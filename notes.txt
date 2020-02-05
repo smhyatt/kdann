@@ -1,0 +1,28 @@
+Q: 
+- What is the point of what we are doing with these images? What data are we using, is there a purpose? 
+
+- Why do we decompose the images to 5x5 patches, more specifically why that size patch? 
+
+- What is m based on? the choice of m 
+
+- Can you explain step 4 again? and why it is akin to the locality principle? 
+
+- Is the difference between propagated or not propagated that it is balanced / uses median and not? 
+
+
+
+Plan for progress: 
+
+
+Q: 
+- We want the whole thing i futhark or do we keep and combine py and fut?
+- Can you really translate a py program to fut using fut? 
+- You said we would use futhark and cuda, can you elaborate? 
+- What structure do you want and what would you recommend I start doing? 
+
+
+fjernet fra linje 4: 
+pkg-resources==0.0.0
+
+
+
