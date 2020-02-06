@@ -10,7 +10,7 @@
 --  
 
 let distance [n] (vct1 : [n]f32) 
-                 (vct2 : [n]f32) : f32 =
+                 (vct2 : [n]f32) : [n]f32 =
     in map2 (\p1 p2 -> (p1-p2)) vct1 vct2
 
 
