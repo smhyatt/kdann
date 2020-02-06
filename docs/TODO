@@ -1,0 +1,29 @@
+
+- kig på koden, forstå de forskellige trin  
+- forstå parallel del 
+√ undersøg import af fil i futhark 
+- skriv synosis 
+√ lav github
+
+
+- lav en optimeret NN som laver kd trees (l. 51, cpu)
+- select_split_dimension ?
+- propagation step
+- 
+
+
+
+- Lav en distance function mellem to vectorer
+- Test at den virker
+	- negative tal 
+	- 0 
+	- null værdier etc 
+- Gå igennem alle pixler i henholdsvis A og B og find distancen imellem dem alle 
+- Lav en NN der finder den eksakte NN 
+
+
+
+
+
+
+

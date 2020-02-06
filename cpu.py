@@ -26,8 +26,14 @@ def run():
     patches_b = image.extract_patches_2d(image_b, (psize,psize))
     print(f"Patches created for image A: {patches_a.shape}")
     print(f"Patches created for image B: {patches_b.shape}")
+    # for pa in patches_a:
+    #     print(f"Patches for image A: {pa}")
     patches_a = patches_a.reshape((-1,psize*psize*n_channels))
     patches_b = patches_b.reshape((-1,psize*psize*n_channels))
+
+
+    # for pb in patches_b:
+    #     print(f"Patches for image B: {pb}")
 
     # random subset (1000 instances from each image)
     patches_a_subset = patches_a[numpy.random.choice(patches_a.shape[0], 1000, replace=False)]
@@ -37,6 +43,8 @@ def run():
 
     # compute PCA model (FAST ALREADY)
     model = PCA(n_components=pca_dim)
+    # rat = model.explained_variance_ratio_
+    # print(f"The variance ratio for applying PCA: {rat}")
     both_subsets = numpy.concatenate((patches_a_subset, patches_b_subset), axis=0)
     model.fit(both_subsets)
 
@@ -45,6 +53,9 @@ def run():
     patches_b_reduced = model.transform(patches_b)
     print(f"Patches reduced for image A: {patches_a_reduced.shape}")
     print(f"Patches reduced for image B: {patches_b_reduced.shape}")
+
+    for par in patches_a_reduced:
+        print(f"Patches reduced for image A data: {par}")
 
     # BASELINE (NOT OPTIMIZED)
     # compute k-d tree
