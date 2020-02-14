@@ -4,6 +4,10 @@ from sklearn.feature_extraction import image
 from sklearn.decomposition import PCA
 from sklearn.neighbors import NearestNeighbors
 import cProfile
+import pyopencl
+import pyopencl.array as pycl_array
+import time
+import brute
 
 from util import build_kd_tree, brute_force, traverse_tree, propagate_patches
 numpy.random.seed(seed=0)
@@ -12,6 +16,23 @@ psize = 8
 n_channels = 3
 pca_dim = 8
 k_neighbours = 1
+
+
+try:
+    platform_id = 0
+    platforms = pyopencl.get_platforms()
+    devices = platforms[platform_id].get_devices()
+
+except Exception as e:
+    raise Exception("Could not access device '{}' on platform with '{}': {}".format(str(platform_id), str(device_id), str(e)))
+
+device_id = 0
+device = devices[device_id]
+ctx = pyopencl.Context(devices=[device])
+queue = pyopencl.CommandQueue(ctx)
+futobj = brute.brute(command_queue=queue)
+
+
 
 def run():
 
@@ -54,8 +75,23 @@ def run():
     print(f"Patches reduced for image A: {patches_a_reduced.shape}")
     print(f"Patches reduced for image B: {patches_b_reduced.shape}")
 
-    for par in patches_a_reduced:
-        print(f"Patches reduced for image A data: {par}")
+    # for par in patches_a_reduced:
+    #     print(f"Patches reduced for image A data: {par}")
+
+    patches_a_reduced_cl = pycl_array.to_device(queue, patches_a_reduced)
+    patches_b_reduced_cl = pycl_array.to_device(queue, patches_b_reduced)
+
+    start_time = time.time()
+    
+    futbrute = futobj.main(patches_a_reduced_cl, patches_b_reduced_cl)
+    
+    total_time = time.time() - start_time
+    total_time = float("{0:.3f}".format(total_time))
+    print("Total time to run Futbrute: {0} seconds.".format(total_time))
+    
+    # for par in futbrute:
+    #     print(f"Futbrute output: {par}") 
+
 
     # BASELINE (NOT OPTIMIZED)
     # compute k-d tree
@@ -128,5 +164,5 @@ def run():
     #l2 = numpy.mean(numpy.linalg.norm(diff, axis=1))
     #print(f"L2: {l2}")
 
-cProfile.run('run()')
+# cProfile.run('run()')
 run()

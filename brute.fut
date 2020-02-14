@@ -1,23 +1,21 @@
--- implement brute-force entry pocket in Futhark 
--- ==
--- compiled input { 
--- [ 42.10298793, -79.7838349, 2.60175886, 15.31100977, -1.51816989,
---   0.33231584, -0.32382814, 0.74201471 ]
--- [ 40.24679201, -79.2333038, 2.60023049, 14.14519061, -1.41773288,
---   0.2697519, -1.42029241, -0.29129826]
--- } 
--- output { 7.3916558642f32 }
---  
-
-let distance [n] (vct1 : [n]f32) 
-                 (vct2 : [n]f32) : [n]f32 =
-    in map2 (\p1 p2 -> (p1-p2)) vct1 vct2
 
 
-let main [n] (pat1 : [n]f32) 
-             (pat2 : [n]f32) : f32 =
-    reduce (+) 0f32 (distance pat1 pat2)
+let sqr_distance  [n] (vct1 : [n]f64) 
+                  (vct2 : [n]f64) : [n]f64 =
+    map2 (\p1 p2 -> (p1-p2)*(p1-p2)) vct1 vct2
+
+let euclidean [n] (vct1 : [n]f64) 
+                  (vct2 : [n]f64) : f64 =
+    f64.sqrt (reduce (+) 0f64 (sqr_distance vct1 vct2))
 
 
--- (42,10298793-40,24679201)^2 + (-79,7838349-(-79,2333038))^2 + (2,60175886-2,60023049)^2 + (15,31100977-14,14519061)^2 + (-1,51816989-(-1,41773288))^2 +  (0,33231584-0,2697519)^2 + (-0,32382814-(-1,42029241))^2 + (0,74201471-(-0,29129826))^2
+entry main [m] [n] (imA : [m][n]f64) 
+                   (imB : [m][n]f64) : []f64 =
+    map (\a_row ->
+        reduce f64.min (f64.inf) 
+            (map (\b_row -> 
+                    euclidean a_row b_row 
+            ) imB 
+        ) 
+    ) imA 
 

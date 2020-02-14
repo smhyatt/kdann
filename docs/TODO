@@ -13,14 +13,12 @@
 
 
 
-- Lav en distance function mellem to vectorer
-- Test at den virker
-	- negative tal 
-	- 0 
-	- null værdier etc 
-- Gå igennem alle pixler i henholdsvis A og B og find distancen imellem dem alle 
-- Lav en NN der finder den eksakte NN 
-
+√ Lav en distance function mellem to vectorer
+√ Test at den virker
+- Læs related work 
+√ Gå igennem alle pixler i henholdsvis A og B og find distancen imellem dem alle 
+√ Lav en NN der finder den eksakte NN 
+- Test at den passer med py implementationen 
 
 
 
