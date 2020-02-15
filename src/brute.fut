@@ -17,22 +17,25 @@ let euclidean [n] (vct1 : [n]real)
     real_sqrt (reduce (+) 0.0 (sqr_distance vct1 vct2))
 
 
-entry nn1 [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) : []real =
-    map (\a_row ->
-        map (\b_row -> 
-                euclidean a_row b_row 
-        ) imB |> reduce real_min real_inf  
-    ) imA 
+-- entry nn1 [m] [n] (imA : [m][n]real) 
+--                   (imB : [m][n]real) : []real =
+--     map (\a_row ->
+--         map (\b_row -> 
+--                 euclidean a_row b_row 
+--         ) imB |> reduce real_min real_inf  
+--     ) imA 
+
+-- let kmin [n] (vct : [n]real) : []real = 
+
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) : []real =
-    map (\a_row ->
-        map (\b_row -> 
+                  (imB : [m][n]real) : [][]real =
+    map2 (\a_row a_idx ->
+        map2 (\b_row b_idx -> 
                 euclidean a_row b_row 
-        ) imB |> reduce real_min real_inf  
-    ) imA 
+        ) imB (iota m) |> reduce real_min real_inf 
+    ) imA (iota m)
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
