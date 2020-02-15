@@ -29,7 +29,7 @@ let euclidean [n] (vct1 : [n]real)
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) : []real =
+                  (imB : [m][n]real) : [][]real =
     map2 (\a_row (a_idx:i32) ->
         map2 (\b_row (b_idx:i32) -> 
                 ((a_idx, b_idx), euclidean a_row b_row)
