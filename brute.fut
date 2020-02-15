@@ -4,12 +4,12 @@
 -- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
 type real = f32
-let real_min = f32.min
-let real_inf = f32.inf
+let real_min  = f32.min
+let real_inf  = f32.inf
 let real_sqrt = f32.sqrt
 
-let sqr_distance  [n] (vct1 : [n]real) 
-                  (vct2 : [n]real) : [n]real =
+let sqr_distance [n] (vct1 : [n]real) 
+                     (vct2 : [n]real) : [n]real = 
     map2 (\p1 p2 -> (p1-p2)*(p1-p2)) vct1 vct2
 
 let euclidean [n] (vct1 : [n]real) 
@@ -18,14 +18,22 @@ let euclidean [n] (vct1 : [n]real)
 
 
 entry nn1 [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) : []real =
+                  (imB : [m][n]real) : []real =
     map (\a_row ->
-        reduce real_min real_inf 
-            (map (\b_row -> 
-                    euclidean a_row b_row 
-            ) imB 
-        ) 
+        map (\b_row -> 
+                euclidean a_row b_row 
+        ) imB |> reduce real_min real_inf  
     ) imA 
+
+
+entry nnk [m] [n] (imA : [m][n]real) 
+                  (imB : [m][n]real) : []real =
+    map (\a_row ->
+        map (\b_row -> 
+                euclidean a_row b_row 
+        ) imB |> reduce real_min real_inf  
+    ) imA 
+
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
 --    $ futhark bench --backend=opencl -e nn1 -r 2 brute.fut
