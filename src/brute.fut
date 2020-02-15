@@ -37,9 +37,9 @@ entry nnk [m] [n] (imA : [m][n]real)
     ) imA (iota m)
 
 
--- entry main [m] [n] (imA : [m][n]real) 
---                    (imB : [m][n]real) : []real =
---     nnk imA imB
+entry main [m] [n] (imA : [m][n]real) 
+                   (imB : [m][n]real) : []real =
+    nnk imA imB
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
