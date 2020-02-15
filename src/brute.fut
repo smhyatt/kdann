@@ -32,9 +32,9 @@ let euclidean [n] (vct1 : [n]real)
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [][]real =
     map2 (\a_row a_idx ->
-        map2 (\b_row b_idx -> 
+        map2 (\b_row -> 
                 euclidean a_row b_row 
-        ) imB (iota m) |> reduce real_min real_inf 
+        ) imB |> reduce real_min real_inf 
     ) imA (iota m)
 
 
