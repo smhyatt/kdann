@@ -19,7 +19,7 @@ runpy:
 
 # Run the futhark brute-force implementation.
 runfut: 
-	./$(EXE1)
+	./$(EXE1) nnk
 
 
 # Run tests of the futhark brute-force implementation.
