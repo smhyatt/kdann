@@ -1,8 +1,8 @@
 
-SRC1 = cpu.py
-SRC2 = utils.py
-SRC3 = brute.fut
-EXE1 = brute
+SRC1 = src/cpu.py
+SRC2 = src/utils.py
+SRC3 = src/brute.fut
+EXE1 = src/brute
 
 
 # Initial command to setup tools and requirements.
