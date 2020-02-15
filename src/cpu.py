@@ -37,8 +37,8 @@ futobj = brute.brute(command_queue=queue)
 def run():
 
     # load both images
-    image_a = cv2.imread("data/A.jpg")
-    image_b = cv2.imread("data/B.jpg")
+    image_a = cv2.imread("../data/A.jpg")
+    image_b = cv2.imread("../data/B.jpg")
     print(f"Shape of image A: {image_a.shape}")
     print(f"Shape of image B: {image_b.shape}")
 
