@@ -5,4 +5,5 @@ annfield
 *.expected
 *.actual
 *.exe
+brute.py
 
