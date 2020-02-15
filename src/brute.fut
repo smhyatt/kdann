@@ -38,7 +38,7 @@ entry nnk [m] [n] (imA : [m][n]real)
 
 
 entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) : []real =
+                   (imB : [m][n]real) = --: []real =
     nnk imA imB
 
 
