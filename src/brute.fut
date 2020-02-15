@@ -1,5 +1,5 @@
 -- ==
--- entry: nn1
+-- entry: nnk
 --
 -- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
@@ -32,14 +32,14 @@ entry nnk [m] [n] (imA : [m][n]real)
                   (imB : [m][n]real) : []real =
     map2 (\a_row (a_idx:i32) ->
         map2 (\b_row (b_idx:i32) -> 
-                euclidean a_row b_row 
-        ) imB (iota m) |> reduce real_min real_inf 
+                ((a_idx, b_idx), euclidean a_row b_row)
+        ) imB (iota m) --|> reduce real_min real_inf 
     ) imA (iota m)
 
 
-entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) : []real =
-    nnk imA imB
+-- entry main [m] [n] (imA : [m][n]real) 
+--                    (imB : [m][n]real) : []real =
+--     nnk imA imB
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
