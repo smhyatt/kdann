@@ -31,11 +31,11 @@ let euclidean [n] (vct1 : [n]real)
 
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [][]real =
-    map2 (\a_row a_idx ->
+    map2 (\a_row (a_idx: i32): [iota n]i32 ->
         map (\b_row -> 
                 euclidean a_row b_row 
         ) imB |> reduce real_min real_inf 
-    ) imA (iota [m])
+    ) imA (iota m)
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
@@ -52,3 +52,11 @@ entry nnk [m] [n] (imA : [m][n]real)
 --    $ ./brute --dump-opencl ker.cl
 --    and you can locally modify the `ker.cl` file and load it back with --load-opencl, as in:
 --    $ futhark dataget brute.fut "[35170][8]f32 [35170][8]f32" | ./brute -D -e nn1 --load-opencl ker.cl > /dev/null
+
+-- in map (\(x: i32): [screenY]i32  ->
+--            map  (\(y: i32): i32  ->
+--                   let c0 = (xmin + (r32(x) * sizex) / r32(screenX),
+--                             ymin + (r32(y) * sizey) / r32(screenY))
+--                   in divergence(depth, c0))
+--                 (iota screenY))
+--          (iota screenX)
