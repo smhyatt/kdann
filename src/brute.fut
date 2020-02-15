@@ -31,11 +31,11 @@ let euclidean [n] (vct1 : [n]real)
 
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [][]real =
-    map2 (\a_row a_idx ->
-        map (\b_row -> 
+    map2 (\a_row ->
+        map (\b_row (bm_i, bn_i) -> 
                 euclidean a_row b_row 
-        ) imB |> reduce real_min real_inf 
-    ) imA (iota (m*n))
+        ) imB (iota m, iota n) |> reduce real_min real_inf 
+    ) imA 
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
