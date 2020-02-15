@@ -34,7 +34,7 @@ entry nnk [m] [n] (imA : [m][n]real)
     map2 (\a_row ->
         map (\b_row bm_i -> 
                 euclidean a_row b_row 
-        ) imB (iota m, iota n) |> reduce real_min real_inf 
+        ) imB (iota n) |> reduce real_min real_inf 
     ) imA 
 
 
