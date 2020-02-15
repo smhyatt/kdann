@@ -26,8 +26,8 @@ let euclidean [n] (vct1 : [n]real)
 --         ) imB |> reduce real_min real_inf  
 --     ) imA 
 
--- let kmin [n] (vct : [n]real) : []real = 
-
+let kmin [m] (dists : [m]((int, int), real)) = 
+    reduce real_min real_inf
 
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [m][m]((int, int), real) =
