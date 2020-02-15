@@ -35,7 +35,7 @@ entry nnk [m] [n] (imA : [m][n]real)
         map (\b_row -> 
                 euclidean a_row b_row 
         ) imB |> reduce real_min real_inf 
-    ) imA (iota m*n)
+    ) imA (iota (m*n))
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
