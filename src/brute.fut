@@ -4,6 +4,7 @@
 -- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
 type real = f32
+type int  = i32
 let real_min  = f32.min
 let real_inf  = f32.inf
 let real_sqrt = f32.sqrt
@@ -29,16 +30,16 @@ let euclidean [n] (vct1 : [n]real)
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) = --: ((i32, i32), f32) [][]real =
-    map2 (\a_row (a_idx:i32) ->
-        map2 (\b_row (b_idx:i32) -> 
+                  (imB : [m][n]real) : [m][m]((int, int), real) =
+    map2 (\a_row (a_idx:int) ->
+        map2 (\b_row (b_idx:int) -> 
                 ((a_idx, b_idx), euclidean a_row b_row)
         ) imB (iota m) --|> reduce real_min real_inf 
     ) imA (iota m)
 
 
 entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) = --: []real =
+                   (imB : [m][n]real) : [m][m]((int, int), real) =
     nnk imA imB
 
 
