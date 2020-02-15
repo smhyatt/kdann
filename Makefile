@@ -17,6 +17,16 @@ runpy:
 	python $(SRC1)
 
 
+# Run the futhark brute-force implementation.
+runfut: 
+	./$(EXE1)
+
+
+# Run tests of the futhark brute-force implementation.
+runtestfut: 
+	futhark test --backend=opencl $(SRC3)
+
+
 # Benchmark multiple datasets with the below, -e denotes the entrypoint.
 bench: 
 	futhark bench --backend=opencl -e $(EXE1) -r 2 $(SRC3)
