@@ -27,15 +27,17 @@ let euclidean [n] (vct1 : [n]real)
 
 -- let kmin [n] (vct : [n]real) : []real = 
 
+-- let 2Didx (n:i32) (m:i32) : []i32 =
+
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [][]real =
-    map (\a_row ->
-        map2 (\b_row (bm_i:[n]i32) -> 
+    map2 (\a_row (a_idx:i32) ->
+        map2 (\b_row (b_idx:i32) -> 
                 euclidean a_row b_row 
         ) imB (iota m) |> reduce real_min real_inf 
-    ) imA 
+    ) imA (iota m)
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
