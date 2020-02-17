@@ -31,7 +31,7 @@ let euclidean [n] (vct1 : [n]real)
 
 let kmin [m] (dists : [m](real, (int, int))) = 
     merge_sort_by_key (.0) (<=) dists --reduce real_min real_inf
-    |> map (.1)
+    -- |> map (.1)
     --map (\(idx, elm) -> elm) dists |> merge_sort (f32.<=) 
 
 
