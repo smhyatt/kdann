@@ -6,4 +6,5 @@ annfield
 *.actual
 *.exe
 brute.py
-
+lib/
+futhark.pkg
