@@ -29,7 +29,8 @@ let euclidean [n] (vct1 : [n]real)
 --     ) imA 
 
 let kmin [m] (dists : [m]((int, int), real)) = 
-    map (\(_, elm) -> elm) dists
+    merge_sort_by_key (_,.0) (<=) dists
+    --map (\(_, elm) -> elm) dists |> 
     --merge_sort_by_key (.0) (<=) dists --reduce real_min real_inf
 
 
