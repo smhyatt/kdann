@@ -1,3 +1,5 @@
+import "merge_sort"
+
 -- ==
 -- entry: nnk
 --
@@ -27,14 +29,15 @@ let euclidean [n] (vct1 : [n]real)
 --     ) imA 
 
 let kmin [m] (dists : [m]((int, int), real)) = 
-    reduce real_min real_inf
+    merge_sort_by_key (.0) (<=) dists --reduce real_min real_inf
+
 
 entry nnk [m] [n] (imA : [m][n]real) 
                   (imB : [m][n]real) : [m][m]((int, int), real) =
     map2 (\a_row (a_idx:int) ->
         map2 (\b_row (b_idx:int) -> 
                 ((a_idx, b_idx), euclidean a_row b_row)
-        ) imB (iota m) --|> reduce real_min real_inf 
+        ) imB (iota m) |> kmin -- reduce real_min real_inf 
     ) imA (iota m)
 
 
