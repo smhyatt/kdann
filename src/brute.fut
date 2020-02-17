@@ -3,7 +3,7 @@ import "../lib/github.com/diku-dk/sorts/merge_sort"
 -- ==
 -- entry: nnk
 --
--- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
+-- compiled random input { 10 [35170][8]f32 [35170][8]f32 } auto output
 
 type real = f32
 type int  = i32
@@ -29,23 +29,25 @@ let euclidean [n] (vct1 : [n]real)
 --     ) imA 
 
 
-let kmin [m] (dists : [m]((int, int), real)) = 
-    merge_sort_by_key (.1) (<=) dists --reduce real_min real_inf
+let kmin [m] (k : int) (dists : [m]((int, int), real)) = 
+    merge_sort_by_key (.1) (>=) dists --reduce real_min real_inf
+    |> 0...k
+
     --map (\(idx, elm) -> elm) dists |> merge_sort (f32.<=) 
 
 
-entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) = --: [m][m]((int, int), real) =
+entry nnk [m] [n] (k : int) (imA : [m][n]real) 
+                            (imB : [m][n]real) = --: [m][m]((int, int), real) =
     map2 (\a_row (a_idx:int) ->
         map2 (\b_row (b_idx:int) -> 
                 ((a_idx, b_idx), euclidean a_row b_row)
-        ) imB (iota m) |> kmin -- reduce real_min real_inf 
+        ) imB (iota m) |> kmin k -- reduce real_min real_inf 
     ) imA (iota m)
 
 
-entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) = --: [m][m]((int, int), real) =
-    nnk imA imB
+entry main [m] [n] (k : int) (imA : [m][n]real) 
+                             (imB : [m][n]real) = --: [m][m]((int, int), real) =
+    nnk k imA imB
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
