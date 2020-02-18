@@ -39,19 +39,21 @@ entry nnk [m] [n] (imA : [m][n]real)
                   (imB : [m][n]real) = --: [m][m]((int, int), real) =
 
     map (\a_patch ->
-        let nn = replicate k real_inf in
+        let nn = replicate k (-1, real_inf)
+        in
         loop nn for q < m do
             let b_patch = imB[q]
-            let dist = euclidean a_patch b_patch in
+            let dist = euclidean a_patch b_patch
+            let b_idx = q in
             let (_, nn') =
-                loop (dist, nn) for i < k do
-                    let cur_nn = nn[i] in
+                loop (dist, b_idx, nn) for i < k do
+                    let (cur_idx, cur_nn) = nn[i] in
                     if dist <= cur_nn then 
-                        let tmp = cur_nn 
-                        let nn[i] = dist -- let nn' = nn with [i] <- dist in ... nn
-                        let dist = tmp
-                        in  (dist, nn)
-                    else  (dist, nn)
+                        let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
+                        let b_idx = cur_idx
+                        let dist = cur_nn
+                        in  (dist, b_idx, nn)
+                    else    (dist, b_idx, nn)
             in  nn'
     ) imA 
 
