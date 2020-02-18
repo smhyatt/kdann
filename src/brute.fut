@@ -42,14 +42,16 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
         loop nn for q < m do
             let b_patch = imB[q]
             let dist = euclidean a_patch b_patch in
-            loop (dist, nn) for i < k do
-                let cur_nn = nn[i] in
-                if dist <= cur_nn then 
-                    let tmp = cur_nn 
-                    let nn[i] = dist -- let nn' = nn with [i] <- dist in ... nn
-                    let dist = tmp
-                    in  (dist, nn)
-                else  (dist, nn)
+            let (_, nn') =
+                loop (dist, nn) for i < k do
+                    let cur_nn = nn[i] in
+                    if dist <= cur_nn then 
+                        let tmp = cur_nn 
+                        let nn[i] = dist -- let nn' = nn with [i] <- dist in ... nn
+                        let dist = tmp
+                        in  (dist, nn)
+                    else  (dist, nn)
+            in  nn'
     ) imA 
 
 
