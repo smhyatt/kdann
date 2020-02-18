@@ -101,3 +101,20 @@ entry nnk [m] [n] (imA : [m][n]real)
 
 
 
+let kmin [m] (k : int) (dists : [m](int, real)) : [k](int, real) = 
+    let fullarr = merge_sort_by_key (.1) (>=) dists 
+    in  fullarr[0:k]
+
+
+entry nnk_sort [m] [n] (imA : [m][n]real) 
+                       (imB : [m][n]real) : ([m][k]int, [m][k]real) =
+    unzip <| map unzip <|
+    map (\a_row ->
+        map2 (\b_row b_idx -> 
+                (b_idx, euclidean a_row b_row)
+        ) imB (iota m) |> kmin k 
+    ) imA 
+
+
+
+
