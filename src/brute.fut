@@ -58,7 +58,7 @@ entry nnk [m] [n] (imA : [m][n]real)
 
 entry main [m] [n] (imA : [m][n]real) 
                    (imB : [m][n]real) = --: [m][m]((int, int), real) =
-    nnk k imA imB
+    nnk imA imB
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
