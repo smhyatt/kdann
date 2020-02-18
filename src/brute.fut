@@ -55,11 +55,11 @@ entry nnk [m] [n] (imA : [m][n]real)
             let b_patch = imB[q]
             let dist = euclidean a_patch b_patch
             let b_idx = q in
-            let (_, _, nn') =
+            let (_, nn') =
                 loop (dist, b_idx, nn) for i < k do
-                    let (cur_idx, cur_nn) = nn[i] in -- (i,32.33) in
-                    if dist <= cur_nn then
-                        let nn[i] = (b_idx, dist)  --let nn' = nn with [i] <- (b_idx, dist) --in ... nn
+                    let (cur_idx, cur_nn) = nn[i] in
+                    if dist <= cur_nn then 
+                        let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
                         let b_idx = cur_idx
                         let dist = cur_nn
                         in  (dist, b_idx, nn)
