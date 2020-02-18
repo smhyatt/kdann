@@ -39,7 +39,8 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
 
     map (\a_patch ->
         let nn = replicate k real_inf in
-        map (\b_patch ->
+        loop nn for q < m do
+            let b_patch = imB[q]
             let dist = euclidean a_patch b_patch in
             loop (dist, nn) for i < k do
                 let cur_nn = nn[i] in
