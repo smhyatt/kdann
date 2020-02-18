@@ -3,13 +3,14 @@ import "../lib/github.com/diku-dk/sorts/merge_sort"
 -- ==
 -- entry: nnk
 --
--- compiled random input { 3 [35170][8]f32 [35170][8]f32 } auto output
+-- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
 type real = f32
 type int  = i32
 let real_min  = f32.min
 let real_inf  = f32.inf
 let real_sqrt = f32.sqrt
+let k = 3
 
 let sqr_distance [n] (vct1 : [n]real) 
                      (vct2 : [n]real) : [n]real = 
@@ -34,8 +35,8 @@ let kmin [m] (k : int) (dists : [m]((int, int), real)) =
     --map (\(idx, elm) -> elm) dists |> merge_sort (f32.<=) 
 
 
-entry nnk [m] [n] (k : int) (imA : [m][n]real) 
-                            (imB : [m][n]real) = --: [m][m]((int, int), real) =
+entry nnk [m] [n] (imA : [m][n]real) 
+                  (imB : [m][n]real) = --: [m][m]((int, int), real) =
 
     map (\a_patch ->
         let nn = replicate k real_inf in
@@ -55,8 +56,8 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
     ) imA 
 
 
-entry main [m] [n] (k : int) (imA : [m][n]real) 
-                             (imB : [m][n]real) = --: [m][m]((int, int), real) =
+entry main [m] [n] (imA : [m][n]real) 
+                   (imB : [m][n]real) = --: [m][m]((int, int), real) =
     nnk k imA imB
 
 
