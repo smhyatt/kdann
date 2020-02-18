@@ -3,7 +3,7 @@ import "../lib/github.com/diku-dk/sorts/merge_sort"
 -- ==
 -- entry: nnk
 --
--- compiled random input { 10 [35170][8]f32 [35170][8]f32 } auto output
+-- compiled random input { 3 [35170][8]f32 [35170][8]f32 } auto output
 
 type real = f32
 type int  = i32
@@ -30,18 +30,26 @@ let euclidean [n] (vct1 : [n]real)
 
 
 let kmin [m] (k : int) (dists : [m]((int, int), real)) = 
-    [(merge_sort_by_key (.1) (>=) dists):k] --reduce real_min real_inf
-    -- |> 0:k
+    merge_sort_by_key (.1) (>=) dists --reduce real_min real_inf
     --map (\(idx, elm) -> elm) dists |> merge_sort (f32.<=) 
 
 
 entry nnk [m] [n] (k : int) (imA : [m][n]real) 
                             (imB : [m][n]real) = --: [m][m]((int, int), real) =
-    map2 (\a_row (a_idx:int) ->
-        map2 (\b_row (b_idx:int) -> 
-                ((a_idx, b_idx), euclidean a_row b_row)
-        ) imB (iota m) |> kmin k -- reduce real_min real_inf 
-    ) imA (iota m)
+
+    map (\a_patch ->
+        let nn = replicate k real_inf in
+        map (\b_patch -> 
+            loop dist = euclidean a_patch b_patch for i < k do 
+                let dist =
+                    if dist <= nn[i] then 
+                        let tmp = nn[i]
+                        nn[i] = dist
+                        dist = tmp
+                    else 
+                        dist
+        ) imB
+    ) imA 
 
 
 entry main [m] [n] (k : int) (imA : [m][n]real) 
