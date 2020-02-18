@@ -1,7 +1,7 @@
 import "../lib/github.com/diku-dk/sorts/merge_sort"
 
 -- ==
--- entry: nnk 
+-- entry: nnk nnk_sort
 --
 -- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
@@ -49,19 +49,19 @@ entry nnk [m] [n] (imA : [m][n]real)
                   (imB : [m][n]real) = --: [m][m]((int, int), real) =
 
     map (\a_patch ->
-        let nn = replicate k (-1, real_inf)
+        let nn = replicate k (-1i32, real_inf)
         in
         loop nn for q < m do
             let b_patch = imB[q]
             let dist = euclidean a_patch b_patch
             let b_idx = q in
-            let (_, nn') =
+            let (_, _, nn') =
                 loop (dist, b_idx, nn) for i < k do
-                    let (cur_idx, cur_nn) = nn[i] in
+                    let (cur_idx, cur_nn) = nn[i]  in
                     if dist <= cur_nn then 
                         let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
-                        let b_idx = cur_idx
-                        let dist = cur_nn
+                        --let b_idx = cur_idx
+                        let dist  = cur_nn
                         in  (dist, b_idx, nn)
                     else    (dist, b_idx, nn)
             in  nn'
