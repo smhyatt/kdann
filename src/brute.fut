@@ -36,7 +36,7 @@ let kmin [m] (k : int) (dists : [m](int, real)) : [k](int, real) =
 
 
 entry nnk_sort [m] [n] (imA : [m][n]real) 
-                       (imB : [m][n]real) : ([m][k]int, [m][n]real) =
+                       (imB : [m][n]real) : ([m][k]int, [m][k]real) =
     unzip <|
     map (\a_row ->
         map2 (\b_row b_idx -> 
