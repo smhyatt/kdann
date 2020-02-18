@@ -51,6 +51,9 @@ entry nnk [m] [n] (imA : [m][n]real)
     map (\a_patch ->
         let nn = replicate k (-1i32, real_inf)
         in
+        if a_patch[0] == real_inf
+        then nn
+        else
         loop nn for q < m do
             let b_patch = imB[q]
             let dist = euclidean a_patch b_patch
