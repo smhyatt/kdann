@@ -43,8 +43,8 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
             loop dist = euclidean a_patch b_patch for i < k do 
                 let dist =
                     if dist <= nn[i] then 
-                        let tmp = nn[i]
-                        nn[i] = dist
+                        let tmp = nn[i] in 
+                        nn[i] = dist in
                         dist = tmp
                     else 
                         dist
