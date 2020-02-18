@@ -70,7 +70,7 @@ entry nnk [m] [n] (imA : [m][n]real)
 
 
 entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) [m][k](int,real) = --: ([m][k]int, [m][k]real) =
+                   (imB : [m][n]real) : [m][k](int,real) = --: ([m][k]int, [m][k]real) =
     nnk imA imB
 
 
