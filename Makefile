@@ -60,6 +60,6 @@ profile-auto-simple:
 
 # For printing the runtime without futhark bench of the futhark brute-force implementation.
 profile-auto-runtime:
-	futhark dataget $(SRC3) "[35170][8]f32 [35170][8]f32" | ./$(EXE1) -t /dev/stderr -r 11 -e $(ENTRY) > /dev/null
+	futhark dataget $(SRC3) "[35170][8]f32 [35170][8]f32" | ./$(EXE1) -t /dev/stderr -r 20 -e $(ENTRY) > /dev/null
 
 
