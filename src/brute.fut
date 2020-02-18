@@ -30,19 +30,19 @@ let euclidean [n] (vct1 : [n]real)
 --     ) imA 
 
 
-let kmin [m] (k : int) (dists : [m]((int, int), real)) = 
+let kmin [m] (k : int) (dists : [m](int, real)) = 
     let fullarr = merge_sort_by_key (.1) (>=) dists 
     in  fullarr[0:k-1]
 
 
 entry nnk_sort [m] [n] (imA : [m][n]real) 
-                       (imB : [m][n]real) : [m][k]((int, int), real) =
+                       (imB : [m][n]real) : [m][k](int, real) =
     
-    map2 (\a_row (a_idx:int) ->
+    map (\a_row ->
         map2 (\b_row (b_idx:int) -> 
-                ((a_idx, b_idx), euclidean a_row b_row)
+                (b_idx, euclidean a_row b_row)
         ) imB (iota m) |> kmin k 
-    ) imA (iota m)
+    ) imA 
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
