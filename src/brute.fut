@@ -36,8 +36,8 @@ let kmin [m] (k : int) (dists : [m](int, real)) : [k](int, real) =
 
 
 entry nnk_sort [m] [n] (imA : [m][n]real) 
-                       (imB : [m][n]real) : [m][k](int, real) =
-    
+                       (imB : [m][n]real) : ([m][k]int, [m][n]real) =
+    unzip <|
     map (\a_row ->
         map2 (\b_row b_idx -> 
                 (b_idx, euclidean a_row b_row)
@@ -59,8 +59,9 @@ entry nnk [m] [n] (imA : [m][n]real)
                 loop (dist, b_idx, nn) for i < k do
                     let (cur_idx, cur_nn) = nn[i]  in
                     if dist <= cur_nn then 
+                        let tmp_ind = cur_idx
                         let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
-                        --let b_idx = cur_idx
+                        let b_idx = tmp_ind
                         let dist  = cur_nn
                         in  (dist, b_idx, nn)
                     else    (dist, b_idx, nn)
