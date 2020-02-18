@@ -39,7 +39,7 @@ entry nnk_sort [m] [n] (imA : [m][n]real)
                        (imB : [m][n]real) : [m][k](int, real) =
     
     map (\a_row ->
-        map2 (\b_row (b_idx:int) -> 
+        map2 (\b_row b_idx -> 
                 (b_idx, euclidean a_row b_row)
         ) imB (iota m) |> kmin k 
     ) imA 
