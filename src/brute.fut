@@ -3,7 +3,7 @@ import "../lib/github.com/diku-dk/sorts/merge_sort"
 -- ==
 -- entry: nnk nnk_sort
 --
--- compiled random input { [351700][8]f32 [351700][8]f32 } auto output
+-- compiled random input { [1517000][8]f32 [1517000][8]f32 } auto output
 
 type real = f32
 type int  = i32
