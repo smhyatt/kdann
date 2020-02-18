@@ -32,7 +32,7 @@ let euclidean [n] (vct1 : [n]real)
 
 let kmin [m] (k : int) (dists : [m](int, real)) : [k](int, real) = 
     let fullarr = merge_sort_by_key (.1) (>=) dists 
-    in  fullarr[0:k-1]
+    in  fullarr[0:k]
 
 
 entry nnk_sort [m] [n] (imA : [m][n]real) 
