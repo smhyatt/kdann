@@ -39,14 +39,16 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
 
     map (\a_patch ->
         let nn = replicate k real_inf in
-        map (\b_patch -> 
-            loop dist = euclidean a_patch b_patch for i < k do 
-                if dist <= nn[i] then 
-                    let tmp = nn[i]
-                    nn[i] = dist 
-                    dist = tmp
-                else 
-                    dist
+        map (\b_patch ->
+            let dist = euclidean a_patch b_patch
+            loop (dist, nn) for i < k do
+                let cur_nn = nn[i] in
+                if dist <= cur_nn then 
+                    let tmp = cur_nn 
+                    let nn[i] = dist -- let nn' = nn with [i] <- dist in ... nn
+                    let dist = tmp
+                    in  (dist, nn)
+                else  (dist, nn)
         ) imB
     ) imA 
 
