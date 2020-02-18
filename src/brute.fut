@@ -42,8 +42,8 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
         map (\b_patch -> 
             loop dist = euclidean a_patch b_patch for i < k do 
                 if dist <= nn[i] then 
-                    let tmp = nn[i] in 
-                    nn[i] = dist in
+                    let tmp = nn[i]
+                    nn[i] = dist 
                     dist = tmp
                 else 
                     dist
