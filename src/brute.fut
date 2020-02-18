@@ -50,7 +50,6 @@ entry nnk [m] [n] (k : int) (imA : [m][n]real)
                     let dist = tmp
                     in  (dist, nn)
                 else  (dist, nn)
-        ) imB
     ) imA 
 
 
