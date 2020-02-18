@@ -50,7 +50,7 @@ entry nnk [m] [n] (imA : [m][n]real)
     --unzip <| map unzip <|
     map (\a_patch ->
         if a_patch[0] == real_inf
-        then nn = replicate k (-2i32, real_inf)
+        then replicate k (-2i32, real_inf)
         else
         let  nn = replicate k (-1i32, real_inf)
         in loop nn for q < m do
