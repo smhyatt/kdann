@@ -46,8 +46,8 @@ entry nnk_sort [m] [n] (imA : [m][n]real)
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) : ([m][k]int, [m][k]real) =
-    unzip <| map unzip <|
+                  (imB : [m][n]real) : [m][k](int,real) = --([m][k]int, [m][k]real) =
+    --unzip <| map unzip <|
     map (\a_patch ->
         let nn = replicate k (-1i32, real_inf)
         in
