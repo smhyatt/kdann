@@ -10,7 +10,7 @@ type int  = i32
 let real_min  = f32.min
 let real_inf  = f32.inf
 let real_sqrt = f32.sqrt
-let k = 3
+let k = 3i32
 
 let sqr_distance [n] (vct1 : [n]real) 
                      (vct2 : [n]real) : [n]real = 
@@ -46,8 +46,8 @@ entry nnk_sort [m] [n] (imA : [m][n]real)
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) = --: [m][m]((int, int), real) =
-
+                  (imB : [m][n]real) : ([m][k]int, [m][k]real) =
+    unzip <| map unzip <|
     map (\a_patch ->
         let nn = replicate k (-1i32, real_inf)
         in
@@ -70,7 +70,7 @@ entry nnk [m] [n] (imA : [m][n]real)
 
 
 entry main [m] [n] (imA : [m][n]real) 
-                   (imB : [m][n]real) = --: [m][m]((int, int), real) =
+                   (imB : [m][n]real) : ([m][k]int, [m][k]real) =
     nnk imA imB
 
 
