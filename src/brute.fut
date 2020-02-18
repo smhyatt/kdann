@@ -1,7 +1,7 @@
 import "../lib/github.com/diku-dk/sorts/merge_sort"
 
 -- ==
--- entry: nnk
+-- entry: nnk nnk_sort
 --
 -- compiled random input { [35170][8]f32 [35170][8]f32 } auto output
 
@@ -31,8 +31,19 @@ let euclidean [n] (vct1 : [n]real)
 
 
 let kmin [m] (k : int) (dists : [m]((int, int), real)) = 
-    merge_sort_by_key (.1) (>=) dists --reduce real_min real_inf
+    let fullarr = merge_sort_by_key (.1) (>=) dists --reduce real_min real_inf
+    in  fullarr[0:k-1]
     --map (\(idx, elm) -> elm) dists |> merge_sort (f32.<=) 
+
+
+entry nnk_sort [m] [n] (imA : [m][n]real) 
+                       (imB : [m][n]real) = --: [m][m]((int, int), real) =
+    
+    map2 (\a_row (a_idx:int) ->
+        map2 (\b_row (b_idx:int) -> 
+                ((a_idx, b_idx), euclidean a_row b_row)
+        ) imB (iota m) |> kmin k 
+    ) imA (iota m)
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
