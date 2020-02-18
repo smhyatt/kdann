@@ -59,10 +59,11 @@ entry nnk [m] [n] (imA : [m][n]real)
                 loop (dist, b_idx, nn) for i < k do
                     let (cur_idx, cur_nn) = nn[i] in
                     if dist <= cur_nn then 
-                        let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
+                        --let nn[i] = (b_idx, dist) 
+                        let nn' = nn with [i] <- (b_idx, dist) --in ... nn
                         let b_idx = cur_idx
                         let dist = cur_nn
-                        in  (dist, b_idx, nn)
+                        in  (dist, b_idx, nn')
                     else    (dist, b_idx, nn)
             in  nn'
     ) imA 
