@@ -18,27 +18,33 @@ pca_dim = 8
 k_neighbours = 1
 
 
-try:
-    platform_id = 0
-    platforms = pyopencl.get_platforms()
-    devices = platforms[platform_id].get_devices()
+############################################## GPU START ##############################################
 
-except Exception as e:
-    raise Exception("Could not access device '{}' on platform with '{}': {}".format(str(platform_id), str(device_id), str(e)))
+# try:
+#     platform_id = 0
+#     platforms = pyopencl.get_platforms()
+#     devices = platforms[platform_id].get_devices()
 
-device_id = 0
-device = devices[device_id]
-ctx = pyopencl.Context(devices=[device])
-queue = pyopencl.CommandQueue(ctx)
-futobj = brute.brute(command_queue=queue)
+# except Exception as e:
+#     raise Exception("Could not access device '{}' on platform with '{}': {}".format(str(platform_id), str(device_id), str(e)))
 
+# device_id = 0
+# device = devices[device_id]
+# ctx = pyopencl.Context(devices=[device])
+# queue = pyopencl.CommandQueue(ctx)
+# futobj = brute.brute(command_queue=queue)
+
+############################################### GPU END ###############################################
 
 
 def run():
 
     # load both images
-    image_a = cv2.imread("../data/A.jpg")
-    image_b = cv2.imread("../data/B.jpg")
+    image_a = cv2.imread("A.jpg")
+    # image_a = cv2.cv.LoadImage("../data/A.jpg")
+    image_b = cv2.imread("B.jpg")
+    # image_b = cv2.cv.LoadImage("../data/B.jpg")
+
     print(f"Shape of image A: {image_a.shape}")
     print(f"Shape of image B: {image_b.shape}")
 
@@ -78,19 +84,24 @@ def run():
     # for par in patches_a_reduced:
     #     print(f"Patches reduced for image A data: {par}")
 
-    patches_a_reduced_cl = pycl_array.to_device(queue, patches_a_reduced)
-    patches_b_reduced_cl = pycl_array.to_device(queue, patches_b_reduced)
 
-    start_time = time.time()
+    ############################################## GPU START ##############################################
+
+    # patches_a_reduced_cl = pycl_array.to_device(queue, patches_a_reduced)
+    # patches_b_reduced_cl = pycl_array.to_device(queue, patches_b_reduced)
+
+    # start_time = time.time()
     
-    futbrute = futobj.main(patches_a_reduced_cl, patches_b_reduced_cl)
+    # futbrute = futobj.main(patches_a_reduced_cl, patches_b_reduced_cl)
     
-    total_time = time.time() - start_time
-    total_time = float("{0:.3f}".format(total_time))
-    print("Total time to run Futbrute: {0} seconds.".format(total_time))
+    # total_time = time.time() - start_time
+    # total_time = float("{0:.3f}".format(total_time))
+    # print("Total time to run Futbrute: {0} seconds.".format(total_time))
     
     # for par in futbrute:
     #     print(f"Futbrute output: {par}") 
+
+    ############################################### GPU END ###############################################
 
 
     # BASELINE (NOT OPTIMIZED)
@@ -115,6 +126,7 @@ def run():
     print("Building propagated k-d tree version ...")
     tree_depth, leaves, inverse_lookup, split_values, split_dimensions = build_kd_tree(patches_b_reduced, max_leaf_size=50)
     print(f"Depth: {tree_depth}")
+    print(f"Leaves: {leaves}")
     print("Propagation starts ...")
 
     # k-d tree traversal is written as a double loop here for hopefully easy translation to gpu

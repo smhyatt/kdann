@@ -6,12 +6,17 @@ EXE1 = src/brute
 ENTRY = nnk
 
 
-# Initial command to setup tools and requirements.
-init: 
+virtual: 
 	virtualenv -p python3 annfield
+
+activate: 
 	source annfield/bin/activate
+
+install: 
 	pip install -r requirements.txt
 
+# Initial command to setup tools and requirements.
+init: virtual activate install
 
 # Run the main python program. 
 runpy:
