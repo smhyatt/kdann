@@ -13,7 +13,21 @@
 
 
 
+## General info
 
+Shape of image A: (800, 1920, 3)
+Shape of image B: (800, 1920, 3)
+Patches created for image A: (1517009, 8, 8, 3)
+Patches created for image B: (1517009, 8, 8, 3)
+Subset of patches created for image A: (1000, 192)
+Subset of patches created for image B: (1000, 192)
+Patches reduced for image A: (1517009, 8)
+Patches reduced for image B: (1517009, 8)
+K-d tree has been fitted ...
+Traversing sklearn
+Building propagated k-d tree version ...
+Going for a depth of: 15
+Depth: 15
 
 
 
