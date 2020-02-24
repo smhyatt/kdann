@@ -66,14 +66,14 @@ def build_kd_tree(patches, max_depth=-1, max_leaf_size=50):
     # (4) create copy of the original patch indices (which are processed
     # in the same way as the points)
     indices_template = numpy.arange(patches.shape[0])
-    print("Patches shape[0] length:", len(patches.shape[0]))
+    print("Patches shape[0] length:", patches.shape[0])
 
     # (5) build k-d tree recursively
     make_kd_tree_recursive(patches, indices_template, 0, max_depth, 0, leaves, inverse_lookup, split_values, split_dimensions)
 
     return max_depth, leaves, inverse_lookup, split_values, split_dimensions
 
-
+# points = patches, 
 def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inverse_lookup, split_values, split_dimensions):
 
     # if depth not reached: create internal node
