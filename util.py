@@ -92,6 +92,13 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
         points = points[sort_indices]
         median_idx = (points.shape[0]) // 2
 
+        print("Median idx:", median_idx)
+
+        for d in range(10):
+            print("Points after sort:", points[d])
+            
+
+
         # (3) the split value used
         split_value = points[median_idx][dim]
 
