@@ -1,8 +1,20 @@
 
 
-# 
+# KD-Tree
 
 1. How is the tree represented in an array? 
+
+split_values: values of split nodes
+split_dimensions: dimension of split nodes
+leaves: list of leaves
+inverse_lookup: per patch, pointer to leaf (int)
+
+Depth: 15
+Leaves number elements in list: 			16384
+inverse_lookup number elements in list: 	1517009
+split_values number elements in list: 		32767
+split_dimensions number elements in list: 	32767
+
 
 Values from lists up to 10: 
 
