@@ -76,6 +76,9 @@ def build_kd_tree(patches, max_depth=-1, max_leaf_size=50):
 # points = patches, 
 def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inverse_lookup, split_values, split_dimensions):
 
+    for pa in patches:
+        print("Patch as point:", pa)
+
     # if depth not reached: create internal node
     if depth < max_depth - 1:
 
@@ -106,7 +109,7 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
         leaf_index = index + 1 - (2 ** (max_depth - 1))
         leaves[leaf_index] = [points, indices]
 
-        # store inverse loopup indices
+        # store inverse lookup indices
         for i in indices:
             inverse_lookup[i] = leaf_index
 
