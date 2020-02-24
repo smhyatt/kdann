@@ -45,9 +45,9 @@ def build_kd_tree(patches, max_depth=-1, max_leaf_size=50):
     """
 
     # (1) select max_depth
-    if max_depth < 1:
+    if max_depth < 1: # x < y < z is equivalent to x < y and y < z, and is evaluates from left-to-right.
         assert(len(patches) > max_leaf_size > 1)
-        max_depth = int(numpy.log2(len(patches)/max_leaf_size)) + 1
+        max_depth = int(numpy.log2(len(patches)/max_leaf_size)) + 1 
     else:
         assert(len(patches) > (2 ** (max_depth - 1)))
     print(f"Going for a depth of: {max_depth}")
@@ -66,6 +66,7 @@ def build_kd_tree(patches, max_depth=-1, max_leaf_size=50):
     # (4) create copy of the original patch indices (which are processed
     # in the same way as the points)
     indices_template = numpy.arange(patches.shape[0])
+    print("Patches shape[0] length:", len(patches.shape[0]))
 
     # (5) build k-d tree recursively
     make_kd_tree_recursive(patches, indices_template, 0, max_depth, 0, leaves, inverse_lookup, split_values, split_dimensions)
