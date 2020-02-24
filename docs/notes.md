@@ -11,7 +11,7 @@ inverse_lookup: per patch, pointer to leaf (int)
 
 Depth: 15
 Leaves number elements in list: 			16384
-inverse_lookup number elements in list: 	1517009
+inverse_lookup number elements in list: 	1517009 (total number patches)
 split_values number elements in list: 		32767
 split_dimensions number elements in list: 	32767
 
