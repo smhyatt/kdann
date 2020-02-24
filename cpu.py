@@ -126,7 +126,8 @@ def run():
     print("Building propagated k-d tree version ...")
     tree_depth, leaves, inverse_lookup, split_values, split_dimensions = build_kd_tree(patches_b_reduced, max_leaf_size=50)
     print(f"Depth: {tree_depth}")
-    print(f"Leaves: {leaves}")
+    for le in leaves:
+        print(f"Leaves: {le}")
     print("Propagation starts ...")
 
     # k-d tree traversal is written as a double loop here for hopefully easy translation to gpu
