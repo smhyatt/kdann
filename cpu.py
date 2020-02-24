@@ -107,7 +107,7 @@ def run():
     # BASELINE (NOT OPTIMIZED)
     # compute k-d tree
     tree_sklearn = NearestNeighbors(n_neighbors=1, algorithm='kd_tree', n_jobs=6).fit(patches_b_reduced)
-    print("K-d tree has been fitted ...")
+    print("K-d tree has been fitted ...", type(tree_sklearn))
 
     # The baseline reports around 57 L2 on pca 3, 27 on pca 8
     print("Traversing sklearn")
@@ -127,7 +127,7 @@ def run():
     tree_depth, leaves, inverse_lookup, split_values, split_dimensions = build_kd_tree(patches_b_reduced, max_leaf_size=50)
     print(f"Depth: {tree_depth}")
     for i in range(10):
-        print(f"Leaves: {leaves[i]}")
+        # print(f"Leaves: {leaves[i]}")
         print(f"inverse_lookup: {inverse_lookup[i]}")
         print(f"split_values: {split_values[i]}")
         print(f"split_dimensions: {split_dimensions[i]}")
