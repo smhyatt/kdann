@@ -12,6 +12,11 @@ def select_split_dimension(points, max_rows=100):
         row_indices = numpy.random.randint(points.shape[0], size=max_rows)
         points = points[row_indices, :]
 
+    print("\n")
+    for x in range(1,10):
+        print(points[x])
+    print("\n")
+
     best_difference = 0
     best_split = 0
 
@@ -76,8 +81,8 @@ def build_kd_tree(patches, max_depth=-1, max_leaf_size=50):
 # points = patches, 
 def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inverse_lookup, split_values, split_dimensions):
 
-    for pa in range(10):
-        print("Patch as point:", points[pa])
+    # for pa in range(10):
+    #     print("Patch as point:", points[pa])
 
     # if depth not reached: create internal node
     if depth < max_depth - 1:
@@ -92,12 +97,10 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
         points = points[sort_indices]
         median_idx = (points.shape[0]) // 2
 
-        print("Median idx:", median_idx)
+        # print("Median idx:", median_idx)
 
-        for d in range(10):
-            print("Points after sort:", points[d])
-            
-
+        # for d in range(10):
+        #     print("Points after sort:", points[d])
 
         # (3) the split value used
         split_value = points[median_idx][dim]
