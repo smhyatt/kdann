@@ -215,15 +215,12 @@ def brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours):
     points, indices = leaves[leaves_index]
     diffs = numpy.sum((points - patch)**2, axis=1)**0.5
     neighbour_candidates = numpy.vstack((diffs, indices))
-    print("\n")
-    # for x in range(1,10):
-    print("first:", neighbour_candidates.shape)
-    print("\n") 
     if best_neighbours is not None:
         neighbour_candidates = numpy.hstack((neighbour_candidates, best_neighbours))
-        print("second:", neighbour_candidates.shape)
-        print("\n")
     neighbour_candidates = neighbour_candidates[:, neighbour_candidates[0,:].argsort()][:, :k_neighbours]
+    print(neighbour_candidates[0])
+    print(neighbour_candidates[1])
+    print(neighbour_candidates[2])
     return neighbour_candidates
 
 
