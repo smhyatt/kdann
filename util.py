@@ -12,10 +12,10 @@ def select_split_dimension(points, max_rows=100):
         row_indices = numpy.random.randint(points.shape[0], size=max_rows)
         points = points[row_indices, :]
 
-    print("\n")
-    for x in range(1,10):
-        print(points[x])
-    print("\n")
+    # print("\n")
+    # for x in range(1,10):
+    #     print(points[x])
+    # print("\n")
 
     best_difference = 0
     best_split = 0
@@ -147,6 +147,7 @@ def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbour
         second = (node_index+1)*2-1
 
     # handle "first" node (just go down)
+    # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
     best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
     # if backtracking is active, traverse also the "second" node
@@ -156,6 +157,7 @@ def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbour
 
     return best_neighbours
 
+# propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours)
 def propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours, max_propagate=-1):
 
     # Clamp propagate amount as to not OOB
@@ -213,6 +215,10 @@ def brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours):
     points, indices = leaves[leaves_index]
     diffs = numpy.sum((points - patch)**2, axis=1)**0.5
     neighbour_candidates = numpy.vstack((diffs, indices))
+    print("\n")
+    for x in range(1,10):
+        print(neighbour_candidates[x])
+    print("\n")        
     if best_neighbours is not None:
         neighbour_candidates = numpy.hstack((neighbour_candidates, best_neighbours))
     neighbour_candidates = neighbour_candidates[:, neighbour_candidates[0,:].argsort()][:, :k_neighbours]
