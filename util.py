@@ -217,10 +217,12 @@ def brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours):
     neighbour_candidates = numpy.vstack((diffs, indices))
     print("\n")
     # for x in range(1,10):
-    print(neighbour_candidates[0])
-    print("\n")        
+    print("first:", neighbour_candidates.shape)
+    print("\n") 
     if best_neighbours is not None:
         neighbour_candidates = numpy.hstack((neighbour_candidates, best_neighbours))
+        print("second:", neighbour_candidates.shape)
+        print("\n")
     neighbour_candidates = neighbour_candidates[:, neighbour_candidates[0,:].argsort()][:, :k_neighbours]
     return neighbour_candidates
 
