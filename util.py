@@ -123,6 +123,51 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
         for i in indices:
             inverse_lookup[i] = leaf_index
 
+
+
+def leaf_search(query_patch, leaves_index, parent_node_index, leaves, best_neighbours, k_neighbours):
+    # do not continue
+    # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
+    # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
+    best_neighbours = brute_force(query_patch, leaves_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
+
+    return best_neighbours
+
+
+
+def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
+    
+    # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
+    if node_index >= (2 ** (tree_depth - 1)) - 1:
+        leaves_index = node_index + 1 - (2 ** (tree_depth - 1))
+        leaf_search(query_patch, leaves_index, node_index, leaves, best_neighbours, k_neighbours)
+
+    # else: go left
+    if query_patch[split_dimensions[node_index]] <= split_values[node_index]:
+        # Go down one, append the other for backtracking
+        first = (node_index+1)*2-1
+        second = (node_index+1)*2
+
+    # or go right
+    else:
+        # Go down one, append the other for backtracking
+        first = (node_index+1)*2
+        second = (node_index+1)*2-1
+
+    # handle "first" node (just go down)
+    # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
+    best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+
+    # if backtracking is active, traverse also the "second" node
+    if backtrack:
+        if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
+            best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+
+    return best_neighbours
+
+
+
+
 def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
 
     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
@@ -130,6 +175,7 @@ def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbour
 
         # do not continue
         # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
+        # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
         best_neighbours = brute_force(query_patch, node_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
 
         return best_neighbours
@@ -152,7 +198,7 @@ def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbour
 
     # if backtracking is active, traverse also the "second" node
     if backtrack:
-        if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha):
+        if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
             best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
     return best_neighbours
@@ -218,9 +264,8 @@ def brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours):
     if best_neighbours is not None:
         neighbour_candidates = numpy.hstack((neighbour_candidates, best_neighbours))
     neighbour_candidates = neighbour_candidates[:, neighbour_candidates[0,:].argsort()][:, :k_neighbours]
-    print(neighbour_candidates[0])
-    print(neighbour_candidates[1])
-    print(neighbour_candidates[2])
+    print(neighbour_candidates[0])  # [30.12423718]
+    print(neighbour_candidates[1])  # [1319526.]
     return neighbour_candidates
 
 

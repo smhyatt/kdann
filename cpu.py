@@ -161,7 +161,7 @@ def run():
             # TODO: neighbour_array = [ (dist, indices), float32 ]
             best_neighbours = None
 
-            best_neighbours = traverse_tree(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+            best_neighbours = traverse_tree2(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
             propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours)
 
             indices_custom[patch_index] = best_neighbours[1]
