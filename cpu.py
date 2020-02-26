@@ -9,7 +9,7 @@ import pyopencl.array as pycl_array
 import time
 import brute
 
-from util import build_kd_tree, brute_force, traverse_tree, propagate_patches
+from util import build_kd_tree, brute_force, traverse_tree2, propagate_patches
 numpy.random.seed(seed=0)
 
 psize = 8

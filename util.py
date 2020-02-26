@@ -142,8 +142,10 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
         leaves_index = node_index + 1 - (2 ** (tree_depth - 1))
         leaf_search(query_patch, leaves_index, node_index, leaves, best_neighbours, k_neighbours)
 
-    for i in range():
-        pass
+
+    # last_node = (2 ** (tree_depth - 1)) - 1
+    # for i in range(last_node):
+    #     pass
 
     # else: go left
     if query_patch[split_dimensions[node_index]] <= split_values[node_index]:
