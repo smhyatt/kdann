@@ -142,6 +142,9 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
         leaves_index = node_index + 1 - (2 ** (tree_depth - 1))
         leaf_search(query_patch, leaves_index, node_index, leaves, best_neighbours, k_neighbours)
 
+    for i in range():
+        pass
+
     # else: go left
     if query_patch[split_dimensions[node_index]] <= split_values[node_index]:
         # Go down one, append the other for backtracking
@@ -156,12 +159,12 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
 
     # handle "first" node (just go down)
     # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
-    best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+    best_neighbours = traverse_tree2(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
-    # if backtracking is active, traverse also the "second" node
-    if backtrack:
-        if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
-            best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+    # # if backtracking is active, traverse also the "second" node
+    # if backtrack:
+    #     if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
+    #         best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
     return best_neighbours
 
