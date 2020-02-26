@@ -176,6 +176,9 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
 
 def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
 
+    for q in query_patch:
+        print(q)
+
     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
     if node_index >= (2 ** (tree_depth - 1)) - 1:
 
@@ -186,7 +189,7 @@ def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbour
 
         return best_neighbours
 
-    print("CHECK:", query_patch[split_dimensions[node_index]], split_values[node_index])
+    # print("CHECK:", query_patch[split_dimensions[node_index]], split_values[node_index])
 
     # else: go left
     if query_patch[split_dimensions[node_index]] <= split_values[node_index]:
