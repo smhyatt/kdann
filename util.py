@@ -125,59 +125,75 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
 
 
 
-# def leaf_search(query_patch, leaves_index, parent_node_index, tree_depth, leaves, best_neighbours, k_neighbours):
-#     # do not continue
-#     # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
-#     # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
-#     best_neighbours = brute_force(query_patch, leaves_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
+def leaf_search(query_patch, leaves_index, tree_depth, leaves, best_neighbours, k_neighbours):
+    # do not continue
+    # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
+    # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
+    # best_neighbours = brute_force(query_patch, leaves_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
+    best_neighbours = brute_force(query_patch, leaves_index, leaves, best_neighbours, k_neighbours)
 
-#     return best_neighbours
+    return best_neighbours
 
 
 # # node_index initially 0
-# def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
+def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
     
-#     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
+    # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
+    first_leaf  = (2 ** (tree_depth - 1)) - 1
+    max_items   = 2 ** tree_depth - 2
+    node_index  = 0
+    parent_node = 0
 
+    while (node_index >= max_items):
+        if (node_index >= first_leaf): # a leaf
+            best_neighbours = leaf_search(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
+            if (node_index % 2 == 0): # right side
+                extra_node = (parent_node + 1) * 2 - 1
+                if backtrack
+                    if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
+                        best_neighbours = brute_force(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
+                        return best_neighbours
+                        # leaf_search(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
+            elif (node_index % 2 != 0): # left side
+                extra_node = (parent_node + 1) * 2
+                if backtrack
+                    if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
+                        best_neighbours = brute_force(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
+                        return best_neighbours
+                        # leaf_search(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
+            else:
+                return best_neighbours
 
-#     last_node = (2 ** (tree_depth - 1)) - 1
-#     for node in range(last_node):
-#         parent_node = 0 # OBS FIND This
-#         if node >= (2 ** (tree_depth - 1)) - 1:
-#             leaves_index = node + 1 - (2 ** (tree_depth - 1))
-#             leaf_search(query_patch, leaves_index, node, tree_depth, leaves, best_neighbours, k_neighbours)
-        
+        # else: go left
+        elif query_patch[split_dimensions[node_index]] <= split_values[node_index]:
+            # Go down one, append the other for backtracking
+            parent_node = node_index
+            node_index  = (node_index+1)*2-1
 
-#     # else: go left
-#     if query_patch[split_dimensions[node_index]] <= split_values[node_index]:
-#         # Go down one, append the other for backtracking
-#         first = (node_index+1)*2-1
-#         second = (node_index+1)*2
+        # or go right
+        else:
+            # Go down one, append the other for backtracking
+            parent_node = node_index
+            node_index = (node_index+1)*2
 
-#     # or go right
-#     else:
-#         # Go down one, append the other for backtracking
-#         first = (node_index+1)*2
-#         second = (node_index+1)*2-1
+    # handle "first" node (just go down)
+    # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
+    # best_neighbours = traverse_tree2(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
-#     # handle "first" node (just go down)
-#     # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
-#     best_neighbours = traverse_tree2(query_patch, backtrack, tree_depth, first, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+    # # if backtracking is active, traverse also the "second" node
+    # if backtrack:
+    #     if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
+    #         best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
 
-#     # # if backtracking is active, traverse also the "second" node
-#     # if backtrack:
-#     #     if abs(split_values[node_index] - query_patch[split_dimensions[node_index]]) < (best_neighbours[0][-1] / alpha): # "< *1"
-#     #         best_neighbours = traverse_tree(query_patch, backtrack, tree_depth, second, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
-
-#     return best_neighbours
+    return best_neighbours
 
 
 
 
 def traverse_tree(query_patch, backtrack, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours, alpha=1.0):
 
-    for q in query_patch:
-        print(q)
+    # for q in query_patch:
+    #     print(q)
 
     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
     if node_index >= (2 ** (tree_depth - 1)) - 1:
