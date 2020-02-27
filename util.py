@@ -149,14 +149,14 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
             best_neighbours = leaf_search(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
             if (node_index % 2 == 0): # right side
                 extra_node = (parent_node + 1) * 2 - 1
-                if backtrack
+                if backtrack:
                     if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
                         best_neighbours = brute_force(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
                         return best_neighbours
                         # leaf_search(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
             elif (node_index % 2 != 0): # left side
                 extra_node = (parent_node + 1) * 2
-                if backtrack
+                if backtrack:
                     if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
                         best_neighbours = brute_force(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
                         return best_neighbours
