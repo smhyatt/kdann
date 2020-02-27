@@ -140,13 +140,13 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
     
     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
     first_leaf  = (2 ** (tree_depth - 1)) - 1
-    max_items   = 2 ** tree_depth - 2
+    max_items   = (2 ** tree_depth) - 2
     node_index  = 0
     parent_node = 0
 
     while (node_index >= max_items):
         if (node_index >= first_leaf): # a leaf
-            best_neighbours = leaf_search(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
+            best_neighbours = brute_force(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
             if (node_index % 2 == 0): # right side
                 extra_node = (parent_node + 1) * 2 - 1
                 if backtrack:
