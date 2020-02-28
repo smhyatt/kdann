@@ -37,56 +37,19 @@ entry main (query_patch: [dim]) (split_vals: [max_nodes]f32) (split_dims: [max_n
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2i32 ** tree_depth) - 2i32
-    let (bn, _, _) = loop (false,node_idx,max_items) while node_idx <= max_items do
-        if node_idx >= fst_leaf 
+    let (bn, _, _) = loop (false, node_idx, max_items) while node_idx <= max_items do
+        if node_idx >= fst_leaf -- we have a leaf
+        then (true, node_idx, max_items)
+        else if query_patch[split_dims[node_idx]] <= split_vals[node_idx] -- left
         then 
-
-
-
-
-
-
-
-let main [n] (as: [n]i32) (value: i32): i32 =
-  let low = 0
-  let high = n-1
-  let (low, _) = loop ((low,high)) while low <= high do
-    -- invariants: value > as[i] for all i < low
-    --             value < as[i] for all i > high
-    let mid = (low+high) / 2
-    in if as[mid] > value
-       then (low, mid - 1)
-       else if as[mid] < value
-       then (mid + 1, high)
-       else (mid, mid-1) -- Force termination.
-  in low
-
-
-
-
--- def simple_traverse(query_patch, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours):
-    
---     # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
---     first_leaf  = (2 ** (tree_depth - 1)) - 1
---     max_items   = (2 ** tree_depth) - 2
---     node_index  = 0
-
---     while (node_index >= max_items):
---         if (node_index >= first_leaf): # a leaf
---             best_neighbours = brute_force(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
---             return best_neighbours
-
---         # else: go left
---         elif query_patch[split_dimensions[node_index]] <= split_values[node_index]:
---             # Go down one, append the other for backtracking
---             node_index  = (node_index+1)*2-1
-
---         # or go right
---         else:
---             # Go down one, append the other for backtracking
---             node_index  = (node_index+1)*2
-
-
+            let tmp = (node_idx+1)*2-1
+            let node_idx = tmp
+            (false, node_idx, max_items)
+        else -- right
+            let tmp = (node_idx+1)*2
+            let node_idx = tmp
+            (false, node_idx, max_items)
+    in bn
 
 
 
