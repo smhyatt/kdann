@@ -33,7 +33,7 @@ let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32
 
 
 
-entry main (query_patch: [dim]) (split_vals: [max_nodes]f32) (split_dims: [max_nodes]i32) =
+entry main (query_patch: [dim]f32) (split_vals: [max_nodes]f32) (split_dims: [max_nodes]i32) =
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2i32 ** tree_depth) - 2i32
