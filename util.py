@@ -125,14 +125,38 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
 
 
 
-def leaf_search(query_patch, leaves_index, tree_depth, leaves, best_neighbours, k_neighbours):
-    # do not continue
-    # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
-    # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
-    # best_neighbours = brute_force(query_patch, leaves_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
-    best_neighbours = brute_force(query_patch, leaves_index, leaves, best_neighbours, k_neighbours)
+# def leaf_search(query_patch, leaves_index, tree_depth, leaves, best_neighbours, k_neighbours):
+#     # do not continue
+#     # print(node[3], node_index + 1 - (2 ** (tree_depth - 1)))
+#     # brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours)
+#     # best_neighbours = brute_force(query_patch, leaves_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
+#     best_neighbours = brute_force(query_patch, leaves_index, leaves, best_neighbours, k_neighbours)
 
-    return best_neighbours
+#     return best_neighbours
+
+
+
+def simple_traverse(query_patch, tree_depth, node_index, best_neighbours, leaves, split_values, split_dimensions, k_neighbours):
+    
+    # if we have reached a leaf (here, (2 ** (tree_depth - 1)) - 1 corresponds to the max internal node index)
+    first_leaf  = (2 ** (tree_depth - 1)) - 1
+    max_items   = (2 ** tree_depth) - 2
+    node_index  = 0
+
+    while (node_index <= max_items):
+        if (node_index >= first_leaf): # a leaf
+            best_neighbours = brute_force(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
+            return best_neighbours
+
+        # else: go left
+        elif query_patch[split_dimensions[node_index]] <= split_values[node_index]:
+            # Go down one, append the other for backtracking
+            node_index  = (node_index+1)*2-1
+
+        # or go right
+        else:
+            # Go down one, append the other for backtracking
+            node_index  = (node_index+1)*2
 
 
 # # node_index initially 0
@@ -144,7 +168,7 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
     node_index  = 0
     parent_node = 0
 
-    while (node_index >= max_items):
+    while (node_index <= max_items):
         if (node_index >= first_leaf): # a leaf
             best_neighbours = brute_force(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
             if (node_index % 2 == 0): # right side
@@ -174,7 +198,7 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
         else:
             # Go down one, append the other for backtracking
             parent_node = node_index
-            node_index = (node_index+1)*2
+            node_index  = (node_index+1)*2
 
     # handle "first" node (just go down)
     # best_neighbours = traverse_tree(patch(A),patch_y<1(outer),tree_depth,0,best_neighbours(None),leaves,split_values,split_dimensions,k_neighbours
