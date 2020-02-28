@@ -9,7 +9,7 @@ import pyopencl.array as pycl_array
 import time
 import brute
 
-from util import build_kd_tree, brute_force, traverse_tree, traverse_tree2, propagate_patches
+from util import build_kd_tree, brute_force, traverse_tree, traverse_tree2, propagate_patches, simple_traverse
 numpy.random.seed(seed=0)
 
 psize = 8
@@ -161,7 +161,8 @@ def run():
             # TODO: neighbour_array = [ (dist, indices), float32 ]
             best_neighbours = None
             print(type(patch))
-            best_neighbours = traverse_tree2(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+            # best_neighbours = traverse_tree2(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+            best_neighbours = simple_traverse(query_patch, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
             propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours)
 
             indices_custom[patch_index] = best_neighbours[1]

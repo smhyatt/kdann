@@ -145,7 +145,7 @@ def simple_traverse(query_patch, tree_depth, node_index, best_neighbours, leaves
 
     while (node_index <= max_items):
         if (node_index >= first_leaf): # a leaf
-            best_neighbours = brute_force(query_patch, node_index, tree_depth, leaves, best_neighbours, k_neighbours)
+            best_neighbours = brute_force(query_patch, node_index, leaves, best_neighbours, k_neighbours)
             return best_neighbours
 
         # else: go left
