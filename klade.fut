@@ -37,7 +37,10 @@ entry main (query_patch: [dim]) (split_vals: [max_nodes]f32) (split_dims: [max_n
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2i32 ** tree_depth) - 2i32
-    let (bn, _, _) = loop (false,node_idx,max_items) while node_idx <= max_items
+    let (bn, _, _) = loop (false,node_idx,max_items) while node_idx <= max_items do
+        if node_idx >= fst_leaf 
+        then 
+
 
 
 
