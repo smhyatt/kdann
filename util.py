@@ -145,7 +145,7 @@ def simple_traverse(query_patch, tree_depth, node_index, best_neighbours, leaves
 
     while (node_index <= max_items):
         if (node_index >= first_leaf): # a leaf
-            best_neighbours = brute_force(query_patch, node_index, leaves, best_neighbours, k_neighbours)
+            best_neighbours = brute_force(query_patch, node_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
             return best_neighbours
 
         # else: go left
@@ -171,19 +171,19 @@ def traverse_tree2(query_patch, backtrack, tree_depth, node_index, best_neighbou
 
     while (node_index <= max_items):
         if (node_index >= first_leaf): # a leaf
-            best_neighbours = brute_force(query_patch, node_index, leaves, best_neighbours, k_neighbours)
+            best_neighbours = brute_force(query_patch, node_index + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
             if (node_index % 2 == 0): # right side
                 extra_node = (parent_node + 1) * 2 - 1
                 if backtrack:
                     if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
-                        best_neighbours = brute_force(query_patch, extra_node, leaves, best_neighbours, k_neighbours)
+                        best_neighbours = brute_force(query_patch, extra_node + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
                         return best_neighbours
                         # leaf_search(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
             elif (node_index % 2 != 0): # left side
                 extra_node = (parent_node + 1) * 2
                 if backtrack:
                     if abs(split_values[extra_node] - query_patch[split_dimensions[extra_node]]) < (best_neighbours[0][-1] / alpha): # "< *1"
-                        best_neighbours = brute_force(query_patch, extra_node, leaves, best_neighbours, k_neighbours)
+                        best_neighbours = brute_force(query_patch, extra_node + 1 - (2 ** (tree_depth - 1)), leaves, best_neighbours, k_neighbours)
                         return best_neighbours
                         # leaf_search(query_patch, extra_node, tree_depth, leaves, best_neighbours, k_neighbours)
             else:
