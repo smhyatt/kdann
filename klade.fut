@@ -20,19 +20,14 @@ entry main (query_patch: [dim]f32) (split_vals: [max_nodes]f32) (split_dims: [ma
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2**4)-2 in
-    let (bn, _, _) = loop (isL,i,m) = (false, node_idx, max_items) while node_idx <= max_items do
+    let (bn, _, _) = loop (is_leaf,i,m) = (false, node_idx, max_items) while i <= m do
         if i >= fst_leaf -- we have a leaf
         then (true, i, m)
         else if query_patch[split_dims[i]] <= split_vals[i] -- left
-        then 
-            let tmp = (i+1)*2-1
-            let i = tmp
-            (false, i, m)
-        else -- right
-            let tmp = (i+1)*2
-            let i = tmp
-            (false, i, m)
+             then (false, (i+1)*2-1, max_items)
+             else (false, (i+1)*2, max_items)
     in bn
+
 
 
 
