@@ -1,6 +1,6 @@
 --
 -- ==
--- compiled input { [55.0, 62.5, 3.9, 3.7, 12.3] [1,0,4,1,1,3,0] [62.5,3.0,12.3,3.3,44.5,0.9,5.0] }
+-- compiled input { [55.0f32, 62.5f32, 3.9f32, 3.7f32, 12.3f32] [1i32, 0i32, 4i32, 1i32, 1i32, 3i32, 0i32] [62.5f32, 3.0f32, 12.3f32, 3.3f32, 44.5f32, 0.9f32, 5.0f32] }
 -- output { true }
 -- 
 
@@ -11,7 +11,7 @@ let tree_depth = 4i32
 let max_nodes  = (2i32 ** (tree_depth-1i32)) - 2i32 -- 2^3-2 = 6
 let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32
 
-entry main (query_patch: [dim]f32) (split_vals: [max_nodes]f32) (split_dims: [max_nodes]i32) =
+entry main (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2**4)-2 in
