@@ -20,19 +20,28 @@ entry main (query_patch: [dim]f32) (split_vals: [max_nodes]f32) (split_dims: [ma
     let bn = false
     let node_idx   = 0i32
     let max_items  = (2**4)-2 in
-    let (bn, _, _) = loop (false, node_idx, max_items) while node_idx <= max_items do
-        if node_idx >= fst_leaf -- we have a leaf
-        then (true, node_idx, max_items)
-        else if query_patch[split_dims[node_idx]] <= split_vals[node_idx] -- left
+    let (bn, _, _) = loop (isL,i,m) = (false, node_idx, max_items) while node_idx <= max_items do
+        if i >= fst_leaf -- we have a leaf
+        then (true, i, m)
+        else if query_patch[split_dims[i]] <= split_vals[i] -- left
         then 
-            let tmp = (node_idx+1)*2-1
-            let node_idx = tmp
-            (false, node_idx, max_items)
+            let tmp = (i+1)*2-1
+            let i = tmp
+            (false, i, m)
         else -- right
-            let tmp = (node_idx+1)*2
-            let node_idx = tmp
-            (false, node_idx, max_items)
+            let tmp = (i+1)*2
+            let i = tmp
+            (false, i, m)
     in bn
+
+
+
+
+-- let main(x: i32): i64 =
+--   loop out = 0i64 for i < 32 do
+--     let digit = (x >> (31-i)) & 1
+--     let out = (out * 10i64) + i64.i32(digit)
+--     in out
 
 
 -- let get_spread =
