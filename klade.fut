@@ -2,7 +2,10 @@
 -- ==
 -- entry: main
 --
--- compiled input { [55.0f32, 62.5f32, 3.9f32, 3.7f32, 12.3f32] [1i32, 0i32, 4i32, 1i32, 1i32, 3i32, 0i32] [62.5f32, 3.0f32, 12.3f32, 3.3f32, 44.5f32, 0.9f32, 5.0f32] }
+-- compiled input { 
+-- [55.0f32, 62.5f32, 3.9f32, 3.7f32, 12.3f32] 
+-- [1i32, 0i32, 4i32, 1i32, 1i32, 3i32, 0i32] 
+-- [62.5f32, 3.0f32, 12.3f32, 3.3f32, 44.5f32, 0.9f32, 5.0f32] }
 -- output { true }
 -- 
 
@@ -11,7 +14,18 @@ let dim = 5i32
 let total_pat  = 9i32
 let tree_depth = 4i32
 let max_nodes  = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
-let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32   -- 2^3-1 = 7
+let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
+
+entry simple_traverse (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
+    let (bn, _) = loop (is_leaf,i) = (false, 0i32) while !is_leaf do
+        if i >= fst_leaf -- we have a leaf
+        then (true, i)
+        else if query_patch[split_dims[i]] <= split_vals[i] -- left
+             then (false, (i+1)*2-1)
+             else (false, (i+1)*2)
+    in bn
+
+
 
 entry main (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
     let (bn, _) = loop (is_leaf,i) = (false, 0i32) while !is_leaf do
