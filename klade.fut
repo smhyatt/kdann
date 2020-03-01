@@ -14,9 +14,7 @@ let max_nodes  = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
 let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32   -- 2^3-1 = 7
 
 entry main (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
-    let node_idx   = 0i32
-    let max_items  = (2**4)-2 in
-    let (bn, _) = loop (_,i) = (false, node_idx) while i <= max_items do
+    let (bn, _) = loop (_,i) = (false, 0i32) while i <= (2**4)-2 do
         if i >= fst_leaf -- we have a leaf
         then (true, i)
         else if query_patch[split_dims[i]] <= split_vals[i] -- left
