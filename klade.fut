@@ -8,7 +8,7 @@ let imA = [[55.0, 62.5, 3.8, 3.7, 69.3],[2.0, 3.3, 2.8, 28.7, 63.3],[24.0, 44.5,
 let dim   = 5i32
 let total_pat  = 9i32
 let tree_depth = 4i32
-let max_nodes  = (2i32 ** (tree_depth-1i32)) - 2i32 -- 2^3-2 = 6
+let max_nodes  = (2i32 ** (tree_depth-1i32)) - 1i32 -- 2^3-1 = 7
 let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32
 
 entry main (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
