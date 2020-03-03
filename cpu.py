@@ -142,6 +142,7 @@ def run():
     # traverse each row; the idea is to "propagate" information from row i to row i+1
     n_cols = image_a.shape[0]-psize+1
     n_rows = image_a.shape[1]-psize+1
+    pindex = -1
 
     for patch_y in range(n_rows):
 
@@ -152,6 +153,7 @@ def run():
         # - for the first row, we simply use the K nearest neighbors/indices found by sklearn/bufferkdtree
         # - for the other rows, we only report the leaf indices to be checked
         # - GPU: parallel brute-force
+        pindex += 1
         for patch_x in range(n_cols):
 
             patch_index = n_cols*patch_y + patch_x
@@ -160,7 +162,7 @@ def run():
             # traverse tree (go to bottom)
             # TODO: neighbour_array = [ (dist, indices), float32 ]
             best_neighbours = None
-
+            print("NEW PATCH NR.", pindex)
             best_neighbours = traverse_tree(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
             # best_neighbours = simple_traverse(patch, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
             propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours)
