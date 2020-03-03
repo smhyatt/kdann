@@ -154,7 +154,7 @@ def run():
         # - for the other rows, we only report the leaf indices to be checked
         # - GPU: parallel brute-force
         pindex += 1
-        print("************************* NEW PATCH NR.", pindex, " *************************")
+        print("************************* NEW PATCH A NR.", pindex, " *************************")
         for patch_x in range(n_cols):
 
             patch_index = n_cols*patch_y + patch_x
@@ -164,6 +164,8 @@ def run():
             # TODO: neighbour_array = [ (dist, indices), float32 ]
             best_neighbours = None
             best_neighbours = traverse_tree(patch, patch_y<1, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
+            a, b = best_neighbours
+            print("Distances:", a, "   Indexes:", b)
             # best_neighbours = simple_traverse(patch, tree_depth, 0, best_neighbours, leaves, split_values, split_dimensions, k_neighbours)
             propagate_patches(best_neighbours, patch_x, patch_y, n_cols, indices_custom, inverse_lookup, patch, leaves, k_neighbours)
 
