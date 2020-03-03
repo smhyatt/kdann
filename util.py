@@ -316,8 +316,8 @@ def brute_force(patch, leaves_index, leaves, best_neighbours, k_neighbours):
     if best_neighbours is not None:
         neighbour_candidates = numpy.hstack((neighbour_candidates, best_neighbours))
     neighbour_candidates = neighbour_candidates[:, neighbour_candidates[0,:].argsort()][:, :k_neighbours]
-    tmp = numpy.array(neighbour_candidates)
-    print("tmp shape: ", tmp.shape())
+
+    print("neighbours: ", neighbour_candidates)
     # print(neighbour_candidates[0])  # [30.12423718]
     # print(neighbour_candidates[1])  # [1319526.]
     return neighbour_candidates
