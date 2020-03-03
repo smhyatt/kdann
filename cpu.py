@@ -154,7 +154,7 @@ def run():
         # - for the other rows, we only report the leaf indices to be checked
         # - GPU: parallel brute-force
         pindex += 1
-        print("NEW PATCH NR.", pindex)
+        print("************************* NEW PATCH NR.", pindex, " *************************")
         for patch_x in range(n_cols):
 
             patch_index = n_cols*patch_y + patch_x
