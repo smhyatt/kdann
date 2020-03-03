@@ -1,3 +1,5 @@
+import "../lib/github.com/diku-dk/sorts/merge_sort"
+
 --
 -- ==
 -- entry: main
@@ -9,6 +11,12 @@
 -- output { true }
 -- 
 
+type real = f32
+type int  = i32
+let real_min  = f32.min
+let real_inf  = f32.inf
+let real_sqrt = f32.sqrt
+let k   = 3i32
 let imA = [[55.0, 62.5, 3.8, 3.7, 69.3],[2.0, 3.3, 2.8, 28.7, 63.3],[24.0, 44.5, 3.9, 7.7, 2.3],[27.0, 4.1, 33.9, 6.6, 1.3],[32.0, 49.0, 45.9, 3.7, 12.3],[5.0, 82.9, 1.9, 3.9, 2.3],[3.0, 81.0, 1.0, 0.9, 2.3],[71.0, 62.5, 2.3, 59.7, 0.3],[0.2, 62.5, 2.4, 65.7, 0.3]]
 let dim = 5i32
 let total_pat  = 9i32
@@ -16,7 +24,16 @@ let tree_depth = 4i32
 let max_nodes  = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
 let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
 
-entry simple_traverse (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
+let sqr_distance [n] (vct1 : [n]real) 
+                     (vct2 : [n]real) : [n]real = 
+    map2 (\p1 p2 -> (p1-p2)*(p1-p2)) vct1 vct2
+
+let euclidean [n] (vct1 : [n]real) 
+                  (vct2 : [n]real) : real =
+    real_sqrt (reduce (+) 0.0 (sqr_distance vct1 vct2))
+
+
+entry simple_traverse (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [max_nodes]real) =
     let (bn, _) = loop (is_leaf,i) = (false, 0i32) while !is_leaf do
         if i >= fst_leaf -- we have a leaf
         then (true, i)
@@ -26,8 +43,33 @@ entry simple_traverse (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (spli
     in bn
 
 
+entry nnk [m] [n] (imA : [m][n]real) 
+                  (imB : [m][n]real) : [m][k](int,real) = --([m][k]int, [m][k]real) =
+    --unzip <| map unzip <|
+    map (\a_patch ->
+        if a_patch[0] == real_inf
+        then replicate k (-2i32, real_inf)
+        else
+        let  nn = replicate k (-1i32, real_inf)
+        in loop nn for q < m do
+            let b_patch = imB[q]
+            let dist = euclidean a_patch b_patch
+            let b_idx = q in
+            let (_, _, nn') =
+                loop (dist, b_idx, nn) for i < k do
+                    let cur_nn = nn[i].1  in
+                    if dist <= cur_nn then 
+                        let tmp_ind = nn[i].0--cur_idx
+                        let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
+                        let b_idx = tmp_ind
+                        let dist  = cur_nn
+                        in  (dist, b_idx, nn)
+                    else    (dist, b_idx, nn)
+            in  nn'
+    ) imA
 
-entry main (query_patch: [dim]f32) (split_dims: [max_nodes]i32) (split_vals: [max_nodes]f32) =
+
+entry main (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [max_nodes]real) =
     let (bn, _) = loop (is_leaf,i) = (false, 0i32) while !is_leaf do
         if i >= fst_leaf -- we have a leaf
         then (true, i)
