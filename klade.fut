@@ -7,7 +7,9 @@ import "../lib/github.com/diku-dk/sorts/merge_sort"
 -- compiled input { 
 -- [55.0f32, 62.5f32, 3.9f32, 3.7f32, 12.3f32] 
 -- [1i32, 0i32, 4i32, 1i32, 1i32, 3i32, 0i32] 
--- [62.5f32, 3.0f32, 12.3f32, 3.3f32, 44.5f32, 0.9f32, 5.0f32] }
+-- [62.5f32, 3.0f32, 12.3f32, 3.3f32, 44.5f32, 0.9f32, 5.0f32] 
+-- 
+-- }
 -- output { true }
 -- 
 
@@ -15,17 +17,19 @@ type real = f32
 type int  = i32
 let real_min  = f32.min
 let real_inf  = f32.inf
+let real_rep  = 10000.0f32
 let real_sqrt = f32.sqrt
 let k   = 3i32
 let dim = 5i32
 let imA = [[55.0, 62.5, 3.8, 3.7, 69.3],[2.0, 3.3, 2.8, 28.7, 63.3],[24.0, 44.5, 3.9, 7.7, 2.3],[27.0, 4.1, 33.9, 6.6, 1.3],[32.0, 49.0, 45.9, 3.7, 12.3],[5.0, 82.9, 1.9, 3.9, 2.3],[3.0, 81.0, 1.0, 0.9, 2.3],[71.0, 62.5, 2.3, 59.7, 0.3],[0.2, 62.5, 2.4, 65.7, 0.3]]
-let tot_leaves = [[ [[27.0f32,  4.1f32,  33.9f32, 6.6f32,  1.3f32],[24.0f32,  44.5f32, 3.9f32,  7.7f32,  2.3f32]], [[32.0f32,  49.0f32, 45.9f32, 3.7f32,  12.3f32]], [[2.0f32,   3.3f32,  2.8f32,  28.7f32, 63.3f32]], [[55.0f32,  62.5f32, 3.8f32,  3.7f32,  69.3f32]], [[0.2f32,   62.5f32, 2.4f32,  65.7f32, 0.3f32]], [[3.0f32, 81.0f32, 1.0f32, 0.9f32,2.3f32]], [[71.0f32, 62.5f32, 2.3f32, 59.7f32, 0.3f32]], [[5.0f32, 82.9f32, 1.9f32, 3.9f32, 2.3f32]] ], [ [3i32,2i32], [4i32], [1i32], [0i32], [8i32], [6i32], [7i32], [5i32]]]]
-let leaves     = tot_leaves[0]
-let l_indices  = tot_leaves[1]
+let leaves = [[[27.0f32,  4.1f32,  33.9f32, 6.6f32,  1.3f32],[24.0f32,  44.5f32, 3.9f32,  7.7f32,  2.3f32]], [[32.0f32,  49.0f32, 45.9f32, 3.7f32,  12.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]], [[2.0f32,   3.3f32,  2.8f32,  28.7f32, 63.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]], [[55.0f32,  62.5f32, 3.8f32,  3.7f32,  69.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]], [[0.2f32,   62.5f32, 2.4f32,  65.7f32, 0.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]], [[3.0f32, 81.0f32, 1.0f32, 0.9f32,2.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]], [[71.0f32, 62.5f32, 2.3f32, 59.7f32, 0.3f32,[real_rep,real_rep, real_rep, real_rep,real_rep]], [[5.0f32, 82.9f32, 1.9f32, 3.9f32, 2.3f32],[real_rep,real_rep, real_rep, real_rep,real_rep]]]
+let l_indices  = [[3i32,2i32], [4i32,100i32], [1i32,100i32], [0i32,100i32], [8i32,100i32], [6i32,100i32], [7i32,100i32], [5i32,100i32]]
 let total_pat  = 9i32
 let tree_depth = 4i32
 let max_nodes  = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
 let fst_leaf   = 2i32 ** (tree_depth-1i32) - 1i32 -- 2^3-1 = 7
+
+
 
 
 let sqr_distance [n] (vct1 : [n]real) 
@@ -48,7 +52,8 @@ entry simple_traverse (query_patch: [dim]real) (split_dims: [max_nodes]int) (spl
     in bn
 
 
-let brute_force (patch_a) (leaves_idx) (leaves: ) (best_neighbours: ([]real,[]int)) (k_neighbours: int) =
+let brute_force (patch_a: []real) (leaves_idx: int) (leaves) (best_neighbours: ([]real,[]int)) (k_neighbours: int) =
+
 
 
 entry nnk [m] [n] (imA : [m][n]real) 
@@ -98,7 +103,7 @@ entry main (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [m
 
 
 -- let get_spread =
---     let  = replicate k (-1i32, real_inf)
+--     let  = replicate k (-1i32, real_rep)
 --         in loop nn for q < m do
 --             let b_patch = imB[q]
 --             let dist = euclidean a_patch b_patch
