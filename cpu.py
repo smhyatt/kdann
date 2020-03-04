@@ -130,11 +130,12 @@ def run():
     print(f"inverse_lookup: {len(inverse_lookup)}")
     print(f"split_values: {len(split_values)}")
     print(f"split_dimensions: {len(split_dimensions)}")
-    # for i in range(10):
-    #     # print(f"Leaves: {leaves[i]}")
-    #     print(f"inverse_lookup: {inverse_lookup[i]}")
-    #     print(f"split_values: {split_values[i]}")
-    #     print(f"split_dimensions: {split_dimensions[i]}")
+    npleaves = np.array(leaves)
+    for i in range(10):
+        print(f"Leaves: {npleaves[i]}")
+        # print(f"inverse_lookup: {inverse_lookup[i]}")
+        # print(f"split_values: {split_values[i]}")
+        # print(f"split_dimensions: {split_dimensions[i]}")
     print("Propagation starts ...")
 
     # k-d tree traversal is written as a double loop here for hopefully easy translation to gpu
