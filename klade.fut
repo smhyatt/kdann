@@ -68,7 +68,7 @@ let brute_force (patch_a: []real) (leaves_idx: int) (leaves: []([][]real, []int)
         in (dist,patch_indices)
         ) (iota patches_in_leaves)
     
-    in kmin all_dist_inds
+    in kmin k_neighbours all_dist_inds
 
 
 
