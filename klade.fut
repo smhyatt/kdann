@@ -1,4 +1,4 @@
-import "../lib/github.com/diku-dk/sorts/merge_sort"
+import "lib/github.com/diku-dk/sorts/merge_sort"
 
 --
 -- ==
