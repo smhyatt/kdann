@@ -130,7 +130,7 @@ def run():
     print(f"inverse_lookup: {len(inverse_lookup)}")
     print(f"split_values: {len(split_values)}")
     print(f"split_dimensions: {len(split_dimensions)}")
-    npleaves = np.array(leaves)
+    npleaves = numpy.array(leaves)
     for i in range(10):
         print(f"Leaves: {npleaves[i]}")
         # print(f"inverse_lookup: {inverse_lookup[i]}")
