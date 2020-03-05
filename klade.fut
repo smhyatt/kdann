@@ -46,18 +46,22 @@ let kmin [m] (k : int) (dists : [m](int, real)) : ([k]int, [k]real) =
     let fullarr = merge_sort_by_key (.1) (<=) dists 
     in  unzip fullarr[0:k]
 
+let kmin2 [m] (k : int) (dists : [m]real) = --: ([k]int, [k]real) = 
+    let fullarr = merge_sort (f32.<=) dists
+    in  fullarr[0:k]
+
 
 -- let brute_force (patch_a: []real) (leaves_idx: int) (leaves: []([][]real, []int)) (best_neighbours: ([]real,[]int)) (k_neighbours: int) =
-let brute_force (query_patch: []real) (leaves_idx: int) (leaves: []([][]real, []int)) (k_neighbours: int) : ([k]int, [k]real) =
+let brute_force (query_patch: []real) (leaves_idx: int) (leaves: []([][]real, []int)) (k_neighbours: int) = -- : ([k]int, [k]real) =
     let all_dist_inds = map (\i ->
         let (candidates, indices) = unzip leaves in 
         let patch_cand = candidates[leaves_idx,i]
         let patch_idx  = indices[leaves_idx,i]
         let dist = euclidean query_patch patch_cand
-        in (patch_idx, dist)
+        in dist -- in (patch_idx, dist)
         ) (iota patches_in_leaves)
     
-    in kmin k_neighbours all_dist_inds
+    in kmin2 k_neighbours all_dist_inds
 
 
 
@@ -74,9 +78,8 @@ entry simple_traverse (query_patch: [dim]real) (split_dims: [max_nodes]int) (spl
 let traverse (query_patch: [dim]real) (split_dims: [max_nodes]int) 
              (split_vals: [max_nodes]real) (leaves: []([][]real, []int)) 
              (k_neighbours: int) =
-             -- (best_neighbours: ([k]int, [k]real)) (k_neighbours: int) =
 
-    let (bn, _) = loop (best_neighbours,i) = (([0i32], [real_inf]), 0i32) while i <= fst_leaf do
+    let (bn, _) = loop (best_neighbours,i) = ([real_inf], 0i32) while i <= fst_leaf do
         if i >= fst_leaf -- we have a leaf
         then ((brute_force query_patch (i + 1 - (2 ** (tree_depth - 1))) leaves k_neighbours), i)
         else if query_patch[split_dims[i]] <= split_vals[i] -- left
