@@ -73,10 +73,10 @@ entry simple_traverse (query_patch: [dim]real) (split_dims: [max_nodes]int) (spl
         else if query_patch[split_dims[i]] <= split_vals[i] -- left
              then 
                 let left = (i+1)*2-1 in
-                (false, left, (p << left | p))
+                (false, left, (1 << left | p))
              else 
                 let right = (i+1)*2 in
-                (false, right, (p << right | p)) -- right
+                (false, right, (1 << right | p)) -- right
     in (bn, node, route)
 
 
@@ -99,8 +99,23 @@ entry main (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [m
     let path = 0i32
     let (is_leaf, idx, path) = simple_traverse query_patch split_dims split_vals path
     in if is_leaf == true
-    then (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves k_neighbours)
+    then if backtracking == true
+         then -- LAV BACKTRACKING HER
+         else (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves k_neighbours)
     else ([-1i32], [real_inf])
+
+
+
+
+-- entry main (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [max_nodes]real) 
+--            (k_neighbours: int) (backtracking: bool) =
+--     let leaves = [([[27.0f32,  4.1f32,  33.9f32, 6.6f32,  1.3f32] , [24.0f32,  44.5f32, 3.9f32,  7.7f32,  2.3f32]] , [3i32,2i32]),([[32.0f32,  49.0f32, 45.9f32, 3.7f32,  12.3f32], [real_rep,real_rep,real_rep,real_rep,real_rep]], [4i32,100i32]),([[2.0f32,   3.3f32,  2.8f32,  28.7f32, 63.3f32], [real_rep,real_rep,real_rep,real_rep,real_rep]], [1i32,100i32]),([[55.0f32,  62.5f32, 3.8f32,  3.7f32,  69.3f32], [real_rep,real_rep,real_rep,real_rep,real_rep]], [0i32,100i32]),([[0.2f32,   62.5f32, 2.4f32,  65.7f32, 0.3f32] , [real_rep,real_rep,real_rep,real_rep,real_rep]], [8i32,100i32]),([[3.0f32,   81.0f32, 1.0f32,  0.9f32,  2.3f32] , [real_rep,real_rep,real_rep,real_rep,real_rep]], [6i32,100i32]),([[71.0f32,  62.5f32, 2.3f32,  59.7f32, 0.3f32] , [real_rep,real_rep,real_rep,real_rep,real_rep]], [7i32,100i32]),([[5.0f32,   82.9f32, 1.9f32,  3.9f32,  2.3f32] , [real_rep,real_rep,real_rep,real_rep,real_rep]], [5i32,100i32]) ]
+--     let path = 0i32
+--     let (is_leaf, idx, path) = simple_traverse query_patch split_dims split_vals path
+--     in if is_leaf == true
+--     then (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves k_neighbours)
+--     else ([-1i32], [real_inf])
+
 
     -- in brute_force query_patch 2 leaves 1
     -- in traverse query_patch split_dims split_vals leaves k_neighbours
