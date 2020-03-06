@@ -53,7 +53,7 @@ let traverseOnce (height: i32) (tree:    []f32)
                 if getPackedInd stack count
                 then (parent, stack, count-1, -1)
                 else
-                  let to_visit = f32.abs (tree[node_index] - querry) < knn in
+                  let to_visit = f32.abs (tree[parent] - querry) < knn in
                   if !to_visit
                   then (parent, stack, count-1, -1)
                   else
