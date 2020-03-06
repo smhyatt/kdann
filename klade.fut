@@ -52,8 +52,13 @@ let kmin2 [m] (k : int) (dists : [m]real) = --: ([k]int, [k]real) =
     in  fullarr[0:k]
 
 
+-- let is_odd (e: i32) : bool = (e & 1) == 1
+
+let is_odd (e: int) : int = if (e & 1) == 1 then 1 else -1
+
+
 -- let brute_force (patch_a: []real) (leaves_idx: int) (leaves: []([][]real, []int)) (best_neighbours: ([]real,[]int)) (k_neighbours: int) =
-let brute_force (query_patch: []real) (leaves_idx: int) (leaves: []([][]real, []int)) (k_neighbours: int) = -- : ([k]int, [k]real) =
+let brute_force (query_patch: []real) (leaves_idx: int) (leaves: []([][]real, []int)) = -- (k_neighbours: int) = -- : ([k]int, [k]real) =
     let all_dist_inds = map (\i ->
         let (candidates, indices) = unzip leaves in 
         let patch_cand = candidates[leaves_idx,i]
@@ -62,7 +67,8 @@ let brute_force (query_patch: []real) (leaves_idx: int) (leaves: []([][]real, []
         in (patch_idx, dist)
         ) (iota patches_in_leaves)
     
-    in kmin k_neighbours all_dist_inds
+    in all_dist_inds
+    -- in kmin k_neighbours all_dist_inds
 
 
 
@@ -99,9 +105,14 @@ entry main (query_patch: [dim]real) (split_dims: [max_nodes]int) (split_vals: [m
     let path = 0i32
     let (is_leaf, idx, path) = simple_traverse query_patch split_dims split_vals path
     in if is_leaf == true
-    then if backtracking == true
-         then -- LAV BACKTRACKING HER
-         else (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves k_neighbours)
+    then if backtracking == true -- LAV BACKTRACKING HER
+         then 
+            -- let parent = floor ((idx-1)/2)
+            let extra_leaf  = (is_odd idx) + (idx + 1 - (2 ** (tree_depth - 1)))
+            let both_leaves = (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves) 
+                              ++ (brute_force query_patch extra_leaf leaves) 
+            in kmin k_neighbours both_leaves
+         else kmin k_neighbours (brute_force query_patch (idx + 1 - (2 ** (tree_depth - 1))) leaves)
     else ([-1i32], [real_inf])
 
 
