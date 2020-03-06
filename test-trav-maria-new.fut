@@ -75,7 +75,7 @@ let traverseOnce (height: i32) (tree:    []f32)
               -- and by computing and following `first` until you
               -- reach a new leaf
               let count = count + 1
-              let stack = setPackedInd stack count true in
+              let stack = setPackedInd stack count false in
               if tree[node_index] <= querry
               then ((node_index+1)*2-1, stack, count) 
               else ((node_index+1)*2, stack, count)
