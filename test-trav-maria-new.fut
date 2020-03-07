@@ -29,7 +29,7 @@ let traverseOnce (height: i32) (tree:    []f32)
                  (querry: f32) (knn:       f32)
                  (last_leaf: i32)
                  -- (stack: i32) : (i32, i32) =
-                 (stack : *[]bool) : (i32, []bool) =
+                 (stack : []bool) : (i32, []bool) =
 
   -- trivial functions for reading/writing from the stack,
   --   which is maintained as an array of booleans.
