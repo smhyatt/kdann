@@ -33,9 +33,8 @@ let traverseOnce (height: i32) (tree:    []f32)
 
   -- trivial functions for reading/writing from the stack,
   --   which is maintained as an array of booleans.
-  let getPackedInd (stk:  [height]bool) (ind: i32) : bool = stk[ind] 
-  let setPackedInd (stk:  [height]bool) (ind: i32) (v: bool) : [height]bool =
-     let stk[ind] = v in stk
+  let getPackedInd (stk:  []bool) (ind: i32) : bool = stk[ind] 
+  let setPackedInd (stk:  []bool) (ind: i32) (v: bool) : []bool = let stk[ind] = v in stk
 
   let (parent_rec, stack, count, rec_node) =
       loop (node_index, stack, count, rec_node) =
