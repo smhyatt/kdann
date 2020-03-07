@@ -57,10 +57,10 @@ let traverseOnce (height: i32) (tree:    []f32)
                   if !to_visit
                   then (parent, stack, count-1, -1)
                   else
-                    let second = addToSecond + node_index
+                    let second = node_index + addToSecond node_index
                     let stack  = setPackedInd stack count true in
                     (parent, stack, count, second)
-                
+
 
   let (new_leaf, stack, _) =
       if parent_rec == 0 && rec_node == -1
