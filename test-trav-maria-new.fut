@@ -115,7 +115,7 @@ entry main (h: i32) (ppl: i32) (q: f32) (knn: f32)=
            (visits, replicate (h+1) false, q_leaf, 0)
          --(visits, 0i32, q_leaf, 0)
       while last_leaf != -1 do
-        let (new_leaf, stack) =
+        let (new_leaf, (stack: []bool)) =
             traverseOnce h tree_arr q knn last_leaf stack
 
         let visits = if new_leaf != -1 
