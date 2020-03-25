@@ -3,7 +3,7 @@ import "lib/github.com/diku-dk/sorts/merge_sort"
 -- ==
 -- entry: main
 --
--- compiled random input { [3510][4]f32 [3510][4]f32 5i32}
+-- compiled random input { [3510][4]f32 [3510][4]f32 5i32 }
 
 
 let getParent (node_index: i32) = (node_index-1) / 2
@@ -36,20 +36,22 @@ let slowBruteForce3D [m] [n] [d] (q: [d]f32) (leaf_idx: i32)
 
 
 let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32) =
-    
-    let nn = copy current_knn
-    in loop nn for p < n do
-        let patch = leaves[p]
-        let dist  = euclidean q patch
-        in let (_, nnp) =
-            loop (dist, nn) for i < k do
-                let cur_nn = nn[i] in
-                if dist <= cur_nn then
-                    let nn[i] = dist
-                    let dist  = cur_nn
-                    in (dist, nn)
-                else (dist, nn)
-        in nnp
+    if q[0] >= f32.highest
+    then copy current_knn
+    else
+        let nn = copy current_knn
+        in loop nn for p < n do
+            let patch = leaves[p]
+            let dist  = euclidean q patch
+            in let (_, nnp) =
+                loop (dist, nn) for i < k do
+                    let cur_nn = nn[i] in
+                    if dist <= cur_nn then
+                        let nn[i] = dist
+                        let dist  = cur_nn
+                        in (dist, nn)
+                    else (dist, nn)
+            in nnp
 
 
 
