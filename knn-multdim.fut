@@ -54,13 +54,21 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
             in nnp
 
 
-let inScatter2D [m] [n] [k] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
-    let flat_inds = map (\p ->
-                            map (\q -> qinds[p]*k + q) (iota k)
-                        ) (iota n)
-    let nk = n*k
-    let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
-    in unflatten m k result
+-- let inScatter2D [m] [n] [k] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
+--     let flat_inds = map (\p ->
+--                             map (\q -> qinds[p]*k + q) (iota k)
+--                         ) (iota n)
+--     let nk = n*k
+--     let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
+--     in unflatten m k result
+
+let inscatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
+  let nk = n*k
+  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
+                              in qinds[d]*k + r
+                       ) (iota nk)
+  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk]t)
+  in  unflatten m k res1D 
 
 
 let scatter2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
