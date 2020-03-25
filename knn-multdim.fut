@@ -226,7 +226,7 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32)  =
                 unzip3 <|
                 map2 (\i node_arr ->
                         let dim_arrs = transpose node_arr
-                        let mini = getEdge dim_arrs lessThan
+                        let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
                         let diffs = map (\di -> maxi[di]-mini[di]) (iota d)
                         let (dim,_) = reduce (\ (i1,v1) (i2,v2) -> if v1>v2 
