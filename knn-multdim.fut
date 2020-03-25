@@ -54,7 +54,7 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
             in nnp
 
 
-let inScatter2D [m][n][k] 't : (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t
+let inScatter2D [m][n][k] 't : (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
     let flat_inds = map(\ p ->
                             map (\q -> qinds[p] + q ) (iota k) 
                        ) (iota n)
