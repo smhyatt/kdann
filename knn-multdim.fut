@@ -54,6 +54,13 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
             in nnp
 
 
+let inScatter2D [m][n][k] 't : (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t
+    let flat_inds = map(\ p ->
+                            map (\q -> qinds[p] + q ) (iota k) 
+                       ) (iota n)
+    let result = scatter (flatten arr2D) (flatten flat_inds) (flatten vals2D)
+    in unflatten n k result
+
 
 let scatter2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
     map (\ind -> map (\x -> x) (val_lst[ind])) idx_lst
@@ -281,8 +288,8 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
                         -- let neighbours  = slowBruteForce3D q (lli-num_nodes) leavesp
                         -- let kneighbours = kmin k neighbours
                         -- let wknn = kneighbours[k-1]
-                        -- let wknn = neighbours[k-1]
-                        let wknn = reduce (\x y -> if largerThan x y then y else x) neighbours[0] neighbours
+                        let wknn = neighbours[k-1]
+                        -- let wknn = reduce (\x y -> if largerThan x y then y else x) neighbours[0] neighbours
                         let (new_l, new_s) = traverseOnce h median_dims median_vals wknn q st lli
                         in (neighbours, new_l, new_s)
                      ) ncq last_leaves_idx stack not_cknns
