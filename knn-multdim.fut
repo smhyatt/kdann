@@ -58,7 +58,8 @@ let inScatter2D [m] [n] [k] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]
     let flat_inds = map (\p ->
                             map (\q -> qinds[p]*k + q) (iota k)
                         ) (iota n)
-    let result = scatter (flatten arr2D) (flatten flat_inds) (flatten vals2D)
+    let nk = n*k
+    let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
     in unflatten m k result
 
 
