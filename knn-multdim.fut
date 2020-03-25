@@ -53,12 +53,13 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
                     else (dist, nn)
             in nnp
 
--- let inScatter2D [m] [n] [k] 't : (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
---     let flat_inds = map(\ p ->
---                             map (\q -> qinds[p]*k + q ) (iota k) 
---                        ) (iota n)
---     let result = scatter (flatten arr2D) (flatten flat_inds) (flatten vals2D)
---     in unflatten m k result
+
+let inScatter2D [m] [n] [k] 't : (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
+    let flat_inds = map (\p ->
+                            map (\q -> qinds[p]*k + q) (iota k)
+                        ) (iota n)
+    let result = scatter (flatten arr2D) (flatten flat_inds) (flatten vals2D)
+    in unflatten m k result
 
 
 let scatter2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
