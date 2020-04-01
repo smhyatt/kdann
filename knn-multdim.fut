@@ -341,8 +341,8 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
                 (scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:]  :> *[m][k]f32),
                 (new_ongoing_knns'[finished:]                                                       :> [finished][k]f32),
                 (scatter visited [i] [trues']                                                       :> *[vlen]i32),
-                i+1                                                                                 :> i32),
-                trues'                                                                              :> i32))
+                (i+1                                                                                :> i32),
+                (trues'                                                                             :> i32))
 
   in (median_vals, median_dims, not_completed_queries, completed_knn, visited)
 
