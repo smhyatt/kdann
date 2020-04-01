@@ -333,13 +333,14 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
             let ongoing_knn_idxs' = copy not_completed_queries'
             let new_ongoing_knns' = gather2D sorted_idxs new_ongoing_knns
             let new_stacks' = gather sorted_idxs new_stacks
+            let vlen = num_leaves+1
 
             in ((not_completed_queries'[finished:] :> [finished]i32),
                 (ongoing_leaf_idxs[finished:] :> [finished]i32),
                 (new_stacks'[finished:] :> [finished]i32),
                 (scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:] :> [m][k]f32),
                 (new_ongoing_knns'[finished:] :> [m][k]f32),
-                (scatter visited [i] [trues'] :> [(num_leaves+1)]i32),
+                (scatter visited [i] [trues'] :> [vlen]i32),
                 i+1,
                 trues')
 
