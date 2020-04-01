@@ -335,12 +335,12 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
             let new_stacks' = gather sorted_idxs new_stacks
             let vlen = num_leaves+1
 
-            in ((not_completed_queries'[finished:] :> [finished]i32),
-                (ongoing_leaf_idxs[finished:] :> [finished]i32),
-                (new_stacks'[finished:] :> [finished]i32),
-                (scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:] :> [m][k]f32),
-                (new_ongoing_knns'[finished:] :> [m][k]f32),
-                (scatter visited [i] [trues'] :> [vlen]i32),
+            in ((not_completed_queries'[finished:]                                                  :> [finished]i32),
+                (ongoing_leaf_idxs[finished:]                                                       :> [finished]i32),
+                (new_stacks'[finished:]                                                             :> [finished]i32),
+                (scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:]  :> [m][k]f32),
+                (new_ongoing_knns'[finished:]                                                       :> [m][k]f32),
+                (scatter visited [i] [trues']                                                       :> [vlen]i32),
                 i+1,
                 trues')
 
@@ -352,7 +352,7 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
 
 
 
-
+-- let trues = map (\ll -> if ll != -1 then 1 else 0) b |> reduce (+) 0
 
 
 
