@@ -1,4 +1,5 @@
 import "lib/github.com/diku-dk/sorts/merge_sort"
+import "lib/github.com/diku-dk/sorts/radix_sort"
 
 -- ==
 -- entry: main
@@ -11,6 +12,15 @@ let getParent (node_index: i32) = (node_index-1) / 2
 let isLeaf (h: i32) (node_index: i32) = node_index >= (1 << (h+1)) - 1
 
 let addToSecond (e: i32) : i32 = if (e & 1) == 1 then 1 else -1
+
+
+let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
+    let dist = loop dist = 0.0f32
+      for i < n do
+          let q = vct1[i]
+          let p = vct2[i]
+          in ((q-p)*(q-p) + dist)
+    in (f32.sqrt dist)
 
 
 let sqr_distance [n] (vct1: [n]f32) 
@@ -42,7 +52,7 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
         let nn = copy current_knn
         in loop nn for p < n do
             let patch = leaves[p]
-            let dist  = euclidean q patch
+            let dist  = seqEuclidean q patch
             in let (_, nnp) =
                 loop (dist, nn) for i < k do
                     let cur_nn = nn[i] in
@@ -62,18 +72,22 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
 --     let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
 --     in unflatten m k result
 
-let inscatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
+let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
   let nk = n*k
   let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
                               in qinds[d]*k + r
                        ) (iota nk)
   let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk]t)
-  in  unflatten m k res1D 
+  in  unflatten m k res1D
 
 
-let scatter2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
+
+let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
     map (\ind -> map (\x -> x) (val_lst[ind])) idx_lst
 
+
+let gather (idx_lst: []i32) (val_lst: []i32) : []i32 =
+    map (\x -> val_lst[x]) idx_lst
 
 
 let lessThan   (x: f32) (y: f32) = x > y  && x != f32.inf && y != f32.inf
@@ -137,10 +151,11 @@ let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
 --         been visited already
 -- Results: the index of the new leaf and the new stack
 --
-let traverseOnce (height:        i32)  (median_dims: []i32)
-                 (median_vals: []f32)  (wknn:          f32)
-                 (query:       []f32)  (stack:         i32) 
-                 (last_leaf:     i32)  : (i32, i32) =
+let traverseOnce      (height:           i32)  (median_dims: []i32)
+                      (median_vals:    []f32)  (wknn:          f32)
+                      (query:          []f32)  (stack:         i32) 
+                      (last_leaf:        i32)  (lower_bounds: [][]f32)
+                      (upper_bounds: [][]f32)  : (i32, i32) =
 
   -- trivial functions for reading/writing from the stack
   let setVisited (stk: i32) (c: i32) : i32 =
@@ -166,8 +181,22 @@ let traverseOnce (height:        i32)  (median_dims: []i32)
                 if isVisited stack count
                 then (parent, stack, count-1, -1)
                 else
-                  let to_visit = (f32.abs (median_vals[parent] - query[median_dims[parent]])) < wknn in
-                  if !to_visit
+                  let cur_qi = median_vals[parent]
+                  let cur_di = median_dims[parent]
+                  let cur_q  = cur_qi-query[cur_di]
+                  let qi     = f32.abs (cur_q*cur_q)
+                  let lower  = cur_qi-lower_bounds[parent,cur_di]
+                  let upper  = cur_qi-upper_bounds[parent,cur_di]
+                  -- exactly the same knn values for both below
+                  let to_visit_case1 = qi >= (f32.abs (lower*lower))
+                  let to_visit_case2 = qi >= (f32.abs (upper*upper))
+                  let to_visit_case3 = qi >= 0 in
+                  -- let to_visit_case1 = (f32.abs lower) < wknn
+                  -- let to_visit_case2 = (f32.abs upper) < wknn
+                  -- let to_visit_case3 = 0 < wknn in
+                  -- let to_visit = (f32.abs (median_vals[parent] - query[median_dims[parent]])) < wknn in
+                  -- if !to_visit
+                  if !(to_visit_case1 || to_visit_case2 || to_visit_case3)
                   then (parent, stack, count-1, -1)
                   else
                     let second = node_index + addToSecond node_index
@@ -197,7 +226,6 @@ let traverseOnce (height:        i32)  (median_dims: []i32)
 
 
 
-
 let firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
                           (query: [d]f32)  (median_vals: [q]f32) =
 
@@ -211,53 +239,48 @@ let firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
 
 
 
+let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
 
-let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32)  =
-
-    let (reference, median_vals, median_dims) =
-        loop(reference, median_vals, median_dims) =
-          (imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32)
+    let (reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+        loop(reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+          (imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32, replicate num_nodes (replicate d 0.0f32), replicate num_nodes (replicate d 0.0f32))
         for level < (h+1) do
             let num_nodes_per_lvl = 1 << level
             let num_points_per_node_per_lvl = m // num_nodes_per_lvl
             let referencep = unflatten num_nodes_per_lvl num_points_per_node_per_lvl reference
-      
-            let (reference, medians, dims) = 
-                unzip3 <|
+
+            let (reference, medians, dims, lower, upper) =
+                unzip5 <|
                 map2 (\i node_arr ->
-                        let dim_arrs = transpose node_arr
-                        let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
+                        let dim_arrs = transpose node_arr    --|> intrinsics.opaque
+                        let mini = getEdge dim_arrs lessThan --|> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
+                        -- getting the widest spread
                         let diffs = map (\di -> maxi[di]-mini[di]) (iota d)
-                        let (dim,_) = reduce (\ (i1,v1) (i2,v2) -> if v1>v2 
-                                                                   then (i1,v1) 
-                                                                   else (i2,v2)) 
+                        let (dim,_) = reduce (\(i1,v1) (i2,v2) -> if v1>v2
+                                                                  then (i1,v1)
+                                                                  else (i2,v2))
                                              ((-1),(-f32.inf)) <| zip (iota d) diffs
-                        let work_dim = map (\x -> 
+                        let work_dim = map (\x ->
                                               (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
-                        let d_sort_idxs = work_dim |> merge_sort_by_key (.1) (<=) |> map (.0)
-                        let node_arrp = scatter2D d_sort_idxs node_arr
+                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0)
+                        let node_arrp = gather2D d_sort_idxs node_arr
                         let median = node_arrp[num_points_per_node_per_lvl // 2, dim]
-                        in (node_arrp, median, dim)
+                        in (node_arrp, median, dim, mini, maxi)
                     ) (iota num_nodes_per_lvl) referencep
 
             let med_inds = map (\j -> (num_nodes_per_lvl-1) + j) (iota num_nodes_per_lvl)
-            in (flatten reference, 
-                scatter median_vals med_inds medians, 
-                scatter median_dims med_inds dims)
-    
-    in (reference, median_vals, median_dims)
+            in (flatten reference,
+                scatter median_vals med_inds medians,
+                scatter median_dims med_inds dims,
+                scatter2D lower_bounds med_inds lower,
+                scatter2D upper_bounds med_inds upper)
+
+    in (reference, median_vals, median_dims, lower_bounds, upper_bounds)
 
 
 
-
--- h:   height of the tree (excluding the leaves)
--- ppl: # of points per leaf
--- q:   the query
--- knn: the worse nearest neighbour
--- run with: echo "3 1024 8024.0f32 3000.0f32" | ./test-trav-maria-new
--- entry main (h: i32) (ppl: i32) (q: f32) (k: i32) (knn: f32) =
 entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
@@ -270,63 +293,57 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let num_patches_in_leaf = mp // num_leaves
 
   -- build the tree of image B
-  let (leaves, median_vals, median_dims) = buildTree imB h num_nodes
+  let (leaves, median_vals, median_dims, lower_bounds, upper_bounds) = buildTree imB h num_nodes
   let leavesp = unflatten num_leaves num_patches_in_leaf leaves
 
-  let (init_leaves, imA_idxs) = 
-      unzip <|
+  let init_leaves =
       map (\a ->
         let q = imA[a]
-        let init = firstTraverse h median_dims q median_vals
-        in (init, a)
+        in firstTraverse h median_dims q median_vals
       ) (iota m)
 
-  let not_cknns = replicate m (replicate k f32.inf)
-  let stack = replicate m 0i32
+  let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
+  let not_completed_queries = gather sorted_idxs_fst (iota m)
 
-  let (not_completed_queries, _, _, _, comp_knns, comp_knns_idxs, _) =
-      loop (ncq, last_leaves_idx, stack, knni, comp_knns, comp_knns_idxs, not_cknns) = 
-        (imA_idxs, init_leaves, stack, iota m, [], [], not_cknns)
+  let ongoing_knn = replicate m (replicate k f32.inf)
+  let completed_knn = replicate m (replicate k f32.inf)
+  let stacks = replicate m 0i32
+  let visited = replicate (num_leaves+1) (-1)
+
+  let (not_completed_queries, _, _, completed_knn, _, visited, _, _) =
+      loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, visited, i, trues) =
+        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, visited, 0i32, m)
           while (length ncq) > 0 do
 
-            let (knns, new_leaves, new_stack) =
+            let (new_ongoing_knns, new_leaves, new_stacks) =
                 unzip3 <|
-                map4 (\nq lli st nck ->
+                map4 (\nq lli st klst ->
                         let q = imA[nq]
-                        let neighbours  = bruteForce q leavesp[(lli-num_nodes)] nck |> trace
-                        -- let neighbours  = slowBruteForce3D q (lli-num_nodes) leavesp
-                        -- let kneighbours = kmin k neighbours
-                        -- let wknn = kneighbours[k-1]
+                        let neighbours  = bruteForce q leavesp[(lli-num_nodes)] klst
                         let wknn = neighbours[k-1]
-                        -- let wknn = reduce (\x y -> if largerThan x y then y else x) neighbours[0] neighbours
-                        let (new_l, new_s) = traverseOnce h median_dims median_vals wknn q st lli
+                        let (new_l, new_s) = traverseOnce h median_dims median_vals wknn q st lli lower_bounds upper_bounds
                         in (neighbours, new_l, new_s)
-                     ) ncq last_leaves_idx stack not_cknns
+                     ) ncq pre_leaf_idx stacks ongoing_knn
 
-            -- let (new_leavesp, new_stacksp, ncqp) =
-            --       unzip3 <| filter (\(ind,_,_) -> ind != -1) <| zip3 new_leaves new_stack ncq
+            let (sorted_idxs, ongoing_leaf_idxs) = zip (iota trues) new_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
+            let finished = map (\ll -> if ll == -1 then 1 else 0) ongoing_leaf_idxs |> reduce (+) 0
+            let trues' = trues - finished
 
-            let (trues, new_leavesp, ncqp, knnip, new_stacksp) =
-                partition2 sortFinishedQueries new_leaves ncq knni new_stack
+            let not_completed_queries' = gather sorted_idxs ncq
+            let ongoing_knn_idxs' = copy not_completed_queries'
+            let new_ongoing_knns' = gather2D sorted_idxs new_ongoing_knns
+            let new_stacks' = gather sorted_idxs new_stacks
 
-            let not_completed_knns_idxs = knnip[:trues]
-            let completed_knns_idxs  = knnip[trues:]
-            let completed_knns_idxsp = comp_knns_idxs ++ completed_knns_idxs
-            -- let bknnsp = insrtScatter2D bknns completed_knns_idxs cur_knns
+            in (not_completed_queries'[finished:],
+                ongoing_leaf_idxs[finished:],
+                new_stacks'[finished:],
+                scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:],
+                new_ongoing_knns'[finished:],
+                scatter visited [i] [trues'],
+                i+1,
+                trues')
 
-            let completed_knns = comp_knns ++ knns[trues:]
-            let not_completed_knns = knns[:trues]
-            let new_not_completed_queries = ncqp[:trues]
-            let new_leaves_idxs = new_leavesp[:trues]
-            let stack = new_stacksp[:trues]
-            let new_knns_idxs = knnip[:trues]
-
-            in (new_not_completed_queries, new_leaves_idxs, stack,
-                new_knns_idxs, completed_knns, completed_knns_idxsp, not_completed_knns)
-
-  let sorted_knns = zip (comp_knns_idxs :> [m]i32) (comp_knns :> [m][k]f32) |> merge_sort_by_key (.0) (<=)
-
-  in (median_vals, median_dims, not_completed_queries, comp_knns_idxs, comp_knns, sorted_knns)
+  in (median_vals, median_dims, not_completed_queries, completed_knn, visited)
 
 
 
