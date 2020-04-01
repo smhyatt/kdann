@@ -4,7 +4,7 @@ import "lib/github.com/diku-dk/sorts/radix_sort"
 -- ==
 -- entry: main
 --
--- compiled random input { [3510][4]f32 [3510][4]f32 5i32 }
+-- compiled random input { [8388608][16]f32 [8388608][16]f32 13i32 }
 
 
 let getParent (node_index: i32) = (node_index-1) / 2
