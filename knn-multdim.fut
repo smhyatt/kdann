@@ -252,8 +252,8 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
 
             let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
                 map2 (\i node_arr ->
-                        let dim_arrs = transpose node_arr    --|> intrinsics.opaque
-                        let mini = getEdge dim_arrs lessThan --|> intrinsics.opaque
+                        let dim_arrs = transpose node_arr    |> intrinsics.opaque
+                        let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
                         -- getting the widest spread
                         let diffs   = map (\di -> maxi[di]-mini[di]) (iota d)
