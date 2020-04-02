@@ -241,43 +241,52 @@ let firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
 
 let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
 
-    let (reference, median_vals, median_dims, lower_bounds, upper_bounds) =
-        loop(reference, median_vals, median_dims, lower_bounds, upper_bounds) =
-          (imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32, replicate num_nodes (replicate d 0.0f32), replicate num_nodes (replicate d 0.0f32))
+    let (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+        loop(imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+          (iota m, imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32, 
+            replicate num_nodes (replicate d 0.0f32), replicate num_nodes (replicate d 0.0f32))
         for level < (h+1) do
             let num_nodes_per_lvl = 1 << level
             let num_points_per_node_per_lvl = m // num_nodes_per_lvl
             let referencep = unflatten num_nodes_per_lvl num_points_per_node_per_lvl reference
 
-            let (reference, medians, dims, lower, upper) =
-                unzip5 <|
+            let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
                 map2 (\i node_arr ->
                         let dim_arrs = transpose node_arr    --|> intrinsics.opaque
                         let mini = getEdge dim_arrs lessThan --|> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
                         -- getting the widest spread
-                        let diffs = map (\di -> maxi[di]-mini[di]) (iota d)
+                        let diffs   = map (\di -> maxi[di]-mini[di]) (iota d)
                         let (dim,_) = reduce (\(i1,v1) (i2,v2) -> if v1>v2
                                                                   then (i1,v1)
                                                                   else (i2,v2))
                                              ((-1),(-f32.inf)) <| zip (iota d) diffs
-                        let work_dim = map (\x ->
-                                              (x, copy node_arr[x,dim])
+                        let work_dim = map (\x -> (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
-                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0)
-                        let node_arrp = gather2D d_sort_idxs node_arr
-                        let median = node_arrp[num_points_per_node_per_lvl // 2, dim]
-                        in (node_arrp, median, dim, mini, maxi)
+                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0) |> trace
+                        -- let new_inds = map (\lvl -> ) d_sort_idxs
+                        let im_indices  = gather d_sort_idxs imB_idxs
+                        let node_arrp   = gather2D d_sort_idxs node_arr
+                        let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
+                        let node_info   = (median, dim)
+                        in (d_sort_idxs, node_arrp, node_info, mini, maxi)
+                        -- in (im_indices, node_arrp, node_info, mini, maxi)
+
                     ) (iota num_nodes_per_lvl) referencep
 
+            let test = imB_idxs'
+            let new_ind = gather (flatten imB_idxs') imB_idxs
+            let (medians, dims) = unzip node_info'
+
             let med_inds = map (\j -> (num_nodes_per_lvl-1) + j) (iota num_nodes_per_lvl)
-            in (flatten reference,
+            in (flatten imB_idxs',
+                flatten reference,
                 scatter median_vals med_inds medians,
                 scatter median_dims med_inds dims,
                 scatter2D lower_bounds med_inds lower,
                 scatter2D upper_bounds med_inds upper)
 
-    in (reference, median_vals, median_dims, lower_bounds, upper_bounds)
+    in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
 
 
 
@@ -293,8 +302,9 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let num_patches_in_leaf = mp // num_leaves
 
   -- build the tree of image B
-  let (leaves, median_vals, median_dims, lower_bounds, upper_bounds) = buildTree imB h num_nodes
+  let (imB_idxs, leaves, median_vals, median_dims, lower_bounds, upper_bounds) = buildTree imB h num_nodes
   let leavesp = unflatten num_leaves num_patches_in_leaf leaves
+  let test = imB_idxs |> trace
 
   let init_leaves =
       map (\a ->
@@ -310,7 +320,7 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let stacks  = replicate m 0i32
   let visited = replicate (num_leaves+1) (-1)
 
-  let (not_completed_queries, _, _, completed_knn, _, visited, _, _) =
+  let (_, _, _, completed_knn, _, visited, _, _) =
       loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, visited, i, trues) =
         (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, visited, 0i32, m)
           while (length ncq) > 0 do
@@ -333,7 +343,7 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
             let ongoing_knn_idxs' = copy not_completed_queries'
             let new_ongoing_knns' = gather2D sorted_idxs new_ongoing_knns
             let new_stacks' = gather sorted_idxs new_stacks
-            let vlen = num_leaves+1
+            -- let vlen = num_leaves+1
 
             in (not_completed_queries'[finished:],
                 ongoing_leaf_idxs[finished:],
@@ -341,7 +351,7 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
                 scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:],
                 new_ongoing_knns'[finished:],
                 scatter visited [i] [trues'],
-                i+1,                                             
+                i+1,
                 trues')
 
             -- in ((not_completed_queries'[finished:]                                                  :> [trues']i32),
@@ -354,7 +364,8 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
             --     (trues'                                                                             :> i32))
 
 
-  in (median_vals, median_dims, not_completed_queries, completed_knn, visited)
+  let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k]f32)
+  in (median_vals, median_dims, completed_knn, visited, with_query_idxs)
 
 
 
@@ -362,7 +373,7 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
 
 
 
--- let trues = map (\ll -> if ll != -1 then 1 else 0) b |> reduce (+) 0
+
 
 
 
