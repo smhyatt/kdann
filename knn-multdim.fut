@@ -5,6 +5,7 @@ import "batch-merge-sort"
 -- ==
 -- entry: main
 --
+-- compiled random input { 11i32 [1048576][16]f32 [1048576][16]f32}
 -- compiled random input { 5i32 [8388][8]f32 [8388][8]f32 }
 -- compiled random input { 14i32 [8388608][16]f32 [8388608][16]f32 }
 -- compiled random input { 12i32 [2097152][16]f32 }
@@ -403,7 +404,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
-  in (completed_knn[:10], visited, with_query_idxs[:10])
+  in (completed_knn[:10], visited[:100], with_query_idxs[:10])
 
 
 
