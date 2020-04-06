@@ -26,30 +26,6 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
     in (f32.sqrt dist)
 
 
--- let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
---                          (current_knn:     [k](i32,f32)) : [k](i32,f32) =
---     if q[0] >= f32.highest
---     then copy current_knn
---     else
---         let nn = copy current_knn
---         in loop nn for p < n do
---             let patch = leaves[p]
---             let dist  = seqEuclidean q patch
---             let idx = leaf_idxs[p]
---             in let (_, _, nnp) =
---                 loop (idx, dist, nn) for i < k do
---                     let cur_nn = nn[i].1 in
---                     if dist <= cur_nn then
---                         let tmp_i = nn[i].0
---                         let nn[i] = (idx, dist)
---                         let idx   = tmp_i
---                         let dist  = cur_nn
---                         in (idx, dist, nn)
---                     else (idx, dist, nn)
---             in nnp
-
-
-
 let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
                          (current_knn:     [k](i32,f32)) : [k](i32,f32) =
     if q[0] >= f32.highest
@@ -59,21 +35,45 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
         in loop nn for p < n do
             let patch = leaves[p]
             let dist  = seqEuclidean q patch
-            let idx   = leaf_idxs[p]
-            let worst = nn[(n-1)].1 in
-            if dist <= worst then
-                let (_, _, nnp) =
-                    loop (idx, dist, nn) for i < k do
-                        let cur_nn = nn[i].1 in
-                        if dist <= cur_nn then
-                            let tmp_i = nn[i].0
-                            let nn[i] = (idx, dist)
-                            let idx   = tmp_i
-                            let dist  = cur_nn
-                            in (idx, dist, nn)
-                        else (idx, dist, nn)
-                in nnp
-            else nn
+            let idx = leaf_idxs[p]
+            in let (_, _, nnp) =
+                loop (idx, dist, nn) for i < k do
+                    let cur_nn = nn[i].1 in
+                    if dist <= cur_nn then
+                        let tmp_i = nn[i].0
+                        let nn[i] = (idx, dist)
+                        let idx   = tmp_i
+                        let dist  = cur_nn
+                        in (idx, dist, nn)
+                    else (idx, dist, nn)
+            in nnp
+
+
+
+-- let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
+--                          (current_knn:     [k](i32,f32)) : [k](i32,f32) =
+--     if q[0] >= f32.highest
+--     then copy current_knn
+--     else
+--         let nn = copy current_knn
+--         in loop nn for p < n do
+--             let patch = leaves[p]
+--             let dist  = seqEuclidean q patch
+--             let idx   = leaf_idxs[p]
+--             let worst = nn[(n-1)].1 in
+--             if dist <= worst then
+--                 let (_, _, nnp) =
+--                     loop (idx, dist, nn) for i < k do
+--                         let cur_nn = nn[i].1 in
+--                         if dist <= cur_nn then
+--                             let tmp_i = nn[i].0
+--                             let nn[i] = (idx, dist)
+--                             let idx   = tmp_i
+--                             let dist  = cur_nn
+--                             in (idx, dist, nn)
+--                         else (idx, dist, nn)
+--                 in nnp
+--             else nn
 
 
 let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
