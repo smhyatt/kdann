@@ -403,7 +403,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
-  in (completed_knn[:10], visited[:100], with_query_idxs[:10])
+  in (completed_knn[:10], visited[:50], with_query_idxs[:10])
 
 
 
