@@ -4,7 +4,7 @@ import "lib/github.com/diku-dk/sorts/radix_sort"
 -- ==
 -- entry: main
 --
--- compiled random input { [8388608][16]f32 [8388608][16]f32 12i32 }
+-- compiled random input { 12i32 [2097152][16]f32 }
 
 
 let getParent (node_index: i32) = (node_index-1) / 2
@@ -246,7 +246,7 @@ let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
 
 
 
-entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
+entry main1 [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
   let ppl  = (m + num_nodes) / num_leaves  -- ceil(m / (2^(h+1)))
@@ -318,11 +318,23 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
 
 
 
+entry main [m] [d] (h: i32) (imB : [m][d]f32) =
+  let num_nodes  = (1 << (h+1)) - 1
+  let num_leaves =  1 << (h+1)
+  let ppl  = (m + num_nodes) / num_leaves  -- ceil(m / (2^(h+1)))
+  let k    = 3i32
+  let mp   = ppl * num_leaves
+  let num_pads = mp - m
+  let pad = map (\_ -> map (\_ -> f32.inf) (iota d)) (iota num_pads)
+  let imB = imB ++ pad
+  let num_patches_in_leaf = mp // num_leaves
 
+  -- build the tree of image B
+  let (imB_idxs, leaves, median_vals, median_dims, lower_bounds, upper_bounds) = buildTree imB h num_nodes
+  let leaves'   = unflatten num_leaves num_patches_in_leaf leaves
+  let imB_idxs' = unflatten num_leaves num_patches_in_leaf imB_idxs
 
-
-
-
+  in (imB_idxs', leaves', median_vals, median_dims, lower_bounds, upper_bounds)
 
 
 
