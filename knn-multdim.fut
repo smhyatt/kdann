@@ -5,6 +5,7 @@ import "batch-merge-sort"
 -- ==
 -- entry: main
 --
+-- compiled random input { 5i32 [8388][8]f32 [8388][8]f32 }
 -- compiled random input { 14i32 [8388608][16]f32 [8388608][16]f32 }
 -- compiled random input { 12i32 [2097152][16]f32 }
 -- compiled random input { 14i32 [8388608][16]f32 }
