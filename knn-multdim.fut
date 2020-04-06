@@ -60,7 +60,7 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 --             let patch = leaves[p]
 --             let dist  = seqEuclidean q patch
 --             let idx   = leaf_idxs[p]
---             let worst = nn[(n-1)].1 in
+--             let worst = nn[(k-1)].1 in
 --             if dist <= worst then
 --                 let (_, _, nnp) =
 --                     loop (idx, dist, nn) for i < k do
@@ -260,7 +260,6 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                         let im_indices  = gather d_sort_idxs inds
                         let node_arrp   = gather2D d_sort_idxs node_arr
                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
-                        let node_info   = (median, dim)
                         in (im_indices, node_arrp, median)
 
                 ) referencep imB_inds d_sort_idxs_2d dims
@@ -403,7 +402,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
-  in (median_vals, median_dims, completed_knn, visited , with_query_idxs)
+  in (completed_knn[:10], visited[:100], with_query_idxs[:10])
 
 
 
