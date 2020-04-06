@@ -45,7 +45,8 @@ let slowBruteForce3D [m] [n] [d] (q: [d]f32) (leaf_idx: i32)
         ) leaves[leaf_idx]
 
 
-let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32) =
+let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
+                         (current_knn:     [k](i32,f32)) : [k](i32,f32) =
     if q[0] >= f32.highest
     then copy current_knn
     else
@@ -53,15 +54,19 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
         in loop nn for p < n do
             let patch = leaves[p]
             let dist  = seqEuclidean q patch
-            in let (_, nnp) =
-                loop (dist, nn) for i < k do
-                    let cur_nn = nn[i] in
+            let idx = leaf_idxs[p]
+            in let (_, _, nnp) =
+                loop (idx, dist, nn) for i < k do
+                    let cur_nn = nn[i].1 in
                     if dist <= cur_nn then
-                        let nn[i] = dist
+                        let tmp_i = nn[i].0
+                        let nn[i] = (idx, dist)
+                        let idx   = tmp_i
                         let dist  = cur_nn
-                        in (dist, nn)
-                    else (dist, nn)
+                        in (idx, dist, nn)
+                    else (idx, dist, nn)
             in nnp
+
 
 
 -- let inScatter2D [m] [n] [k] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
@@ -72,6 +77,7 @@ let bruteForce [n] [k] [d] (q: [d]f32) (leaves: [n][d]f32) (current_knn: [k]f32)
 --     let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
 --     in unflatten m k result
 
+
 let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
   let nk = n*k
   let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
@@ -80,6 +86,18 @@ let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) :
   let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk]t)
   in  unflatten m k res1D
 
+
+let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D: [n][k](i32,f32)) : *[m][k](i32,f32) =
+  let nk = n*k
+  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
+                              in qinds[d]*k + r
+                       ) (iota nk)
+  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk](i32,f32))
+  in  unflatten m k res1D
+
+
+let gather2Dtuples (idx_lst: []i32) (val_lst: [][](i32,f32)) : [][](i32,f32) =
+    map (\ind -> map (\(i,d) -> (i,d)) (val_lst[ind])) idx_lst
 
 
 let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
@@ -196,7 +214,7 @@ let traverseOnce [d][n] (height:             i32)  (median_dims:     [n]i32)
                               in (ack + res)
                           else (ack + 0.0)
 
-                  let to_visit = ack < wknn in
+                  let to_visit = (f32.sqrt ack) < wknn in
                   if !to_visit
                   then (parent, stack, count-1, -1)
                   else
@@ -253,7 +271,7 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
             let imB_inds   = unflatten num_nodes_per_lvl num_points_per_node_per_lvl imB_idxs
 
             let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
-                map3 (\i node_arr inds ->
+                map2 (\node_arr inds ->
                         let dim_arrs = transpose node_arr    |> intrinsics.opaque
                         let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
@@ -265,16 +283,15 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                                              ((-1),(-f32.inf)) <| zip (iota d) diffs
                         let work_dim = map (\x -> (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
-                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0) |> trace
+                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0)
                         let im_indices  = gather d_sort_idxs inds
                         let node_arrp   = gather2D d_sort_idxs node_arr
                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
                         let node_info   = (median, dim)
                         in (im_indices, node_arrp, node_info, mini, maxi)
 
-                    ) (iota num_nodes_per_lvl) referencep imB_inds
+                    ) referencep imB_inds
 
-            let test = imB_idxs'
             let (medians, dims) = unzip node_info'
 
             let med_inds = map (\j -> (num_nodes_per_lvl-1) + j) (iota num_nodes_per_lvl)
@@ -286,6 +303,14 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                 scatter2D upper_bounds med_inds upper)
 
     in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
+
+
+let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
+  unzip <| merge_sort 
+                (\ (v1,i1) (v2,i2) -> 
+                    if v1 < v2 then true  else
+                    if v1 > v2 then false else i1 <= i2 )
+                (zip leaves (iota n))
 
 
 
@@ -302,8 +327,8 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
 
   -- build the tree of image B
   let (imB_idxs, leaves, median_vals, median_dims, lower_bounds, upper_bounds) = buildTree imB h num_nodes
-  let leavesp = unflatten num_leaves num_patches_in_leaf leaves
-  let test = imB_idxs |> trace
+  let leaves'   = unflatten num_leaves num_patches_in_leaf leaves
+  let imB_idxs' = unflatten num_leaves num_patches_in_leaf imB_idxs
 
   let init_leaves =
       map (\a ->
@@ -314,8 +339,8 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
   let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   let not_completed_queries = gather sorted_idxs_fst (iota m)
 
-  let ongoing_knn   = replicate m (replicate k f32.inf)
-  let completed_knn = replicate m (replicate k f32.inf)
+  let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
+  let completed_knn = copy ongoing_knn
   let stacks  = replicate m 0i32
   let visited = replicate (num_leaves+1) (-1)
 
@@ -328,56 +353,34 @@ entry main [m] [d] (imA : [m][d]f32) (imB : [m][d]f32) (h: i32) =
                 unzip3 <|
                 map4 (\nq lli st klst ->
                         let q = imA[nq]
-                        let neighbours  = bruteForce q leavesp[(lli-num_nodes)] klst
-                        let wknn = neighbours[k-1]
+                        let lind = (lli-num_nodes)
+                        let neighbours = bruteForce q leaves'[lind] imB_idxs'[lind] klst
+                        let wknn = neighbours[k-1].1
                         let (new_l, new_s) = traverseOnce h median_dims median_vals wknn q st lli lower_bounds upper_bounds
                         in (neighbours, new_l, new_s)
                      ) ncq pre_leaf_idx stacks ongoing_knn
 
-            let (sorted_idxs, ongoing_leaf_idxs) = zip (iota trues) new_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
+            let (ongoing_leaf_idxs, sorted_idxs) = sortQueriesByLeaves new_leaves
             let finished = map (\ll -> if ll == -1 then 1 else 0) ongoing_leaf_idxs |> reduce (+) 0
             let trues' = trues - finished
 
             let not_completed_queries' = gather sorted_idxs ncq
             let ongoing_knn_idxs' = copy not_completed_queries'
-            let new_ongoing_knns' = gather2D sorted_idxs new_ongoing_knns
+            let new_ongoing_knns' = gather2Dtuples sorted_idxs new_ongoing_knns
             let new_stacks' = gather sorted_idxs new_stacks
-            -- let vlen = num_leaves+1
 
             in (not_completed_queries'[finished:],
                 ongoing_leaf_idxs[finished:],
                 new_stacks'[finished:],
-                scatter2D completed_knn ongoing_knn_idxs'[:finished] new_ongoing_knns'[:finished],
+                scatter2Dtuples completed_knn ongoing_knn_idxs'[:finished] new_ongoing_knns'[:finished],
                 new_ongoing_knns'[finished:],
                 scatter visited [i] [trues'],
                 i+1,
                 trues')
 
-            -- in ((not_completed_queries'[finished:]                                                  :> [trues']i32),
-            --     (ongoing_leaf_idxs[finished:]                                                       :> [trues']i32),
-            --     (new_stacks'[finished:]                                                             :> [trues']i32),
-            --     (scatter2D completed_knn ongoing_knn_idxs'[finished:] new_ongoing_knns'[finished:]  :> *[m][k]f32),
-            --     (new_ongoing_knns'[finished:]                                                       :> [trues'][k]f32),
-            --     (scatter visited [i] [trues']                                                       :> *[vlen]i32),
-            --     (i+1                                                                                :> i32),
-            --     (trues'                                                                             :> i32))
 
-
-  let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k]f32)
-  in (median_vals, median_dims, completed_knn, visited, with_query_idxs)
-
-
-
-
-
-
-
-
-
-
-
-
-
+  let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
+  in (median_vals, median_dims, completed_knn, visited , with_query_idxs)
 
 
 
