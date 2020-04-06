@@ -108,15 +108,15 @@ let gather (idx_lst: []i32) (val_lst: []i32) : []i32 =
     map (\x -> val_lst[x]) idx_lst
 
 
-let lessThan   (x: f32) (y: f32) = x <= y  && x != f32.inf && y != f32.inf
+let lessThan   (x: f32) (y: f32) = x <= y && x != f32.inf && y != f32.inf
 let largerThan (x: f32) (y: f32) = x >  y && x != f32.inf && y != f32.inf
 
 let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
       map (\lst ->
-          reduce (\x y -> if expr x y
-                          then y 
-                          else x
-                 ) lst[0] lst
+          reduce_comm (\x y -> if expr x y
+                          then x
+                          else y
+                      ) lst[0] lst
           ) lsts
 
 
@@ -240,10 +240,10 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                         let maxi = getEdge dim_arrs largerThan
                         -- getting the widest spread
                         let diffs   = map (\di -> maxi[di]-mini[di]) (iota d)
-                        let (dim,_) = reduce (\(i1,v1) (i2,v2) -> if v1>v2
+                        let (dim,_) = reduce_comm (\(i1,v1) (i2,v2) -> if v1>v2
                                                                   then (i1,v1)
                                                                   else (i2,v2))
-                                             ((-1),(-f32.inf)) <| zip (iota d) diffs
+                                                  ((-1),(-f32.inf)) <| zip (iota d) diffs
                         let work_dim = map (\x -> (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
                         in (dim, work_dim, mini, maxi)
