@@ -4,7 +4,7 @@ import "lib/github.com/diku-dk/sorts/radix_sort"
 -- ==
 -- entry: main
 --
--- compiled random input { [8388608][8]f32 [8388608][8]f32 13i32 }
+-- compiled random input { [8388608][16]f32 [8388608][16]f32 12i32 }
 
 
 let getParent (node_index: i32) = (node_index-1) / 2
@@ -21,28 +21,6 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
           let p = vct2[i]
           in ((q-p)*(q-p) + dist)
     in (f32.sqrt dist)
-
-
-let sqr_distance [n] (vct1: [n]f32) 
-                     (vct2: [n]f32) : [n]f32 = 
-    map2 (\p1 p2 -> (p1-p2)*(p1-p2)) vct1 vct2
-
-
-let euclidean [n] (vct1: [n]f32) 
-                  (vct2: [n]f32) : f32 =
-    f32.sqrt (reduce (+) 0.0 (sqr_distance vct1 vct2))
-
-
-let kmin (k: i32) (dists: []f32) =
-    let fullarr = merge_sort (f32.<=) dists
-    in  fullarr[0:k]
-
-
-let slowBruteForce3D [m] [n] [d] (q: [d]f32) (leaf_idx: i32) 
-                               (leaves: [m][n][d]f32) =
-    map (\patch ->
-          euclidean q patch
-        ) leaves[leaf_idx]
 
 
 let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
@@ -66,16 +44,6 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
                         in (idx, dist, nn)
                     else (idx, dist, nn)
             in nnp
-
-
-
--- let inScatter2D [m] [n] [k] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
---     let flat_inds = map (\p ->
---                             map (\q -> qinds[p]*k + q) (iota k)
---                         ) (iota n)
---     let nk = n*k
---     let result = scatter (flatten arr2D) ((flatten flat_inds) :> [nk]t) ((flatten vals2D) :> [nk]t)
---     in unflatten m k result
 
 
 let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
@@ -118,44 +86,6 @@ let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
                           else x
                  ) lst[0] lst
           ) lsts
-
-
-let segScatter [n] [m] (res_lst:  [n][]i32) (idx_lst: [n][m]i32) 
-                       (val_lst: [n][m]i32)         : [n][]i32 =
-    map3 (\res ind v -> 
-              scatter (copy res) ind v 
-         ) res_lst idx_lst val_lst
-
-
-let sortFinishedQueries (elm: i32) : bool = elm != (-1)
-
-
-let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
-                   (completed:   [n]i32) (knns:      [n]i32)
-                   (stack:       [n]i32) 
-                   : (i32, [n]i32, [n]i32, [n]i32, [n]i32) =
-
-    let tflgs = map (\e -> if expr e then 1 else 0) leaf_idxs
-    let fflgs = map (\b -> 1 - b) tflgs
-
-    let indsT = scan (+) 0 tflgs
-    let tmp   = scan (+) 0 fflgs
-    let trues = if n > 0 then indsT[n-1] else -1
-    let indsF = map (+trues) tmp
-
-    let inds  = map3 (\leaf indT indF -> if expr leaf 
-                                         then indT-1 
-                                         else indF-1
-                     ) leaf_idxs indsT indsF
-
-    let leaf_idxsp = scatter (replicate n 0i32) inds leaf_idxs
-    let completedp = scatter (replicate n 0i32) inds completed
-    let knnsp      = scatter (replicate n 0i32) inds knns
-    let stackp     = scatter (replicate n 0i32) inds stack
-    in  (trues, leaf_idxsp, completedp, knnsp, stackp)
-
-
-
 
 
 -- This is implemented for 1-dim
@@ -305,12 +235,14 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
     in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
 
 
+
 let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
   unzip <| merge_sort 
                 (\ (v1,i1) (v2,i2) -> 
                     if v1 < v2 then true  else
                     if v1 > v2 then false else i1 <= i2 )
                 (zip leaves (iota n))
+
 
 
 
