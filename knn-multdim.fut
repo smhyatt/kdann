@@ -108,8 +108,8 @@ let gather (idx_lst: []i32) (val_lst: []i32) : []i32 =
     map (\x -> val_lst[x]) idx_lst
 
 
-let lessThan   (x: f32) (y: f32) = x > y  && x != f32.inf && y != f32.inf
-let largerThan (x: f32) (y: f32) = x <= y && x != f32.inf && y != f32.inf
+let lessThan   (x: f32) (y: f32) = x <= y  && x != f32.inf && y != f32.inf
+let largerThan (x: f32) (y: f32) = x >  y && x != f32.inf && y != f32.inf
 
 let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
       map (\lst ->
