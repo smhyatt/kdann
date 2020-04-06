@@ -1,10 +1,11 @@
 import "lib/github.com/diku-dk/sorts/merge_sort"
 import "lib/github.com/diku-dk/sorts/radix_sort"
+import "batch-merge-sort"
 
 -- ==
 -- entry: main
 --
--- compiled random input { 12i32 [2097152][16]f32 }
+-- compiled random input { 14i32 [8388608][16]f32 }
 
 
 let getParent (node_index: i32) = (node_index-1) / 2
@@ -44,6 +45,33 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
                         in (idx, dist, nn)
                     else (idx, dist, nn)
             in nnp
+
+
+
+-- let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
+--                          (current_knn:     [k](i32,f32)) : [k](i32,f32) =
+--     if q[0] >= f32.highest
+--     then copy current_knn
+--     else
+--         let nn = copy current_knn
+--         in loop nn for p < n do
+--             let patch = leaves[p]
+--             let dist  = seqEuclidean q patch
+--             let idx   = leaf_idxs[p]
+--             let worst = nn[(n-1)].1 in
+--             if dist <= worst then
+--                 let (_, _, nnp) =
+--                     loop (idx, dist, nn) for i < k do
+--                         let cur_nn = nn[i].1 in
+--                         if dist <= cur_nn then
+--                             let tmp_i = nn[i].0
+--                             let nn[i] = (idx, dist)
+--                             let idx   = tmp_i
+--                             let dist  = cur_nn
+--                             in (idx, dist, nn)
+--                         else (idx, dist, nn)
+--                 in nnp
+--             else nn
 
 
 let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
@@ -188,6 +216,7 @@ let firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
 
 
 
+
 let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
 
     let (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
@@ -200,8 +229,8 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
             let referencep = unflatten num_nodes_per_lvl num_points_per_node_per_lvl reference
             let imB_inds   = unflatten num_nodes_per_lvl num_points_per_node_per_lvl imB_idxs
 
-            let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
-                map2 (\node_arr inds ->
+            let (dims, work_dims, lower, upper) = unzip4 <|
+                map (\node_arr ->
                         let dim_arrs = transpose node_arr    |> intrinsics.opaque
                         let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
                         let maxi = getEdge dim_arrs largerThan
@@ -213,16 +242,27 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                                              ((-1),(-f32.inf)) <| zip (iota d) diffs
                         let work_dim = map (\x -> (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
-                        let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0)
+                        in (dim, work_dim, mini, maxi)
+                      ) referencep
+
+            let (d_sort_idxs_2d, _) = 
+                          work_dims
+                          |> batch_merge_sort (num_points_per_node_per_lvl, f32.inf)
+                                              (\ (i1,v1) (i2,v2) -> 
+                                                  if v1 < v2 then true  else
+                                                  if v1 > v2 then false else i1 <= i2 )
+                          |> map unzip |> unzip
+
+            let (imB_idxs', reference, medians) = unzip3 <|
+                map4 (\node_arr inds d_sort_idxs dim ->
                         let im_indices  = gather d_sort_idxs inds
                         let node_arrp   = gather2D d_sort_idxs node_arr
                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
                         let node_info   = (median, dim)
-                        in (im_indices, node_arrp, node_info, mini, maxi)
+                        in (im_indices, node_arrp, median)
 
-                    ) referencep imB_inds
+                ) referencep imB_inds d_sort_idxs_2d dims
 
-            let (medians, dims) = unzip node_info'
 
             let med_inds = map (\j -> (num_nodes_per_lvl-1) + j) (iota num_nodes_per_lvl)
             in (flatten imB_idxs',
@@ -233,6 +273,55 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
                 scatter2D upper_bounds med_inds upper)
 
     in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
+
+
+
+
+-- let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
+
+--     let (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+--         loop(imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+--           (iota m, imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32, 
+--             replicate num_nodes (replicate d 0.0f32), replicate num_nodes (replicate d 0.0f32))
+--         for level < (h+1) do
+--             let num_nodes_per_lvl = 1 << level
+--             let num_points_per_node_per_lvl = m // num_nodes_per_lvl
+--             let referencep = unflatten num_nodes_per_lvl num_points_per_node_per_lvl reference
+--             let imB_inds   = unflatten num_nodes_per_lvl num_points_per_node_per_lvl imB_idxs
+
+--             let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
+--                 map2 (\node_arr inds ->
+--                         let dim_arrs = transpose node_arr    |> intrinsics.opaque
+--                         let mini = getEdge dim_arrs lessThan |> intrinsics.opaque
+--                         let maxi = getEdge dim_arrs largerThan
+--                         -- getting the widest spread
+--                         let diffs   = map (\di -> maxi[di]-mini[di]) (iota d)
+--                         let (dim,_) = reduce (\(i1,v1) (i2,v2) -> if v1>v2
+--                                                                   then (i1,v1)
+--                                                                   else (i2,v2))
+--                                              ((-1),(-f32.inf)) <| zip (iota d) diffs
+--                         let work_dim = map (\x -> (x, copy node_arr[x,dim])
+--                                            ) (iota num_points_per_node_per_lvl)
+--                         let d_sort_idxs = work_dim |> radix_sort_float_by_key (.1) f32.num_bits f32.get_bit |> map (.0)
+--                         let im_indices  = gather d_sort_idxs inds
+--                         let node_arrp   = gather2D d_sort_idxs node_arr
+--                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
+--                         let node_info   = (median, dim)
+--                         in (im_indices, node_arrp, node_info, mini, maxi)
+
+--                     ) referencep imB_inds
+
+--             let (medians, dims) = unzip node_info'
+
+--             let med_inds = map (\j -> (num_nodes_per_lvl-1) + j) (iota num_nodes_per_lvl)
+--             in (flatten imB_idxs',
+--                 flatten reference,
+--                 scatter median_vals med_inds medians,
+--                 scatter median_dims med_inds dims,
+--                 scatter2D lower_bounds med_inds lower,
+--                 scatter2D upper_bounds med_inds upper)
+
+--     in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
 
 
 
