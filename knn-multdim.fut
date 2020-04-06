@@ -5,6 +5,7 @@ import "batch-merge-sort"
 -- ==
 -- entry: main
 --
+-- compiled random input { 11i32 [1048576][4]f32 [1048576][4]f32}
 -- compiled random input { 11i32 [1048576][16]f32 [1048576][16]f32}
 -- compiled random input { 5i32 [8388][8]f32 [8388][8]f32 }
 -- compiled random input { 14i32 [8388608][16]f32 [8388608][16]f32 }
@@ -28,30 +29,6 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
     in (f32.sqrt dist)
 
 
-let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
-                         (current_knn:     [k](i32,f32)) : [k](i32,f32) =
-    if q[0] >= f32.highest
-    then copy current_knn
-    else
-        let nn = copy current_knn
-        in loop nn for p < n do
-            let patch = leaves[p]
-            let dist  = seqEuclidean q patch
-            let idx = leaf_idxs[p]
-            in let (_, _, nnp) =
-                loop (idx, dist, nn) for i < k do
-                    let cur_nn = nn[i].1 in
-                    if dist <= cur_nn then
-                        let tmp_i = nn[i].0
-                        let nn[i] = (idx, dist)
-                        let idx   = tmp_i
-                        let dist  = cur_nn
-                        in (idx, dist, nn)
-                    else (idx, dist, nn)
-            in nnp
-
-
-
 -- let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 --                          (current_knn:     [k](i32,f32)) : [k](i32,f32) =
 --     if q[0] >= f32.highest
@@ -61,21 +38,45 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 --         in loop nn for p < n do
 --             let patch = leaves[p]
 --             let dist  = seqEuclidean q patch
---             let idx   = leaf_idxs[p]
---             let worst = nn[(k-1)].1 in
---             if dist <= worst then
---                 let (_, _, nnp) =
---                     loop (idx, dist, nn) for i < k do
---                         let cur_nn = nn[i].1 in
---                         if dist <= cur_nn then
---                             let tmp_i = nn[i].0
---                             let nn[i] = (idx, dist)
---                             let idx   = tmp_i
---                             let dist  = cur_nn
---                             in (idx, dist, nn)
---                         else (idx, dist, nn)
---                 in nnp
---             else nn
+--             let idx = leaf_idxs[p]
+--             in let (_, _, nnp) =
+--                 loop (idx, dist, nn) for i < k do
+--                     let cur_nn = nn[i].1 in
+--                     if dist <= cur_nn then
+--                         let tmp_i = nn[i].0
+--                         let nn[i] = (idx, dist)
+--                         let idx   = tmp_i
+--                         let dist  = cur_nn
+--                         in (idx, dist, nn)
+--                     else (idx, dist, nn)
+--             in nnp
+
+
+
+let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
+                         (current_knn:     [k](i32,f32)) : [k](i32,f32) =
+    if q[0] >= f32.highest
+    then copy current_knn
+    else
+        let nn = copy current_knn
+        in loop nn for p < n do
+            let patch = leaves[p]
+            let dist  = seqEuclidean q patch
+            let idx   = leaf_idxs[p]
+            let worst = nn[(k-1)].1 in
+            if dist <= worst then
+                let (_, _, nnp) =
+                    loop (idx, dist, nn) for i < k do
+                        let cur_nn = nn[i].1 in
+                        if dist <= cur_nn then
+                            let tmp_i = nn[i].0
+                            let nn[i] = (idx, dist)
+                            let idx   = tmp_i
+                            let dist  = cur_nn
+                            in (idx, dist, nn)
+                        else (idx, dist, nn)
+                in nnp
+            else nn
 
 
 let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
@@ -106,18 +107,6 @@ let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
 
 let gather (idx_lst: []i32) (val_lst: []i32) : []i32 =
     map (\x -> val_lst[x]) idx_lst
-
-
-let lessThan   (x: f32) (y: f32) = x <= y && x != f32.inf && y != f32.inf
-let largerThan (x: f32) (y: f32) = x >  y && x != f32.inf && y != f32.inf
-
-let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
-      map (\lst ->
-          reduce_comm (\x y -> if expr x y
-                          then x
-                          else y
-                      ) lst[0] lst
-          ) lsts
 
 
 -- This is implemented for 1-dim
@@ -218,6 +207,17 @@ let firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
 
     in new_leaf
 
+
+let lessThan   (x: f32) (y: f32) = x <= y && x != f32.inf && y != f32.inf
+let largerThan (x: f32) (y: f32) = x >  y && x != f32.inf && y != f32.inf
+
+let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
+      map (\lst ->
+          reduce_comm (\x y -> if expr x y
+                          then x
+                          else y
+                      ) lst[0] lst
+          ) lsts
 
 
 
@@ -404,7 +404,8 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
-  in (completed_knn[:10], visited[:200], with_query_idxs[:10])
+  in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
+  -- in (completed_knn[:10], visited[:200], with_query_idxs[:10], lower_bounds, upper_bounds)
 
 
 
