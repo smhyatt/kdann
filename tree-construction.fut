@@ -30,8 +30,8 @@ let largerThan (x: f32) (y: f32) = x >  y && x != f32.inf && y != f32.inf
 let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
       map (\lst ->
           reduce_comm (\x y -> if expr x y
-                          then x
-                          else y
+                               then x
+                               else y
                       ) lst[0] lst
           ) lsts
 
@@ -66,8 +66,8 @@ entry buildTree [m][d] (imB : [m][d]f32) (h: i32) =
                         -- getting the widest spread
                         let diffs   = map (\di -> maxi[di]-mini[di]) (iota d)
                         let (dim,_) = reduce_comm (\(i1,v1) (i2,v2) -> if v1>v2
-                                                                  then (i1,v1)
-                                                                  else (i2,v2))
+                                                                       then (i1,v1)
+                                                                       else (i2,v2))
                                                   ((-1),(-f32.inf)) <| zip (iota d) diffs
                         let work_dim = map (\x -> (x, copy node_arr[x,dim])
                                            ) (iota num_points_per_node_per_lvl)
@@ -113,9 +113,12 @@ entry buildTree [m][d] (imB : [m][d]f32) (h: i32) =
 
     let new_bound_idxs = map (\j -> (j + num_nodes)) (iota num_leaves)
 
-    in (imB_idxs', leaves', median_vals, median_dims,
-        scatter2D lower_bounds new_bound_idxs lower :> [tot_nodes][d]f32,
-        scatter2D upper_bounds new_bound_idxs upper :> [tot_nodes][d]f32)
+    in (imB_idxs', 
+        leaves', 
+        median_vals, 
+        median_dims,
+        (scatter2D lower_bounds new_bound_idxs lower :> [tot_nodes][d]f32),
+        (scatter2D upper_bounds new_bound_idxs upper :> [tot_nodes][d]f32))
 
 
 
