@@ -113,12 +113,13 @@ entry buildTree [m][d] (imB : [m][d]f32) (h: i32) =
 
     let new_bound_idxs = map (\j -> (j + num_nodes)) (iota num_leaves)
 
-    in ((imB_idxs' :> [num_leaves][num_patches_in_leaf]i32),
-        (leaves'   :> [num_leaves][num_patches_in_leaf][d]f32),
+    in ((imB_idxs' :> [num_leaves][ppl]i32),
+        (leaves'   :> [num_leaves][ppl][d]f32),
         (median_vals :> [num_nodes]f32),
         (median_dims :> [num_nodes]i32),
         (scatter2D lower_bounds new_bound_idxs lower :> [tot_nodes][d]f32),
-        (scatter2D upper_bounds new_bound_idxs upper :> [tot_nodes][d]f32))
+        (scatter2D upper_bounds new_bound_idxs upper :> [tot_nodes][d]f32),
+        ppl)
 
 
 
