@@ -132,7 +132,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                 unzip3 <|
                 map4 (\q lli st klst ->
                         let lind = (lli-num_nodes)
-                        let neighbours = bruteForce q leaves[lind] imB_idxs'[lind] klst
+                        let neighbours = bruteForce q leaves[lind] imB_idxs[lind] klst
                         let wknn = neighbours[k-1].1
                         let (new_l, new_s) = traverse h median_dims median_vals wknn q st lli lower_bounds upper_bounds
                         in (neighbours, new_l, new_s)
