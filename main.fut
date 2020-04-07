@@ -164,7 +164,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
   -- let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
   let (knn_inds, knn_vals) = map unzip completed_knn |> unzip
-  in (knn_inds[:16], knn_vals[:16], visited, lower_bounds, upper_bounds)
+  in (knn_inds[:16], knn_vals[:16], visited)
   -- in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
   -- in (completed_knn[:10], visited[:200], with_query_idxs[:10])--, lower_bounds, upper_bounds)
 
