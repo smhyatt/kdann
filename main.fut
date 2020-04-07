@@ -94,6 +94,15 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   -- build the tree of image B
   let (imB_idxs, leaves, median_vals, median_dims, lower_bounds, upper_bounds, ppl) = buildTree imB h
 
+  let leaves       = leaves       :> [num_leaves][ppl][d]f32
+  let imB_idxs     = imB_idxs     :> [num_leaves][ppl]i32
+  let median_dims  = median_dims  :> [num_nodes]i32
+  let median_vals  = median_vals  :> [num_nodes]f32
+  let lower_bounds = lower_bounds :> [tot_nodes][d]f32
+  let upper_bounds = upper_bounds :> [tot_nodes][d]f32
+
+
+
   let init_leaves =
       map (\a ->
         let q = imA[a]
@@ -122,7 +131,7 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                 unzip3 <|
                 map4 (\q lli st klst ->
                         let lind = (lli-num_nodes)
-                        let neighbours = bruteForce q (leaves[lind] :> [num_leaves][ppl][d]f32) (imB_idxs'[lind] :> [num_leaves][ppl]i32) klst
+                        let neighbours = bruteForce q leaves[lind] imB_idxs'[lind] klst
                         let wknn = neighbours[k-1].1
                         let (new_l, new_s) = traverse h median_dims median_vals wknn q st lli lower_bounds upper_bounds
                         in (neighbours, new_l, new_s)
