@@ -107,8 +107,8 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let init_leaves =
       map (\a ->
         let q = imA[a]
-        in firstTraverse h (median_dims :> [num_nodes]i32) q (median_vals :> [num_nodes]f32)
-        -- in firstTraverse h median_dims q median_vals
+        -- in firstTraverse h (median_dims :> [num_nodes]i32) q (median_vals :> [num_nodes]f32)
+        in firstTraverse h median_dims q median_vals
       ) (iota m)
 
 
@@ -162,8 +162,10 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                 trues')
 
 
-  let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
-  in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
+  -- let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
+  let (knn_inds, knn_vals) = map unzip completed_knn |> unzip
+  in (knn_inds, knn_vals, visited, with_query_idxs, lower_bounds, upper_bounds)
+  -- in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
   -- in (completed_knn[:10], visited[:200], with_query_idxs[:10])--, lower_bounds, upper_bounds)
 
 
