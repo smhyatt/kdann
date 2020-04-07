@@ -98,8 +98,8 @@ entry traverse [d][n][l] (height:             i32)  (median_dims:     [n]i32)
 
 
 
-entry firstTraverse [d] [q] (height:   i32)  (median_dims: [q]i32)
-                          (query: [d]f32)  (median_vals: [q]f32) =
+entry firstTraverse [d][q] (height:   i32)  (median_dims: [q]i32)
+                           (query: [d]f32)  (median_vals: [q]f32) =
 
     let new_leaf = loop node_index = 0
         while !(isLeaf height node_index) do
