@@ -46,11 +46,12 @@ entry buildTree [m][d] (imB : [m][d]f32) (h: i32) =
     let pad = map (\_ -> map (\_ -> f32.inf) (iota d)) (iota num_pads)
     let imB = imB ++ pad
     let num_patches_in_leaf = m' // num_leaves
+    let tot_nodes = num_nodes+num_leaves
 
     let (imB_idxs, leaves, median_vals, median_dims, lower_bounds, upper_bounds) =
         loop(imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
           (iota m', imB, replicate num_nodes 0.0f32, replicate num_nodes 0i32, 
-            replicate (num_nodes+num_leaves) (replicate d 0.0f32), replicate (num_nodes+num_leaves) (replicate d 0.0f32))
+            replicate tot_nodes (replicate d 0.0f32), replicate tot_nodes (replicate d 0.0f32))
         for level < (h+1) do
             let num_nodes_per_lvl = 1 << level
             let num_points_per_node_per_lvl = m' // num_nodes_per_lvl
