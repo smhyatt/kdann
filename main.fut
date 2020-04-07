@@ -97,8 +97,10 @@ entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let init_leaves =
       map (\a ->
         let q = imA[a]
-        in firstTraverse h median_dims q median_vals
+        in firstTraverse h (median_dims :> [num_nodes]i32) q (median_vals :> [num_nodes]f32)
+        -- in firstTraverse h median_dims q median_vals
       ) (iota m)
+
 
   let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
