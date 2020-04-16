@@ -1,0 +1,40 @@
+\section{Introduction}
+\label{sec:intro}
+1. short introduction, in which you start by saying that of common agreement
+with your advisor have decided to narrow the scope of the original project to
+just targeting the exact k-nn problem solved with the kd tree, and that it was
+also agreed that this should not negatively influence your grade.
+
+Then describe the main accomplishments of your work.
+(so perhaps you write the introduction last)
+
+
+K-Nearest Neighbours (KNN) is a well-known algorithm highly used in areas such as computer vision and computer graphics. One way of applying it is in image recognition where it can be used to find similarities between two images. 
+
+(skriv om pixler der bliver til patches med PCA).
+
+The naive approach of implementing KNN is a brute force method which compares each patch of image A with each patch of image B. 
+
+
+More in section \hyperref[sec:back]{2. Background}.
+
+
+Instead this project utilises the benefits of storing data of one image in a multidimensional binary search trees, also known as KD-trees, where k is the dimensionality of the search space. It has shown to be quite efficient in its storage requirements in addition to 
+
+
+
+% The aim of the project is to implement a approach similar with He and Sun's, however utilizing highly parallel hardware such as GPUs. To this extent we are going to develop a data parallel implementation of the main algorithmic steps in the Futhark language and/or perhaps CUDA. We are going to identify the performance bottlenecks and study techniques aimed at solving them. 
+
+% Computing nearest-neighbour fields (NNFs) between two images is useful for solving various computer vision problems. One common method is applying brute-force which has the complexity of O(n^2), while it is easy to implement it is also infeasible when n is large. 
+% Another common solution is using KD-Trees which has an average complexity of O(n lg n). While this offers a cheaper traversal it still suffers from the curse of high dimensionality. Thus, the trade-off is accuracy for lower dimensionality and reduced algorithmic complexity. 
+
+% Dimensionality and tree traversal can be further optimized by applying NNF in an approximate fashion that does not guarantee an exact solution, however the result has been found to be good enough in practice. 
+
+
+
+
+% Climate changes and global warming are pressing matters that require attention and action. Map- ping forest changes at a large scale is an important step into understanding the current levels of de- forestation, that occur due to climate changes. One method of monitoring deforestation is through the BFAST algorithm, which analyses independently the time series of each pixel in the image. BFAST uses a fraction of the time series data to build an AI model, and then it applies the model on the remaining data to identify landscape changes for that pixel. However, BFAST is a compute hungry algorithm and performing large scale analysis (e.g., entire continents) is infeasible time wise. As such, this projects looks into techniques to parallel use of BFAST on General-Purpose Graphics Processing Units (GPGPUs) to implement the BFAST algorithm monitoring satellite images obtained over Peru in years 2002, 2010, 2014 and 2017 and Sahara in years 2010 to 2018.
+
+% BFAST has a naive approach to utilise parallelism, simply by wrapping the computations of each independent pixel in an outer parallel loop. However, this is a suboptimal solution because it does not utilise locality of reference well. Even when the outer loop contains enough parallelism to fully utilise the hardware, then it might happen that utilising inner levels of parallelism will improve locality of reference. For example, Peru’s dataset includes 111556 pixels, which is more than enough to utilise GPU4 that has 70000 hardware threads. The cornerstone of this project is utilising the inner parallelism to better optimize locality of reference. Matrix computations can in some cases be optimized by performing block and register tiling. Additional optimizations are taking advantage of spatial locality, by reducing the number of memory transactions. Figure 1 sums up the overall steps for the algorithm, where the implementation and optimizations of each step will be described in sections 2.1-2.5. Appendix Figure 2 shows the road map of each kernel applied for the implementation of this project.
+
+

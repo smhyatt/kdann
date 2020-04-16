@@ -1,0 +1,58 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Friedman%
+, Bentley%
+\BCBL {}\ \BBA {} Finkel%
+}{%
+Friedman%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1977}}%
+}]{%
+logmatches}
+\APACinsertmetastar {%
+logmatches}%
+\begin{APACrefauthors}%
+Friedman, J\BPBI H.%
+, Bentley, J\BPBI L.%
+\BCBL {}\ \BBA {} Finkel, R\BPBI A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1977}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An Algorithm for Finding Best Matches in Logarithmic
+  Expected Time} {An algorithm for finding best matches in logarithmic expected
+  time}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Transactions on Mathematical Software}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+He%
+\ \BBA {} Sun%
+}{%
+He%
+\ \BBA {} Sun%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+kdann}
+\APACinsertmetastar {%
+kdann}%
+\begin{APACrefauthors}%
+He, K.%
+\BCBT {}\ \BBA {} Sun, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Computing Nearest-Neighbor Fields via
+  Propagation-Assisted KD-Trees} {Computing nearest-neighbor fields via
+  propagation-assisted kd-trees}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Microsoft Research Asia}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

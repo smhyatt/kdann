@@ -1,0 +1,625 @@
+ ~  futhark repl                                                                                1 ↵  10542  10:51:40
+|// |\    |   |\  |\   /
+|/  | \   |\  |\  |/  /
+|   |  \  |/  |   |\  \
+|   |   \ |   |   | \  \
+Version 0.14.1.
+Copyright (C) DIKU, University of Copenhagen, released under the ISC license.
+
+Run :help for a list of commands.
+
+[0]> let arr = [1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8]
+[1]> let shp =
+
+  sks
+Error at [1]> :3:1-3:
+Unknown name `sks`
+[2]> let shp = [8]
+[3]> let sres = scan (+) 0 shp
+[4]> let inds = zip ([0] ++ (init sres), sres)
+Error at [4]> :1:16-41:
+Types do not match.
+When matching type
+  []a₀
+with
+  (*[]i32, []i32)
+
+[5]> let inds = ([0] ++ (init sres), sres)
+[6]> inds
+([0i32], [8i32])
+[7]> let inds = unzip ([0] ++ (init sres), sres)
+Error at [7]> :1:18-43:
+Types do not match.
+When matching type
+  [](a₀, b₁)
+with
+  (*[]i32, []i32)
+
+[8]> inds
+([0i32], [8i32])
+[9]> unzip inds
+Error at [9]> :1:7-10:
+Types do not match.
+When matching type
+  [](a₀, b₁)
+with
+  ([]i32, []i32)
+
+[10]> zip inds
+Error at [10]> :1:5-8:
+Types do not match.
+When matching type
+  []a₀
+with
+  ([]i32, []i32)
+
+[11]> let inds = [[0] ++ (init sres), sres]
+[12]> inds
+[[0i32], [8i32]]
+[13]> zip inds
+#<fun>
+[14]> inds
+[[0i32], [8i32]]
+[15]> unzip inds
+Error at [15]> :1:7-10:
+Couldn't match expected type
+  (a₀, b₁)
+with actual type
+  []i32
+When matching type
+  [](a₀, b₁)
+with
+  [][]i32
+
+[16]> let inds = ([0] ++ (init sres), sres)
+[17]> let inds = zip ([0] ++ (init sres)) sres
+[18]> inds
+[(0i32, 8i32)]
+[19]> map (\(fr,to) -> [(to-fr)]) inds
+[[8i32]]
+[20]> inds
+[(0i32, 8i32)]
+[21]> let (fr,to) = inds[0]
+  in fr
+0i32
+[22]> let (fr,to) = inds[0]
+  in (fr,to)
+(0i32, 8i32)
+[23]> let n_shp = []
+[24]> let tmp = to-fr
+Error at [24]> :1:11-12:
+Unknown name `to`
+[25]> to
+Error at [25]> :1:1-2:
+Unknown name `to`
+[26]> let (fr,to) = inds[0]
+  in to
+8i32
+[27]> let tmp = to-fr
+Error at [27]> :1:11-12:
+Unknown name `to`
+[28]> in let tmp = to-fr
+Error at [28]> :1:1-2: Parse error.
+[29]> let (fr,to) = inds[0]
+  in to-fr
+8i32
+[30]> inds[0].0
+0i32
+[31]> length inds
+1i32
+[32]> let h = 15
+[33]> 1 << (h+1)
+65536i32
+[34]> let h = 5
+[35]> 1 << (h+1)
+64i32
+[36]> 100-(1<<(h+1))
+36i32
+[37]> unzip2 <| map (\i -> let j = i*2 in (i,j)) (iota 10)
+([0i32, 1i32, 2i32, 3i32, 4i32, 5i32, 6i32, 7i32, 8i32, 9i32], [0i32, 2i32,
+                                                                4i32, 6i32,
+                                                                8i32, 10i32,
+                                                                12i32, 14i32,
+                                                                16i32, 18i32])
+[38]> (1 << 0)
+1i32
+[39]> (1 << 5)
+32i32
+[40]> t32 (1 << 5)
+Error at [40]> :1:5-12:
+Cannot unify `t₂`' with type
+  f32
+as `t₂` must be one of i8, i16, i32, i64, u8, u16, u32, u64 due to use as function argument at [40]> :1:11-11).
+When matching type
+  f32
+with
+  *t₂
+
+[41]> r32 (1 << 5)
+32.0f32
+[42]> r32 (1 << 5)
+32.0f32
+[43]> t32 (1 << 5.0)
+Error at [43]> :1:11-13:
+Type constrained to one of i8,i16,i32,i64,u8,u16,u32,u64 but also one of f32,f64 due to float literal at [43]> :1:11-13.
+When matching type
+  t₁
+with
+  t₂
+
+[44]> let image = [[1,2,3,4,5]‚[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20]]
+lexical error at line 1, column 25
+[45]> let image = [[1,2,3,4,5]‚[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20]]
+lexical error at line 1, column 25
+[46]> let imB = [[0.13599575f32, 1.323092f32, 7.4242945f32],
+    [1.2051415f32, 2.8189754f32, 7.1788645f32],
+    [8.475803f32, 8.861168f32, 9.710144f32],
+    [1.4399022f32, 5.325674f32, 9.441526f32],
+    [0.65261006f32, 6.609876f32, 7.296194f32],
+    [1.4800721f32, 9.46303f32, 9.501018f32],
+    [5.0352955f32, 5.237294f32, 8.6838875f32],
+    [2.8717546f32, 8.990658f32, f32.inf]]
+[47]> imB[2:3]
+[[8.475803f32, 8.861168f32, 9.710144f32]]
+[48]> imB[2:,3]
+Error at
+-> #0  [48]> :1:1-9
+Index [2:, 3] out of bounds for array of shape [8][3].
+[49]> imB[2:]
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32],
+ [1.4800721f32, 9.46303f32, 9.501018f32],
+ [5.0352955f32, 5.237294f32, 8.6838875f32],
+ [2.8717546f32, 8.990658f32, f32.inf]]
+[50]> imB[2:9]
+Error at
+-> #0  [50]> :1:1-8
+Index [2:9] out of bounds for array of shape [8][3].
+[51]> imB[2:6]
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32],
+ [1.4800721f32, 9.46303f32, 9.501018f32]]
+[52]>
+[53]> imB[2:6][1]
+Error at [53]> :1:1-11:
+Attempt to apply an expression of type [][]f32 to an argument of type *[]t₂.
+[54]> imB[2:6,1]
+[8.861168f32, 5.325674f32, 6.609876f32, 9.46303f32]
+[55]> reduce f32.min f32.inf imB[2:6,1]
+5.325674f32
+[56]> reduce f32.max -f32.inf imB[2:6,1]
+Error at [56]> :1:17-34:
+Attempt to apply an expression of type f32 to an argument of type []f32.
+[57]> reduce f32.max f32.-inf imB[2:6,1]
+Error at [57]> :1:21-23:
+Unknown name `inf`
+[58]> reduce f32.max (-f32.inf) imB[2:6,1]
+9.46303f32
+[59]> let node_arr = imB[2:5]
+[60]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[61]> map (\k ->
+                                  let maxi = reduce f32.max (-f32.inf) node_arr[k]
+                                  let mini = reduce f32.min f32.inf node_arr[k]
+                              ) (iota 3)
+Error at [61]> :4:29-29: Parse error.
+[62]>                                 let maxi = reduce f32.max (-f32.inf) node_arr[k]
+Error at [62]> :1:79-79:
+Unknown name `k`
+[63]> map (\k ->
+                                  let maxi = reduce f32.max (-f32.inf) node_arr[k]
+                                  let mini = reduce f32.min f32.inf node_arr[k]
+                                  in maxi
+                              ) (iota d)
+Error at [63]> :5:37-37:
+Unknown name `d`
+[64]> map (\k ->
+                                  let maxi = reduce f32.max (-f32.inf) node_arr[k]
+                                  let mini = reduce f32.min f32.inf node_arr[k]
+                                  in maxi
+                              ) (iota 3)
+[9.710144f32, 9.441526f32, 7.296194f32]
+[65]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[66]> map (\i -> i) (iota (length node_arr))
+[0i32, 1i32, 2i32]
+[67]> map (\i -> node_arr[i]) (iota (length node_arr))
+Error at [67]> :1:6-22:
+Function result aliases the free variable `node_arr`.
+Use `copy` to break the aliasing.
+
+[68]> map (\i -> let tmp = node_arr[i] in tmp) (iota (length node_arr))
+Error at [68]> :1:6-39:
+Function result aliases the free variable `node_arr`.
+Use `copy` to break the aliasing.
+
+[69]> map (\i -> let tmp = copy node_arr[i] in tmp) (iota (length node_arr))
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[70]> map (\i -> let tmp = copy node_arr[i,0] in tmp) (iota (length node_arr))
+[8.475803f32, 1.4399022f32, 0.65261006f32]
+[71]> map (\k -> node_arr[k]) (iota 3)
+Error at [71]> :1:6-22:
+Function result aliases the free variable `node_arr`.
+Use `copy` to break the aliasing.
+
+[72]> map (\k -> copy node_arr[k]) (iota 3)
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[73]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[74]> map (\i -> map (\k -> let tmp = copy node_arr[i,k] in tmp ) (iota 3) ) (iota (length node_arr))
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[75]> map (\i -> map (\k -> let tmp = copy node_arr[i,k] in tmp ) (iota 3) ) (iota (length node_arr))
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[76]> map (\k -> map (\w -> copy node_arr[w,k]) (iota (length node_arr)) ) (iota 3)
+[[8.475803f32, 1.4399022f32, 0.65261006f32],
+ [8.861168f32, 5.325674f32, 6.609876f32],
+ [9.710144f32, 9.441526f32, 7.296194f32]]
+[77]> let d = 3
+[78]> let leaf_len = length node_arr
+[79]> let dim_arrs =
+                              map (\k -> map (\w -> copy node_arr[w,k]) (iota leaf_len)) (iota d)
+[80]> dims_arrs
+Error at [80]> :1:1-9:
+Unknown name `dims_arrs`
+[81]> dim_arrs
+[[8.475803f32, 1.4399022f32, 0.65261006f32],
+ [8.861168f32, 5.325674f32, 6.609876f32],
+ [9.710144f32, 9.441526f32, 7.296194f32]]
+[82]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in maxi-mini
+                                          ) (iota leaf_len)
+[83]> diffs
+[7.8231936f32, 3.5354939f32, 2.41395f32]
+[84]> let wid_spread = map (\p -> let ws = if diffs[p] > diffs[p-1] then p else diffs[p-1] ) (iota leaf_len)
+Error at [84]> :1:86-86: Parse error.
+[85]> let wid_spread = map2 (\e p ->  ) diffs (iota leaf_len)
+Error at [85]> :1:33-33: Parse error.
+[86]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in (q, maxi-mini)
+                                          ) (iota leaf_len)
+[87]> dffs
+Error at [87]> :1:1-4:
+Unknown name `dffs`
+[88]> diffs
+[(0i32, 7.8231936f32), (1i32, 3.5354939f32), (2i32, 2.41395f32)]
+[89]> reduce .5354939f32), (2i32, 2.41395f32)]
+Error at [89]> :1:19-19: Parse error.
+[90]> [89]> reduce .5354939f32), (2i32, 2.41395f32)]
+Error at [90]> :1:25-25: Parse error.
+[91]> [89]> reduce f32.max (-f32.inf) diffs.1
+Error at [91]> :1:33-39:
+Types do not match.
+When matching type
+  [](i32, f32)
+with
+  {1: t₃}
+
+[92]> [89]> reduce f32.max (-f32.inf) diffs
+Error at [92]> :1:33-37:
+Couldn't match expected type
+  f32
+with actual type
+  (i32, f32)
+When matching type
+  []f32
+with
+  [](i32, f32)
+
+[93]> [89]> reduce f32.max (-f32.inf) (unzip diffs)
+Error at [93]> :1:33-45:
+Types do not match.
+When matching type
+  []f32
+with
+  (*[]i32, *[]f32)
+
+[94]> [89]> reduce f32.max (-f32.inf) (unzip diffs.1)
+Error at [94]> :1:40-46:
+Types do not match.
+When matching type
+  [](i32, f32)
+with
+  {1: t₅}
+
+[95]> let (winnerIndex,_) = reduce (\ (i1,v1) (i2,v2) ->
+                                                           if v1>v2 then (i1,v1) else (i2,v2)
+                                                     ) (0,f32.-inf) (diffs,iota length diffs)
+Error at [95]> :3:57-61: Parse error.
+[96]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in maxi-mini
+                                          ) (iota leaf_len)
+[97]>
+[98]> let (winnerIndex,_) = reduce (\ (i1,v1) (i2,v2) ->
+                                                           if v1>v2 then (i1,v1) else (i2,v2)
+                                                     ) (0,f32.-inf) (diff,iota length diff)
+Error at [98]> :3:57-61: Parse error.
+[99]> let (winnerIndex,_) = reduce (\ (i1,v1) (i2,v2) ->
+                             if v1>v2 then (i1,v1) else (i2,v2)
+                       ) (0,(-f32.inf)) (diffs,iota length diffs)
+
+Error at [99]> :3:64-64: unexpected end of file.
+[100]> let (winnerIndex,_) = reduce (\ (i1,v1) (i2,v2) ->
+                             if v1>v2 then (i1,v1) else (i2,v2)
+                       ) (0,(-f32.inf)) (diffs,(iota (length diffs)))
+
+Error at [100]> :3:68-68: unexpected end of file.
+[101]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in (q, maxi-mini)
+                                          ) (iota leaf_len)
+[102]> let (winnerIndex,_) = reduce (\ (i1,v1) (i2,v2) ->
+                             if v1>v2 then (i1,v1) else (i2,v2)
+                       ) ((-1),(-f32.inf)) diffs
+
+Error at [102]> :3:47-47: unexpected end of file.
+[103]> let (ws,_) = reduce (\ (i1,v1) (i2,v2) -> if v1>v2 then (i1,v1) else (i2,v2) ) ((-1),(-f32.inf)) diffs
+
+Error at [103]> :1:103-103: unexpected end of file.
+[104]> diffs
+[(0i32, 7.8231936f32), (1i32, 3.5354939f32), (2i32, 2.41395f32)]
+[105]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in maxi-mini
+                                          ) (iota leaf_len)
+[106]> diffs
+[7.8231936f32, 3.5354939f32, 2.41395f32]
+[107]> let biggest = reduce f32.max (-f32.inf) diffs
+[108]> biggest
+7.8231936f32
+[109]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len) |> scan (+) 0
+[110]> widest_d
+[0i32, 0i32, 0i32]
+[111]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len) |> reduce (+) 0
+[112]> widest_d
+0i32
+[113]> let diffs = [1.8231936f32, 3.5354939f32, 2.41395f32]
+[114]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len) |> reduce (+) 0
+[115]> widest_d
+0i32
+[116]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in (q, maxi-mini)
+                                          ) (iota leaf_len)
+[117]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in maxi-mini
+                                          ) (iota leaf_len)
+[118]> diffs
+[7.8231936f32, 3.5354939f32, 2.41395f32]
+[119]> let biggest  = reduce f32.max (-f32.inf) diffs
+[120]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len)
+[121]> widest_d
+[0i32, 0i32, 0i32]
+[122]> let diffs = [1.8231936f32, 3.5354939f32, 2.41395f32]
+[123]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len)
+[124]> widest_d
+[0i32, 0i32, 0i32]
+[125]> let biggest  = reduce f32.max (-f32.inf) diffs
+[126]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len)
+[127]> widest_d
+[0i32, 1i32, 0i32]
+[128]> let widest_d = map (\ix -> if biggest == diffs[ix] then ix else 0) (iota leaf_len) |> reduce (+) 0
+[129]> widest_d
+1i32
+[130]> import "lib/github.com/diku-dk/sorts/merge_sort"
+Error at [130]> :1:1-48: could not find import 'lib/github.com/diku-dk/sorts/merge_sort'.
+[131]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[132]> diffs
+[1.8231936f32, 3.5354939f32, 2.41395f32]
+[133]> let largest = reduce (\x y -> if x <= y then y else x) diffs[0] diffs
+[134]> largest
+3.5354939f32
+[135]> let largest = reduce (\x y i -> if x <= y then i else i) diffs[0] diffs (iota leaf_len)
+Error at [135]> :1:22-56:
+Cannot unify `t₂`' with type
+  (i: t₃) -> t₃
+as `t₂` must be one of bool, i8, i16, i32, i64, u8, u16, u32, u64, f32, f64 due to use as function argument at [135]> :1:41-41).
+When matching type
+  a₀ -> a₀ -> a₀
+with
+  (x: t₂) -> (y: t₂) -> (i: t₃) -> t₃
+
+[136]>
+[137]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[138]> let dim_arrs =
+                              map (\k -> map (\w -> copy node_arr[w,k]) (iota leaf_len)) (iota d)
+[139]> let diffs = map (\q ->
+                                              let maxi = reduce f32.max (-f32.inf) dim_arrs[q]
+                                              let mini = reduce f32.min f32.inf    dim_arrs[q]
+                                              in maxi-mini
+                                          ) (iota leaf_len)
+[140]> let big = reduce f32.max (-f32.inf) diffs
+[141]> let dim = map (\ix -> if big == diffs[ix] then ix else 0) (iota leaf_len)
+[142]>                                   |> reduce (+) 0
+Error at [142]> :1:35-36: Parse error.
+[143]> let dim = map (\ix -> if big == diffs[ix] then ix else 0) (iota leaf_len) |> reduce (+) 0
+[144]> dim
+0i32
+[145]> let work_dim = map (\x -> copy node_arr[x,dim] ) (iota leaf_len)
+[146]> work_dim
+[8.475803f32, 1.4399022f32, 0.65261006f32]
+[147]> let work_dim = map (\x -> (x, copy node_arr[x,dim]) ) (iota leaf_len)
+[148]> work_dim
+[(0i32, 8.475803f32), (1i32, 1.4399022f32), (2i32, 0.65261006f32)]
+[149]> let st = merge_sort_by_key (.1) (<=) work_dim
+Error at [149]> :1:10-26:
+Unknown name `merge_sort_by_key`
+[150]> let d_sort = [(2i32, 0.65261006f32), (1i32, 1.4399022f32), (0i32, 8.475803f32)]
+[151]> let d_sort_idxs = [2i32, 1i32, 0i32]
+[152]> let node_arrp  = replicate leaf_len (replicate d 0.0f32)
+[153]> node_arrp
+[[0.0f32, 0.0f32, 0.0f32], [0.0f32, 0.0f32, 0.0f32], [0.0f32, 0.0f32, 0.0f32]]
+[154]> let node_arrpp = scatter node_arrp d_sort_idxs node_arr
+Error at [154]> :1:26-34:
+Consuming parameter passed non-unique argument.
+[155]> let scatter2D [r] [c] (inp_lst:[r][]i32) (idx_lst:[r][c]i32) (val_lst:[r][c]i32): [r][]i32 =
+      map3 (\ ins ids vs -> scatter (copy ins) ids vs ) inp_lst idx_lst val_lst
+[156]> let d_sort_idxs = [[2i32], [1i32], [0i32]]
+[157]> scatter2D node_arrp d_sort_idxs node_arr
+Error at [157]> :1:11-19:
+Couldn't match expected type
+  i32
+with actual type
+  f32
+When matching type
+  [][]i32
+with
+  [][]f32
+
+[158]> let scatter2D [r] [c] (inp_lst:[r][]f32) (idx_lst:[r][c]f32) (val_lst:[r][c]f32): [r][]f32 =
+      map3 (\ ins ids vs -> scatter (copy ins) ids vs ) inp_lst idx_lst val_lst
+Error at [158]> :2:63-69:
+Couldn't match expected type
+  i32
+with actual type
+  f32
+When matching type
+  [][]i32
+with
+  [][]f32
+
+[159]> let scatter2D [r] [c] (inp_lst:[r][]f32) (idx_lst:[r][c]f32) (val_lst:[r][c]f32): [r][]f32 =
+      map3 (\ ins ids vs -> scatter (copy ins) ids vs ) inp_lst idx_lst val_lst
+Error at [159]> :2:63-69:
+Couldn't match expected type
+  i32
+with actual type
+  f32
+When matching type
+  [][]i32
+with
+  [][]f32
+
+[160]> let scatter2D [r] [c] (inp_lst:[r][]f32) (idx_lst:[r][c]i32) (val_lst:[r][c]f32): [r][]f32 =
+      map3 (\ ins ids vs -> scatter (copy ins) ids vs ) inp_lst idx_lst val_lst
+[161]> scatter2D node_arrp d_sort_idxs node_arr
+Error at
+-> #0  [160]> :1:63-79
+   #1  [161]> :1:1-40
+Size annotation 1 does not match observed size 3.
+[162]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[163]> node_arr[0]
+[8.475803f32, 8.861168f32, 9.710144f32]
+[164]> let scatter2D [r] (inp_lst:[r][]f32) (idx_lst:[r]i32) (val_lst:[r][]f32): [r][]f32 =
+      map (\i ->
+              let new_idx  = copy idx_lst[i]
+              in val_lst[new_idx]
+          ) (iota r)
+[165]> let d_sort_idxs = [2i32, 1i32, 0i32]
+[166]> scatter2D node_arrp d_sort_idxs node_arr
+[[0.65261006f32, 6.609876f32, 7.296194f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [8.475803f32, 8.861168f32, 9.710144f32]]
+[167]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[168]> let median = node_arrp[num_points_per_node_per_lvl // 2]
+Error at [168]> :1:24-50:
+Unknown name `num_points_per_node_per_lvl`
+[169]> let median = node_arrp[leaf_len // 2]
+[170]> median
+[0.0f32, 0.0f32, 0.0f32]
+[171]> let scatter2D [r] (idx_lst:[r]i32) (val_lst:[r][]f32): [r][]f32 =
+      map (\i ->
+              let new_idx  = copy idx_lst[i]
+              in val_lst[new_idx]
+          ) (iota r)
+[172]> let node_arrp = scatter2D d_sort_idxs node_arr
+[173]> let median = node_arrp[leaf_len // 2]
+[174]> median
+[1.4399022f32, 5.325674f32, 9.441526f32]
+[175]> let num_pads = 2
+[176]> arr
+[1.1f64, 2.2f64, 3.3f64, 4.4f64, 5.5f64, 6.6f64, 7.7f64, 8.8f64]
+[177]> let pad = map (\_ -> f32.inf) (iota num_pads)
+[178]> pad
+[f32.inf, f32.inf]
+[179]> let pad = map (\_ -> map (\_ -> f32.inf) (iota d)) (iota num_pads)
+[180]> pad
+[[f32.inf, f32.inf, f32.inf], [f32.inf, f32.inf, f32.inf]]
+[181]> let nnode = node_arr ++ pad
+[182]> nnode
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32],
+ [f32.inf, f32.inf, f32.inf],
+ [f32.inf, f32.inf, f32.inf]]
+[183]> node_arr
+[[8.475803f32, 8.861168f32, 9.710144f32],
+ [1.4399022f32, 5.325674f32, 9.441526f32],
+ [0.65261006f32, 6.609876f32, 7.296194f32]]
+[184]> node_arr[1,2]
+9.441526f32
+[185]> dim_arrs
+[[8.475803f32, 1.4399022f32, 0.65261006f32],
+ [8.861168f32, 5.325674f32, 6.609876f32],
+ [9.710144f32, 9.441526f32, 7.296194f32]]
+[186]> let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
+        map (\lst ->
+            reduce (\x y -> if expr
+                            then y
+                            else x
+                   ) lst[0] lst
+            ) lsts
+Error at [186]> :3:30-33:
+Types do not match.
+When matching type
+  bool
+with
+  f32 -> f32 -> bool
+
+[187]> let getEdge (lsts : [][]f32) (expr : (f32 -> f32 -> bool)) =
+        map (\lst ->
+            reduce (\x y -> if expr x y
+                            then y
+                            else x
+                   ) lst[0] lst
+            ) lsts
+[188]> let maximum (x:f32) (y:f32) = x <= y && x != f32.inf
+[189]> let minimum (x:f32) (y:f32) = x > y  && x != f32.inf
+[190]> getEdge dim_arrs maximum
+[8.475803f32, 8.861168f32, 9.710144f32]
+[191]> dim_arrs
+[[8.475803f32, 1.4399022f32, 0.65261006f32],
+ [8.861168f32, 5.325674f32, 6.609876f32],
+ [9.710144f32, 9.441526f32, 7.296194f32]]
+[192]> getEdge dim_arrs minimum
+[0.65261006f32, 5.325674f32, 7.296194f32]
+[193]>
+
