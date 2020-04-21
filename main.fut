@@ -8,11 +8,31 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
--- compiled random input { 1i32  8i32 [100000][1]f32  [100000][1]f32}
--- compiled random input { 3i32  8i32 [100000][4]f32  [100000][4]f32}
--- compiled random input { 5i32  8i32 [100000][6]f32  [100000][6]f32}
--- compiled random input { 7i32  8i32 [100000][8]f32  [100000][8]f32}
--- compiled random input { 17i32 8i32 [100000][16]f32 [100000][16]f32}
+-- compiled random input { 1i32 8i32 [100000][1]f32 [100000][1]f32 }
+-- compiled random input { 1i32 8i32 [100000][4]f32 [100000][4]f32 }
+-- compiled random input { 1i32 8i32 [100000][6]f32 [100000][6]f32 }
+-- compiled random input { 1i32 8i32 [100000][8]f32 [100000][8]f32 }
+-- compiled random input { 1i32 8i32 [100000][16]f32 [100000][16]f32 }
+-- compiled random input { 3i32 8i32 [100000][1]f32 [100000][1]f32 }
+-- compiled random input { 3i32 8i32 [100000][4]f32 [100000][4]f32 }
+-- compiled random input { 3i32 8i32 [100000][6]f32 [100000][6]f32 }
+-- compiled random input { 3i32 8i32 [100000][8]f32 [100000][8]f32 }
+-- compiled random input { 3i32 8i32 [100000][16]f32 [100000][16]f32 }
+-- compiled random input { 5i32 8i32 [100000][1]f32 [100000][1]f32 }
+-- compiled random input { 5i32 8i32 [100000][4]f32 [100000][4]f32 }
+-- compiled random input { 5i32 8i32 [100000][6]f32 [100000][6]f32 }
+-- compiled random input { 5i32 8i32 [100000][8]f32 [100000][8]f32 }
+-- compiled random input { 5i32 8i32 [100000][16]f32 [100000][16]f32 }
+-- compiled random input { 7i32 8i32 [100000][1]f32 [100000][1]f32 }
+-- compiled random input { 7i32 8i32 [100000][4]f32 [100000][4]f32 }
+-- compiled random input { 7i32 8i32 [100000][6]f32 [100000][6]f32 }
+-- compiled random input { 7i32 8i32 [100000][8]f32 [100000][8]f32 }
+-- compiled random input { 7i32 8i32 [100000][16]f32 [100000][16]f32 }
+-- compiled random input { 17i32 8i32 [100000][1]f32 [100000][1]f32 }
+-- compiled random input { 17i32 8i32 [100000][4]f32 [100000][4]f32 }
+-- compiled random input { 17i32 8i32 [100000][6]f32 [100000][6]f32 }
+-- compiled random input { 17i32 8i32 [100000][8]f32 [100000][8]f32 }
+-- compiled random input { 17i32 8i32 [100000][16]f32 [100000][16]f32 }
 -- compiled random input { 1i32  10i32 [400000][1]f32  [400000][1]f32}
 -- compiled random input { 3i32  10i32 [400000][4]f32  [400000][4]f32}
 -- compiled random input { 5i32  10i32 [400000][6]f32  [400000][6]f32}
@@ -45,7 +65,6 @@ import "traverse-tree"
 -- compiled random input { 17i32 13i32 [4000000][16]f32 [4000000][16]f32}
 --
 --
-
 
 
 --           h+1
