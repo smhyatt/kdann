@@ -7,23 +7,91 @@
 % Whenever possible, support your reasoning with (as in point to) experimental
 % evaluation results (next).
 
+\begin{itemize}
+	\item using an integer to represent the stack
+	\item the first traversal logic (show figure)
+	\item the continuous traversal logic (show figure)
+	\item checking a median on one dimension
+	\item checking all medians from all dimensions (show equation)
+	\item 
+	\item 
+	\item 
+\end{itemize}	
+
+
+As mention in the Background, Futhark does not support recursion, which is why the pseudo-code from Algorithm 3 is rewritten into an imperative version. One such solution is using a stack to traverse the tree incrementally while deciding which nodes to visit next. The figure below demonstrates the traverse down to the first leaf; this example does not need a stack because, at this point, we do not know if we need to visit additional leaves. Figures X-X show the traversal continuing from the first leaf, in which a stack is necessary. 
+
+
+\subsection{Representing the Stack as an Integer}
+
+The naive solution of representing a stack is using a boolean list where the leaves and node are set to true once visited. Although this is a simple and correct solution, since the height of the tree never exceeds 32, it can be further optimised as an integer representation instead. The code in listing XX shows the bit arithmetic done to modify the right areas of the stack and the logic behind setVisited is demonstrated in XX. 
 
 \begin{listing}[H]
 \begin{minted}{haskell}
-entry firstTraverse [d][q] (height:   i32)  (median_dims: [q]i32)
-                           (query: [d]f32)  (median_vals: [q]f32) =
-
-    let new_leaf = loop node_index = 0
-        while !(isLeaf height node_index) do
-          if query[median_dims[node_index]] <= median_vals[node_index]
-          then (node_index+1)*2-1
-          else (node_index+1)*2
-
-    in new_leaf
+  let setVisited (stk: i32) (c: i32) : i32 =
+      stk | (1 << c)
+  let resetVisit (stk: i32) (c: i32) : i32 =
+      stk & !(1 << c)
+  let isVisited (stk: i32) (c: i32) : bool =
+      (stk & (1 << c)) > 0i32
 \end{minted}
-\caption{Futhark implementation of the first tree traversal.}
-\label{lst:first}
+\caption{Snippet of bit arithmetic for stack modifications.}
+\label{lst:stack}
 \end{listing}
+
+\begin{figure}\label{fig:bits}
+\begin{align*}
+	&& &00000000000000000000100010000101 &\\ \text{or} 
+	&& &00000000000000000000001000000000 &\\ 
+	\cline{3-4}
+	&& &00000000000000000000101010000101
+\end{align*}
+\caption{Example of stack integer arithmetic.}
+\end{figure}
+
+
+
+% \begin{align*}
+% 	&& &00000000000000000000101010000101 &\\ \text{and} 
+% 	&& &11111111111111111111110111111111 &\\ 
+% 	\cline{3-4}
+% 	&& &00000000000000000000100010000101
+% \end{align*}
+
+
+
+
+
+% \begin{listing}[H]
+% \begin{minted}{haskell}
+% entry firstTraverse [d][q] (height:   i32)  (median_dims: [q]i32)
+%                            (query: [d]f32)  (median_vals: [q]f32) =
+
+%     let new_leaf = loop node_index = 0
+%         while !(isLeaf height node_index) do
+%           if query[median_dims[node_index]] <= median_vals[node_index]
+%           then (node_index+1)*2-1
+%           else (node_index+1)*2
+
+%     in new_leaf
+% \end{minted}
+% \caption{Futhark implementation of the first tree traversal.}
+% \label{lst:first}
+% \end{listing}
+
+
+
+\subsection{Validating Whether to Look at the \texttt{second}}
+
+The original solution determines whether to visit the second node by XXX. 
+
+
+
+
+
+
+
+
 
 
 \begin{listing}[H]
