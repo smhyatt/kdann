@@ -4,17 +4,59 @@ import "batch-merge-sort"
 import "tree-construction"
 import "traverse-tree"
 
+
 -- ==
 -- entry: main
 --
--- compiled random input { 14i32 [8388608][4]f32 [8388608][4]f32}
--- compiled random input { 11i32 [1048576][4]f32 [1048576][4]f32}
--- compiled random input { 11i32 [1048576][16]f32 [1048576][16]f32}
--- compiled random input { 5i32  [8388][8]f32 [8388][8]f32 }
--- compiled random input { 14i32 [8388608][16]f32 [8388608][16]f32 }
--- compiled random input { 12i32 [2097152][16]f32 }
--- compiled random input { 14i32 [8388608][16]f32 }
+-- compiled random input { 1i32  8i32 [100000][1]f32  [100000][1]f32}
+-- compiled random input { 3i32  8i32 [100000][4]f32  [100000][4]f32}
+-- compiled random input { 5i32  8i32 [100000][6]f32  [100000][6]f32}
+-- compiled random input { 7i32  8i32 [100000][8]f32  [100000][8]f32}
+-- compiled random input { 17i32 8i32 [100000][16]f32 [100000][16]f32}
+-- compiled random input { 1i32  10i32 [400000][1]f32  [400000][1]f32}
+-- compiled random input { 3i32  10i32 [400000][4]f32  [400000][4]f32}
+-- compiled random input { 5i32  10i32 [400000][6]f32  [400000][6]f32}
+-- compiled random input { 7i32  10i32 [400000][8]f32  [400000][8]f32}
+-- compiled random input { 17i32 10i32 [400000][16]f32 [400000][16]f32}
+-- compiled random input { 1i32  11i32 [800000][1]f32  [800000][1]f32}
+-- compiled random input { 3i32  11i32 [800000][4]f32  [800000][4]f32}
+-- compiled random input { 5i32  11i32 [800000][6]f32  [800000][6]f32}
+-- compiled random input { 7i32  11i32 [800000][8]f32  [800000][8]f32}
+-- compiled random input { 17i32 11i32 [800000][16]f32 [800000][16]f32}
+-- compiled random input { 1i32  12i32 [1200000][1]f32  [1200000][1]f32}
+-- compiled random input { 3i32  12i32 [1200000][4]f32  [1200000][4]f32}
+-- compiled random input { 5i32  12i32 [1200000][6]f32  [1200000][6]f32}
+-- compiled random input { 7i32  12i32 [1200000][8]f32  [1200000][8]f32}
+-- compiled random input { 17i32 12i32 [1200000][16]f32 [1200000][16]f32}
+-- compiled random input { 1i32  11i32 [1600000][1]f32  [1600000][1]f32}
+-- compiled random input { 3i32  11i32 [1600000][4]f32  [1600000][4]f32}
+-- compiled random input { 5i32  11i32 [1600000][6]f32  [1600000][6]f32}
+-- compiled random input { 7i32  11i32 [1600000][8]f32  [1600000][8]f32}
+-- compiled random input { 17i32 11i32 [1600000][16]f32 [1600000][16]f32}
+-- compiled random input { 1i32  12i32 [2000000][1]f32  [2000000][1]f32}
+-- compiled random input { 3i32  12i32 [2000000][4]f32  [2000000][4]f32}
+-- compiled random input { 5i32  12i32 [2000000][6]f32  [2000000][6]f32}
+-- compiled random input { 7i32  12i32 [2000000][8]f32  [2000000][8]f32}
+-- compiled random input { 17i32 12i32 [2000000][16]f32 [2000000][16]f32}
+-- compiled random input { 1i32  13i32 [4000000][1]f32  [4000000][1]f32}
+-- compiled random input { 3i32  13i32 [4000000][4]f32  [4000000][4]f32}
+-- compiled random input { 5i32  13i32 [4000000][6]f32  [4000000][6]f32}
+-- compiled random input { 7i32  13i32 [4000000][8]f32  [4000000][8]f32}
+-- compiled random input { 17i32 13i32 [4000000][16]f32 [4000000][16]f32}
+--
+--
 
+
+
+
+--           h+1
+-- 100000    9     195,3125      9   131072    256
+-- 400000    11    195,3125      11  524288    256
+-- 800000    12    195,3125      12  1048576   256
+-- 1200000   13    146,484375    13  2097152   256
+-- 1600000   12    195,3125      12  1048576   256
+-- 2000000   13    244,140625    13  2097152   256
+-- 4000000   14    244,140625    14  4194304   256
 
 
 
@@ -85,10 +127,10 @@ let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
 
 
 
-entry main [m][d] (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
+entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
-  let k          = 3i32
+  -- let k          = 3i32
   let tot_nodes  = num_nodes+num_leaves
 
 

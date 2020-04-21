@@ -1,5 +1,40 @@
 
 
+
+## PCA
+
+Given a collection of points in two, three, or higher dimensional space, a "best fitting" line can be defined as one that minimizes the average squared distance from a point to the line. The next best-fitting line can be similarly chosen from directions perpendicular to the first. Repeating this process yields an orthogonal basis in which different individual dimensions of the data are uncorrelated. These basis vectors are called principal components, and several related procedures principal component analysis (PCA).
+
+Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, second choosing the line perpendicular to the first, and repeating the process . 
+
+Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).
+
+by maximising the sum of the squared distances from the projected points to the origin. 
+
+Cocktail mix of gene 1 and 2 are i.e. PC1 is in mathematical terms called linear combination of variables. 
+
+The Eigenvector for PC2 is the sum of squares of the distances between the projected points and the origin. 
+-> this is done using Single Value Decomposition (SVD)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 Main(k) {
 	imA, imB = PCA(imageA), PCA(imageB)

@@ -2,15 +2,48 @@
 \label{sec:brute}
 \subsection{The Brute Force Version}
 
-3. section(s) in which you describe your work: each step
-    -- brute force version
-    -- k-d tree construction
-    -- tree traversal
-    -- how you plug everything together
+% 3. section(s) in which you describe your work: each step
+%     -- brute force version
+%     -- k-d tree construction
+%     -- tree traversal
+%     -- how you plug everything together
 
-At each step you reason about tradeoffs/alternative design choices and
-justify why you did it in the way you did it (advantages/shortcommings,
-and why your approach is reasonable). Of course mostly related to performance.
+% At each step you reason about tradeoffs/alternative design choices and
+% justify why you did it in the way you did it (advantages/shortcommings,
+% and why your approach is reasonable). Of course mostly related to performance.
 
-Whenever possible, support your reasoning with (as in point to) experimental
-evaluation results (next).
+% Whenever possible, support your reasoning with (as in point to) experimental
+% evaluation results (next).
+
+
+\begin{listing}[H]
+\begin{minted}{haskell}
+entry nnk [m] [n] (imA : [m][n]real) 
+                  (imB : [m][n]real) : [m][k](int,real) =
+    map (\a_patch ->
+        if a_patch[0] == real_inf
+        then replicate k (-2i32, real_inf)
+        else
+        let  nn = replicate k (-1i32, real_inf)
+        in loop nn for q < m do
+            let b_patch = imB[q]
+            let dist = euclidean a_patch b_patch
+            let b_idx = q in
+            let (_, _, nn') =
+                loop (dist, b_idx, nn) for i < k do
+                    let cur_nn = nn[i].1  in
+                    if dist <= cur_nn then 
+                        let tmp_ind = nn[i].0
+                        let nn[i] = (b_idx, dist)
+                        let b_idx = tmp_ind
+                        let dist  = cur_nn
+                        in  (dist, b_idx, nn)
+                    else    (dist, b_idx, nn)
+            in  nn'
+    ) imA 
+\end{minted}
+\caption{Futhark implementation of the Brute Force.}
+\label{lst:brute}
+\end{listing}
+
+

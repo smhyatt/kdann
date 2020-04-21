@@ -2,19 +2,52 @@
 \label{sec:back}
 % 2. background section about k nearest meighors by k-d trees.
 %     Perhaps give and discuss the pseudocode of the recursive version of the python code.
+%
+% It has to be thorough in the sense that it provides the necessary understanding to
+% the reader about all stages involved in the nearest neighbor by k-d tree, so all
+% stages need to be explained. However, why  do you include "propagation" there?
+% It is currently outside the scope of the project, right? You can use the material
+% you read in related work or motivation, but there is no reason to describe
+% "propagate_patches".
+%
+% A picture is worth 1000 words, so I would suggest you use either the python code
+% or your own pseudocode. In particular the python code for tree traversal (that also does
+% brute force) is relatively clean, I would include it. But make sure to give the high level
+% explanation that helps understanding: for example explain the test that computes
+% the (node) variables named "first" and "second", and say that "first" is always the node
+% that is on the same side of the current node's median as the query. Similarly explain
+% the "to-visit" condition for the "second" node -- why is it safe and why is it a
+% conservative approximation (?)
+%
+% Tree construction looks reasonably nice in python pseudocode as well ...
+% I do not think  there is reason to show the pseudocode for bruteforce --- that
+% should be clear --- say that it is an n^2 algorithm, and you will explain it
+% in your implementation section.
 
-Computing K-Nearest Neighbours (KNN) is widely used due to its simplicity and excellent empirical performance. It has no training phase and it can handle binary as well as multiclass data. When comparing two images the challenge of KNN is finding the patches of say image B that are most similar to the query patch of say image A according to some measured distance. While there are many ways to compute KNN, one commonly applied method is using the \textit{k-d} tree. The \textit{k-d} tree is a binary tree and in this case we define each node to represent a sub-image of the patches in the image representation and a partitioning of that sub-image, meaning the root will represent the whole image.
-\\[2mm]
-Once the tree is created, all leaves will together contain the full partitioned image and each node will represent $\dfrac{m}{2^{level}}$ of the image patches, where $level$ is the current level of the node in the tree in which $level \leq height+1$, $height$ is the height of the tree excluding leaves and $m$ is the total number of patches in the image. 
-\\[2mm]
-The benefit of using a \textit{k-d} tree is the advances w.r.t. search performance. Thanks to the binary tree structure a KNN search for patches will have a complexity of $O(n\ \lg\ n)$. The naive approach of computing KNN is the brute force method, comparing each patch of image B with each patch of image A, resulting in a complexity of $O(n^2)$ \cite{logmatches}.
-\\[2mm]
-% explain propagation assisted method
-Many approaches 
-\cite{kdann} The argument for this approach is that by computing the exact KNN of the first query patch it is then possible to propagate .... and since the assumption is that the images are similar, it is likely that the former query patch will have nearby results as the current and the next. 
 
 
-\begin{algorithm}
+
+Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it can handle binary as well as multiclass data, and while often applied for comparing two images, it faces the challenge of slow performance because both images are of image size. 
+\\[2mm]
+When comparing two images; image A and image B, the goal of KNN is to find the patches of image B that are most similar to each query patch of image A according to a measured distance. The naive approach is using brute force, in which each patch of image B is compared with each patch of image A, if each image has m patches the complexity of the search will be $O(m^2)$. See \hyperref[sec:brute]{Brute Force}. Although brute force is a simple solution, there exists several alternative techniques for computing KNN. One commonly applied method is using a generalisation of the binary tree; the k-d tree. 
+\\[2mm]
+The k-d tree consists of a root, nodes and leaves; the root represents all patches, the nodes represent a partitioned segment of the patches, and the leaves collectively contain all patches spread out on $2^{h+1}$ leaves where h is the height of the tree excluding leaves.
+\\[2mm]
+Using a k-d tree has advances w.r.t search performance, thanks to the binary tree structure it yields a complexity of $O(m\ \lg\ m)$ \cite{logmatches}.
+\\[2mm]
+Algorithms \hyperref[alg:main]{1}, \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} below represent a recursive implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. 
+\todo[color=green!40, inline, size=\small]{Cosmin: should I mention that the pseudo-code is based on the Python code and the authors?}
+Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which dimensionality of images A and B are reduced using PCA\footnote{Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).}, a k-d tree is created of image B, and all patches of image A are iterated through, of which a call to \texttt{\textsc{Traverse}} yields the best neighbours for each patch in A. 
+% \\[2mm]
+
+
+% \\[2mm]
+% Given the total number of patches m, a tree height excluding leaves h and level that represents each level of the tree from 0 to h, each node will have $\dfrac{m}{2^{level}}$ of the image patches, where $level$ is the current level of the node in the tree in which $level \leq height+1$, $height$ is the height of the tree excluding leaves and $m$ is the total number of patches in the image. 
+
+% \todo[inline, size=\small]{}
+% \todo[color=green!40, inline, size=\small]{}
+
+\begin{algorithm}[H]
 \caption{Main}\label{main}
 \begin{algorithmic}[1]
 \Procedure{Main}{k}
@@ -31,7 +64,57 @@ Many approaches
 \end{algorithm}
 
 
-\begin{algorithm}
+Algorithm \hyperref[alg:tree]{2} represents the construction of the k-d tree. The tree construction is divided into two statements; working with the nodes (lines 4-9) or working with the leaves (lines 20-21). This condition is measured by computing the height of the tree and checking the current level against the height. 
+\\[2mm]
+The patches are partitioned by finding the dimension with the widest spread and choosing the median value of that dimension. The nodes, therefore, contain a dimension and a median value. Line 5 uses the function GetSplitDimension to attain the dimension, lines 6-7 sort the indices and patches w.r.t the chosen dimension and lines 9-10 pick out the median index and value. Once done, the median and the dimension are ready to be stored, which essentially creates that particular node of the tree. Lines 13-19 compute the left and right indices for the next iteration and recursively call the BuildTree function again, in order to complete the creation of nodes in the tree. 
+\\[2mm]
+Last, line 21 sorts the leaves w.r.t the indices that were sorted and partitioned throughout the recursive node creation.
+
+
+\begin{algorithm}[H]
+\caption{Building the Tree}\label{tree}
+\begin{algorithmic}[1]
+\Procedure{BuildTree}{patches, indices, depth, index, tree}
+\State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
+\BState \emph{}
+\If {depth < maxDepth-1}
+\State $dim \gets \textsc{GetSplitDimension(\textit{patches})} $
+\State $indices \gets \textsc{SortByDim(}indices, dim\text{)} $
+\State $points \gets patches[indices] $
+\BState \emph{}
+\State $medianIdx \gets \textsc{GetMedianIdx(\textit{indices})} $
+\State $median \gets \textsc{GetMedian(\textit{points})} $
+\BState \emph{}
+\State $tree \gets (median, dim) $
+\State $depth \gets depth \text{ + 1} $
+\BState \emph{}
+\State $leftIdx  \gets \textsc{AddToLeft(index)} $
+\State $rightIdx \gets \textsc{AddToRight(index)} $
+\BState \emph{}
+\State $ \textsc{BuildTree(}patches[: medianIdx], indices, depth, leftIdx , tree\text{)} $
+\State $ \textsc{BuildTree(}patches[medianIdx :], indices, depth, rightIdx, tree\text{)} $
+\Else
+\State $ leaves[index] \gets \textsc{SortLeavesByIndices(}patches, indices\text{)} $
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+The traversal is presented in Algorithm 3 below. It deals with three different stages; reaching a leaf, which is the first and second node to visit and a check to visit the second leaf. The first stage on lines 2-4, reaching a leaf, is straightforward. We reach a leaf; therefore, we perform brute force with the query patch and the patches of image B in that current leaf. 
+% \\[2mm]
+
+
+
+% leaf
+% left first
+% right first
+% check second leaf (backtrack)
+
+
+
+
+\begin{algorithm}[H]
 \caption{The Tree Traversal}\label{traverse}
 \begin{algorithmic}[1]
 \Procedure{Traverse}{tree, query, nodeIndex, neighbours, k}
@@ -64,39 +147,22 @@ Many approaches
 \end{algorithmic}
 \end{algorithm}
 
+The third stage, lines 18-21, determine whether we should visit the second node by checking if the difference between the median and the query is less than the worst nearest neighbour. If this is the case; the second node will be visited in a recursive call of Traverse on line 21. The check is an estimate to assure that it makes sense to continue the traversal, because if the worst nearest neighbours is a better result in XXXX. \todo[inline, size=\small]{Argument the logic behind this.}
+~~
+\\[2mm]
+The second stage on lines 6-17 determines which following nodes are the first and second, respectively. The first is always the node that is on the same side of the current node's median as the query. We might think of this as going left first on lines 10-12 and right first on lines 13-15. The dimension and median of the current node is extracted from the tree, lines 6-7, and the query value based on the current dimension of that node, line 8. Line 17 executes a recursive call of Traverse in which the first node is the next node to be visited.
 
+\begin{itemize}
+	\item approximate, PCA
+	\item implement in Futhark, why
+	\item 
+\end{itemize}
 
-\begin{algorithm}
-\caption{Building the Tree}\label{tree}
-\begin{algorithmic}[1]
-\Procedure{BuildTree}{patches, indices, depth, index, tree}
-\State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
-\BState \emph{}
-\If {depth < maxDepth-1}
-\State $dim \gets \textsc{GetSplitDimension(\textit{patches})} $
-\State $indices \gets \textsc{SortByDim(}patches, dim\text{)} $
-\State $points \gets patches[indices] $
-\BState \emph{}
-\State $medianIdx \gets \textsc{GetMedianIdx(\textit{indices})} $
-\State $median \gets \textsc{GetMedian(\textit{points})} $
-\BState \emph{}
-\State $tree \gets (median, dim) $
-\State $depth \gets depth \text{ + 1} $
-\BState \emph{}
-\State $leftIdx  \gets \textsc{AddToLeft(index)} $
-\State $rightIdx \gets \textsc{AddToRight(index)} $
-\BState \emph{}
-\State $ \textsc{BuildTree(}patches[: medianIdx], indices, depth, leftIdx , tree\text{)} $
-\State $ \textsc{BuildTree(}patches[medianIdx :], indices, depth, rightIdx, tree\text{)} $
-\Else
-\State $ leaves[index] \gets \textsc{SortLeavesByIndices(}patches, indices\text{)} $
-\EndIf
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
+% \\[2mm]
+% While this report focuses on computing the exact KNN, it will still be an approximate KNN, due to the use of PCA to reduce dimensionality of the pixels in each image.
 
+% Although the recursive implementation is simple it does not work in the programming language Futhark. XXXXX why ?  
 
-While this report focuses on computing the exact KNN, it will still be an approximate KNN, due to the use of PCA to reduce dimensionality of the pixels in each image. 
 
 % EMPIRICAL PERFORMANCE MODELS (EPMS)
 % What are EPMs?
