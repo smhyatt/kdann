@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# outputpath=results/
-# mkdir -p $outputpath
+outputpath=results/
+mkdir -p $outputpath
 
-futhark dataget main.fut "1i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr	#  >>  "1-100000.txt"
-futhark dataget main.fut "3i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr	#  >>  "3-100000.txt"
-futhark dataget main.fut "5i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr	#  >>  "5-100000.txt"
-futhark dataget main.fut "7i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr	#  >>  "7-100000.txt"
-futhark dataget main.fut "17i32 8i32 [100000][16]f32 [100000][16]f32" | ./main -t /dev/stderr	# >> "17-100000.txt"
+futhark dataget main.fut "1i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr  >>  $outputpath/"1-100000.txt"
+futhark dataget main.fut "3i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr  >>  $outputpath/"3-100000.txt"
+futhark dataget main.fut "5i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr  >>  $outputpath/"5-100000.txt"
+futhark dataget main.fut "7i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr  >>  $outputpath/"7-100000.txt"
+futhark dataget main.fut "17i32 8i32 [100000][16]f32 [100000][16]f32" | ./main -t /dev/stderr >> $outputpath/"17-100000.txt"
 
 # futhark dataget main.fut "1i32  10i32 [400000][1]f32  [400000][1]f32"  | ./main -t /dev/stderr >>  "1-400000.txt"
 # futhark dataget main.fut "3i32  10i32 [400000][4]f32  [400000][4]f32"  | ./main -t /dev/stderr >>  "3-400000.txt"
