@@ -13,30 +13,35 @@ outputpath=results/
 mkdir -p $outputpath
 
 printf '\nDatasets with size: %s\n' "$FST"
+printf '\nFor k=1 and d=1, 4, 6, 8, 16:'
 futhark dataget main.fut "1i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr  >>  $outputpath/"1-1-100000.txt"
 futhark dataget main.fut "1i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr  >>  $outputpath/"1-4-100000.txt"
 futhark dataget main.fut "1i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr  >>  $outputpath/"1-6-100000.txt"
 futhark dataget main.fut "1i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr  >>  $outputpath/"1-8-100000.txt"
 futhark dataget main.fut "1i32 8i32 [100000][16]f32 [100000][16]f32"  | ./main -t /dev/stderr  >>  $outputpath/"1-16-100000.txt"
 
+printf '\nFor k=3 and d=1, 4, 6, 8, 16:'
 futhark dataget main.fut "3i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr  >>  $outputpath/"3-1-100000.txt"
 futhark dataget main.fut "3i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr  >>  $outputpath/"3-4-100000.txt"
 futhark dataget main.fut "3i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr  >>  $outputpath/"3-6-100000.txt"
 futhark dataget main.fut "3i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr  >>  $outputpath/"3-8-100000.txt"
 futhark dataget main.fut "3i32 8i32 [100000][16]f32 [100000][16]f32"  | ./main -t /dev/stderr  >>  $outputpath/"3-16-100000.txt"
 
+printf '\nFor k=5 and d=1, 4, 6, 8, 16:'
 futhark dataget main.fut "5i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr  >>  $outputpath/"5-1-100000.txt"
 futhark dataget main.fut "5i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr  >>  $outputpath/"5-4-100000.txt"
 futhark dataget main.fut "5i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr  >>  $outputpath/"5-6-100000.txt"
 futhark dataget main.fut "5i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr  >>  $outputpath/"5-8-100000.txt"
 futhark dataget main.fut "5i32 8i32 [100000][16]f32 [100000][16]f32"  | ./main -t /dev/stderr  >>  $outputpath/"5-16-100000.txt"
 
+printf '\nFor k=7 and d=1, 4, 6, 8, 16:'
 futhark dataget main.fut "7i32 8i32 [100000][1]f32 [100000][1]f32"    | ./main -t /dev/stderr  >>  $outputpath/"7-1-100000.txt"
 futhark dataget main.fut "7i32 8i32 [100000][4]f32 [100000][4]f32"    | ./main -t /dev/stderr  >>  $outputpath/"7-4-100000.txt"
 futhark dataget main.fut "7i32 8i32 [100000][6]f32 [100000][6]f32"    | ./main -t /dev/stderr  >>  $outputpath/"7-6-100000.txt"
 futhark dataget main.fut "7i32 8i32 [100000][8]f32 [100000][8]f32"    | ./main -t /dev/stderr  >>  $outputpath/"7-8-100000.txt"
 futhark dataget main.fut "7i32 8i32 [100000][16]f32 [100000][16]f32"  | ./main -t /dev/stderr  >>  $outputpath/"7-16-100000.txt"
 
+printf '\nFor k=17 and d=1, 4, 6, 8, 16:'
 futhark dataget main.fut "17i32 8i32 [100000][1]f32 [100000][1]f32"   | ./main -t /dev/stderr  >>  $outputpath/"17-1-100000.txt"
 futhark dataget main.fut "17i32 8i32 [100000][4]f32 [100000][4]f32"   | ./main -t /dev/stderr  >>  $outputpath/"17-4-100000.txt"
 futhark dataget main.fut "17i32 8i32 [100000][6]f32 [100000][6]f32"   | ./main -t /dev/stderr  >>  $outputpath/"17-6-100000.txt"
