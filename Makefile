@@ -69,6 +69,7 @@ profile-saved: compile-fut
 
 
 profile:
+	chmod +x runrandom
 	./runrandom.sh
 
 
