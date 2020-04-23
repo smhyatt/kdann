@@ -114,6 +114,15 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 
 
 
+let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D: [n][k](i32,f32)) : *[m][k](i32,f32) =
+  let nk = n*k
+  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
+                              in qinds[d]*k + r
+                       ) (iota nk)
+  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk](i32,f32))
+  in  unflatten m k res1D
+
+
 let sortFinishedQueries (elm: i32) : bool = elm != (-1)
 
 
@@ -204,7 +213,8 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
             in (not_completed_queries'[:trues],
                 ongoing_leaf_idxs[:trues],
                 new_stacks'[:trues],
-                scatter2D completed_knn ongoing_knn_idxs'[trues:] new_ongoing_knns[trues:],
+                scatter2Dtuples completed_knn ongoing_knn_idxs'[:finished] new_ongoing_knns[:finished],
+                -- scatter2D completed_knn ongoing_knn_idxs'[trues:] new_ongoing_knns[trues:],
                 new_ongoing_knns[:trues],
                 ongoing_knn_idxs'[:trues],
                 visited,
