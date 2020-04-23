@@ -123,18 +123,6 @@ let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D:
   in  unflatten m k res1D
 
 
-let gather2Dtuples (idx_lst: []i32) (val_lst: [][](i32,f32)) : [][](i32,f32) =
-    map (\ind -> map (\(i,d) -> (i,d)) (val_lst[ind])) idx_lst
-
-
-let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
-    map (\ind -> map (\x -> x) (val_lst[ind])) idx_lst
-
-
-let gather (idx_lst: []i32) (val_lst: []i32) : []i32 =
-    map (\x -> val_lst[x]) idx_lst
-
-
 let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
   unzip <| merge_sort 
                 (\ (v1,i1) (v2,i2) -> 
@@ -196,14 +184,9 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let init_leaves =
       map (\a ->
         let q = imA[a]
-        -- in firstTraverse h (median_dims :> [num_nodes]i32) q (median_vals :> [num_nodes]f32)
         in firstTraverse h median_dims q median_vals
       ) (iota m)
 
-
-  -- let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
-  -- let not_completed_queries = gather sorted_idxs_fst (iota m)
-  -- let not_completed_queries = gather2D sorted_idxs_fst imA
 
   let not_completed_queries = iota m
   let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
@@ -243,26 +226,12 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                 scatter2D completed_knn ongoing_knn_idxs'[trues:] new_ongoing_knns[trues:],
                 new_ongoing_knns[:trues],
                 ongoing_knn_idxs'[:trues],
-                visited, --scatter visited [i] [trues],
+                visited,
                 i+1)
 
 
-            -- in (not_completed_queries'[finished:],
-            --     ongoing_leaf_idxs[finished:],
-            --     new_stacks'[finished:],
-            --     scatter2Dtuples completed_knn ongoing_knn_idxs'[:finished] new_ongoing_knns'[:finished],
-            --     new_ongoing_knns'[finished:],
-            --     ongoing_knn_idxs'[finished:],
-            --     visited, -- scatter visited [i] [trues'],
-            --     i+1,
-            --     trues')
-
-
-  -- let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
   let (knn_inds, knn_vals) = map unzip completed_knn |> unzip
   in (knn_inds[:16], knn_vals[:16], visited)
-  -- in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
-  -- in (completed_knn[:10], visited[:200], with_query_idxs[:10])--, lower_bounds, upper_bounds)
 
 
 
