@@ -227,7 +227,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                         in (neighbours, new_l, new_s)
                      ) ncq pre_leaf_idx stacks ongoing_knn
 
-            let (trues, ongoing_leaf_idxs, new_not_completed_queries, ongoing_knn_idxs', new_stacks') =
+            let (trues, ongoing_leaf_idxs, not_completed_queries, ongoing_knn_idxs', new_stacks') =
                 partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks
 
 
@@ -236,7 +236,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                           else visited
 
 
-            in (new_not_completed_queries[:trues],
+            in (not_completed_queries[:trues],
                 ongoing_leaf_idxs[:trues],
                 new_stacks'[:trues],
                 scatter2D completed_knn ongoing_knn_idxs'[trues:] new_ongoing_knns[trues:],
