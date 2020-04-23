@@ -9,6 +9,8 @@ import "traverse-tree"
 -- entry: main
 --
 -- compiled input @ data/testinput.in
+
+
 -- output @ data/validation.out
 --
 
@@ -120,6 +122,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
   let not_completed_queries = gather2D sorted_idxs_fst imA
+  -- let init_leaves' = 
 
   let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
