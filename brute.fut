@@ -89,28 +89,30 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 entry nnk [m] [n] (k: i32) (imA : [m][n]real) 
                   (imB : [m][n]real) = -- : [m][k](int,real) = --([m][k]int, [m][k]real) =
-    unzip <| 
-    map (\a_patch ->
-        if a_patch[0] == real_inf
-        then replicate k (-2i32, real_inf)
-        else
-        let  nn = replicate k (-1i32, real_inf)
-        in loop nn for q < m do
-            let b_patch = imB[q]
-            let dist = seqEuclidean a_patch b_patch
-            let b_idx = q in
-            let (_, _, nn') =
-                loop (dist, b_idx, nn) for i < k do
-                    let cur_nn = nn[i].1  in
-                    if dist <= cur_nn then 
-                        let tmp_ind = nn[i].0--cur_idx
-                        let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
-                        let b_idx = tmp_ind
-                        let dist  = cur_nn
-                        in  (dist, b_idx, nn)
-                    else    (dist, b_idx, nn)
-            in  nn'
-    ) imA 
+    --unzip <| map unzip <|
+    let knn =
+        map (\a_patch ->
+            if a_patch[0] == real_inf
+            then replicate k (-2i32, real_inf)
+            else
+            let  nn = replicate k (-1i32, real_inf)
+            in loop nn for q < m do
+                let b_patch = imB[q]
+                let dist = seqEuclidean a_patch b_patch
+                let b_idx = q in
+                let (_, _, nn') =
+                    loop (dist, b_idx, nn) for i < k do
+                        let cur_nn = nn[i].1  in
+                        if dist <= cur_nn then 
+                            let tmp_ind = nn[i].0--cur_idx
+                            let nn[i] = (b_idx, dist) -- let nn' = nn with [i] <- dist in ... nn
+                            let b_idx = tmp_ind
+                            let dist  = cur_nn
+                            in  (dist, b_idx, nn)
+                        else    (dist, b_idx, nn)
+                in  nn'
+        ) imA 
+    in unzip knn
 
 
 
