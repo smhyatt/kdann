@@ -114,6 +114,14 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 
 
 
+let gather2Dtuples (idx_lst: []i32) (val_lst: [][](i32,f32)) : [][](i32,f32) =
+    map (\ind -> map (\(i,d) -> (i,d)) (val_lst[ind])) idx_lst
+
+
+let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
+    map (\ind -> map (\x -> x) (val_lst[ind])) idx_lst
+
+
 let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D: [n][k](i32,f32)) : *[m][k](i32,f32) =
   let nk = n*k
   let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
@@ -128,8 +136,8 @@ let sortFinishedQueries (elm: i32) : bool = elm != (-1)
 
 let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
                    (completed:   [n]i32) (knns:      [n]i32)
-                   (stack:       [n]i32) (ongo_knns: [n]i32)
-                   : (i32, [n]i32, [n]i32, [n]i32, [n]i32, [n]i32) =
+                   (stack:       [n]i32) 
+                   : (i32, [n]i32, [n]i32, [n]i32, [n]i32) =
 
     let tflgs = map (\e -> if expr e then 1 else 0) leaf_idxs
     let fflgs = map (\b -> 1 - b) tflgs
@@ -148,8 +156,7 @@ let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
     let completedp = scatter (replicate n 0i32) inds completed
     let knnsp      = scatter (replicate n 0i32) inds knns
     let stackp     = scatter (replicate n 0i32) inds stack
-    let ongo_knnsp = scatter (replicate n 0i32) inds ongo_knns
-    in  (trues, leaf_idxsp, completedp, knnsp, stackp, ongo_knnsp)
+    in  (trues, leaf_idxsp, completedp, knnsp, stackp)
 
 
 
@@ -202,8 +209,10 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                         in (neighbours, new_l, new_s)
                      ) ncq pre_leaf_idx stacks ongoing_knn
 
-            let (trues, ongoing_leaf_idxs, not_completed_queries', ongoing_knn_idxs', new_stacks', new_ongoing_knns') =
-                partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks new_ongoing_knns
+            let (trues, ongoing_leaf_idxs, not_completed_queries', ongoing_knn_idxs', new_stacks') =
+                partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks
+
+            let new_ongoing_knns' = gather2Dtuples ongoing_knn_idxs' new_ongoing_knns
 
 
             let visited = if (i != 0) && ((i%STEP) == 0)
