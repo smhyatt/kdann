@@ -116,8 +116,8 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
         in firstTraverse h median_dims q median_vals
       ) (iota m)
 
-
-  let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
+  let (sorted_idxs_fst, init_leaves) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip 
+  -- let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
   let not_completed_queries = gather2D sorted_idxs_fst imA
 
@@ -130,7 +130,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
   let (_, _, _, completed_knn, _, _, visited, _, _) =
       loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, ongoing_knn_idxs, visited, i, trues) =
-        (not_completed_queries, ongoing_leaf_idxs_fst, stacks, completed_knn, ongoing_knn, sorted_idxs_fst, visited, 0i32, m)
+        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, sorted_idxs_fst, visited, 0i32, m)
           while (length ncq) > 0 do
 
             let (new_ongoing_knns, new_leaves, new_stacks) =
