@@ -1,4 +1,4 @@
-1 Introduction
+ 1 Introduction
 	- inspiration: the original paper
 		- it has been inspired by paper xxx for computing axx it has good computations in computer vision, however in order to solve the problem we need all the pieces of knn for the kdtree
  		  it is non-trivial so therefore we dicided to concentrate on that. 
@@ -48,7 +48,7 @@
 
 	3.3 Tree Traversal
 		- explaining the solution to use a stack 
-		- showing a figure of the first traversal: ffirst go to the leaf in which the query naturally belongs 
+		- showing a figure of the first traversal: first go to the leaf in which the query naturally belongs 
 		- showing (2-3) figures of the continuous traversal with a stack
 
 		3.3.1 Representing the Stack as an Integer
