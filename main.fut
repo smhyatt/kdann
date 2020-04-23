@@ -148,7 +148,6 @@ let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
 entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
-  -- let k          = 3i32
   let tot_nodes  = num_nodes+num_leaves
 
 
