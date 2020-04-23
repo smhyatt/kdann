@@ -114,24 +114,6 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
 
 
 
-let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D: [n][k](i32,f32)) : *[m][k](i32,f32) =
-  let nk = n*k
-  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
-                              in qinds[d]*k + r
-                       ) (iota nk)
-  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk](i32,f32))
-  in  unflatten m k res1D
-
-
-let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
-  unzip <| merge_sort 
-                (\ (v1,i1) (v2,i2) -> 
-                    if v1 < v2 then true  else
-                    if v1 > v2 then false else i1 <= i2 )
-                (zip leaves (iota n))
-
-
-
 let sortFinishedQueries (elm: i32) : bool = elm != (-1)
 
 
@@ -165,7 +147,6 @@ let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
 entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
-  -- let k          = 3i32
   let tot_nodes  = num_nodes+num_leaves
 
 
