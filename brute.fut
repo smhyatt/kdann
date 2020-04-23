@@ -1,6 +1,6 @@
 
 -- ==
--- entry: nnk
+-- entry: main
 --
 -- compiled random input { 1i32 [100000][1]f32 [100000][1]f32 }
 -- compiled random input { 1i32 [100000][4]f32 [100000][4]f32 }
@@ -87,7 +87,7 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 
 
-entry nnk [m] [n] (k: i32) (imA : [m][n]real) 
+entry main [m] [n] (k: i32) (imA : [m][n]real) 
                   (imB : [m][n]real) : [m][k]real = --([m][k]int, [m][k]real) = -- : [m][k](int,real) =
     --unzip <| map unzip <|
     let res_arr_of_tups =
