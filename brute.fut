@@ -1,4 +1,3 @@
-import "../lib/github.com/diku-dk/sorts/merge_sort"
 
 -- ==
 -- entry: main
