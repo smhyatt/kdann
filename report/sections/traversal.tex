@@ -22,7 +22,7 @@
 As mention in the Background, Futhark does not support recursion, which is why the pseudo-code from Algorithm 3 is rewritten into an imperative version. One such solution is using a stack to traverse the tree incrementally while deciding which nodes to visit next. The figure below demonstrates the traverse down to the first leaf; this example does not need a stack because, at this point, we do not know if we need to visit additional leaves. Figures X-X show the traversal continuing from the first leaf, in which a stack is necessary. 
 
 
-\subsection{Representing the Stack as an Integer}
+\subsubsection{Representing the Stack as an Integer}
 
 The naive solution of representing a stack is using a boolean list where the leaves and node are set to true once visited. Although this is a simple and correct solution, since the height of the tree never exceeds 32, it can be further optimised as an integer representation instead. The code in listing XX shows the bit arithmetic done to modify the right areas of the stack and the logic behind setVisited is demonstrated in XX. 
 
@@ -81,7 +81,7 @@ The naive solution of representing a stack is using a boolean list where the lea
 
 
 
-\subsection{Validating Whether to Look at the \texttt{second}}
+\subsubsection{Validating Whether to Look at the \texttt{second}}
 
 The original solution determines whether to visit the second node by XXX. 
 
