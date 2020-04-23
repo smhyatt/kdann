@@ -214,7 +214,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
   let (_, _, _, completed_knn, _, _, visited, _) =
       loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, ongoing_knn_idxs, visited, i) =
-        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, iota m, visited, 0i32)
+        (iota m, init_leaves, stacks, completed_knn, ongoing_knn, iota m, visited, 0i32)
           while (length ncq) > 0 do
 
             let (new_ongoing_knns, new_leaves, new_stacks) =
