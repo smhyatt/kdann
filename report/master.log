@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  21 APR 2020 11:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  21 APR 2020 18:13
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1272,7 +1272,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<pics/nat-farve.pdf, id=63, 597.23125pt x 845.1575pt>
+<pics/nat-farve.pdf, id=71, 597.23125pt x 845.1575pt>
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
 Package pdftex.def Info: pics/nat-farve.pdf  used on input line 208.
@@ -1281,7 +1281,7 @@ File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
 Package pdftex.def Info: pics/nat-farve.pdf  used on input line 208.
 (pdftex.def)             Requested size: 702.625pt x 1003.75pt.
-<pics/nat-en.pdf, id=66, 597.23125pt x 845.1575pt>
+<pics/nat-en.pdf, id=74, 597.23125pt x 845.1575pt>
 File: pics/nat-en.pdf Graphic file (type pdf)
 <use pics/nat-en.pdf>
 Package pdftex.def Info: pics/nat-en.pdf  used on input line 208.
@@ -1299,53 +1299,48 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 13.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ))
 \tf@toc=\write8
 \openout8 = `master.toc'.
 
 
-(./sections/intro.texpdfTeX warning (ext4): destination with the same identifie
-r (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.20 M
-      any approaches [1]
-Underfull \hbox (badness 10000) in paragraph at lines 20--23
+(./sections/intro.tex) (./sections/ack.tex) (./sections/back.tex
 
- []
-
-) (./sections/ack.tex) (./sections/back.tex
-
-LaTeX Warning: Hyper reference `alg:main' on page 2 undefined on input line 38.
+LaTeX Warning: Hyper reference `alg:main' on page 1 undefined on input line 38.
 
 
 
-LaTeX Warning: Hyper reference `alg:tree' on page 2 undefined on input line 38.
+LaTeX Warning: Hyper reference `alg:tree' on page 1 undefined on input line 38.
 
 
 
-LaTeX Warning: Hyper reference `alg:traverse' on page 2 undefined on input line
+LaTeX Warning: Hyper reference `alg:traverse' on page 1 undefined on input line
  38.
 
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
 ine 39.
-[2]
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.39 ...based on the Python code and the authors?}
+                                                   [1]
 
-LaTeX Warning: Hyper reference `alg:main' on page 3 undefined on input line 40.
+LaTeX Warning: Hyper reference `alg:main' on page 2 undefined on input line 40.
 
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 40.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 51.
 
+LaTeX Warning: Hyper reference `alg:tree' on page 2 undefined on input line 67.
 
-LaTeX Warning: Hyper reference `alg:tree' on page 3 undefined on input line 67.
 
-
-[3] [4] [5] [6]) (./sections/brute.tex
+[2] [3] [4] [5] [6]) (./sections/brute.tex [7]
 \openout4 = `master.pyg'.
 
 
@@ -1361,72 +1356,59 @@ LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 13.
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ))
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 45.
+t line 58.
 
-[7]) (./sections/kdtree.tex
+[8]) (./sections/kdtree.tex
 \openout4 = `master.pyg'.
-
-runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
-_minted-master/68B329DA9893E34099C7D8AD5CB9C9406D5E9B5CA395CA8C27C43E4C01BD6354
-.pygtex master.pyg)...executed.
 
 
 (./_minted-master/68B329DA9893E34099C7D8AD5CB9C9406D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex)) (./sections/traversal.tex
+354.pygtex) [9]) (./sections/traversal.tex
 \openout4 = `master.pyg'.
 
-runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
-_minted-master/38F9407C39267F6CCC0C8B1DA471F4866D5E9B5CA395CA8C27C43E4C01BD6354
-.pygtex master.pyg)...executed.
 
-
-(./_minted-master/38F9407C39267F6CCC0C8B1DA471F4866D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex) [8]
+(./_minted-master/A846073DE81566EC7D25782B7F20B5AA6D5E9B5CA395CA8C27C43E4C01BD6
+354.pygtex) [10]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 84.
 \openout4 = `master.pyg'.
-
-runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
-_minted-master/6EF238F87358005769C51FDCE71F94EF6D5E9B5CA395CA8C27C43E4C01BD6354
-.pygtex master.pyg)...executed.
 
 
 (./_minted-master/6EF238F87358005769C51FDCE71F94EF6D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex)) (./sections/fullprog.tex [9]
+354.pygtex)) (./sections/fullprog.tex [11]
 Overfull \vbox (284.96112pt too high) has occurred while \output is active []
 
 
-[10]) (./sections/eval.tex [11]) (./sections/conclusion.tex) [12] (./master.bbl
-) [13]
+[12]) (./sections/eval.tex) (./sections/conclusion.tex) [13] (./master.bbl)
+[14]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
  (./master.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: B290EB8E0EF235B553BED2C4E8462240;851.
+(rerunfilecheck)             Checksum: 491BF43B0C6E8CF61886E1E518AE2C5D;1028.
 
 
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
 runsystem(rm master.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27303 strings out of 492649
- 494399 string characters out of 6129621
- 644903 words of memory out of 5000000
- 30536 multiletter control sequences out of 15000+600000
- 28479 words of font info for 68 fonts, out of 8000000 for 9000
+ 27311 strings out of 492649
+ 494492 string characters out of 6129621
+ 646435 words of memory out of 5000000
+ 30541 multiletter control sequences out of 15000+600000
+ 28792 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,12n,96p,1140b,622s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{
-/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</u
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/
+usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</u
 sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
@@ -1448,11 +1430,12 @@ fonts/type1/public/cm-super/sfrm2488.pfb></usr/local/texlive/2018/texmf-dist/fo
 nts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-dist/font
 s/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
-pe1/public/cm-super/sftt1200.pfb>
-Output written on master.pdf (14 pages, 413182 bytes).
+pe1/public/cm-super/sftt1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/cm-super/sftt1440.pfb>
+Output written on master.pdf (15 pages, 433162 bytes).
 PDF statistics:
- 292 PDF objects out of 1000 (max. 8388607)
- 242 compressed objects within 3 object streams
- 41 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 311 PDF objects out of 1000 (max. 8388607)
+ 259 compressed objects within 3 object streams
+ 45 named destinations out of 1000 (max. 500000)
+ 169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

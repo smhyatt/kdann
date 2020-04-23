@@ -111,7 +111,7 @@ def make_kd_tree_recursive(points, indices, depth, max_depth, index, leaves, inv
 
         # (5) recursive calls
         make_kd_tree_recursive(points[: median_idx], indices[: median_idx], depth + 1, max_depth, (index+1)*2-1, leaves, inverse_lookup, split_values, split_dimensions)
-        make_kd_tree_recursive(points[median_idx:], indices[median_idx:], depth + 1, max_depth, (index+1)*2, leaves, inverse_lookup, split_values, split_dimensions)
+        make_kd_tree_recursive(points[median_idx:], indices[median_idx:], depth + 1, max_depth,   (index+1)*2, leaves, inverse_lookup, split_values, split_dimensions)
 
     # create a leaf
     else:
