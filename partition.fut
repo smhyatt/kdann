@@ -205,7 +205,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
   -- let not_completed_queries = gather2D sorted_idxs_fst imA
 
-  let not_completed_queries = imA
+  let not_completed_queries = iota m
   let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
   let stacks  = replicate m 0i32
@@ -219,7 +219,8 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
             let (new_ongoing_knns, new_leaves, new_stacks) =
                 unzip3 <|
-                map4 (\q lli st klst ->
+                map4 (\nqi lli st klst ->
+                        let q = imA[nqi]
                         let lind = (lli-num_nodes)
                         let neighbours = bruteForce q leaves[lind] imB_idxs[lind] klst
                         let wknn = neighbours[k-1].1
