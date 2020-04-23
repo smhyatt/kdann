@@ -55,7 +55,7 @@ futhark dataget main.fut "7i32 12i32 [1200000][8]f32 [1200000][8]f32"    | ./mai
 
 futhark dataget partition.fut "5i32 8i32 [100000][8]f32 [100000][8]f32"    | ./partition -t /dev/stderr
 
-459537
+462051
 
 ### knn indexes
 
