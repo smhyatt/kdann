@@ -88,7 +88,7 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 
 entry nnk [m] [n] (k: i32) (imA : [m][n]real) 
-                  (imB : [m][n]real) : [m][k](int,real) = --([m][k]int, [m][k]real) =
+                  (imB : [m][n]real) = -- : [m][k](int,real) = --([m][k]int, [m][k]real) =
     unzip <| 
     map (\a_patch ->
         if a_patch[0] == real_inf
