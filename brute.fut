@@ -88,9 +88,9 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 
 entry nnk [m] [n] (k: i32) (imA : [m][n]real) 
-                  (imB : [m][n]real) = -- : [m][k](int,real) = --([m][k]int, [m][k]real) =
+                  (imB : [m][n]real) : [m][k]real = --([m][k]int, [m][k]real) = -- : [m][k](int,real) =
     --unzip <| map unzip <|
-    let knn =
+    let res_arr_of_tups =
         map (\a_patch ->
             if a_patch[0] == real_inf
             then replicate k (-2i32, real_inf)
@@ -112,9 +112,10 @@ entry nnk [m] [n] (k: i32) (imA : [m][n]real)
                         else    (dist, b_idx, nn)
                 in  nn'
         ) imA 
-    in unzip knn
 
-
+    let (res_inds, res_dsts) = unzip <| map unzip res_arr_of_tups
+    in  res_dsts
+    -- in  (res_inds, res_dsts)
 
 
 

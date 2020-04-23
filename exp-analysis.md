@@ -129,7 +129,7 @@ futhark dataget brute.fut "5i32 [100000][8]f32 [100000][8]f32"    | ./brute -t /
 
 ### runtime
 
-futhark dataget brute.fut "7i32 [1200000][8]f32 [1200000][8]f32"    | ./brute -t /dev/stderr
+futhark dataget brute.fut "7i32 [1200000][8]f32 [1200000][8]f32"    | ./brute -t /dev/stderr >> results/bruteforce.txt
 
 
 ### knn indexes
