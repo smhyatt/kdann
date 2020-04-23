@@ -184,7 +184,8 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let (knn_inds, knn_vals) = map unzip completed_knn |> unzip
-  in (knn_inds[:16], knn_vals[:16], visited)
+  in knn_vals
+  -- in (knn_inds[:16], knn_vals[:16], visited)
 
 
 
