@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{k+kr}{let} \PYG{n}{setVisited} \PYG{p}{(}\PYG{n}{stk}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{c}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{k+kt}{:} \PYG{n}{i32} \PYG{o+ow}{=}
+      \PYG{n}{stk} \PYG{o}{|} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{c}\PYG{p}{)}
+  \PYG{k+kr}{let} \PYG{n}{resetVisit} \PYG{p}{(}\PYG{n}{stk}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{c}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{k+kt}{:} \PYG{n}{i32} \PYG{o+ow}{=}
+      \PYG{n}{stk} \PYG{o}{\PYGZam{}} \PYG{o}{!}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{c}\PYG{p}{)}
+  \PYG{k+kr}{let} \PYG{n}{isVisited} \PYG{p}{(}\PYG{n}{stk}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{c}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{k+kt}{:} \PYG{n}{bool} \PYG{o+ow}{=}
+      \PYG{p}{(}\PYG{n}{stk} \PYG{o}{\PYGZam{}} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{c}\PYG{p}{))} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{n}{i32}
+\end{Verbatim}
