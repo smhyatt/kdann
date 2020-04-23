@@ -68,7 +68,7 @@ entry traverse [d][n][l] (height:             i32)  (median_dims:     [n]i32)
                           else (ack + 0.0)
 
                   let to_visit = (f32.sqrt ack) < wknn in
-                  -- let to_visit = f32.abs(median_vals[parent] - query[median_dims[parent]]) < wknn in
+                  let to_visit = f32.abs(median_vals[parent] - query[median_dims[parent]]) < wknn in
                   if !to_visit
                   then (parent, stack, count-1, -1)
                   else
