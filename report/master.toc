@@ -1,15 +1,17 @@
 \babel@toc {english}{}
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}
-\contentsline {subsection}{\numberline {1.1}Acknowledgement}{2}{subsection.1.1}
-\contentsline {section}{\numberline {2}Background}{2}{section.2}
+\contentsline {subsection}{\numberline {1.1}Acknowledgement}{1}{subsection.1.1}
+\contentsline {section}{\numberline {2}Background}{1}{section.2}
 \contentsline {subsection}{\numberline {2.1}Related Work}{6}{subsection.2.1}
 \contentsline {subsubsection}{\numberline {2.1.1}PatchMatch}{6}{subsubsection.2.1.1}
 \contentsline {subsubsection}{\numberline {2.1.2}Coherency Sensitive Hashing}{7}{subsubsection.2.1.2}
 \contentsline {section}{\numberline {3}Implementation}{8}{section.3}
 \contentsline {subsection}{\numberline {3.1}The Brute Force Version}{8}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}KD-Tree Construction}{8}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Tree Traversal}{9}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}The Full Implementation}{11}{subsection.3.4}
-\contentsline {section}{\numberline {4}Experimental Evaluation}{11}{section.4}
-\contentsline {section}{\numberline {5}Conclusion}{12}{section.5}
-\contentsline {section}{References}{13}{section*.4}
+\contentsline {subsection}{\numberline {3.2}k-d Tree Construction}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Tree Traversal}{10}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Representing the Stack as an Integer}{10}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Validating Whether to Look at the \texttt {second}}{11}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}The Full Implementation}{13}{subsection.3.6}
+\contentsline {section}{\numberline {4}Experimental Evaluation}{13}{section.4}
+\contentsline {section}{\numberline {5}Conclusion}{13}{section.5}
+\contentsline {section}{References}{14}{section*.5}
