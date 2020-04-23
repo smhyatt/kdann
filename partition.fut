@@ -113,6 +113,15 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
             else nn
 
 
+let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
+  let nk = n*k
+  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
+                              in qinds[d]*k + r
+                       ) (iota nk)
+  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk]t)
+  in  unflatten m k res1D
+
+
 
 let gather2Dtuples (idx_lst: []i32) (val_lst: [][](i32,f32)) : [][](i32,f32) =
     map (\ind -> map (\(i,d) -> (i,d)) (val_lst[ind])) idx_lst
@@ -134,10 +143,35 @@ let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D:
 let sortFinishedQueries (elm: i32) : bool = elm != (-1)
 
 
-let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
-                   (completed:   [n]i32) (knns:      [n]i32)
-                   (stack:       [n]i32) 
-                   : (i32, [n]i32, [n]i32, [n]i32, [n]i32) =
+-- let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
+--                    (completed:   [n]i32) (knns:      [n]i32)
+--                    (stack:       [n]i32) 
+--                    : (i32, [n]i32, [n]i32, [n]i32, [n]i32) =
+
+--     let tflgs = map (\e -> if expr e then 1 else 0) leaf_idxs
+--     let fflgs = map (\b -> 1 - b) tflgs
+
+--     let indsT = scan (+) 0 tflgs
+--     let tmp   = scan (+) 0 fflgs
+--     let trues = if n > 0 then indsT[n-1] else -1
+--     let indsF = map (+trues) tmp
+
+--     let inds  = map3 (\leaf indT indF -> if expr leaf 
+--                                          then indT-1 
+--                                          else indF-1
+--                      ) leaf_idxs indsT indsF
+
+--     let leaf_idxsp = scatter (replicate n 0i32) inds leaf_idxs
+--     let completedp = scatter (replicate n 0i32) inds completed
+--     let knnsp      = scatter (replicate n 0i32) inds knns
+--     let stackp     = scatter (replicate n 0i32) inds stack
+--     in  (trues, leaf_idxsp, completedp, knnsp, stackp)
+
+
+let partition2 [n][k] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
+                   (completed:   [n]i32) (knn_inds:  [n]i32)
+                   (knn_dsts: [n][k](i32,f32)) (stack:     [n]i32)
+                   : (i32, [n]i32, [n]i32, [n]i32, [n][k](i32,f32), [n]i32) =
 
     let tflgs = map (\e -> if expr e then 1 else 0) leaf_idxs
     let fflgs = map (\b -> 1 - b) tflgs
@@ -154,10 +188,10 @@ let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
 
     let leaf_idxsp = scatter (replicate n 0i32) inds leaf_idxs
     let completedp = scatter (replicate n 0i32) inds completed
-    let knnsp      = scatter (replicate n 0i32) inds knns
+    let knn_inds'  = scatter (replicate n 0i32) inds knn_inds
+    let knn_dsts'  = scatter2D (replicate n (replicate k (0i32, 0.0f32))) inds knn_dsts 
     let stackp     = scatter (replicate n 0i32) inds stack
-    in  (trues, leaf_idxsp, completedp, knnsp, stackp)
-
+    in  (trues, leaf_idxsp, completedp, knn_inds', knn_dsts', stackp)
 
 
 
@@ -209,12 +243,11 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
                         in (neighbours, new_l, new_s)
                      ) ncq pre_leaf_idx stacks ongoing_knn
 
-            let (trues, ongoing_leaf_idxs, not_completed_queries', ongoing_knn_idxs', new_stacks') =
-                partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks
+
+            let (trues, ongoing_leaf_idxs, not_completed_queries', ongoing_knn_idxs', new_ongoing_knns', new_stacks') =
+                partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks new_ongoing_knns
 
             -- let new_ongoing_knns' = gather2Dtuples ongoing_knn_idxs new_ongoing_knns
-
-            let new_ongoing_knns' = scatter2Dtuples (replicate m (replicate k (0i32, 0.0f32))) ongoing_knn_idxs new_ongoing_knns
 
 
             let visited = if (i != 0) && ((i%STEP) == 0)
