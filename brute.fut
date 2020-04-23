@@ -1,6 +1,6 @@
 
 -- ==
--- entry: main
+-- entry: nnk
 --
 -- compiled random input { 1i32 [100000][1]f32 [100000][1]f32 }
 -- compiled random input { 1i32 [100000][4]f32 [100000][4]f32 }
@@ -77,15 +77,6 @@ let euclidean [n] (vct1 : [n]real)
     real_sqrt (reduce (+) 0.0 (sqr_distance vct1 vct2))
 
 
--- entry nn1 [m] [n] (imA : [m][n]real) 
---                   (imB : [m][n]real) : []real =
---     map (\a_row ->
---         map (\b_row -> 
---                 euclidean a_row b_row 
---         ) imB |> reduce real_min real_inf  
---     ) imA 
-
-
 let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
     let dist = loop dist = 0.0f32
       for i < n do
@@ -98,7 +89,7 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 entry nnk [m] [n] (k: i32) (imA : [m][n]real) 
                   (imB : [m][n]real) : [m][k](int,real) = --([m][k]int, [m][k]real) =
-    --unzip <| map unzip <|
+    unzip <| 
     map (\a_patch ->
         if a_patch[0] == real_inf
         then replicate k (-2i32, real_inf)
@@ -126,9 +117,9 @@ entry nnk [m] [n] (k: i32) (imA : [m][n]real)
 
 
 
-entry main [m] [n] (k: i32) (imA : [m][n]real) 
-                   (imB : [m][n]real) : [m][k](int,real) = --: ([m][k]int, [m][k]real) =
-    nnk k imA imB
+-- entry main [m] [n] (k: i32) (imA : [m][n]real) 
+--                    (imB : [m][n]real) : [m][k](int,real) = --: ([m][k]int, [m][k]real) =
+--     nnk k imA imB
 
 
 -- 1. Benchmark multiple datasets with the below, -e denotes the entrypoint
@@ -145,14 +136,6 @@ entry main [m] [n] (k: i32) (imA : [m][n]real)
 --    $ ./brute --dump-opencl ker.cl
 --    and you can locally modify the `ker.cl` file and load it back with --load-opencl, as in:
 --    $ futhark dataget brute.fut "[35170][8]f32 [35170][8]f32" | ./brute -D -e nn1 --load-opencl ker.cl > /dev/null
-
--- in map (\(x: i32): [screenY]i32  ->
---            map  (\(y: i32): i32  ->
---                   let c0 = (xmin + (r32(x) * sizex) / r32(screenX),
---                             ymin + (r32(y) * sizey) / r32(screenY))
---                   in divergence(depth, c0))
---                 (iota screenY))
---          (iota screenX)
 
 
 
