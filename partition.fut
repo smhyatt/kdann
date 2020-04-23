@@ -58,23 +58,6 @@ let bruteForce [n][k][d] (q: [d]f32) (leaves: [n][d]f32) (leaf_idxs: [n]i32)
             else nn
 
 
-let scatter2D [m][k][n] 't (arr2D: *[m][k]t) (qinds: [n]i32) (vals2D: [n][k]t) : *[m][k]t =
-  let nk = n*k
-  let flat_qinds = map (\i -> let (d,r) = (i / k, i % k)
-                              in qinds[d]*k + r
-                       ) (iota nk)
-  let res1D = scatter (flatten arr2D) flat_qinds ((flatten vals2D) :> [nk]t)
-  in  unflatten m k res1D
-
-
-
-let gather2Dtuples (idx_lst: []i32) (val_lst: [][](i32,f32)) : [][](i32,f32) =
-    map (\ind -> map (\(i,d) -> (i,d)) (val_lst[ind])) idx_lst
-
-
-let gather2D (idx_lst: []i32) (val_lst: [][]f32) : [][]f32 =
-    map (\ind -> map (\x -> x) (val_lst[ind])) idx_lst
-
 
 let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D: [n][k](i32,f32)) : *[m][k](i32,f32) =
   let nk = n*k
