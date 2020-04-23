@@ -2,7 +2,7 @@
 -- ==
 -- entry: main
 --
--- compiled input @ data/testinput
+-- compiled input @ data/brutetestinput.in
 --
 
 --

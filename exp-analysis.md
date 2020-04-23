@@ -167,6 +167,7 @@ futhark dataget brute.fut "7i32 [1200000][8]f32 [1200000][8]f32"    | ./brute -t
 futhark dataset --f32-bounds=0:1 -g "7i32" -g "12i32" -g "[1048576][8]f32" -g "[1048576][8]f32"  > data/testinput.in
 
 
+futhark dataset --f32-bounds=0:1 -g "7i32" -g "[1048576][8]f32" -g "[1048576][8]f32"  > data/brutetestinput.in
 
 
 
