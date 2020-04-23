@@ -168,8 +168,9 @@ let sortFinishedQueries (elm: i32) : bool = elm != (-1)
 --     in  (trues, leaf_idxsp, completedp, knnsp, stackp)
 
 
+
 let partition2 [n][k] (expr: (i32 -> bool)) (leaf_idxs:         [n]i32)
-                      (completed:   [n]i32) (knns:              [n]i32)
+                      (completed:   [n]i32) (knns_inds:         [n]i32)
                       (stack:       [n]i32) (knn_dsts: [n][k](i32,f32))
                       : (i32, [n]i32, [n]i32, [n]i32, [n][k](i32,f32), [n]i32) =
 
