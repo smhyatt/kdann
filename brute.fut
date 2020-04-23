@@ -2,7 +2,7 @@
 -- ==
 -- entry: main
 --
--- compiled input @ data/brutetestinput.in
+-- compiled input @ data/testinput.in
 --
 
 --
@@ -34,7 +34,7 @@ let seqEuclidean [n] (vct1: [n]f32) (vct2: [n]f32) : f32 =
 
 
 
-entry main [m] [n] (k: i32) (imA : [m][n]real) 
+entry main [m] [n] (k: i32) (h: i32) (imA : [m][n]real) 
                   (imB : [m][n]real) : [m][k]real = --([m][k]int, [m][k]real) = -- : [m][k](int,real) =
     --unzip <| map unzip <|
     let res_arr_of_tups =
