@@ -214,7 +214,7 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
             -- let new_ongoing_knns' = gather2Dtuples ongoing_knn_idxs new_ongoing_knns
 
-            let new_ongoing_knns' = scatter2Dtuples (replicate n (replicate k (0i32, 0.0f32))) ongoing_knn_idxs new_ongoing_knns
+            let new_ongoing_knns' = scatter2Dtuples (replicate m (replicate k (0i32, 0.0f32))) ongoing_knn_idxs new_ongoing_knns
 
 
             let visited = if (i != 0) && ((i%STEP) == 0)
