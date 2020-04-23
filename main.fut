@@ -9,8 +9,6 @@ import "traverse-tree"
 -- entry: main
 --
 -- compiled input @ data/testinput.in
-
-
 -- output @ data/validation.out
 --
 
