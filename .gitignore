@@ -11,3 +11,4 @@ futhark.pkg
 docs/
 scraps/
 data/
+results/bruteforce/
