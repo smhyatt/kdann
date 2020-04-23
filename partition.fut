@@ -8,64 +8,9 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
--- compiled random input { 1i32 8i32 [100000][1]f32 [100000][1]f32 }
--- compiled random input { 1i32 8i32 [100000][4]f32 [100000][4]f32 }
--- compiled random input { 1i32 8i32 [100000][6]f32 [100000][6]f32 }
--- compiled random input { 1i32 8i32 [100000][8]f32 [100000][8]f32 }
--- compiled random input { 1i32 8i32 [100000][16]f32 [100000][16]f32 }
--- compiled random input { 3i32 8i32 [100000][1]f32 [100000][1]f32 }
--- compiled random input { 3i32 8i32 [100000][4]f32 [100000][4]f32 }
--- compiled random input { 3i32 8i32 [100000][6]f32 [100000][6]f32 }
--- compiled random input { 3i32 8i32 [100000][8]f32 [100000][8]f32 }
--- compiled random input { 3i32 8i32 [100000][16]f32 [100000][16]f32 }
--- compiled random input { 5i32 8i32 [100000][1]f32 [100000][1]f32 }
--- compiled random input { 5i32 8i32 [100000][4]f32 [100000][4]f32 }
--- compiled random input { 5i32 8i32 [100000][6]f32 [100000][6]f32 }
--- compiled random input { 5i32 8i32 [100000][8]f32 [100000][8]f32 }
--- compiled random input { 5i32 8i32 [100000][16]f32 [100000][16]f32 }
--- compiled random input { 7i32 8i32 [100000][1]f32 [100000][1]f32 }
--- compiled random input { 7i32 8i32 [100000][4]f32 [100000][4]f32 }
--- compiled random input { 7i32 8i32 [100000][6]f32 [100000][6]f32 }
--- compiled random input { 7i32 8i32 [100000][8]f32 [100000][8]f32 }
--- compiled random input { 7i32 8i32 [100000][16]f32 [100000][16]f32 }
--- compiled random input { 17i32 8i32 [100000][1]f32 [100000][1]f32 }
--- compiled random input { 17i32 8i32 [100000][4]f32 [100000][4]f32 }
--- compiled random input { 17i32 8i32 [100000][6]f32 [100000][6]f32 }
--- compiled random input { 17i32 8i32 [100000][8]f32 [100000][8]f32 }
--- compiled random input { 17i32 8i32 [100000][16]f32 [100000][16]f32 }
--- compiled random input { 1i32  10i32 [400000][1]f32  [400000][1]f32}
--- compiled random input { 3i32  10i32 [400000][4]f32  [400000][4]f32}
--- compiled random input { 5i32  10i32 [400000][6]f32  [400000][6]f32}
--- compiled random input { 7i32  10i32 [400000][8]f32  [400000][8]f32}
--- compiled random input { 17i32 10i32 [400000][16]f32 [400000][16]f32}
--- compiled random input { 1i32  11i32 [800000][1]f32  [800000][1]f32}
--- compiled random input { 3i32  11i32 [800000][4]f32  [800000][4]f32}
--- compiled random input { 5i32  11i32 [800000][6]f32  [800000][6]f32}
--- compiled random input { 7i32  11i32 [800000][8]f32  [800000][8]f32}
--- compiled random input { 17i32 11i32 [800000][16]f32 [800000][16]f32}
--- compiled random input { 1i32  12i32 [1200000][1]f32  [1200000][1]f32}
--- compiled random input { 3i32  12i32 [1200000][4]f32  [1200000][4]f32}
--- compiled random input { 5i32  12i32 [1200000][6]f32  [1200000][6]f32}
--- compiled random input { 7i32  12i32 [1200000][8]f32  [1200000][8]f32}
--- compiled random input { 17i32 12i32 [1200000][16]f32 [1200000][16]f32}
--- compiled random input { 1i32  11i32 [1600000][1]f32  [1600000][1]f32}
--- compiled random input { 3i32  11i32 [1600000][4]f32  [1600000][4]f32}
--- compiled random input { 5i32  11i32 [1600000][6]f32  [1600000][6]f32}
--- compiled random input { 7i32  11i32 [1600000][8]f32  [1600000][8]f32}
--- compiled random input { 17i32 11i32 [1600000][16]f32 [1600000][16]f32}
--- compiled random input { 1i32  12i32 [2000000][1]f32  [2000000][1]f32}
--- compiled random input { 3i32  12i32 [2000000][4]f32  [2000000][4]f32}
--- compiled random input { 5i32  12i32 [2000000][6]f32  [2000000][6]f32}
--- compiled random input { 7i32  12i32 [2000000][8]f32  [2000000][8]f32}
--- compiled random input { 17i32 12i32 [2000000][16]f32 [2000000][16]f32}
--- compiled random input { 1i32  13i32 [4000000][1]f32  [4000000][1]f32}
--- compiled random input { 3i32  13i32 [4000000][4]f32  [4000000][4]f32}
--- compiled random input { 5i32  13i32 [4000000][6]f32  [4000000][6]f32}
--- compiled random input { 7i32  13i32 [4000000][8]f32  [4000000][8]f32}
--- compiled random input { 17i32 13i32 [4000000][16]f32 [4000000][16]f32}
+-- compiled input @ data/testinput
+-- output @ data/validation.out
 --
---
-
 
 --           h+1
 -- 100000    9     195,3125      9   131072    256
@@ -141,32 +86,6 @@ let scatter2Dtuples [m][k][n] (arr2D: *[m][k](i32,f32)) (qinds: [n]i32) (vals2D:
 
 
 let sortFinishedQueries (elm: i32) : bool = elm != (-1)
-
-
--- let partition2 [n] (expr: (i32 -> bool)) (leaf_idxs: [n]i32)
---                    (completed:   [n]i32) (knns:      [n]i32)
---                    (stack:       [n]i32) 
---                    : (i32, [n]i32, [n]i32, [n]i32, [n]i32) =
-
---     let tflgs = map (\e -> if expr e then 1 else 0) leaf_idxs
---     let fflgs = map (\b -> 1 - b) tflgs
-
---     let indsT = scan (+) 0 tflgs
---     let tmp   = scan (+) 0 fflgs
---     let trues = if n > 0 then indsT[n-1] else -1
---     let indsF = map (+trues) tmp
-
---     let inds  = map3 (\leaf indT indF -> if expr leaf 
---                                          then indT-1 
---                                          else indF-1
---                      ) leaf_idxs indsT indsF
-
---     let leaf_idxsp = scatter (replicate n 0i32) inds leaf_idxs
---     let completedp = scatter (replicate n 0i32) inds completed
---     let knnsp      = scatter (replicate n 0i32) inds knns
---     let stackp     = scatter (replicate n 0i32) inds stack
---     in  (trues, leaf_idxsp, completedp, knnsp, stackp)
-
 
 
 let partition2 [n][k] (expr: (i32 -> bool)) (leaf_idxs:         [n]i32)
@@ -247,8 +166,6 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
             let (trues, ongoing_leaf_idxs, not_completed_queries', ongoing_knn_idxs', new_ongoing_knns', new_stacks') =
                 partition2 sortFinishedQueries new_leaves ncq ongoing_knn_idxs new_stacks new_ongoing_knns
-
-            -- let new_ongoing_knns' = gather2Dtuples ongoing_knn_idxs new_ongoing_knns
 
 
             let visited = if (i != 0) && ((i%STEP) == 0)
