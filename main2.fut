@@ -10,22 +10,23 @@ import "traverse-tree2"
 --
 -- compiled input @ data/traverse/11test-k1-d1.in
 -- compiled input @ data/traverse/11test-k1-d6.in
--- compiled input @ data/traverse/11test-k1-d16.in
+-- compiled input @ data/traverse/11test-k1-d10.in
 -- compiled input @ data/traverse/11test-k5-d1.in
 -- compiled input @ data/traverse/11test-k5-d6.in
--- compiled input @ data/traverse/11test-k5-d16.in
+-- compiled input @ data/traverse/11test-k5-d10.in
 -- compiled input @ data/traverse/11test-k17-d1.in
 -- compiled input @ data/traverse/11test-k17-d6.in
--- compiled input @ data/traverse/11test-k17-d16.in
+-- compiled input @ data/traverse/11test-k17-d10.in
 -- compiled input @ data/traverse/13test-k1-d1.in
 -- compiled input @ data/traverse/13test-k1-d6.in
--- compiled input @ data/traverse/13test-k1-d16.in
+-- compiled input @ data/traverse/13test-k1-d10.in
 -- compiled input @ data/traverse/13test-k5-d1.in
 -- compiled input @ data/traverse/13test-k5-d6.in
--- compiled input @ data/traverse/13test-k5-d16.in
+-- compiled input @ data/traverse/13test-k5-d10.in
 -- compiled input @ data/traverse/13test-k17-d1.in
 -- compiled input @ data/traverse/13test-k17-d6.in
--- compiled input @ data/traverse/13test-k17-d16.in
+-- compiled input @ data/traverse/13test-k17-d10.in
+
 
 
 -- Partition vs. sorting
