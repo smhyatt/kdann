@@ -162,6 +162,19 @@ futhark dataget brute.fut "7i32 [1200000][8]f32 [1200000][8]f32"    | ./brute -t
 
 
 
+[zfj900@a00333 kdann]$ futhark bench --backend=opencl -r 1 main.fut
+Compiling main.fut...
+Results for main.fut:
+dataset data/testinput.in: 3482134.00μs (avg. of 1 runs; RSD: 0.00)
+
+[zfj900@a00333 kdann]$ futhark bench --backend=opencl -r 1 partition.fut
+Compiling partition.fut...
+Results for partition.fut:
+dataset data/testinput.in: 4737026.00μs (avg. of 1 runs; RSD: 0.00)
+
+
+
+
 
 
 futhark dataset --f32-bounds=0:1 -g "7i32" -g "12i32" -g "[1048576][8]f32" -g "[1048576][8]f32"  > data/testinput.in
@@ -223,6 +236,97 @@ h+1 	data size 	data size 	ppl		k	dim
 14  	4194304   	4194304   	256				
 
 
+Tests				h+1 	data size 	data size 	ppl		k	dim
+---------------------------------------------------------------------
+8test-k3-d4			9   	131072    	120000    	256		3	 4  
+8test-k3-d16		9   	131072    	120000    	256		3	 16  
+8test-k11-d4		9   	131072    	120000    	256		11	 4  
+8test-k11-d16		9   	131072    	120000    	256		11	 16  
+8test-k3-d4-eq		9   	131072    	131072    	256		3	 4  
+8test-k3-d16-eq		9   	131072    	131072    	256		3	 16  
+8test-k11-d4-eq		9   	131072    	131072    	256		11	 4  
+8test-k11-d16-eq	9   	131072    	131072    	256		11	 16
+
+11test-k3-d4		11  	524288    	580000    	256		3	 4
+11test-k3-d8		11  	524288    	580000    	256		3	 8
+11test-k7-d4		11  	524288    	580000    	256		7	 4
+11test-k7-d8		11  	524288    	580000    	256		7	 8
+11test-k3-d4-eq		11  	524288    	524288    	256		3	 4
+11test-k3-d8-eq		11  	524288    	524288    	256		3	 8
+11test-k7-d4-eq		11  	524288    	524288    	256		7	 4
+11test-k7-d8-eq		11  	524288    	524288    	256		7	 8
+
+test				12  	1048576   	1048576   	256				
+test				13  	2097152   	2097152   	256				
+test				12  	1048576   	1048576   	256				
+
+12test-k3-d4		13  	2097152   	2230000   	256		3	 4 
+12test-k3-d16		13  	2097152   	2230000   	256		3	 16 
+12test-k11-d4		13  	2097152   	2230000   	256		11	 4 
+12test-k11-d16		13  	2097152   	2230000   	256		11	 16 
+12test-k3-d4-eq		13  	2097152   	2097152   	256		3	 4 
+12test-k3-d16-eq	13  	2097152   	2097152   	256		3	 16 
+12test-k11-d4-eq	13  	2097152   	2097152   	256		11	 4 
+12test-k11-d16-eq	13  	2097152   	2097152   	256		11	 16
+
+14test-k3-d4		14  	4194304   	3000000   	256		3	 4
+14test-k3-d8		14  	4194304   	3000000   	256		3	 8
+14test-k7-d4		14  	4194304   	3000000   	256		7	 4
+14test-k7-d8		14  	4194304   	3000000   	256		7	 8
+14test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
+14test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
+14test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
+14test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
+
+
+printf '\nDatasets with size: 131072 and 120000\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][4]f32 --f32-bounds=0:1  -g [120000][4]f32  > data/sorting/8test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][16]f32 --f32-bounds=0:1 -g [120000][16]f32 > data/sorting/8test-k3-d16.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][4]f32 --f32-bounds=0:1  -g [120000][4]f32  > data/sorting/8test-k11-d4.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][16]f32 --f32-bounds=0:1 -g [120000][16]f32 > data/sorting/8test-k11-d16.in
+
+
+printf '\nDatasets with size: 131072 and 131072\n'
+futhark dataset -b --i32-bounds=3:3   -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1  -g [131072][4]f32 --f32-bounds=0:1 -g [131072][4]f32  > data/sorting/8test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3   -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][16]f32 --f32-bounds=0:1 -g [131072][16]f32 > data/sorting/8test-k3-d16-eq.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1  -g [131072][4]f32 --f32-bounds=0:1 -g [131072][4]f32  > data/sorting/8test-k11-d4-eq.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][16]f32 --f32-bounds=0:1 -g [131072][16]f32 > data/sorting/8test-k11-d16-eq.in
+
+
+printf '\nDatasets with size: 2097152 and 2230000\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1   -g [2097152][4]f32 --f32-bounds=0:1  -g [2230000][4]f32  > data/sorting/12test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1   -g [2097152][16]f32 --f32-bounds=0:1 -g [2230000][16]f32 > data/sorting/12test-k3-d16.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][4]f32 --f32-bounds=0:1  -g [2230000][4]f32  > data/sorting/12test-k11-d4.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2230000][16]f32 > data/sorting/12test-k11-d16.in
+
+
+printf '\nDatasets with size: 2097152 and 2097152\n'
+futhark dataset -b --i32-bounds=3:3   -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][4]f32 --f32-bounds=0:1  -g [2097152][4]f32  > data/sorting/12test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3   -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2097152][16]f32 > data/sorting/12test-k3-d16-eq.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][4]f32 --f32-bounds=0:1  -g [2097152][4]f32  > data/sorting/12test-k11-d4-eq.in
+futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2097152][16]f32 > data/sorting/12test-k11-d16-eq.in
+
+
+
+
+printf '\nDatasets with size: 3000000 and 4194304\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k3-d8.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k7-d4.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k7-d8.in
+
+
+printf '\nDatasets with size: 4194304 and 4194304\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k3-d8-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k7-d4-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k7-d8-eq.in
+
+
+
+
+
+
 
 **Traversal with all dimensions**
 
@@ -269,32 +373,33 @@ k h imA imB
 
 
 
-printf '\nDatasets with size: 524288 and 580000\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [580000][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k3-d4.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [580000][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k3-d8.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [580000][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k7-d4.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [580000][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k7-d8.in
+printf '\nDatasets with size: 580000 and 524288\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [580000][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/10test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [580000][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/10test-k3-d8.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [580000][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/10test-k7-d4.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [580000][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/10test-k7-d8.in
 
 
 printf '\nDatasets with size: 524288 and 524288\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k3-d4-eq.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k3-d8-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k7-d4-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k7-d8-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/10test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/10test-k3-d8-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/10test-k7-d4-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=10:10 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/10test-k7-d8-eq.in
 
 
-printf '\nDatasets with size: 4194304 and 3000000\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k3-d4.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k3-d8.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k7-d4.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k7-d8.in
+printf '\nDatasets with size: 3000000 and 4194304\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/13test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/13test-k3-d8.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/13test-k7-d4.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/13test-k7-d8.in
 
 
 printf '\nDatasets with size: 4194304 and 4194304\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k3-d4-eq.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k3-d8-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k7-d4-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k7-d8-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/13test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/13test-k3-d8-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/13test-k7-d4-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/13test-k7-d8-eq.in
+n
 
 
 
