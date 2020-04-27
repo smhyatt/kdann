@@ -53,7 +53,6 @@ compile-futlib:
 
 
 makedata:
-	chmod +x makedata.sh
 	./makedata.sh
 
 
@@ -78,7 +77,6 @@ profile-saved: compile-fut
 
 
 profile:
-	chmod +x runrandom.sh
 	./runrandom.sh
 
 
