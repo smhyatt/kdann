@@ -330,6 +330,13 @@ futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bound
 
 **Traversal with all dimensions**
 
+
+dim: 1, 4, 6, 8, 16
+k: 1, 3, 5, 7, 17
+
+brug 1, 5, 16 og 1, 5, 17
+
+
 h+1 	data size 	data size 	ppl		k	dim
 ------------------------------------------------
 9   	131072    	131072    	256				

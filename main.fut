@@ -8,10 +8,26 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/sorting/8test-k3-d4.in
+-- compiled input @ data/sorting/8test-k3-d16.in
+-- compiled input @ data/sorting/8test-k11-d4.in
+-- compiled input @ data/sorting/8test-k11-d16.in
+-- compiled input @ data/sorting/8test-k3-d4-eq.in
+-- compiled input @ data/sorting/8test-k3-d16-eq.in
+-- compiled input @ data/sorting/8test-k11-d4-eq.in
+-- compiled input @ data/sorting/8test-k11-d16-eq.in
+-- compiled input @ data/sorting/12test-k3-d4.in
+-- compiled input @ data/sorting/12test-k3-d16.in
+-- compiled input @ data/sorting/12test-k11-d4.in
+-- compiled input @ data/sorting/12test-k11-d16.in
+-- compiled input @ data/sorting/12test-k3-d4-eq.in
+-- compiled input @ data/sorting/12test-k3-d16-eq.in
+-- compiled input @ data/sorting/12test-k11-d4-eq.in
+-- compiled input @ data/sorting/12test-k11-d16-eq.in
+
+
+
 -- compiled input @ data/testinput.in
-
-
-
 -- output @ data/validation.out
 --
 

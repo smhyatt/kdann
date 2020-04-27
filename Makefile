@@ -42,8 +42,10 @@ runtestfut:
 
 # futhark bench --backend=opencl -r 1 main.fut
 # Benchmark multiple datasets with the below, -e denotes the entrypoint.
-bench: 
+benchmain: 
 	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC3)
+
+benchpar:
 	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC4)
 
 
