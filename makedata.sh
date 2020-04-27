@@ -72,7 +72,7 @@ futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bou
 
 
 futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1   -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k1-d10.in
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k17-d10.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k5-d10.in
 futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k17-d10.in
 
 
