@@ -2,8 +2,10 @@
 SRC1 = cpu.py
 SRC2 = utils.py
 SRC3 = main.fut
-EXE1 = main
+EXE3 = main
 ENTRY = main
+SRC4 = partition.fut
+EXE4 = partition
 
 
 virtual: 
@@ -30,7 +32,7 @@ compile-fut:
 
 # Run the futhark brute-force implementation.
 runfut: compile-fut
-	./$(EXE1)
+	./$(EXE3)
 
 
 # Run tests of the futhark brute-force implementation.
@@ -38,9 +40,11 @@ runtestfut:
 	futhark test --backend=opencl $(SRC3)
 
 
+# futhark bench --backend=opencl -r 1 main.fut
 # Benchmark multiple datasets with the below, -e denotes the entrypoint.
 bench: 
-	futhark bench --backend=opencl -e $(EXE1) -r 2 $(SRC3)
+	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC3)
+	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC4)
 
 
 # Creating a Python module of the futhark brute-force implementation with pyopencl. 

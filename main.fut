@@ -91,7 +91,7 @@ let sortQueriesByLeaves [n] (leaves: [n]i32) : ([n]i32, [n]i32) =
 
 
 
-entry main [a][b][d] (k: i32) (h: i32) (imB : [b][d]f32) (imA : [a][d]f32) =
+entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
   let tot_nodes  = num_nodes+num_leaves
@@ -110,27 +110,27 @@ entry main [a][b][d] (k: i32) (h: i32) (imB : [b][d]f32) (imA : [a][d]f32) =
 
 
   let init_leaves =
-      map (\ai ->
-        let q = imA[ai]
+      map (\a ->
+        let q = imA[a]
         -- in firstTraverse h (median_dims :> [num_nodes]i32) q (median_vals :> [num_nodes]f32)
         in firstTraverse h median_dims q median_vals
-      ) (iota a)
+      ) (iota m)
 
-  let (sorted_idxs_fst, init_leaves) = zip (iota a) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip 
+  let (sorted_idxs_fst, init_leaves) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip 
   -- let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
   let not_completed_queries = gather2D sorted_idxs_fst imA
 
-  let ongoing_knn   = replicate a (replicate k (-1i32, f32.inf))
+  let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
-  let stacks  = replicate a 0i32
+  let stacks  = replicate m 0i32
   let STEP = 64
   let visited = replicate (num_leaves/STEP) (-1)
   -- let visited = replicate (num_leaves+1) (-1)
 
   let (_, _, _, completed_knn, _, _, visited, _, _) =
       loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, ongoing_knn_idxs, visited, i, trues) =
-        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, sorted_idxs_fst, visited, 0i32, a)
+        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, sorted_idxs_fst, visited, 0i32, m)
           while (length ncq) > 0 do
 
             let (new_ongoing_knns, new_leaves, new_stacks) =
