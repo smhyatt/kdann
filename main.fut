@@ -116,7 +116,7 @@ entry main [a][b][d] (k: i32) (h: i32) (imB : [b][d]f32) (imA : [a][d]f32) =
         in firstTraverse h median_dims q median_vals
       ) (iota a)
 
-  let (sorted_idxs_fst, init_leaves) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip 
+  let (sorted_idxs_fst, init_leaves) = zip (iota a) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip 
   -- let (sorted_idxs_fst, ongoing_leaf_idxs_fst) = zip (iota m) init_leaves |> merge_sort_by_key (.1) (<=) |> unzip -- radix_sort_int_by_key (.1) i32.num_bits i32.get_bit |> unzip
   -- let not_completed_queries = gather sorted_idxs_fst (iota m)
   let not_completed_queries = gather2D sorted_idxs_fst imA
