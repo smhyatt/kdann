@@ -11,4 +11,8 @@ futhark.pkg
 docs/
 scraps/
 data/
+brute
+main
+partition
+
 
