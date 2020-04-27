@@ -307,7 +307,7 @@ futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bou
 futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2097152][16]f32 > data/sorting/12test-k11-d16-eq.in
 
 
-### first try
+### first try of sorting
 
 Results for main.fut:
 dataset data/sorting/8test-k3-d4.in:         68522.00μs (avg. of 3 runs; RSD: 0.01)
@@ -349,7 +349,7 @@ dataset data/sorting/12test-k11-d16-eq.in: 127700359.00μs (avg. of 3 runs; RSD:
 
 
 
-### second try
+### second try of sorting
 
 Results for main.fut:
 dataset data/sorting/8test-k3-d4.in:        556700.33μs (avg. of 3 runs; RSD: 1.21)
@@ -370,7 +370,7 @@ dataset data/sorting/12test-k11-d4-eq.in:  1148170.33μs (avg. of 3 runs; RSD: 0
 dataset data/sorting/12test-k11-d16-eq.in: 117716654.33μs (avg. of 3 runs; RSD: 0.01)
 
 
-### third try
+### third try of sorting
 
 dataset data/sorting/8test-k3-d4.in:         68614.67μs (avg. of 3 runs; RSD: 0.01)
 dataset data/sorting/8test-k3-d16.in:      1287140.00μs (avg. of 3 runs; RSD: 0.01)
@@ -390,8 +390,38 @@ dataset data/sorting/12test-k11-d4-eq.in:  1114384.67μs (avg. of 3 runs; RSD: 0
 dataset data/sorting/12test-k11-d16-eq.in: 120381889.33μs (avg. of 3 runs; RSD: 0.01)
 
 
+## first try of partition
+
+dataset data/sorting/8test-k3-d4.in:         48291.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16.in:      2804616.00μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k11-d4.in:        77636.33μs (avg. of 3 runs; RSD: 0.08)
+dataset data/sorting/8test-k11-d16.in:     3342884.33μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d4-eq.in:      53854.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16-eq.in:   4818202.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d4-eq.in:     79458.33μs (avg. of 3 runs; RSD: 0.10)
+dataset data/sorting/8test-k11-d16-eq.in:  5877597.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k3-d4.in:       926225.33μs (avg. of 3 runs; RSD: 0.03)
+dataset data/sorting/12test-k3-d16.in:     661491506.00μs (avg. of 3 runs; RSD: 0.06)
+dataset data/sorting/12test-k11-d4.in:     1626979.33μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k11-d16.in:    882439881.00μs (avg. of 3 runs; RSD: 0.03)
+dataset data/sorting/12test-k3-d4-eq.in:   1041860.33μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k3-d16-eq.in:  870679564.33μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d4-eq.in:  1814530.33μs (avg. of 3 runs; RSD: 0.00)
 
 
+## second try of partition
+Results for partition.fut:
+dataset data/sorting/8test-k3-d4.in:         47205.33μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16.in:      2790234.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k11-d4.in:        77608.33μs (avg. of 3 runs; RSD: 0.07)
+dataset data/sorting/8test-k11-d16.in:     3357732.00μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d4-eq.in:      52363.00μs (avg. of 3 runs; RSD: 0.06)
+dataset data/sorting/8test-k3-d16-eq.in:   4801450.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k11-d4-eq.in:     77096.33μs (avg. of 3 runs; RSD: 0.14)
+dataset data/sorting/8test-k11-d16-eq.in:  5866850.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k3-d4.in:       895139.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k3-d16.in:     579172471.33μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d4.in:     1606669.33μs (avg. of 3 runs; RSD: 0.00)
 
 
 
@@ -510,6 +540,15 @@ printf '\nDatasets with size: 4194304 and 4194304, k:17\n'
 futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32 > data/traverse/13test-k17-d1.in
 futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32 > data/traverse/13test-k17-d6.in
 futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k17-d16.in
+
+
+
+### All dimensions
+
+
+
+
+### One dimension
 
 
 

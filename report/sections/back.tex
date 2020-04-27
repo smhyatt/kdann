@@ -25,6 +25,9 @@
 % in your implementation section.
 
 
+% - the algorithms as pseudo-code
+% - why Futhark: supports regular parallelism - which is why it doesnt have recursion, 
+% - note on PCA and going on with an approximate solution
 
 
 Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it can handle binary as well as multiclass data, and while often applied for comparing two images, it faces the challenge of slow performance because both images are of image size. 
@@ -154,13 +157,9 @@ The second stage on lines 6-17 determines which following nodes are the first an
 \\[2mm]
 The goal is to implement the solution using Futhark since Futhark is a pure functional data-parallel array language, meaning it is syntactically and conceptually similar to other functional languages; however, Futhark can compile code to run on the CPU, or it can optimise and parallelise the code to run on the GPU. It is a great advantage to write fully parallel code in a high-level functional language. The downside is that Futhark has its limits; such as only supporting regular arrays and not supporting recursion. With this in mind, the pseudo-code, demonstrated above, will need to be rewritten without recursion. See more in the sections \hyperref[sec:kdtree]{k-d Tree Construction} and \hyperref[sec:traversal]{Tree Traversal}.
 
-
-\begin{itemize}
-	\item approximate, PCA
-	\item implement in Futhark, why and what is different
-	\item 
-\end{itemize}
-
+% Futhark because it is a data-parallel language and simpler to write code in compared to CUDA, and to prototype various implementations. 
+% Futhark because it is a data-parallel language that supports regular parallelism that's basically why we cannot use recursion. 
+% The recursion in the k-d tree construction is a divide and conquer recursion approach. GPU's do not support dynamic parallelism, you cannot just spawn threads from a kernel. You cannot say 'I'm going to spawn another parallel things that computes this and another parallel thing that computes that' 
 
 
 % \\[2mm]

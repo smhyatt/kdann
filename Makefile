@@ -2,6 +2,7 @@
 SRC1 = cpu.py
 SRC2 = utils.py
 SRC3 = main.fut
+SRC5 = main2.fut
 EXE3 = main
 ENTRY = main
 SRC4 = partition.fut
@@ -43,10 +44,14 @@ runtestfut:
 # futhark bench --backend=opencl -r 1 main.fut
 # Benchmark multiple datasets with the below, -e denotes the entrypoint.
 benchmain: 
-	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC3)
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 
 benchpar:
-	futhark bench --backend=opencl -e $(ENTRY) -r 3 $(SRC4)
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
+
+benchtrav:
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC5)
 
 
 # Creating a Python module of the futhark brute-force implementation with pyopencl. 

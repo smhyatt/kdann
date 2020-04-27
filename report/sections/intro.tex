@@ -8,6 +8,68 @@
 % Then describe the main accomplishments of your work.
 % (so perhaps you write the introduction last)
 
+%  by Computing Nearest-Neighbor Fields via Propagation-Assisted KD-Trees by He and Sun,
+% The searching accuracy depends on the amount of backtracking - while various other methods such as the k-means tree, the bbd-tree improve accuracy over the k-d tree, they spend extra effort in building the trees, for the k-means tree; 10-20 times more \cite{kdann}.
+
+
+The original direction of this project was inspired by \cite{kdann} who propose a solution for efficiently computing approximate nearest-neighbours (ANN) computations using propagation-assisted k-d trees. The performance bottleneck is the search for K-nearest neighbours (KNN) to improve accuracy, and while various other methods such as the k-means tree and the bbd-tree improve accuracy over the k-d tree, they spend extra effort in building the trees, e.g. the k-means tree uses 10-20 more time \cite{kdann}. However, we found that in order to implement such algorithms we would still need all the components of the exact K-Nearest Neighbour (KNN) computations by k-d trees as we would for the approximate solution, thus, for this project, it was commonly agreed to concentrate on the exact KNN computation solution. 
+
+
+KNN is the core of many applications in various fields such as Computer Vision and Machine Learning, for instance, finding similarities between two images as the original direction proposed. 
+
+The naive approach of computing KNN is using brute force, and while brute force has been empirically observed to be efficient than the k-d tree traversal when dealing with a small number of reference points, such as in the hundreds, it is infeasible time-wise for larger datasets due to its complexity $O(n\vdot m)$. 
+
+The idea of KNN by k-d trees is to construct a spatial data-structure, which is a binary tree where each internal node semantically corresponds to a subset of the reference points that can be reached through them, such that each query does not have to be compared with each reference point, as it would in the naive approach, keeping the number of comparisons asymptotically cheaper than the O(n*m). In our approach, the leaves contain a set of points and we apply brute force at the leaf level due to because it has been empirically observed that brute force is more efficient than k-d tree traversal when the number of reference points is small such as in the hundred for GPU computation. 
+
+In order to compute the KNN for a query, the tree is traversed in which each visit to each node determines whether it is necessary to go into a recursion to visit the next node or to skip it. Typically we reason about whether to visit the next node by computing the distance to the worst nearest-neighbour with the distance from the query to the box that bounds that region represented by that internal node. The approach typically compares the distance between the query to the current median against the distance to the worst nearest-neighbour. However, we improve this test to be more accurate by considering the upper and lower bounds of all dimensions corresponding to that.  
+
+
+
+In principal this possibly reduces the asymptotic work to a factor of $O(n\ lg\ n)$, but in practice, the efficiency of the solution depends fundamentally on the dimensionality and the size of K. While this offers a cheaper traversal it still suffers from the curse of high dimensionality. Thus, the trade-off is accuracy for lower dimensionality and reduced algorithmic complexity. In practice there are two main problems that may affect the performance of the solution in asymptotic terms (1) dimensionality, if it is too high, then you might have to compare against most of the reference points (2) and similarly K if K is too high and the distance to the worst neighbour becomes big then similarly you are going to visit more leaves. 
+
+One of the advantages of the k-d tree, compared to various other similar structures, such as octal trees - is that is can in principal conduct NN computations over high dimensionality spaces. Octal trees are limited to three dimensions. 
+
+To address the curse of high dimensionality, we present a more accurate test that, in several cases, allows to efficiently process queries of higher dimensionality than the classical approach. While the typical solution computes the distance between the query to the current median against the distance to the worst nearest-neighbour, this solution considers the upper and lower bounds of all dimensions. Which, in return, improves temporal locality by sorting the leaves by accessing the same reference points in the same order. See more in section \textbf{ADD REFERENCE}.
+
+Additional optimisation, such as improving temporal locality, have been done by sorting the queries such that they access the same reference points in the same order whenever we do brute force of the leaves.
+
+
+
+Summarise the conclusions at a higher level. 
+
+for this dimensionality we obtain this amazing speedups and for small k's we increase the k's for a small dimensionality and this is roughly how the speed ups is xxx. (OBS the summary should back my previous defined claims)
+
+The summarise the results : here we want to validate the points that we have just made : does sorting improve things or not? and more insight like - give people a magical pill so they can understand things - even if it is not that precise. for example, if i'm having a uniformly distributed dataset of 16 points then if i'm choosing k it's reasonable to compute this knn like by 5, over 5 I see the performance reduces drastically.   
+
+- what are the downsides of the solution - significant overhead and uses contains much more data - so that is why experiments are important to show which ds and ks run best. 
+	if you visit most of the leaves then you are going to be much much slower, due to the significant overhead. That's why experimental evaluation is important because it shows on what d's and k's it is beneficial - does it make sense to run the k-d tree this way.  
+
+
+% we change the implementation a bit such that the leaves contain a set of bits and this is motivated by the fact that because brute force is more efficient than k-d tree traversal when the number of reference points is small such as in the hundred for GPU computation. 
+% (bc. the original k-d tree is a complete thing in which the nodes each are a reference point - that's the classical approach, such that you build a tree where each leaf contains exactly one point.) So specify that we use a slightly different approach where the leaves contain several points. 
+
+
+
+ % 1 Introduction
+	% - inspiration: the original paper
+	% 	- it has been inspired by paper xxx for computing axx it has good computations in computer vision, however in order to solve the problem we need all the pieces of knn for the kdtree
+ % 		  it is non-trivial so therefore we decided to concentrate on that. 
+ % 	- how has the project changed direction
+	% - why is this project useful: knn is core of many applications in various fields such as computer vision, ML
+	% - high level: that is computing knn with kd trees, internal node semantically corresponds to subset of , and how we reason about whether to visit the next node. 
+ % 	- so what is a k-d tree: to construct - each internal node represents a range of the reference points, and I do not have to compare each query with each reference point. 
+	% - what does the project contain (concentrate on exact KNN by KD trees, the original has a nice motivation to compute the exact knn by kdtree efficiently)
+	% - we changed the Implementation uses a slightly different approach in which we use multiple points in each node, rather than just one point. 
+	% - discuss the difficulties: this reduces the performance to n log n, how efficient it is depends on dim and k. 
+
+	% - summarise the conclusion : mention so called dimensionality curse - octal trees cannot do high dim - k-d tree can in principal, in practise 2 main problems that may affect: the dimensionality is too high then we might have to visit most reference point and similarly if k is too high and the distance to the worst neighbour becomes to big then we visit more points. before all that introduce that the leaves contain a set of points and we apply brute on the leaf level, because it is still fast when the number of points are small - in the hundred.  
+	
+	% - how do I address dimensionality curse? - we propose an efficient way to look at higher dimensionality than the original approach. the distance to the current median to the distance of the worst neighbour - now we consider the upper and lower bounds of all dimensions. Improving temporal locality by sorting the leaves by accessing the same reference points in the same order. 
+	% - a summary of the results: for this dimensionality we obtain these amazing speed-ups and for these k's and how this affects the speed-up etc. - purpose is to demonstrate that these things you have just said are in fact true - give a magical feel. - over 5 I see the performance reduces drastically ... 
+	% - what are the downsides of the solution - significant overhead and uses contains much more data - so that is why experiments are important to show which ds and ks run best. 
+	% - how is the report organised
+
+
 
 % K-Nearest Neighbours (KNN) is a well-known algorithm highly used in areas such as computer vision and computer graphics. One way of applying it is in image recognition where it can be used to find similarities between two images. 
 
