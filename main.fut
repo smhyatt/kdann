@@ -8,6 +8,27 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/traverse/11test-k1-d1.in
+-- compiled input @ data/traverse/11test-k1-d6.in
+-- compiled input @ data/traverse/11test-k1-d16.in
+-- compiled input @ data/traverse/11test-k5-d1.in
+-- compiled input @ data/traverse/11test-k5-d6.in
+-- compiled input @ data/traverse/11test-k5-d16.in
+-- compiled input @ data/traverse/11test-k17-d1.in
+-- compiled input @ data/traverse/11test-k17-d6.in
+-- compiled input @ data/traverse/11test-k17-d16.in
+-- compiled input @ data/traverse/13test-k1-d1.in
+-- compiled input @ data/traverse/13test-k1-d6.in
+-- compiled input @ data/traverse/13test-k1-d16.in
+-- compiled input @ data/traverse/13test-k5-d1.in
+-- compiled input @ data/traverse/13test-k5-d6.in
+-- compiled input @ data/traverse/13test-k5-d16.in
+-- compiled input @ data/traverse/13test-k17-d1.in
+-- compiled input @ data/traverse/13test-k17-d6.in
+-- compiled input @ data/traverse/13test-k17-d16.in
+
+
+-- Partition vs. sorting
 -- compiled input @ data/sorting/8test-k3-d4.in
 -- compiled input @ data/sorting/8test-k3-d16.in
 -- compiled input @ data/sorting/8test-k11-d4.in
@@ -24,6 +45,29 @@ import "traverse-tree"
 -- compiled input @ data/sorting/12test-k3-d16-eq.in
 -- compiled input @ data/sorting/12test-k11-d4-eq.in
 -- compiled input @ data/sorting/12test-k11-d16-eq.in
+
+
+
+-- Traversal
+-- compiled input @ data/traverse/11test-k1-d1.in
+-- compiled input @ data/traverse/11test-k1-d6.in
+-- compiled input @ data/traverse/11test-k1-d16.in
+-- compiled input @ data/traverse/11test-k5-d1.in
+-- compiled input @ data/traverse/11test-k5-d6.in
+-- compiled input @ data/traverse/11test-k5-d16.in
+-- compiled input @ data/traverse/11test-k17-d1.in
+-- compiled input @ data/traverse/11test-k17-d6.in
+-- compiled input @ data/traverse/11test-k17-d16.in
+-- compiled input @ data/traverse/13test-k1-d1.in
+-- compiled input @ data/traverse/13test-k1-d6.in
+-- compiled input @ data/traverse/13test-k1-d16.in
+-- compiled input @ data/traverse/13test-k5-d1.in
+-- compiled input @ data/traverse/13test-k5-d6.in
+-- compiled input @ data/traverse/13test-k5-d16.in
+-- compiled input @ data/traverse/13test-k17-d1.in
+-- compiled input @ data/traverse/13test-k17-d6.in
+-- compiled input @ data/traverse/13test-k17-d16.in
+
 
 
 

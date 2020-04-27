@@ -307,6 +307,7 @@ futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bou
 futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2097152][16]f32 > data/sorting/12test-k11-d16-eq.in
 
 
+### first try
 
 Results for main.fut:
 dataset data/sorting/8test-k3-d4.in:         68522.00μs (avg. of 3 runs; RSD: 0.01)
@@ -345,6 +346,48 @@ dataset data/sorting/12test-k3-d4-eq.in:    722109.67μs (avg. of 3 runs; RSD: 0
 dataset data/sorting/12test-k3-d16-eq.in:  79057467.67μs (avg. of 3 runs; RSD: 0.00)
 dataset data/sorting/12test-k11-d4-eq.in:  1133415.00μs (avg. of 3 runs; RSD: 0.00)
 dataset data/sorting/12test-k11-d16-eq.in: 127700359.00μs (avg. of 3 runs; RSD: 0.02)
+
+
+
+### second try
+
+Results for main.fut:
+dataset data/sorting/8test-k3-d4.in:        556700.33μs (avg. of 3 runs; RSD: 1.21)
+dataset data/sorting/8test-k3-d16.in:      1523340.00μs (avg. of 3 runs; RSD: 0.03)
+dataset data/sorting/8test-k11-d4.in:        99049.33μs (avg. of 3 runs; RSD: 0.14)
+dataset data/sorting/8test-k11-d16.in:     3945433.00μs (avg. of 3 runs; RSD: 0.41)
+dataset data/sorting/8test-k3-d4-eq.in:     237314.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16-eq.in:   5533058.33μs (avg. of 3 runs; RSD: 0.19)
+dataset data/sorting/8test-k11-d4-eq.in:     95187.00μs (avg. of 3 runs; RSD: 0.04)
+dataset data/sorting/8test-k11-d16-eq.in:  1942095.67μs (avg. of 3 runs; RSD: 0.11)
+dataset data/sorting/12test-k3-d4.in:       871476.67μs (avg. of 3 runs; RSD: 0.18)
+dataset data/sorting/12test-k3-d16.in:     71737351.00μs (avg. of 3 runs; RSD: 0.17)
+dataset data/sorting/12test-k11-d4.in:     1056601.33μs (avg. of 3 runs; RSD: 0.03)
+dataset data/sorting/12test-k11-d16.in:    93256634.00μs (avg. of 3 runs; RSD: 0.02)
+dataset data/sorting/12test-k3-d4-eq.in:    774836.00μs (avg. of 3 runs; RSD: 0.05)
+dataset data/sorting/12test-k3-d16-eq.in:  75949725.00μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d4-eq.in:  1148170.33μs (avg. of 3 runs; RSD: 0.05)
+dataset data/sorting/12test-k11-d16-eq.in: 117716654.33μs (avg. of 3 runs; RSD: 0.01)
+
+
+### third try
+
+dataset data/sorting/8test-k3-d4.in:         68614.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16.in:      1287140.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d4.in:        91731.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d16.in:     1550267.00μs (avg. of 3 runs; RSD: 0.03)
+dataset data/sorting/8test-k3-d4-eq.in:      58494.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d16-eq.in:   2238789.00μs (avg. of 3 runs; RSD: 0.02)
+dataset data/sorting/8test-k11-d4-eq.in:     94642.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k11-d16-eq.in:  1754700.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k3-d4.in:       717318.00μs (avg. of 3 runs; RSD: 0.02)
+dataset data/sorting/12test-k3-d16.in:     81353278.00μs (avg. of 3 runs; RSD: 0.15)
+dataset data/sorting/12test-k11-d4.in:     2187016.00μs (avg. of 3 runs; RSD: 0.41)
+dataset data/sorting/12test-k11-d16.in:    172073459.00μs (avg. of 3 runs; RSD: 0.41)
+dataset data/sorting/12test-k3-d4-eq.in:   7566183.33μs (avg. of 3 runs; RSD: 0.13)
+dataset data/sorting/12test-k3-d16-eq.in:  180681302.33μs (avg. of 3 runs; RSD: 0.78)
+dataset data/sorting/12test-k11-d4-eq.in:  1114384.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k11-d16-eq.in: 120381889.33μs (avg. of 3 runs; RSD: 0.01)
 
 
 
