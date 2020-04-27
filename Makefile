@@ -52,6 +52,7 @@ benchpar:
 benchtrav:
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC5)
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
 
 
 # Creating a Python module of the futhark brute-force implementation with pyopencl. 
