@@ -98,7 +98,8 @@ let partition2 [n][k] (expr: (i32 -> bool)) (leaf_idxs:         [n]i32)
 
 
 
-entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
+--entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
+entry main [a][b][d] (k: i32) (h: i32) (imB : [b][d]f32) (imA : [a][d]f32) =
   let num_nodes  = (1 << (h+1)) - 1
   let num_leaves =  1 << (h+1)
   let tot_nodes  = num_nodes+num_leaves
@@ -117,22 +118,22 @@ entry main [m][d] (k: i32) (h: i32) (imA : [m][d]f32) (imB : [m][d]f32) =
 
 
   let init_leaves =
-      map (\a ->
-        let q = imA[a]
+      map (\ai ->
+        let q = imA[ai]
         in firstTraverse h median_dims q median_vals
-      ) (iota m)
+      ) (iota a)
 
 
-  let not_completed_queries = iota m
-  let ongoing_knn   = replicate m (replicate k (-1i32, f32.inf))
+  let not_completed_queries = iota a
+  let ongoing_knn   = replicate a (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
-  let stacks  = replicate m 0i32
+  let stacks  = replicate a 0i32
   let STEP = 64
   let visited = replicate (num_leaves/STEP) (-1)
 
   let (_, _, _, completed_knn, _, _, visited, _) =
       loop (ncq, pre_leaf_idx, stacks, completed_knn, ongoing_knn, ongoing_knn_idxs, visited, i) =
-        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, iota m, visited, 0i32)
+        (not_completed_queries, init_leaves, stacks, completed_knn, ongoing_knn, iota a, visited, 0i32)
           while (length ncq) > 0 do
 
             let (new_ongoing_knns, new_leaves, new_stacks) =

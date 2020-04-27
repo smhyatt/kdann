@@ -48,6 +48,11 @@ compile-futlib:
 	futhark pyopencl --library $(SRC3)
 
 
+makedata:
+	chmod +x makedata.sh
+	./makedata.sh
+
+
 # Profile info for a file-saved dataset.
 profile-saved: compile-fut
 	./$(EXE1) -P < data/dataset.in

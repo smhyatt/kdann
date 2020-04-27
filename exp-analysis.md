@@ -172,10 +172,122 @@ futhark dataset --f32-bounds=0:1 -g "7i32" -g "[1048576][8]f32" -g "[1048576][8]
 
 
 
+futhark dataset --i32-bounds=7:7 -g "7i32" --i32-bounds=12:12 -g "12i32" --f32-bounds=0:1 -g "[1048576][8]f32" --f32-bounds=0:1 -g  "[1048576][8]f32"  > data/testinput.in
+
+
+futhark dataset --i32-bounds=7:7 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [1048576][8]f32 --f32-bounds=0:1 -g [1048576][8]f32 > data/testinput.in
+
+
+futhark dataset --i32-bounds=7:7 -g i32 --f32-bounds=0:1 -g [1048576][8]f32 --f32-bounds=0:1 -g [1048576][8]f32 > data/brutetestinput.in
+
+
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [1048576][8]f32 --f32-bounds=0:1 -g [1048576][8]f32 > my.in
+
+
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [1048576][8]f32 --f32-bounds=0:1 -g [1048576][8]f32 > testinput.in
 
 
 
 
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [1048576][8]f32 --f32-bounds=0:1 -g [1048576][8]f32 > my.in
+
+
+
+dim: 1, 4, 6, 8, 16
+k: 1, 3, 5, 7, 17
+
+
+h+1 	data size 	ppl		k	dim
+------------------------------------
+9   	131072    	256				
+11  	524288    	256				
+12  	1048576   	256				
+13  	2097152   	256				
+12  	1048576   	256				
+13  	2097152   	256				
+14  	4194304   	256				
+
+
+
+**Sorting over Partition**
+
+
+h+1 	data size 	data size 	ppl		k	dim
+------------------------------------------------
+9   	131072    	131072    	256				
+11  	524288    	524288    	256				
+12  	1048576   	1048576   	256				
+13  	2097152   	2097152   	256				
+12  	1048576   	1048576   	256				
+13  	2097152   	2097152   	256				
+14  	4194304   	4194304   	256				
+
+
+
+**Traversal with all dimensions**
+
+h+1 	data size 	data size 	ppl		k	dim
+------------------------------------------------
+9   	131072    	131072    	256				
+11  	524288    	524288    	256				
+12  	1048576   	1048576   	256				
+13  	2097152   	2097152   	256				
+12  	1048576   	1048576   	256				
+13  	2097152   	2097152   	256				
+14  	4194304   	4194304   	256				
+
+
+
+**Brute Force vs. Fully Optimise**
+
+Tests				h+1 	data size 	data size 	ppl		k	dim
+---------------------------------------------------------------------
+test				9   	131072    	131072    	256			 
+11test-k3-d4		11  	524288    	580000    	256		3	 4
+11test-k3-d8		11  	524288    	580000    	256		3	 8
+11test-k7-d4		11  	524288    	580000    	256		7	 4
+11test-k7-d8		11  	524288    	580000    	256		7	 8
+11test-k3-d4-eq		11  	524288    	524288    	256		3	 4
+11test-k3-d8-eq		11  	524288    	524288    	256		3	 8
+11test-k7-d4-eq		11  	524288    	524288    	256		7	 4
+11test-k7-d8-eq		11  	524288    	524288    	256		7	 8
+test				12  	1048576   	1048576   	256				
+test				13  	2097152   	2097152   	256				
+test				12  	1048576   	1048576   	256				
+test				13  	2097152   	2097152   	256				
+14test-k3-d4		14  	4194304   	3000000   	256		3	 4
+14test-k3-d8		14  	4194304   	3000000   	256		3	 8
+14test-k7-d4		14  	4194304   	3000000   	256		7	 4
+14test-k7-d8		14  	4194304   	3000000   	256		7	 8
+14test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
+14test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
+14test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
+14test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
+
+
+k h imB imA
+
+
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [580000][4]f32 > data/11test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [580000][8]f32 > data/11test-k3-d8.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [580000][4]f32 > data/11test-k7-d4.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [580000][8]f32 > data/11test-k7-d8.in
+
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k3-d8-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][4]f32 --f32-bounds=0:1 -g [524288][4]f32 > data/11test-k7-d4-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [524288][8]f32 --f32-bounds=0:1 -g [524288][8]f32 > data/11test-k7-d8-eq.in
+
+
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [3000000][4]f32 > data/14test-k3-d4.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [3000000][8]f32 > data/14test-k3-d8.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [3000000][4]f32 > data/14test-k7-d4.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [3000000][8]f32 > data/14test-k7-d8.in
+
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k3-d4-eq.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k3-d8-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/14test-k7-d4-eq.in
+futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=14:14 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/14test-k7-d8-eq.in
 
 
 
