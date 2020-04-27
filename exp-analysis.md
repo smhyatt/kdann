@@ -422,6 +422,9 @@ dataset data/sorting/8test-k11-d16-eq.in:  5866850.67μs (avg. of 3 runs; RSD: 0
 dataset data/sorting/12test-k3-d4.in:       895139.67μs (avg. of 3 runs; RSD: 0.00)
 dataset data/sorting/12test-k3-d16.in:     579172471.33μs (avg. of 3 runs; RSD: 0.00)
 dataset data/sorting/12test-k11-d4.in:     1606669.33μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d16.in:    919489909.00μs (avg. of 3 runs; RSD: 0.07)
+dataset data/sorting/12test-k3-d4-eq.in:   1015346.33μs (avg. of 3 runs; RSD: 0.00)
+
 
 
 

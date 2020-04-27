@@ -33,37 +33,47 @@
 
 
 # TRAVERSAL WITH ALL DIMENSIONS VS. ONE DIMENSION
-printf '\nDatasets with size: 1048576 and 1048576, k:1\n'
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k1-d1.in
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k1-d6.in
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k1-d16.in
+# printf '\nDatasets with size: 1048576 and 1048576, k:1\n'
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k1-d1.in
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k1-d6.in
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k1-d16.in
 
-printf '\nDatasets with size: 1048576 and 1048576, k:5\n'
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k5-d1.in
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k5-d6.in
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k5-d16.in
+# printf '\nDatasets with size: 1048576 and 1048576, k:5\n'
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k5-d1.in
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k5-d6.in
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k5-d16.in
 
-printf '\nDatasets with size: 1048576 and 1048576, k:17\n'
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k17-d1.in
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k17-d6.in
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k17-d16.in
+# printf '\nDatasets with size: 1048576 and 1048576, k:17\n'
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32  > data/traverse/11test-k17-d1.in
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32  > data/traverse/11test-k17-d6.in
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/11test-k17-d16.in
 
 
 
-printf '\nDatasets with size: 4194304 and 4194304, k:1\n'
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k1-d1.in
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k1-d6.in
-futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k1-d16.in
+# printf '\nDatasets with size: 4194304 and 4194304, k:1\n'
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k1-d1.in
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k1-d6.in
+# futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k1-d16.in
 
-printf '\nDatasets with size: 4194304 and 4194304, k:5\n'
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k5-d1.in
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k5-d6.in
-futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k5-d16.in
+# printf '\nDatasets with size: 4194304 and 4194304, k:5\n'
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k5-d1.in
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k5-d6.in
+# futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k5-d16.in
 
-printf '\nDatasets with size: 4194304 and 4194304, k:17\n'
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k17-d1.in
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k17-d6.in
-futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k17-d16.in
+# printf '\nDatasets with size: 4194304 and 4194304, k:17\n'
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32   > data/traverse/13test-k17-d1.in
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32   > data/traverse/13test-k17-d6.in
+# futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k17-d16.in
+
+
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][10]f32 --f32-bounds=0:1 -g [1048576][10]f32 > data/traverse/11test-k1-d10.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][10]f32 --f32-bounds=0:1 -g [1048576][10]f32 > data/traverse/11test-k5-d10.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=11:11 -g i32 --f32-bounds=0:1 -g [1048576][10]f32 --f32-bounds=0:1 -g [1048576][10]f32 > data/traverse/11test-k17-d10.in
+
+
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1   -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k1-d10.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k17-d10.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][10]f32 --f32-bounds=0:1 -g [4194304][10]f32 > data/traverse/13test-k17-d10.in
 
 
 
