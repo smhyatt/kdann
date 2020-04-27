@@ -247,14 +247,14 @@ Tests				h+1 	data size 	data size 	ppl		k	dim
 8test-k11-d4-eq		9   	131072    	131072    	256		11	 4  
 8test-k11-d16-eq	9   	131072    	131072    	256		11	 16
 
-11test-k3-d4		11  	524288    	580000    	256		3	 4
-11test-k3-d8		11  	524288    	580000    	256		3	 8
-11test-k7-d4		11  	524288    	580000    	256		7	 4
-11test-k7-d8		11  	524288    	580000    	256		7	 8
-11test-k3-d4-eq		11  	524288    	524288    	256		3	 4
-11test-k3-d8-eq		11  	524288    	524288    	256		3	 8
-11test-k7-d4-eq		11  	524288    	524288    	256		7	 4
-11test-k7-d8-eq		11  	524288    	524288    	256		7	 8
+10test-k3-d4		11  	524288    	580000    	256		3	 4
+10test-k3-d8		11  	524288    	580000    	256		3	 8
+10test-k7-d4		11  	524288    	580000    	256		7	 4
+10test-k7-d8		11  	524288    	580000    	256		7	 8
+10test-k3-d4-eq		11  	524288    	524288    	256		3	 4
+10test-k3-d8-eq		11  	524288    	524288    	256		3	 8
+10test-k7-d4-eq		11  	524288    	524288    	256		7	 4
+10test-k7-d8-eq		11  	524288    	524288    	256		7	 8
 
 test				12  	1048576   	1048576   	256				
 test				13  	2097152   	2097152   	256				
@@ -269,14 +269,14 @@ test				12  	1048576   	1048576   	256
 12test-k11-d4-eq	13  	2097152   	2097152   	256		11	 4 
 12test-k11-d16-eq	13  	2097152   	2097152   	256		11	 16
 
-14test-k3-d4		14  	4194304   	3000000   	256		3	 4
-14test-k3-d8		14  	4194304   	3000000   	256		3	 8
-14test-k7-d4		14  	4194304   	3000000   	256		7	 4
-14test-k7-d8		14  	4194304   	3000000   	256		7	 8
-14test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
-14test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
-14test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
-14test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
+13test-k3-d4		14  	4194304   	3000000   	256		3	 4
+13test-k3-d8		14  	4194304   	3000000   	256		3	 8
+13test-k7-d4		14  	4194304   	3000000   	256		7	 4
+13test-k7-d8		14  	4194304   	3000000   	256		7	 8
+13test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
+13test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
+13test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
+13test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
 
 
 printf '\nDatasets with size: 131072 and 120000\n'
@@ -308,19 +308,43 @@ futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bou
 
 
 
+Results for main.fut:
+dataset data/sorting/8test-k3-d4.in:         68522.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16.in:      1306336.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d4.in:        91673.67μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d16.in:     1545662.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d4-eq.in:      61727.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k3-d16-eq.in:   2316947.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/8test-k11-d4-eq.in:     98146.00μs (avg. of 3 runs; RSD: 0.04)
+dataset data/sorting/8test-k11-d16-eq.in:  1816733.00μs (avg. of 3 runs; RSD: 0.01)
+dataset data/sorting/12test-k3-d4.in:      main.fut failed with error code 1 and output:
+./main: Index [2097920] out of bounds for array of shape [2097152].
+-> #0  main.fut:126:17-23
+   #1  main.fut:125:7-129:16
+   #2  main.fut:106:1-184:13
 
-printf '\nDatasets with size: 3000000 and 4194304\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k3-d4.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k3-d8.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k7-d4.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [3000000][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k7-d8.in
+dataset data/sorting/12test-k3-d16.in:     main.fut failed with error code 1 and output:
+./main: Index [2097952] out of bounds for array of shape [2097152].
+-> #0  main.fut:126:17-23
+   #1  main.fut:125:7-129:16
+   #2  main.fut:106:1-184:13
 
+dataset data/sorting/12test-k11-d4.in:     main.fut failed with error code 1 and output:
+./main: Index [2097920] out of bounds for array of shape [2097152].
+-> #0  main.fut:126:17-23
+   #1  main.fut:125:7-129:16
+   #2  main.fut:106:1-184:13
 
-printf '\nDatasets with size: 4194304 and 4194304\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k3-d4-eq.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k3-d8-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][4]f32 --f32-bounds=0:1 -g [4194304][4]f32 > data/brute/13test-k7-d4-eq.in
-futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][8]f32 --f32-bounds=0:1 -g [4194304][8]f32 > data/brute/13test-k7-d8-eq.in
+dataset data/sorting/12test-k11-d16.in:    main.fut failed with error code 1 and output:
+./main: Index [2097408] out of bounds for array of shape [2097152].
+-> #0  main.fut:126:17-23
+   #1  main.fut:125:7-129:16
+   #2  main.fut:106:1-184:13
+
+dataset data/sorting/12test-k3-d4-eq.in:    722109.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k3-d16-eq.in:  79057467.67μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d4-eq.in:  1133415.00μs (avg. of 3 runs; RSD: 0.00)
+dataset data/sorting/12test-k11-d16-eq.in: 127700359.00μs (avg. of 3 runs; RSD: 0.02)
 
 
 
@@ -334,7 +358,7 @@ futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bound
 dim: 1, 4, 6, 8, 16
 k: 1, 3, 5, 7, 17
 
-brug 1, 5, 16 og 1, 5, 17
+brug 1, 6, 16 og 1, 5, 17
 
 
 h+1 	data size 	data size 	ppl		k	dim
@@ -349,31 +373,132 @@ h+1 	data size 	data size 	ppl		k	dim
 
 
 
+
+Tests				h+1 	data size 	data size 	ppl		k	dim
+---------------------------------------------------------------------
+8test-k3-d4			9   	131072    	120000    	256		3	 4  
+8test-k3-d16		9   	131072    	120000    	256		3	 16  
+8test-k11-d4		9   	131072    	120000    	256		11	 4  
+8test-k11-d16		9   	131072    	120000    	256		11	 16  
+8test-k3-d4-eq		9   	131072    	131072    	256		3	 4  
+8test-k3-d16-eq		9   	131072    	131072    	256		3	 16  
+8test-k11-d4-eq		9   	131072    	131072    	256		11	 4  
+8test-k11-d16-eq	9   	131072    	131072    	256		11	 16
+
+10test-k3-d4		11  	524288    	580000    	256		3	 4
+10test-k3-d8		11  	524288    	580000    	256		3	 8
+10test-k7-d4		11  	524288    	580000    	256		7	 4
+10test-k7-d8		11  	524288    	580000    	256		7	 8
+10test-k3-d4-eq		11  	524288    	524288    	256		3	 4
+10test-k3-d8-eq		11  	524288    	524288    	256		3	 8
+10test-k7-d4-eq		11  	524288    	524288    	256		7	 4
+10test-k7-d8-eq		11  	524288    	524288    	256		7	 8
+
+11test-k1-d1		12  	1048576   	1048576   	256		1	 1
+11test-k1-d6		12  	1048576   	1048576   	256		1	 6
+11test-k1-d16		12  	1048576   	1048576   	256		1	 16
+11test-k5-d1		12  	1048576   	1048576   	256		5	 1
+11test-k5-d6		12  	1048576   	1048576   	256		5	 6
+11test-k5-d16		12  	1048576   	1048576   	256		5	 16
+11test-k17-d1		12  	1048576   	1048576   	256		17	 1
+11test-k17-d6		12  	1048576   	1048576   	256		17	 6
+11test-k17-d16		12  	1048576   	1048576   	256		17	 16
+
+12test-k3-d4		13  	2097152   	2230000   	256		3	 4 
+12test-k3-d16		13  	2097152   	2230000   	256		3	 16 
+12test-k11-d4		13  	2097152   	2230000   	256		11	 4 
+12test-k11-d16		13  	2097152   	2230000   	256		11	 16 
+12test-k3-d4-eq		13  	2097152   	2097152   	256		3	 4 
+12test-k3-d16-eq	13  	2097152   	2097152   	256		3	 16 
+12test-k11-d4-eq	13  	2097152   	2097152   	256		11	 4 
+12test-k11-d16-eq	13  	2097152   	2097152   	256		11	 16
+
+13test-k1-d1		14  	4194304   	4194304   	256		1	 1
+13test-k1-d6		14  	4194304   	4194304   	256		1	 6
+13test-k1-d16		14  	4194304   	4194304   	256		1	 16
+13test-k5-d1		14  	4194304   	4194304   	256		5	 1
+13test-k5-d6		14  	4194304   	4194304   	256		5	 6
+13test-k5-d16		14  	4194304   	4194304   	256		5	 16
+13test-k17-d1		14  	4194304   	4194304   	256		17	 1
+13test-k17-d6		14  	4194304   	4194304   	256		17	 6
+13test-k17-d16		14  	4194304   	4194304   	256		17	 16
+
+13test-k3-d4		14  	4194304   	3000000   	256		3	 4
+13test-k3-d8		14  	4194304   	3000000   	256		3	 8
+13test-k7-d4		14  	4194304   	3000000   	256		7	 4
+13test-k7-d8		14  	4194304   	3000000   	256		7	 8
+13test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
+13test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
+13test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
+13test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
+
+
+
+
+printf '\nDatasets with size: 1048576 and 1048576, k:1\n'
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32 > data/traverse/13test-k1-d1.in
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32 > data/traverse/13test-k1-d6.in
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/13test-k1-d16.in
+
+printf '\nDatasets with size: 1048576 and 1048576, k:5\n'
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32 > data/traverse/13test-k5-d1.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32 > data/traverse/13test-k5-d6.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/13test-k5-d16.in
+
+printf '\nDatasets with size: 1048576 and 1048576, k:17\n'
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][1]f32 --f32-bounds=0:1  -g [1048576][1]f32 > data/traverse/13test-k17-d1.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][6]f32 --f32-bounds=0:1  -g [1048576][6]f32 > data/traverse/13test-k17-d6.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [1048576][16]f32 --f32-bounds=0:1 -g [1048576][16]f32 > data/traverse/13test-k17-d16.in
+
+
+
+
+printf '\nDatasets with size: 4194304 and 4194304, k:1\n'
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32 > data/traverse/13test-k1-d1.in
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32 > data/traverse/13test-k1-d6.in
+futhark dataset -b --i32-bounds=1:1 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k1-d16.in
+
+printf '\nDatasets with size: 4194304 and 4194304, k:5\n'
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32 > data/traverse/13test-k5-d1.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32 > data/traverse/13test-k5-d6.in
+futhark dataset -b --i32-bounds=5:5 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k5-d16.in
+
+printf '\nDatasets with size: 4194304 and 4194304, k:17\n'
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][1]f32 --f32-bounds=0:1 -g [4194304][1]f32 > data/traverse/13test-k17-d1.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][6]f32 --f32-bounds=0:1 -g [4194304][6]f32 > data/traverse/13test-k17-d6.in
+futhark dataset -b --i32-bounds=17:17 -g i32 --i32-bounds=13:13 -g i32 --f32-bounds=0:1 -g [4194304][16]f32 --f32-bounds=0:1 -g [4194304][16]f32 > data/traverse/13test-k17-d16.in
+
+
+
+
+
+
+
 **Brute Force vs. Fully Optimise**
 
 Tests				h+1 	data size 	data size 	ppl		k	dim
 ---------------------------------------------------------------------
 test				9   	131072    	131072    	256			 
-11test-k3-d4		11  	524288    	580000    	256		3	 4
-11test-k3-d8		11  	524288    	580000    	256		3	 8
-11test-k7-d4		11  	524288    	580000    	256		7	 4
-11test-k7-d8		11  	524288    	580000    	256		7	 8
-11test-k3-d4-eq		11  	524288    	524288    	256		3	 4
-11test-k3-d8-eq		11  	524288    	524288    	256		3	 8
-11test-k7-d4-eq		11  	524288    	524288    	256		7	 4
-11test-k7-d8-eq		11  	524288    	524288    	256		7	 8
+10test-k3-d4		11  	524288    	580000    	256		3	 4
+10test-k3-d8		11  	524288    	580000    	256		3	 8
+10test-k7-d4		11  	524288    	580000    	256		7	 4
+10test-k7-d8		11  	524288    	580000    	256		7	 8
+10test-k3-d4-eq		11  	524288    	524288    	256		3	 4
+10test-k3-d8-eq		11  	524288    	524288    	256		3	 8
+10test-k7-d4-eq		11  	524288    	524288    	256		7	 4
+10test-k7-d8-eq		11  	524288    	524288    	256		7	 8
 test				12  	1048576   	1048576   	256				
 test				13  	2097152   	2097152   	256				
 test				12  	1048576   	1048576   	256				
 test				13  	2097152   	2097152   	256				
-14test-k3-d4		14  	4194304   	3000000   	256		3	 4
-14test-k3-d8		14  	4194304   	3000000   	256		3	 8
-14test-k7-d4		14  	4194304   	3000000   	256		7	 4
-14test-k7-d8		14  	4194304   	3000000   	256		7	 8
-14test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
-14test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
-14test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
-14test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
+13test-k3-d4		14  	4194304   	3000000   	256		3	 4
+13test-k3-d8		14  	4194304   	3000000   	256		3	 8
+13test-k7-d4		14  	4194304   	3000000   	256		7	 4
+13test-k7-d8		14  	4194304   	3000000   	256		7	 8
+13test-k3-d4-eq		14  	4194304   	4194304   	256		3	 4
+13test-k3-d8-eq		14  	4194304   	4194304   	256		3	 8
+13test-k7-d4-eq		14  	4194304   	4194304   	256		7	 4
+13test-k7-d8-eq		14  	4194304   	4194304   	256		7	 8
 
 
 k h imA imB
