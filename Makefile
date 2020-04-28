@@ -7,6 +7,7 @@ EXE3 = main
 ENTRY = main
 SRC4 = partition.fut
 EXE4 = partition
+SRC6 = brute.fut
 
 
 virtual: 
@@ -54,6 +55,11 @@ benchtrav:
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC5)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
+
+
+benchbrute:
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
+	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC6)
 
 
 # Creating a Python module of the futhark brute-force implementation with pyopencl. 
