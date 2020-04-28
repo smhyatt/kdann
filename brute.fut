@@ -2,6 +2,25 @@
 -- ==
 -- entry: main
 --
+-- compiled input @ data/brute/10test-k3-d4.in
+-- compiled input @ data/brute/10test-k3-d8.in
+-- compiled input @ data/brute/10test-k7-d4.in
+-- compiled input @ data/brute/10test-k7-d8.in
+-- compiled input @ data/brute/10test-k3-d4-eq.in
+-- compiled input @ data/brute/10test-k3-d8-eq.in
+-- compiled input @ data/brute/10test-k7-d4-eq.in
+-- compiled input @ data/brute/10test-k7-d8-eq.in
+-- compiled input @ data/brute/13test-k3-d4.in
+-- compiled input @ data/brute/13test-k3-d8.in
+-- compiled input @ data/brute/13test-k7-d4.in
+-- compiled input @ data/brute/13test-k7-d8.in
+-- compiled input @ data/brute/13test-k3-d4-eq.in
+-- compiled input @ data/brute/13test-k3-d8-eq.in
+-- compiled input @ data/brute/13test-k7-d4-eq.in
+-- compiled input @ data/brute/13test-k7-d8-eq.in
+
+
+
 -- compiled input @ data/testinput.in
 --
 

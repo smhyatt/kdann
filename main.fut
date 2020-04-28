@@ -8,24 +8,24 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
--- compiled input @ data/traverse/11test-k1-d1.in
--- compiled input @ data/traverse/11test-k1-d6.in
--- compiled input @ data/traverse/11test-k1-d10.in
--- compiled input @ data/traverse/11test-k5-d1.in
--- compiled input @ data/traverse/11test-k5-d6.in
--- compiled input @ data/traverse/11test-k5-d10.in
--- compiled input @ data/traverse/11test-k17-d1.in
--- compiled input @ data/traverse/11test-k17-d6.in
--- compiled input @ data/traverse/11test-k17-d10.in
--- compiled input @ data/traverse/13test-k1-d1.in
--- compiled input @ data/traverse/13test-k1-d6.in
--- compiled input @ data/traverse/13test-k1-d10.in
--- compiled input @ data/traverse/13test-k5-d1.in
--- compiled input @ data/traverse/13test-k5-d6.in
--- compiled input @ data/traverse/13test-k5-d10.in
--- compiled input @ data/traverse/13test-k17-d1.in
--- compiled input @ data/traverse/13test-k17-d6.in
--- compiled input @ data/traverse/13test-k17-d10.in
+-- compiled input @ data/brute/10test-k3-d4.in
+-- compiled input @ data/brute/10test-k3-d8.in
+-- compiled input @ data/brute/10test-k7-d4.in
+-- compiled input @ data/brute/10test-k7-d8.in
+-- compiled input @ data/brute/10test-k3-d4-eq.in
+-- compiled input @ data/brute/10test-k3-d8-eq.in
+-- compiled input @ data/brute/10test-k7-d4-eq.in
+-- compiled input @ data/brute/10test-k7-d8-eq.in
+-- compiled input @ data/brute/13test-k3-d4.in
+-- compiled input @ data/brute/13test-k3-d8.in
+-- compiled input @ data/brute/13test-k7-d4.in
+-- compiled input @ data/brute/13test-k7-d8.in
+-- compiled input @ data/brute/13test-k3-d4-eq.in
+-- compiled input @ data/brute/13test-k3-d8-eq.in
+-- compiled input @ data/brute/13test-k7-d4-eq.in
+-- compiled input @ data/brute/13test-k7-d8-eq.in
+
+
 
 
 -- Partition vs. sorting
@@ -48,7 +48,7 @@ import "traverse-tree"
 
 
 
--- Traversal
+-- Old Traversal
 -- compiled input @ data/traverse/11test-k1-d1.in
 -- compiled input @ data/traverse/11test-k1-d6.in
 -- compiled input @ data/traverse/11test-k1-d16.in
@@ -68,6 +68,26 @@ import "traverse-tree"
 -- compiled input @ data/traverse/13test-k17-d6.in
 -- compiled input @ data/traverse/13test-k17-d16.in
 
+
+-- New Traversal
+-- compiled input @ data/traverse/11test-k1-d1.in
+-- compiled input @ data/traverse/11test-k1-d6.in
+-- compiled input @ data/traverse/11test-k1-d10.in
+-- compiled input @ data/traverse/11test-k5-d1.in
+-- compiled input @ data/traverse/11test-k5-d6.in
+-- compiled input @ data/traverse/11test-k5-d10.in
+-- compiled input @ data/traverse/11test-k17-d1.in
+-- compiled input @ data/traverse/11test-k17-d6.in
+-- compiled input @ data/traverse/11test-k17-d10.in
+-- compiled input @ data/traverse/13test-k1-d1.in
+-- compiled input @ data/traverse/13test-k1-d6.in
+-- compiled input @ data/traverse/13test-k1-d10.in
+-- compiled input @ data/traverse/13test-k5-d1.in
+-- compiled input @ data/traverse/13test-k5-d6.in
+-- compiled input @ data/traverse/13test-k5-d10.in
+-- compiled input @ data/traverse/13test-k17-d1.in
+-- compiled input @ data/traverse/13test-k17-d6.in
+-- compiled input @ data/traverse/13test-k17-d10.in
 
 
 
