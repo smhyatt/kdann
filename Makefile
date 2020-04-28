@@ -36,10 +36,13 @@ compile-fut:
 
 # Run the futhark brute-force implementation.
 runfut: compile-fut
-	./$(EXE3) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-all-k5-d16
-	./$(EXE5) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-one-k5-d16
-	./$(EXE3) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-all-k5-d1
-	./$(EXE5) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-one-k5-d1
+	./$(EXE3) -e main < data/sorting/8test-k3-d8.in > data/traverse/visit-all-k3-d8
+	./$(EXE5) -e main < data/sorting/8test-k3-d8.in > data/traverse/visit-one-k3-d8
+
+# 	./$(EXE3) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-all-k5-d16
+# 	./$(EXE5) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-one-k5-d16
+# 	./$(EXE3) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-all-k5-d1
+# 	./$(EXE5) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-one-k5-d1
 
 
 # ./brute -e main < data/testinput.in  > data/validation.out

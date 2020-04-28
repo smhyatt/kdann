@@ -8,6 +8,9 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/sorting/8test-k3-d8.in
+
+
 -- compiled input @ data/traverse/11test-k5-d16.in
 -- compiled input @ data/traverse/11test-k5-d10.in
 -- compiled input @ data/traverse/11test-k5-d1.in
@@ -247,7 +250,7 @@ entry main [a][b][d] (k: i32) (h: i32) (imA : [b][d]f32) (imB : [a][d]f32) =
   let ongoing_knn   = replicate a (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
   let stacks  = replicate a 0i32
-  let STEP = 1
+  let STEP = 64
   let visited = replicate (num_leaves/STEP) (-1)
   -- let visited = replicate (num_leaves+1) (-1)
 
