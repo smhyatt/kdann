@@ -59,6 +59,7 @@ benchtrav:
 
 
 benchbrute:
+	./makedata.sh
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC6)
 

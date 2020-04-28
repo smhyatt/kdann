@@ -447,6 +447,26 @@ dataset data/sorting/12test-k11-d4-eq.in:    1819314.00μs (avg. of 1 runs; RSD:
 dataset data/sorting/12test-k11-d16-eq.in:1487264456.00μs (avg. of 1 runs; RSD: 0.00)
 
 
+## break even try
+
+Results for main.fut:
+dataset data/sorting/8test-k3-d10.in:  628864.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d9.in:   560468.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d8.in:   381321.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d7.in:   258004.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d6.in:   148256.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d5.in:    94219.00μs (avg. of 1 runs; RSD: 0.00)
+futhark bench --backend=opencl -e main -r 1 partition.fut
+Compiling partition.fut...
+Results for partition.fut:
+dataset data/sorting/8test-k3-d10.in:  427825.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d9.in:   322582.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d8.in:   233464.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d7.in:   146267.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d6.in:   102766.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/sorting/8test-k3-d5.in:    63343.00μs (avg. of 1 runs; RSD: 0.00)
+
+
 
 
 

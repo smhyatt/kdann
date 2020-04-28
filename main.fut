@@ -8,6 +8,30 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/brute/2brute2.in
+-- compiled input @ data/brute/4brute2.in
+-- compiled input @ data/brute/6brute2.in
+-- compiled input @ data/brute/8brute2.in
+-- compiled input @ data/brute/10brute2.in
+-- compiled input @ data/brute/12brute2.in
+-- compiled input @ data/brute/14brute2.in
+-- compiled input @ data/brute/2brute6.in
+-- compiled input @ data/brute/4brute6.in
+-- compiled input @ data/brute/6brute6.in
+-- compiled input @ data/brute/8brute6.in
+-- compiled input @ data/brute/10brute6.in
+-- compiled input @ data/brute/12brute6.in
+-- compiled input @ data/brute/14brute6.in
+-- compiled input @ data/brute/2brute12.in
+-- compiled input @ data/brute/4brute12.in
+-- compiled input @ data/brute/6brute12.in
+-- compiled input @ data/brute/8brute12.in
+-- compiled input @ data/brute/10brute12.in
+-- compiled input @ data/brute/12brute12.in
+-- compiled input @ data/brute/14brute12.in
+
+
+
 -- compiled input @ data/sorting/8test-k3-d11.in
 -- compiled input @ data/sorting/8test-k3-d12.in
 -- compiled input @ data/sorting/8test-k3-d13.in

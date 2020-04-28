@@ -176,11 +176,14 @@ print(k3sor.Sorting)
 #################################################################################
 
 
-m = [628.86, 560.46, 381.32, 258.0, 148.25, 94.21]
-p = [427.82, 322.58, 233.46, 146.26, 102.76, 63.34]
+# m = [628.86, 560.46, 381.32, 258.0, 148.25, 94.21]
+# p = [427.82, 322.58, 233.46, 146.26, 102.76, 63.34]
+
+m = [702.89, 781.39, 895.22, 1018.01, 1146.41]
+p = [564.15, 718.27, 917.62, 1223.02, 1686.59]
 
 labels = [
-'D=10', 'D=9', 'D=8', 'D=7', 'D=6', 'D=5'
+'D=11', 'D=12', 'D=13', 'D=14', 'D=15'
 ]
 
 # labels = [
@@ -201,7 +204,7 @@ rects2 = ax.bar(x + width/2, p, width, label='Partition', color='#6baee6')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Performance in milliseconds.')
-ax.set_title('Sorting Queries w.r.t Leaves Versus Partition On a Small Dataset \n for K=3 and Testing Dimensions 10, 9, 8, 7, 6 and 5')
+ax.set_title('Sorting Queries w.r.t Leaves Versus Partition On a Small Dataset \n for K=3 and Testing Dimensions 11, 12, 13, 14 and 15')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
