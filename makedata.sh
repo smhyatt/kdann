@@ -109,13 +109,12 @@
 
 
 # Trying to find break even 
-printf '\nDatasets with size: 131072 and 120000 and d: 10,9,8,7,6,5\n'
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][10]f32 --f32-bounds=0:1 -g [120000][10]f32 > data/sorting/8test-k3-d10.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][9]f32 --f32-bounds=0:1 -g [120000][9]f32   > data/sorting/8test-k3-d9.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][8]f32 --f32-bounds=0:1 -g [120000][8]f32   > data/sorting/8test-k3-d8.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][7]f32 --f32-bounds=0:1 -g [120000][7]f32   > data/sorting/8test-k3-d7.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][6]f32 --f32-bounds=0:1 -g [120000][6]f32   > data/sorting/8test-k3-d6.in
-futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][5]f32 --f32-bounds=0:1 -g [120000][5]f32   > data/sorting/8test-k3-d5.in
+printf '\nDatasets with size: 131072 and 120000 and d: 11, 12, 13, 14, 15\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][11]f32 --f32-bounds=0:1 -g [120000][11]f32   > data/sorting/8test-k3-d11.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][12]f32 --f32-bounds=0:1 -g [120000][12]f32   > data/sorting/8test-k3-d12.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][13]f32 --f32-bounds=0:1 -g [120000][13]f32   > data/sorting/8test-k3-d13.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][14]f32 --f32-bounds=0:1 -g [120000][14]f32   > data/sorting/8test-k3-d14.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][15]f32 --f32-bounds=0:1 -g [120000][15]f32   > data/sorting/8test-k3-d15.in
 
 
 # printf '\nDatasets with size: 131072 and 131072\n'

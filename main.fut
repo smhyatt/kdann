@@ -8,6 +8,14 @@ import "traverse-tree"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/sorting/8test-k3-d11.in
+-- compiled input @ data/sorting/8test-k3-d12.in
+-- compiled input @ data/sorting/8test-k3-d13.in
+-- compiled input @ data/sorting/8test-k3-d14.in
+-- compiled input @ data/sorting/8test-k3-d15.in
+
+
+-- break even partition test
 -- compiled input @ data/sorting/8test-k3-d10.in
 -- compiled input @ data/sorting/8test-k3-d9.in
 -- compiled input @ data/sorting/8test-k3-d8.in

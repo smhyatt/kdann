@@ -680,6 +680,43 @@ futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bound
 
 
 
+Results for main.fut:
+dataset data/brute/10test-k3-d4.in:     259023.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k3-d8.in:    1066992.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d4.in:     292585.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d8.in:    1439083.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k3-d4-eq.in:  267292.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k3-d8-eq.in: 1028800.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d4-eq.in:  289733.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d8-eq.in: 1431061.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d4.in:    1159426.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d8.in:    4355539.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d4.in:    1303970.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d8.in:    5966072.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d4-eq.in: 1394971.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d8-eq.in: 5002590.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d4-eq.in: 1565688.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d8-eq.in: 6852613.00μs (avg. of 1 runs; RSD: 0.00)
+
+
+Results for brute.fut:
+dataset data/brute/10test-k3-d4.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/10test-k3-d8.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/10test-k7-d4.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/10test-k7-d8.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/10test-k3-d4-eq.in: 3443664.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k3-d8-eq.in: 5161552.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d4-eq.in: 5953962.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/10test-k7-d8-eq.in: 7936524.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d4.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/13test-k3-d8.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/13test-k7-d4.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/13test-k7-d8.in:    brute.fut failed with error code 1 and output:
+dataset data/brute/13test-k3-d4-eq.in: 225546032.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k3-d8-eq.in: 339422429.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d4-eq.in: 388576651.00μs (avg. of 1 runs; RSD: 0.00)
+dataset data/brute/13test-k7-d8-eq.in: 528240234.00μs (avg. of 1 runs; RSD: 0.00)
+
 
 
 
