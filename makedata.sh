@@ -107,3 +107,47 @@ futhark dataset -b --i32-bounds=7:7 -g i32 --i32-bounds=13:13 -g i32 --f32-bound
 # futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=12:12 -g i32 --f32-bounds=0:1 -g [2097152][16]f32 --f32-bounds=0:1 -g [2097152][16]f32 > data/sorting/12test-k11-d16-eq.in
 
 
+
+# Trying to find break even 
+printf '\nDatasets with size: 131072 and 120000 and d: 10,9,8,7,6,5\n'
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][10]f32 --f32-bounds=0:1 -g [120000][10]f32 > data/sorting/8test-k3-d10.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][9]f32 --f32-bounds=0:1 -g [120000][9]f32   > data/sorting/8test-k3-d9.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][8]f32 --f32-bounds=0:1 -g [120000][8]f32   > data/sorting/8test-k3-d8.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][7]f32 --f32-bounds=0:1 -g [120000][7]f32   > data/sorting/8test-k3-d7.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][6]f32 --f32-bounds=0:1 -g [120000][6]f32   > data/sorting/8test-k3-d6.in
+futhark dataset -b --i32-bounds=3:3 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1   -g [131072][5]f32 --f32-bounds=0:1 -g [120000][5]f32   > data/sorting/8test-k3-d5.in
+
+
+# printf '\nDatasets with size: 131072 and 131072\n'
+# futhark dataset -b --i32-bounds=3:3   -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][16]f32 --f32-bounds=0:1 -g [131072][16]f32 > data/sorting/8test-k3-d16-eq.in
+# futhark dataset -b --i32-bounds=11:11 -g i32 --i32-bounds=8:8 -g i32 --f32-bounds=0:1 -g [131072][16]f32 --f32-bounds=0:1 -g [131072][16]f32 > data/sorting/8test-k11-d16-eq.in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

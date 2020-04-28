@@ -156,9 +156,9 @@ data = [[
 
 
 
-# plt.bar([1], [940, 1000], 1, label="", color='#12446d')
-# plt.bar([2.5], [940, 1200], 1, label="CUDA", color = '#1e6dae')
-# plt.bar([4], [3178, 3000], 1, label="C", color='#6baee6')
+# plt.bar([1], [940, 1000], 1, label="",       color='#12446d')
+# plt.bar([2.5], [940, 1200], 1, label="CUDA", color='#1e6dae')
+# plt.bar([4], [3178, 3000], 1, label="C",     color='#6baee6')
 # plt.yscale('log')
 # plt.legend()
 # plt.xticks([])
@@ -168,20 +168,296 @@ data = [[
 # plt.show()
 
 
-# data = [[30, 25, 50, 20],
-# [40, 23, 51, 17],
-# [35, 22, 45, 19]]
-X = np.arange(18)
-# X = ['C', 'C++', 'Java', 'Python', 'PHP']
-fig = plt.figure()
-ax = fig.add_axes([0,0,1,1])
-ax.bar(X + 0.00, data[0], color='#12446d', width = 0.25)
-ax.bar(X + 0.25, data[1], color = '#1e6dae', width = 0.25)
+
+
+df1 = pd.read_csv('trav-d-1.csv')
+df1.columns = ['All','One', 'K', 'D']
+df6 = pd.read_csv('trav-d-6.csv')
+df6.columns = ['All','One', 'K', 'D']
+df16 = pd.read_csv('trav-d-16.csv')
+df16.columns = ['All','One', 'K', 'D']
+
+k5 = pd.read_csv('trav-k-5.csv')
+k5.columns = ['All','One', 'K', 'D']
+
+
+# labels = ['G1', 'G2', 'G3', 'G4', 'G5', 'G6']
+# # labels = ['G1', 'G2', 'G3', 'G4', 'G5']
+# # men_means = [20, 34, 30, 35, 27]
+# # women_means = [25, 32, 34, 20, 25]
+
+# x = np.arange(len(labels))  # the label locations
+# width = 0.35  # the width of the bars
+
+# fig, ax = plt.subplots()
+# rects1 = ax.bar(x - width/2, k5.All, width, label='All')
+# rects2 = ax.bar(x + width/2, k5.One, width, label='One')
+# # rects1 = ax.bar(x - width/2, df16.All, width, label='All')
+# # rects2 = ax.bar(x + width/2, df16.One, width, label='One')
+# # rects3 = ax.bar(x - width/2, df6.One, width, label='One')
+# # rects4 = ax.bar(x + width/2, df6.One, width, label='One')
+# # rects2 = ax.bar(x + width/2, df16, width, label='Women')
+
+# # Add some text for labels, title and custom x-axis tick labels, etc.
+# ax.set_ylabel('Performance in microseconds.')
+# ax.set_title('Traversal Checking All Dimensions Versus Checking One Dimension')
+# ax.set_xticks(x)
+# ax.set_xticklabels(labels)
+# ax.legend()
+
+
+# def autolabel(rects):
+#     """Attach a text label above each bar in *rects*, displaying its height."""
+#     for rect in rects:
+#         height = rect.get_height()
+#         ax.annotate('{}'.format(height),
+#                     xy=(rect.get_x() + rect.get_width() / 2, height),
+#                     xytext=(0, 3),  # 3 points vertical offset
+#                     textcoords="offset points",
+#                     ha='center', va='bottom')
+
+
+# autolabel(rects1)
+# autolabel(rects2)
+# # autolabel(rects3)
+# # autolabel(rects4)
+
+# fig.tight_layout()
+
+# # plt.show()
+
+
+
+
+def truncate(n):
+	return int(n * 100) / 100
+
+
+
+
+#################################################################################
+#			Dataset testing traversal for k=5 and dims 1, 6 and 16
+#################################################################################
+
+
+
+# k5 = pd.read_csv('trav-k-5.csv')
+# k5.columns = ['All','One', 'K', 'D']
+
+# labels = ['D=1\nDataset: 1048576', 'D=6\nDataset: 1048576', 'D=16\nDataset: 1048576', 'D=1\nDataset: 4194304', 'D=6\nDataset: 4194304', 'D=16\nDataset: 4194304']
+
+# x = np.arange(len(labels))  # the label locations
+# width = 0.4  # the width of the bars
+
+# allk5 = [truncate(i*0.001) for i in k5.All]
+# onek5 = [truncate(i*0.001) for i in k5.One]
+
+# fig, ax = plt.subplots()
+# rects1 = ax.bar(x - width/2, allk5, width, label='Traversal Checking Median of All Dimensions.', color='#1e6dae')
+# rects2 = ax.bar(x + width/2, onek5, width, label='Traversal Checking Median of One Dimension.', color='#6baee6')
+
+# # Add some text for labels, title and custom x-axis tick labels, etc.
+# ax.set_ylabel('Performance in milliseconds.')
+# ax.set_title('Traversal Checking All Dimensions Versus Checking\nOne Dimension, for K=5 and Dimensions 1, 6 and 16')
+# # ax.set_yticks(k5.All)
+# ax.set_xticks(x)
+# ax.set_xticklabels(labels)
+# ax.legend()
+
+
+# def autolabel(rects):
+#     """Attach a text label above each bar in *rects*, displaying its height."""
+#     for rect in rects:
+#         height = rect.get_height()
+#         ax.annotate('{}'.format(height),
+#                     xy=(rect.get_x() + rect.get_width() / 2, height),
+#                     xytext=(0, 3),  # 3 points vertical offset
+#                     textcoords="offset points",
+#                     ha='center', va='bottom')
+
+
+# autolabel(rects1)
+# autolabel(rects2)
+
+
+# fig.tight_layout()
+
+# plt.show()
+
+
+#################################################################################
+
+
+
+#################################################################################
+#			Dataset testing traversal for k=5 and dims 1, 6 and 16
+#################################################################################
+
+
+
+# k17 = pd.read_csv('trav-k-17.csv')
+# k17.columns = ['All','One', 'K', 'D']
+
+# k1 = pd.read_csv('trav-k-1.csv')
+# k1.columns = ['All','One', 'K', 'D']
+
+# labels = ['D=1\nDataset: 1048576', 'D=6\nDataset: 1048576', 'D=16\nDataset: 1048576', 'D=1\nDataset: 4194304', 'D=6\nDataset: 4194304', 'D=16\nDataset: 4194304']
+
+# x = np.arange(len(labels))  # the label locations
+# width = 0.4  # the width of the bars
+
+
+# allk5 = [truncate(i*0.001) for i in k5.All]
+# onek5 = [truncate(i*0.001) for i in k5.One]
+# allk17 = [truncate(i*0.001) for i in k17.All]
+# onek17 = [truncate(i*0.001) for i in k17.One]
+
+# fig, ax = plt.subplots()
+# rects1 = ax.bar(x - width/2, allk17, width, label='Traversal Checking Median of All Dimensions.', color='#1e6dae')
+# rects2 = ax.bar(x + width/2, onek17, width, label='Traversal Checking Median of One Dimension.',  color='#12446d')
+# rects3 = ax.bar(x - width/2, allk5, width, label='All', color='#6baee6')
+# rects4 = ax.bar(x + width/2, onek5, width, label='One', color='#6baee6')
+
+
+# # Add some text for labels, title and custom x-axis tick labels, etc.
+# ax.set_ylabel('Performance in milliseconds.')
+# ax.set_title('Traversal Checking All Dimensions Versus Checking\nOne Dimension, for K=17, K=5 and Dimensions 1, 6 and 16')
+# # ax.set_yticks(k5.All)
+# ax.set_xticks(x)
+# ax.set_xticklabels(labels)
+# ax.legend()
+
+
+
+# def autolabel(rects):
+#     """Attach a text label above each bar in *rects*, displaying its height."""
+#     for rect in rects:
+#         height = rect.get_height()
+#         ax.annotate('{}'.format(height),
+#                     xy=(rect.get_x() + rect.get_width() / 2, height),
+#                     xytext=(0, 3),  # 3 points vertical offset
+#                     textcoords="offset points",
+#                     ha='center', va='bottom')
+
+
+# autolabel(rects1)
+# autolabel(rects2)
+# autolabel(rects3)
+# autolabel(rects4)
+
+
+# fig.tight_layout()
+
+# plt.show()
+
+
+#################################################################################
+
+
+
+#################################################################################
+#			Dataset testing traversal for k=5 and dims 1, 6 and 16
+#################################################################################
+
+
+
+d16 = pd.read_csv('trav-d-16.csv')
+d16.columns = ['All','One', 'K', 'D']
+
+labels = ['K=1\nDataset: 1048576', 'K=5\nDataset: 1048576', 'K=17\nDataset: 1048576', 'K=1\nDataset: 4194304', 'K=5\nDataset: 4194304', 'K=17\nDataset: 4194304']
+
+x = np.arange(len(labels))  # the label locations
+width = 0.4  # the width of the bars
+
+alld16 = [truncate(i*0.001) for i in d16.All]
+oned16 = [truncate(i*0.001) for i in d16.One]
+
+fig, ax = plt.subplots()
+rects1 = ax.bar(x - width/2, alld16, width, label='Traversal Checking Median of All Dimensions.', color='#1e6dae')
+rects2 = ax.bar(x + width/2, oned16, width, label='Traversal Checking Median of One Dimension.', color='#6baee6')
+
+# Add some text for labels, title and custom x-axis tick labels, etc.
+ax.set_ylabel('Performance in milliseconds.')
+ax.set_title('Traversal Checking All Dimensions Versus Checking\nOne Dimension, for D=16 and K 1, 5 and 17')
+# ax.set_yticks(k5.All)
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
+
+
+def autolabel(rects):
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+
+
+autolabel(rects1)
+autolabel(rects2)
+
+
+fig.tight_layout()
+
+plt.show()
+
+
+#################################################################################
+
+
+
+
+
+# # data = [[30, 25, 50, 20],
+# # [40, 23, 51, 17],
+# # [35, 22, 45, 19]]
+# X = np.arange(18)
+# plt.figure(figsize=(10,5))
+# # X = ['C', 'C++', 'Java', 'Python', 'PHP']
+# fig = plt.figure()
+# ax = fig.add_axes([0,0,1,1])
+# ax.bar(X + 0.00, data[0], color='#12446d', width = 0.25)
+# ax.bar(X + 0.25, data[1], color = '#1e6dae', width = 0.25)
+# ax.plot(X, data[0])
+
+
+# ax.set_ylabel('Performance in microseconds.')
+# ax.set_title('Traversal Checking All Dimensions Versus Checking One Dimension')
+# # ax.set_xticks(x)
+# # ax.set_xticklabels(labels)
+# ax.legend()
+
+# # plt.title('Traversal Checking All Dimensions Versus Checking One Dimension') 
+# # plt.xlabel('Various Ks and Dimensions.')
+# # plt.ylabel('Performance in microseconds.') 
+
+# # fig.tight_layout()
+# plt.show()
+
 # ax.bar(X + 0.50, data[2], color='#6baee6', width = 0.25)
+
+
+
+
+
+
 
 
 for i in range(18):
 	print(oned[i]-alld[i])
+
+
+
+
+
+
+
+
+
+
 
 
 # sns.distplot(alld, kde=False);
@@ -199,32 +475,32 @@ for i in range(18):
 
 
 
-X2 = np.arange(0, 18, 1)
+# X2 = np.arange(0, 18, 1)
 
-diff = pd.read_csv('diffs.csv')
-diff.columns = ['Diff','K', 'D']
+# diff = pd.read_csv('diffs.csv')
+# diff.columns = ['Diff','K', 'D']
 
-plt.figure(figsize=(10,5))
-plt.title('Time differences in running Prime-Numbers Computation sequentially \n and parallel with both a flat and not-flat implementation.') 
-# plt.xscale('log')
+# plt.figure(figsize=(10,5))
+# plt.title('Traversal Checking All Dimensions Versus Checking One Dimension') 
+# # plt.xscale('log')
+# # plt.yscale('log')
+# plt.xlabel('Various Ks and Dimensions')
+# plt.ylabel('Performance in microseconds.') 
+
+# # plt.xticks()
+# # plt.yticks()
 # plt.yscale('log')
-plt.xlabel('Ten test runs.')
-plt.ylabel('The runtime.') 
 
-# plt.xticks()
-# plt.yticks()
-plt.yscale('log')
+# # plt.plot(X2, naivc, linestyle='-', label = "primes-naive w/ C")
+# # plt.plot(X2, diff.Diff, linestyle='-.', label = "primes-naive w/ OpenCL")
 
-# plt.plot(X2, naivc, linestyle='-', label = "primes-naive w/ C")
-plt.plot(X2, diff.Diff, linestyle='-.', label = "primes-naive w/ OpenCL")
+# # plt.plot(X2, flatc, linestyle='-', label = "primes-flat w/ C")
+# # plt.plot(X2, alld, linestyle='-.', label = "primes-flat w/ OpenCL")
 
-# plt.plot(X2, flatc, linestyle='-', label = "primes-flat w/ C")
-# plt.plot(X2, alld, linestyle='-.', label = "primes-flat w/ OpenCL")
+# # plt.plot(X2, seqc, linestyle='-', label = "primes-seq w/ C")
 
-# plt.plot(X2, seqc, linestyle='-', label = "primes-seq w/ C")
-
-plt.legend()
-plt.show()
+# plt.legend()
+# plt.show()
 
 
 
@@ -325,7 +601,7 @@ plt.show()
 # create plot
 # sns.countplot(x = 'class', hue = 'who', data = titanic, palette = 'magma')
 # plt.title('Survivors')
-plt.show()
+# plt.show()
 
 
 
