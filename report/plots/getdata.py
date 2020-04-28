@@ -253,8 +253,8 @@ p = [
 m = [truncate(i*0.001) for i in m]
 p = [truncate(i*0.001) for i in p]
 
-print(m)
-print(p)
+# print(m)
+# print(p)
 
 # [628.86, 560.46, 381.32, 258.0, 148.25, 94.21]
 # [427.82, 322.58, 233.46, 146.26, 102.76, 63.34]
@@ -280,9 +280,158 @@ print(p)
 
 
 
+kd = [
+313654.00,
+397663.00,
+647345.00,
+1506710.00,
+4301244.00,
+9499064.00,
+17277283.00,
+323269.00,
+434993.00,
+746427.00,
+2136644.00,
+6216083.00,
+13364451.00,
+24479515.00,
+468335.00,
+697512.00,
+1248377.00,
+3025365.00,
+7882991.00,
+15542903.00,
+29663429.00
+]
+
+
+b = [
+10865980.00,
+13290172.00,
+17786287.00,
+19846781.00,
+24632685.00,
+26696886.00,
+33222130.00,
+21172624.00,
+23476282.00,
+28483454.00,
+30800635.00,
+37329361.00,
+41230081.00,
+51948623.00,
+36862009.00,
+40858725.00,
+49988509.00,
+53249722.00,
+65170236.00,
+74242407.00,
+97294327.00
+]
 
 
 
+kd = [truncate(i*0.001) for i in kd]
+b = [truncate(i*0.001) for i in b]
+
+print(kd)
+print(b)
+
+
+
+# [313.65, 397.66, 647.34, 1506.71, 4301.24, 9499.06, 17277.28, 323.26, 434.99, 746.42, 2136.64, 6216.08, 13364.45, 24479.51, 468.33, 697.51, 1248.37, 3025.36, 7882.99, 15542.9, 29663.42]
+# [10865.98, 13290.17, 17786.28, 19846.78, 24632.68, 26696.88, 33222.12, 21172.62, 23476.28, 28483.45, 30800.63, 37329.36, 41230.08, 51948.62, 36862.0, 40858.72, 49988.5, 53249.72, 65170.23, 74242.4, 97294.32]
+
+# 313.65, 
+# 397.66, 
+# 647.34, 
+# 1506.71, 
+# 4301.24, 
+# 9499.06, 
+# 17277.28, 
+# 323.26, 
+# 434.99, 
+# 746.42, 
+# 2136.64, 
+# 6216.08, 
+# 13364.45, 
+# 24479.51, 
+# 468.33, 
+# 697.51, 
+# 1248.37, 
+# 3025.36, 
+# 7882.99, 
+# 15542.9, 
+# 29663.42
+
+# 10865.98, 
+# 13290.17, 
+# 17786.28, 
+# 19846.78, 
+# 24632.68, 
+# 26696.88, 
+# 33222.12, 
+# 21172.62, 
+# 23476.28, 
+# 28483.45, 
+# 30800.63, 
+# 37329.36, 
+# 41230.08, 
+# 51948.62, 
+# 36862.0, 
+# 40858.72, 
+# 49988.5, 
+# 53249.72, 
+# 65170.23, 
+# 74242.4, 
+# 97294.32
+
+# Results for main.fut:
+# dataset data/brute/2brute2.in:     313654.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute2.in:     397663.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute2.in:     647345.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute2.in:    1506710.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute2.in:   4301244.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute2.in:   9499064.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute2.in:  17277283.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/2brute6.in:     323269.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute6.in:     434993.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute6.in:     746427.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute6.in:    2136644.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute6.in:   6216083.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute6.in:  13364451.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute6.in:  24479515.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/2brute12.in:    468335.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute12.in:    697512.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute12.in:   1248377.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute12.in:   3025365.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute12.in:  7882991.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute12.in: 15542903.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute12.in: 29663429.00μs (avg. of 1 runs; RSD: 0.00)
+# futhark bench --backend=opencl -e main -r 1 brute.fut
+# Compiling brute.fut...
+# Results for brute.fut:
+# dataset data/brute/2brute2.in:   10865980.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute2.in:   13290172.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute2.in:   17786287.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute2.in:   19846781.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute2.in:  24632685.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute2.in:  26696886.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute2.in:  33222130.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/2brute6.in:   21172624.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute6.in:   23476282.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute6.in:   28483454.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute6.in:   30800635.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute6.in:  37329361.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute6.in:  41230081.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute6.in:  51948623.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/2brute12.in:  36862009.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/4brute12.in:  40858725.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/6brute12.in:  49988509.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/8brute12.in:  53249722.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/10brute12.in: 65170236.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/12brute12.in: 74242407.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/brute/14brute12.in: 97294327.00μs (avg. of 1 runs; RSD: 0.00)
 
 
 

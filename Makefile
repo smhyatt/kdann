@@ -4,6 +4,7 @@ SRC2 = utils.py
 SRC3 = main.fut
 SRC5 = main2.fut
 EXE3 = main
+EXE5 = main2
 ENTRY = main
 SRC4 = partition.fut
 EXE4 = partition
@@ -30,11 +31,18 @@ runpy:
 # Compile futhark brute-force implementation with opencl.
 compile-fut:
 	futhark opencl $(SRC3)
+	futhark opencl $(SRC5)
 
 
 # Run the futhark brute-force implementation.
 runfut: compile-fut
-	./$(EXE3)
+	./$(EXE3) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-all-k5-d16
+	./$(EXE5) -e main < data/traverse/11test-k5-d16.in > data/traverse/visit-one-k5-d16
+	./$(EXE3) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-all-k5-d1
+	./$(EXE5) -e main < data/traverse/11test-k5-d1.in  > data/traverse/visit-one-k5-d1
+
+
+# ./brute -e main < data/testinput.in  > data/validation.out
 
 
 # Run tests of the futhark brute-force implementation.
@@ -48,18 +56,15 @@ benchmain:
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 
 benchpar:
-	./makedata.sh
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
 
 benchtrav:
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC5)
-	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
 
 
 benchbrute:
-	./makedata.sh
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC6)
 

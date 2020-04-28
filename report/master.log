@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  28 APR 2020 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  28 APR 2020 19:57
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -796,17 +796,52 @@ Package: geometry 2018/03/24 v5.7 Page Geometry
 \Gm@layoutvoffset=\dimen196
 \Gm@dimlist=\toks46
 )
+(/usr/local/texlive/2018/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen197
+\captionmargin@=\dimen198
+\captionwidth=\dimen199
+\caption@tempdima=\dimen256
+\caption@indent=\dimen257
+\caption@parindent=\dimen258
+\caption@hangindent=\dimen259
+)
+\c@ContinuedFloat=\count161
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+\c@KVtest=\count162
+\sf@farskip=\skip56
+\sf@captopadj=\dimen260
+\sf@capskip=\skip57
+\sf@nearskip=\skip58
+\c@subfigure=\count163
+\c@subfigure@save=\count164
+\c@lofdepth=\count165
+\c@subtable=\count166
+\c@subtable@save=\count167
+\c@lotdepth=\count168
+\sf@top=\skip59
+\sf@bottom=\skip60
+)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count161
-\rotFPtop=\skip56
-\rotFPbot=\skip57
+\c@r@tfl@t=\count169
+\rotFPtop=\skip61
+\rotFPbot=\skip62
 \rot@float@box=\box49
 \rot@mess@toks=\toks47
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count162
+\c@float@type=\count170
 \float@exts=\toks48
 \float@box=\box50
 \@float@everytoks=\toks49
@@ -824,11 +859,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count163
+\FV@CodeLineNo=\count171
 \FV@InFile=\read3
 \FV@TabBox=\box52
-\c@FancyVerbLine=\count164
-\FV@StepNumber=\count165
+\c@FancyVerbLine=\count172
+\FV@StepNumber=\count173
 \FV@OutFile=\write4
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/upquote/upquote.sty
@@ -994,19 +1029,19 @@ Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 ))
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count166
+\linenopenalty=\count174
 \output=\toks50
-\linenoprevgraf=\count167
-\linenumbersep=\dimen197
-\linenumberwidth=\dimen198
-\c@linenumber=\count168
-\c@pagewiselinenumber=\count169
-\c@LN@truepage=\count170
-\c@internallinenumber=\count171
-\c@internallinenumbers=\count172
-\quotelinenumbersep=\dimen199
-\bframerule=\dimen256
-\bframesep=\dimen257
+\linenoprevgraf=\count175
+\linenumbersep=\dimen261
+\linenumberwidth=\dimen262
+\c@linenumber=\count176
+\c@pagewiselinenumber=\count177
+\c@LN@truepage=\count178
+\c@internallinenumber=\count179
+\c@internallinenumbers=\count180
+\quotelinenumbersep=\dimen263
+\bframerule=\dimen264
+\bframesep=\dimen265
 \bframebox=\box53
 
 
@@ -1019,25 +1054,25 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package fvextra Warning: csquotes should be loaded after fvextra, to avoid a wa
 rning from the lineno package on input line 37.
 
-\c@FV@TrueTabGroupLevel=\count173
-\c@FV@TrueTabCounter=\count174
+\c@FV@TrueTabGroupLevel=\count181
+\c@FV@TrueTabCounter=\count182
 \FV@TabBox@Group=\box54
-\FV@TmpLength=\skip58
-\c@FV@HighlightLinesStart=\count175
-\c@FV@HighlightLinesStop=\count176
-\FV@LoopCount=\count177
+\FV@TmpLength=\skip63
+\c@FV@HighlightLinesStart=\count183
+\c@FV@HighlightLinesStop=\count184
+\FV@LoopCount=\count185
 \FV@NCharsBox=\box55
-\FV@BreakIndent=\dimen258
-\FV@BreakIndentNChars=\count178
-\FV@BreakSymbolSepLeft=\dimen259
-\FV@BreakSymbolSepLeftNChars=\count179
-\FV@BreakSymbolSepRight=\dimen260
-\FV@BreakSymbolSepRightNChars=\count180
-\FV@BreakSymbolIndentLeft=\dimen261
-\FV@BreakSymbolIndentLeftNChars=\count181
-\FV@BreakSymbolIndentRight=\dimen262
-\FV@BreakSymbolIndentRightNChars=\count182
-\c@FancyVerbLineBreakLast=\count183
+\FV@BreakIndent=\dimen266
+\FV@BreakIndentNChars=\count186
+\FV@BreakSymbolSepLeft=\dimen267
+\FV@BreakSymbolSepLeftNChars=\count187
+\FV@BreakSymbolSepRight=\dimen268
+\FV@BreakSymbolSepRightNChars=\count188
+\FV@BreakSymbolIndentLeft=\dimen269
+\FV@BreakSymbolIndentLeftNChars=\count189
+\FV@BreakSymbolIndentRight=\dimen270
+\FV@BreakSymbolIndentRightNChars=\count190
+\c@FancyVerbLineBreakLast=\count191
 \FV@LineBox=\box56
 \FV@LineIndentBox=\box57
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/ifplatform/ifplatform.sty
@@ -1056,26 +1091,26 @@ runsystem(rm -- "master.w18")...executed.
 (/usr/local/texlive/2018/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/local/texlive/2018/texmf-dist/tex/generic/xstring/xstring.tex
 \@xs@message=\write5
-\integerpart=\count184
-\decimalpart=\count185
+\integerpart=\count192
+\decimalpart=\count193
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip59
-\fb@frw=\dimen263
-\fb@frh=\dimen264
-\FrameRule=\dimen265
-\FrameSep=\dimen266
+\OuterFrameSep=\skip64
+\fb@frw=\dimen271
+\fb@frh=\dimen272
+\FrameRule=\dimen273
+\FrameSep=\dimen274
 )
 \minted@appexistsfile=\read4
 \minted@bgbox=\box58
 \minted@code=\write6
-\c@minted@FancyVerbLineTemp=\count186
-\c@minted@pygmentizecounter=\count187
+\c@minted@FancyVerbLineTemp=\count194
+\c@minted@pygmentizecounter=\count195
 \@float@every@listing=\toks51
-\c@listing=\count188
+\c@listing=\count196
 )
 runsystem(mkdir -p _minted-master)...executed.
 
@@ -1084,7 +1119,7 @@ runsystem(mkdir -p _minted-master)...executed.
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 \@float@every@algorithm=\toks52
-\c@algorithm=\count189
+\c@algorithm=\count197
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
@@ -1093,39 +1128,20 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count190
-\c@ALG@rem=\count191
-\c@ALG@nested=\count192
-\ALG@tlm=\skip60
-\ALG@thistlm=\skip61
-\c@ALG@Lnr=\count193
-\c@ALG@blocknr=\count194
-\c@ALG@storecount=\count195
-\c@ALG@tmpcounter=\count196
-\ALG@tmplength=\skip62
+\c@ALG@line=\count198
+\c@ALG@rem=\count199
+\c@ALG@nested=\count266
+\ALG@tlm=\skip65
+\ALG@thistlm=\skip66
+\c@ALG@Lnr=\count267
+\c@ALG@blocknr=\count268
+\c@ALG@storecount=\count269
+\c@ALG@tmpcounter=\count270
+\ALG@tmplength=\skip67
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
-
-(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen267
-\captionmargin@=\dimen268
-\captionwidth=\dimen269
-\caption@tempdima=\dimen270
-\caption@indent=\dimen271
-\caption@parindent=\dimen272
-\caption@hangindent=\dimen273
-)
-\c@ContinuedFloat=\count197
-Package caption Info: float package is loaded.
-Package caption Info: hyperref package is loaded.
-Package caption Info: listings package is loaded.
-Package caption Info: rotating package is loaded.
-) (./lst.tex (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/listingsutf
-8.sty
+) (./lst.tex
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/listingsutf8.sty
 Package: listingsutf8 2016/05/16 v1.3 Allow UTF-8 in listings input (HO)
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/stringenc.sty
@@ -1147,40 +1163,40 @@ runsystem(rm master.aex)...executed.
 (./master.aux)
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 172.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 172.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 173.
 
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    ... okay on input line 173.
 
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen274
+\scratchcounter=\count271
+\scratchdimen=\dimen275
 \scratchbox=\box59
-\nofMPsegments=\count199
-\nofMParguments=\count266
+\nofMPsegments=\count272
+\nofMParguments=\count273
 \everyMPshowfont=\toks53
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen275
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
+\MPscratchCnt=\count274
+\MPscratchDim=\dimen276
+\MPnumerator=\count275
+\makeMPintoPDFobject=\count276
 \everyMPtoPDFconversion=\toks54
 ) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1200,7 +1216,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box60
-Package hyperref Info: Link coloring OFF on input line 172.
+Package hyperref Info: Link coloring OFF on input line 173.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1208,18 +1224,18 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count270
+\c@section@level=\count277
 )
-LaTeX Info: Redefining \ref on input line 172.
-LaTeX Info: Redefining \pageref on input line 172.
-LaTeX Info: Redefining \nameref on input line 172.
+LaTeX Info: Redefining \ref on input line 173.
+LaTeX Info: Redefining \pageref on input line 173.
+LaTeX Info: Redefining \nameref on input line 173.
 
 (./master.out) (./master.out)
 \@outlinefile=\write7
 \openout7 = `master.out'.
 
  ABD: EveryShipout initializing macros
-\c@maskedRefs=\count271
+\c@maskedRefs=\count278
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/apacite/english.apc
 File: english.apc 2013/07/21 v6.03 apacite language file
@@ -1234,7 +1250,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-\c@lstlisting=\count272
+\c@lstlisting=\count279
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1271,20 +1287,23 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<pics/nat-farve.pdf, id=75, 597.23125pt x 845.1575pt>
+<pics/nat-farve.pdf, id=83, 597.23125pt x 845.1575pt>
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
-Package pdftex.def Info: pics/nat-farve.pdf  used on input line 208.
+Package pdftex.def Info: pics/nat-farve.pdf  used on input line 209.
 (pdftex.def)             Requested size: 702.625pt x 602.25pt.
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
-Package pdftex.def Info: pics/nat-farve.pdf  used on input line 208.
+Package pdftex.def Info: pics/nat-farve.pdf  used on input line 209.
 (pdftex.def)             Requested size: 702.625pt x 1003.75pt.
-<pics/nat-en.pdf, id=78, 597.23125pt x 845.1575pt>
+<pics/nat-en.pdf, id=86, 597.23125pt x 845.1575pt>
 File: pics/nat-en.pdf Graphic file (type pdf)
 <use pics/nat-en.pdf>
-Package pdftex.def Info: pics/nat-en.pdf  used on input line 208.
+Package pdftex.def Info: pics/nat-en.pdf  used on input line 209.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 [1
 
@@ -1381,25 +1400,58 @@ Overfull \vbox (284.96112pt too high) has occurred while \output is active []
 
 
 [13]) (./sections/eval.tex
-<pics/plot-figs/trav-k5-2.png, id=225, 818.8191pt x 448.074pt>
+<pics/plot-figs/sort-d16.png, id=235, 616.4631pt x 418.4433pt>
+File: pics/plot-figs/sort-d16.png Graphic file (type png)
+<use pics/plot-figs/sort-d16.png>
+Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 41.
+(pdftex.def)             Requested size: 472.03123pt x 320.41455pt.
+ [14]
+File: pics/plot-figs/sort-d16.png Graphic file (type png)
+<use pics/plot-figs/sort-d16.png>
+Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 47.
+(pdftex.def)             Requested size: 231.2979pt x 156.99886pt.
+<pics/plot-figs/sort-d4.png, id=241, 630.1944pt x 415.5525pt>
+File: pics/plot-figs/sort-d4.png Graphic file (type png)
+<use pics/plot-figs/sort-d4.png>
+Package pdftex.def Info: pics/plot-figs/sort-d4.png  used on input line 50.
+(pdftex.def)             Requested size: 236.01561pt x 155.62889pt.
+File: pics/plot-figs/sort-d16.png Graphic file (type png)
+<use pics/plot-figs/sort-d16.png>
+Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 57.
+(pdftex.def)             Requested size: 472.03123pt x 320.41455pt.
+ [15 <./pics/plot-figs/sort-d16.png> <./pics/plot-figs/sort-d4.png>]
+<pics/plot-figs/sort-small-d16.png, id=252, 615.0177pt x 416.9979pt>
+File: pics/plot-figs/sort-small-d16.png Graphic file (type png)
+<use pics/plot-figs/sort-small-d16.png>
+Package pdftex.def Info: pics/plot-figs/sort-small-d16.png  used on input line 
+63.
+(pdftex.def)             Requested size: 231.2979pt x 156.82558pt.
+<pics/plot-figs/sort-small-d4.png, id=253, 633.0852pt x 418.4433pt>
+File: pics/plot-figs/sort-small-d4.png Graphic file (type png)
+<use pics/plot-figs/sort-small-d4.png>
+Package pdftex.def Info: pics/plot-figs/sort-small-d4.png  used on input line 6
+6.
+(pdftex.def)             Requested size: 236.01561pt x 155.99641pt.
+<pics/plot-figs/trav-k5-2.png, id=254, 818.8191pt x 448.074pt>
 File: pics/plot-figs/trav-k5-2.png Graphic file (type png)
 <use pics/plot-figs/trav-k5-2.png>
-Package pdftex.def Info: pics/plot-figs/trav-k5-2.png  used on input line 42.
+Package pdftex.def Info: pics/plot-figs/trav-k5-2.png  used on input line 79.
 (pdftex.def)             Requested size: 472.03123pt x 258.30373pt.
- [14]
-<pics/plot-figs/trav-d16.png, id=231, 840.5001pt x 478.4274pt>
+ [16 <./pics/plot-figs/sort-small-d16.png> <./pics/plot-figs/sort-small-d4.png>
+]
+<pics/plot-figs/trav-d16.png, id=265, 840.5001pt x 478.4274pt>
 File: pics/plot-figs/trav-d16.png Graphic file (type png)
 <use pics/plot-figs/trav-d16.png>
-Package pdftex.def Info: pics/plot-figs/trav-d16.png  used on input line 50.
+Package pdftex.def Info: pics/plot-figs/trav-d16.png  used on input line 87.
 (pdftex.def)             Requested size: 472.03123pt x 268.69133pt.
-) (./sections/conclusion.tex) [15 <./pics/plot-figs/trav-k5-2.png> <./pics/plot
--figs/trav-d16.png>] [16] (./master.bbl)
-[17]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
- (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 239.
+) (./sections/conclusion.tex) [17 <./pics/plot-figs/trav-k5-2.png> <./pics/plot
+-figs/trav-d16.png>] [18] (./master.bbl) [19]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
+
+(./master.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
 
 
 Package rerunfilecheck Warning: File `master.out' has changed.
@@ -1407,30 +1459,30 @@ Package rerunfilecheck Warning: File `master.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `master.out':
-(rerunfilecheck)             Before: 4643BDE2C7C50CA2538D624A691F1797;1157
-(rerunfilecheck)             After:  59DF8791657B1075A8CB10B0C096EED5;1157.
+(rerunfilecheck)             Before: C2CF5421F1EE889FDD8BD4BF12129957;1344
+(rerunfilecheck)             After:  50DA766612996D5DA76C874147B2FCAA;1345.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 240.
 runsystem(rm master.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27331 strings out of 492649
- 494901 string characters out of 6129621
- 647443 words of memory out of 5000000
- 30551 multiletter control sequences out of 15000+600000
+ 27524 strings out of 492649
+ 498232 string characters out of 6129621
+ 651896 words of memory out of 5000000
+ 30724 multiletter control sequences out of 15000+600000
  28479 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,12n,96p,1140b,622s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 67i,12n,102p,1140b,622s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
-pdfTeX warning (dest): name{section*.6} has been referenced but does not exist,
+pdfTeX warning (dest): name{section*.9} has been referenced but does not exist,
  replaced by a fixed one
 
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{
@@ -1457,10 +1509,10 @@ nts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-dist/font
 s/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/cm-super/sftt1200.pfb>
-Output written on master.pdf (18 pages, 510773 bytes).
+Output written on master.pdf (20 pages, 639034 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
- 279 compressed objects within 3 object streams
- 52 named destinations out of 1000 (max. 500000)
- 187 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 375 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 223 words of extra memory for PDF output out of 10000 (max. 10000000)
 

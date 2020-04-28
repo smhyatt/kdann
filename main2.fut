@@ -8,6 +8,12 @@ import "traverse-tree2"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/traverse/11test-k5-d16.in
+-- compiled input @ data/traverse/11test-k5-d10.in
+-- compiled input @ data/traverse/11test-k5-d1.in
+
+
+
 -- compiled input @ data/traverse/11test-k1-d1.in
 -- compiled input @ data/traverse/11test-k1-d6.in
 -- compiled input @ data/traverse/11test-k1-d10.in
@@ -29,7 +35,6 @@ import "traverse-tree2"
 
 
 
--- Partition vs. sorting
 -- compiled input @ data/sorting/8test-k3-d4.in
 -- compiled input @ data/sorting/8test-k3-d16.in
 -- compiled input @ data/sorting/8test-k11-d4.in
@@ -226,7 +231,8 @@ entry main [a][b][d] (k: i32) (h: i32) (imA : [b][d]f32) (imB : [a][d]f32) =
 
   -- let with_query_idxs = zip (iota m :> [m]i32) (completed_knn :> [m][k](i32,f32))
   let (knn_inds, knn_vals) = map unzip completed_knn |> unzip
-  in knn_vals
+  in visited
+  -- in knn_vals
   -- in (knn_inds[:16], knn_vals[:16], visited)
   -- in (completed_knn, visited, with_query_idxs, lower_bounds, upper_bounds)
   -- in (completed_knn[:10], visited[:200], with_query_idxs[:10])--, lower_bounds, upper_bounds)

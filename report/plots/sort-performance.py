@@ -74,7 +74,7 @@ print(k3sor.Sorting)
 
 
 # fig, ax = plt.subplots()
-# rects1 = ax.bar(x - width/2, d16sor.Sorting, width,   label='Sorting', color='#1e6dae')
+# rects1 = ax.bar(x - width/2, d16sor.Sorting, width,   label='Sorting',   color='#1e6dae')
 # rects2 = ax.bar(x + width/2, d16par.Partition, width, label='Partition', color='#6baee6')
 
 # # Add some text for labels, title and custom x-axis tick labels, etc.
