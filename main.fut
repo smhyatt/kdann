@@ -247,7 +247,7 @@ entry main [a][b][d] (k: i32) (h: i32) (imA : [b][d]f32) (imB : [a][d]f32) =
   let ongoing_knn   = replicate a (replicate k (-1i32, f32.inf))
   let completed_knn = copy ongoing_knn
   let stacks  = replicate a 0i32
-  let STEP = 64
+  let STEP = 1
   let visited = replicate (num_leaves/STEP) (-1)
   -- let visited = replicate (num_leaves+1) (-1)
 
