@@ -8,6 +8,8 @@ import "traverse-tree2"
 -- ==
 -- entry: main
 --
+-- compiled input @ data/traverse/11test-k5-d14.in
+
 -- compiled input @ data/sorting/8test-k3-d8.in
 
 

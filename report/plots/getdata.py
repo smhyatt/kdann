@@ -448,6 +448,24 @@ b = [truncate(i*0.001) for i in b]
 # dataset data/sorting/12test-k11-d4.in: 1597397.00μs (avg. of 1 runs; RSD: 0.00)
 
 
+# Results for main.fut:
+# dataset data/sorting/10test-k3-d4.in:   270543.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k11-d4.in:  355286.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k3-d9.in:  1816399.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k11-d9.in: 2904259.00μs (avg. of 1 runs; RSD: 0.00)
+# futhark bench --backend=opencl -e main -r 1 partition.fut
+# Compiling partition.fut...
+# Results for partition.fut:
+# dataset data/sorting/10test-k3-d4.in:   241519.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k11-d4.in:  423542.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k3-d9.in:  2634657.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/10test-k11-d9.in: 4625589.00μs (avg. of 1 runs; RSD: 0.00)
+
+
+
+
+
+
 
 s4 = [
 65297.00,
@@ -465,24 +483,24 @@ p4 = [
 
 
 s = [
-588907.00,
-654088.00,
-4209215.00,
-7229986.00
+270543.00,
+355286.00,
+1816399.00,
+2904259.00
 ]
 
 p = [
-334850.00,
-435987.00,
-20708117.00,
-32698247.00
+241519.00,
+423542.00,
+2634657.00,
+4625589.00
 ]
 
 
 
 
-s = [truncate(i*0.001) for i in s4]
-p = [truncate(i*0.001) for i in p4]
+s = [truncate(i*0.001) for i in s]
+p = [truncate(i*0.001) for i in p]
 
 print(s)
 print(p)
@@ -492,6 +510,9 @@ print(p)
 
 # [65.29, 95.01, 683.62, 1038.63]
 # [46.89, 82.95, 892.39, 1597.39]
+
+# [270.54, 355.28, 1816.39, 2904.25]
+# [241.51, 423.54, 2634.65, 4625.58]
 
 
 # Results for main.fut:
