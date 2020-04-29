@@ -86,9 +86,15 @@ bk2 = brute[brute['K']==2]
 labels = [
 'D=2', 'D=4', 
 'D=6', 'D=8', 
-'D=10', 'D=12',
-'D=14'
+'D=10', 'D=12'
 ]
+
+# labels = [
+# 'D=2', 'D=4', 
+# 'D=6', 'D=8', 
+# 'D=10', 'D=12',
+# 'D=14'
+# ]
 
 x = np.arange(len(labels))  # the label locations
 width = 0.4  # the width of the bars
@@ -101,7 +107,7 @@ rects2 = ax.bar(x + width/2, bk2.Optimised, width, label='The Fully Optimised KN
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Performance in milliseconds.')
-ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=2 and Dimensions 2, 4, 6, 8, 10, 12 and 14')
+ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=2 and Dimensions 2, 4, 6, 8, 10 and 12')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
@@ -144,8 +150,7 @@ bk6 = brute[brute['K']==6]
 labels = [
 'D=2', 'D=4', 
 'D=6', 'D=8', 
-'D=10', 'D=12',
-'D=14'
+'D=10', 'D=12'
 ]
 
 x = np.arange(len(labels))  # the label locations
@@ -159,7 +164,7 @@ rects2 = ax.bar(x + width/2, bk6.Optimised, width, label='The Fully Optimised KN
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Performance in milliseconds.')
-ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=6 and Dimensions 2, 4, 6, 8, 10, 12 and 14')
+ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=6 and Dimensions 2, 4, 6, 8, 10 and 12')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
@@ -202,8 +207,7 @@ bk12 = brute[brute['K']==12]
 labels = [
 'D=2', 'D=4', 
 'D=6', 'D=8', 
-'D=10', 'D=12',
-'D=14'
+'D=10', 'D=12'
 ]
 
 x = np.arange(len(labels))  # the label locations
@@ -212,15 +216,15 @@ width = 0.4  # the width of the bars
 
 
 fig, ax = plt.subplots()
-rects2 = ax.bar(x, bk12.Optimised, width, label='The Fully Optimised KNN via k-d Trees', color='#6baee6')
-rects1 = ax.bar(x, bk12.Brute, width,   label='Brute Force', color='#1e6dae')
+# rects2 = ax.bar(x, bk12.Optimised, width, label='The Fully Optimised KNN via k-d Trees', color='#6baee6')
+# rects1 = ax.bar(x, bk12.Brute, width,   label='Brute Force', color='#1e6dae')
 
-# rects1 = ax.bar(x - width/2, bk12.Brute, width,   label='Brute Force', color='#1e6dae')
-# rects2 = ax.bar(x + width/2, bk12.Optimised, width, label='The Fully Optimised KNN via k-d Trees', color='#6baee6')
+rects1 = ax.bar(x - width/2, bk12.Brute, width,   label='Brute Force', color='#1e6dae')
+rects2 = ax.bar(x + width/2, bk12.Optimised, width, label='The Fully Optimised KNN via k-d Trees', color='#6baee6')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Performance in milliseconds.')
-ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=12 and Dimensions 2, 4, 6, 8, 10, 12 and 14')
+ax.set_title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Trees, for K=12 and Dimensions 2, 4, 6, 8, 10 and 12')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
@@ -252,9 +256,9 @@ plt.show()
 
 
 # X2 = np.arange(len(bk12.Optimised))
-X2 = np.arange(2, 16, 2) # 2, 4, 6, 8, 10, 12, 14
+X2 = np.arange(2, 14, 2) # 2, 4, 6, 8, 10, 12, 14
 
-plt.title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Tree, for K=12 and Dimensions 2, 4, 6, 8, 10, 12 and 14.') 
+plt.title('Computing K-Nearest Neighbours with Brute Force versus\n Fully Optimised k-d Tree, for K=12 and Dimensions 2, 4, 6, 8, 10 and 12')
 # plt.xscale('log')
 # plt.yscale('log')
 plt.ylabel('Performance in milliseconds.')

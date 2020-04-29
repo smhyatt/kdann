@@ -215,11 +215,11 @@ If we experiment further by slightly increasing K to 5 while testing against bot
 Table \ref{tab:total} summarises the speed-ups for testing the fully optimised k-d tree implementation against the brute force implementation, where we look at D sizes ranging from 2-14 and K sizes 2, 6 and 12. Figures showing the performance for K=2 and K=6, referenced in the table, can be found in the Appendix \ref{sec:appendix} figures \ref{fig:b1}, \ref{fig:b2} and \ref{fig:b4}.
 \begin{table}[H]
 \centering
-\begin{tabular}{@{} *9l @{}}    \toprule
-\emph{K} & \emph{D=2} & \emph{D=4} & \emph{D=6} & \emph{D=8} & \emph{D=10} & \emph{D=12} & \emph{D=14} & \\\midrule
-12 & 78.7 & 58.57 & 40.04 & 17.6 & 8.26 & 4.77 & 3.27   &   \\ 
-6 & 65.49 & 53.96 & 38.16 & 14.41 & 6.0 & 3.08& 2.12    & \\ 
-2 &  34.64 & 33.42 & 27.47 & 13.17 & 5.72 & 2.81 & 1.92	& \\ \bottomrule
+\begin{tabular}{@{} *8l @{}}    \toprule
+\emph{K} & \emph{D=2} & \emph{D=4} & \emph{D=6} & \emph{D=8} & \emph{D=10} & \emph{D=12} & \\\midrule
+12 & 78.7 & 58.57 & 40.04 & 17.6 & 8.26 & 4.77     &   \\ 
+6 & 65.49 & 53.96 & 38.16 & 14.41 & 6.0 & 3.08      & \\ 
+2 &  34.64 & 33.42 & 27.47 & 13.17 & 5.72 & 2.81	& \\ \bottomrule
  \hline
 \end{tabular}
 \caption{Speed-ups achieved by the k-d tree solution compared to the brute force solution, based on datasets of sizes 1048576.}
@@ -235,7 +235,7 @@ The results show that any given size of K and D results in a speed-up in favour 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth]{pics/plot-figs/brute-mult-k12-side.png}
+\includegraphics[width=1.1\textwidth]{pics/plot-figs/new-brute-k12.png}
 \caption{Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.}
 \label{fig:b3}
 \end{figure}

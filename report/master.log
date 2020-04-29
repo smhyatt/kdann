@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  29 APR 2020 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  29 APR 2020 19:16
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1452,17 +1452,20 @@ Overfull \vbox (415.41118pt too high) has occurred while \output is active []
 
 
 [16]) (./sections/eval.tex
-<pics/plot-figs/sort-d16.png, id=284, 616.4631pt x 418.4433pt>
-File: pics/plot-figs/sort-d16.png Graphic file (type png)
-<use pics/plot-figs/sort-d16.png>
-Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 32.
-(pdftex.def)             Requested size: 231.2979pt x 156.99886pt.
-<pics/plot-figs/sort-d4.png, id=286, 630.1944pt x 415.5525pt>
-File: pics/plot-figs/sort-d4.png Graphic file (type png)
-<use pics/plot-figs/sort-d4.png>
-Package pdftex.def Info: pics/plot-figs/sort-d4.png  used on input line 35.
-(pdftex.def)             Requested size: 236.01561pt x 155.62889pt.
- [17 <./pics/plot-figs/sort-d16.png> <./pics/plot-figs/sort-d4.png>]
+<pics/plot-figs/new-sort-d9-k3k11.png, id=284, 569.4876pt x 496.4949pt>
+File: pics/plot-figs/new-sort-d9-k3k11.png Graphic file (type png)
+<use pics/plot-figs/new-sort-d9-k3k11.png>
+Package pdftex.def Info: pics/plot-figs/new-sort-d9-k3k11.png  used on input li
+ne 32.
+(pdftex.def)             Requested size: 231.2979pt x 201.64752pt.
+<pics/plot-figs/new-sort-d9-k3k11-big.png, id=286, 534.798pt x 428.5611pt>
+File: pics/plot-figs/new-sort-d9-k3k11-big.png Graphic file (type png)
+<use pics/plot-figs/new-sort-d9-k3k11-big.png>
+Package pdftex.def Info: pics/plot-figs/new-sort-d9-k3k11-big.png  used on inpu
+t line 35.
+(pdftex.def)             Requested size: 236.01561pt x 189.13638pt.
+ [17 <./pics/plot-figs/new-sort-d9-k3k11.png> <./pics/plot-figs/new-sort-d9-k3k
+11-big.png>]
 <pics/plot-figs/sort-small-d16.png, id=299, 615.0177pt x 416.9979pt>
 File: pics/plot-figs/sort-small-d16.png Graphic file (type png)
 <use pics/plot-figs/sort-small-d16.png>
@@ -1559,12 +1562,12 @@ n input line 175.
  [23 <./pics/plot-figs/visits/visit-k5-d6-all-new.png> <./pics/plot-figs/visits
 /visit-k5-d6-one-new.png> <./pics/plot-figs/visits/visit-k5-d16-all-new.png> <.
 /pics/plot-figs/visits/visit-k5-d16-one-new.png>]
-<pics/plot-figs/brute-mult-k12-side.png, id=391, 1051.5285pt x 490.7133pt>
-File: pics/plot-figs/brute-mult-k12-side.png Graphic file (type png)
-<use pics/plot-figs/brute-mult-k12-side.png>
-Package pdftex.def Info: pics/plot-figs/brute-mult-k12-side.png  used on input 
-line 238.
-(pdftex.def)             Requested size: 519.23723pt x 242.31604pt.
+<pics/plot-figs/new-brute-k12.png, id=391, 869.4081pt x 534.798pt>
+File: pics/plot-figs/new-brute-k12.png Graphic file (type png)
+<use pics/plot-figs/new-brute-k12.png>
+Package pdftex.def Info: pics/plot-figs/new-brute-k12.png  used on input line 2
+38.
+(pdftex.def)             Requested size: 519.23723pt x 319.40425pt.
 
 Overfull \hbox (47.206pt too wide) in paragraph at lines 238--239
  [][] 
@@ -1577,22 +1580,23 @@ File: pics/plot-figs/brute-mult-k2.png Graphic file (type png)
 Package pdftex.def Info: pics/plot-figs/brute-mult-k2.png  used on input line 9
 .
 (pdftex.def)             Requested size: 472.03123pt x 220.64389pt.
- [24 <./pics/plot-figs/brute-mult-k12-side.png>]
+ [24 <./pics/plot-figs/new-brute-k12.png>]
 <pics/plot-figs/brute-mult-k6.png, id=403, 1055.142pt x 493.6041pt>
 File: pics/plot-figs/brute-mult-k6.png Graphic file (type png)
 <use pics/plot-figs/brute-mult-k6.png>
 Package pdftex.def Info: pics/plot-figs/brute-mult-k6.png  used on input line 1
 7.
 (pdftex.def)             Requested size: 472.03123pt x 220.81679pt.
-<pics/plot-figs/brute-vs-kdtree.png, id=404, 739.3221pt x 364.9635pt>
+ [25 <./pics/plot-figs/brute-mult-k2.png>]
+<pics/plot-figs/brute-vs-kdtree.png, id=409, 739.3221pt x 364.9635pt>
 File: pics/plot-figs/brute-vs-kdtree.png Graphic file (type png)
 <use pics/plot-figs/brute-vs-kdtree.png>
 Package pdftex.def Info: pics/plot-figs/brute-vs-kdtree.png  used on input line
  25.
 (pdftex.def)             Requested size: 377.62642pt x 186.41293pt.
- [25 <./pics/plot-figs/brute-mult-k2.png> <./pics/plot-figs/brute-mult-k6.png>]
-) [26 <./pics/plot-figs/brute-vs-kdtree.png>]
-(./master.bbl) [27]
+) [26 <./pics/plot-figs/brute-mult-k6.png> <./pics/plot-figs/brute-vs-kdtree.pn
+g>] (./master.bbl)
+[27]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 252.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 252.
  (./master.aux)
@@ -1604,13 +1608,16 @@ Package rerunfilecheck Info: File `master.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 252.
 runsystem(rm master.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
  27751 strings out of 492649
- 503395 string characters out of 6129621
+ 503480 string characters out of 6129621
  655386 words of memory out of 5000000
  30891 multiletter control sequences out of 15000+600000
  28479 words of font info for 68 fonts, out of 8000000 for 9000
@@ -1643,7 +1650,7 @@ nts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-dist/font
 s/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/cm-super/sftt1200.pfb>
-Output written on master.pdf (28 pages, 1224495 bytes).
+Output written on master.pdf (28 pages, 1218696 bytes).
 PDF statistics:
  518 PDF objects out of 1000 (max. 8388607)
  402 compressed objects within 5 object streams
