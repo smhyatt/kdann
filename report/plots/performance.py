@@ -363,48 +363,48 @@ plt.show()
 
 
 
-d16 = pd.read_csv('trav-d-16.csv')
-d16.columns = ['All','One', 'K', 'D']
+# d16 = pd.read_csv('trav-d-16.csv')
+# d16.columns = ['All','One', 'K', 'D']
 
-labels = ['K=1\nDataset: 1048576', 'K=5\nDataset: 1048576', 'K=17\nDataset: 1048576', 'K=1\nDataset: 4194304', 'K=5\nDataset: 4194304', 'K=17\nDataset: 4194304']
+# labels = ['K=1\nDataset: 1048576', 'K=5\nDataset: 1048576', 'K=17\nDataset: 1048576', 'K=1\nDataset: 4194304', 'K=5\nDataset: 4194304', 'K=17\nDataset: 4194304']
 
-x = np.arange(len(labels))  # the label locations
-width = 0.4  # the width of the bars
+# x = np.arange(len(labels))  # the label locations
+# width = 0.4  # the width of the bars
 
-alld16 = [truncate(i*0.001) for i in d16.All]
-oned16 = [truncate(i*0.001) for i in d16.One]
+# alld16 = [truncate(i*0.001) for i in d16.All]
+# oned16 = [truncate(i*0.001) for i in d16.One]
 
-fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, alld16, width, label='Traversal Checking Median of All Dimensions.', color='#1e6dae')
-rects2 = ax.bar(x + width/2, oned16, width, label='Traversal Checking Median of One Dimension.', color='#6baee6')
+# fig, ax = plt.subplots()
+# rects1 = ax.bar(x - width/2, alld16, width, label='Traversal Checking Median of All Dimensions.', color='#1e6dae')
+# rects2 = ax.bar(x + width/2, oned16, width, label='Traversal Checking Median of One Dimension.', color='#6baee6')
 
-# Add some text for labels, title and custom x-axis tick labels, etc.
-ax.set_ylabel('Performance in milliseconds.')
-ax.set_title('Traversal Checking All Dimensions Versus Checking\nOne Dimension, for D=12 and K 1, 5 and 17')
-# ax.set_yticks(k5.All)
-ax.set_xticks(x)
-ax.set_xticklabels(labels)
-ax.legend()
-
-
-def autolabel(rects):
-    """Attach a text label above each bar in *rects*, displaying its height."""
-    for rect in rects:
-        height = rect.get_height()
-        ax.annotate('{}'.format(height),
-                    xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),  # 3 points vertical offset
-                    textcoords="offset points",
-                    ha='center', va='bottom')
+# # Add some text for labels, title and custom x-axis tick labels, etc.
+# ax.set_ylabel('Performance in milliseconds.')
+# ax.set_title('Traversal Checking All Dimensions Versus Checking\nOne Dimension, for D=12 and K 1, 5 and 17')
+# # ax.set_yticks(k5.All)
+# ax.set_xticks(x)
+# ax.set_xticklabels(labels)
+# ax.legend()
 
 
-autolabel(rects1)
-autolabel(rects2)
+# def autolabel(rects):
+#     """Attach a text label above each bar in *rects*, displaying its height."""
+#     for rect in rects:
+#         height = rect.get_height()
+#         ax.annotate('{}'.format(height),
+#                     xy=(rect.get_x() + rect.get_width() / 2, height),
+#                     xytext=(0, 3),  # 3 points vertical offset
+#                     textcoords="offset points",
+#                     ha='center', va='bottom')
 
 
-fig.tight_layout()
+# autolabel(rects1)
+# autolabel(rects2)
 
-plt.show()
+
+# fig.tight_layout()
+
+# plt.show()
 
 
 #################################################################################
