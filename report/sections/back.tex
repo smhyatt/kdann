@@ -31,20 +31,24 @@
 
 % Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it can handle binary as well as multiclass data, and while often applied for comparing two images, it faces the challenge of slow performance because both images are of image size. 
 
-Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it works well handling multi-dimensional datasets. 
-
-KNN, the problem is to find the nearest neighbours in some dimensionality D and k-d trees are good 
-
-We have D dimensional space, we have a set of reference points of size n, and a set of queries of size m and we aim to compute the nearest neighbours according to a measured distance for each query. 
+KNN is used find the K nearest neighbours in some dimensionality D, and it is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it works well handling multi-dimensional datasets. 
+We look at a D dimensional space, where we have a set of reference points of size n, and a set of queries of size m, and we aim to compute the nearest neighbours according to a measured distance for each query. 
+% KNN, the problem is to find the nearest neighbours in some dimensionality D and k-d trees are good 
+% O(m*n)
 \\[2mm]
-When comparing two images; image A and image B, the goal of KNN is to find the patches of image B that are most similar to each query patch of image A, according to a measured distance. The naive approach is using brute force, in which each patch of image B is compared with each patch of image A, if each image has m patches the complexity of the search will be $O(m^2)$. See \hyperref[sec:brute]{Brute Force}. Although brute force is a simple solution, there exists several alternative techniques for computing KNN. One commonly applied method is using a generalisation of the binary tree; the k-d tree. 
+% When comparing two images; image A and image B, the goal of KNN is to find the patches of image B that are most similar to each query patch of image A, according to a measured distance. 
+The naive approach is using brute force, in which each reference point is compared with each query, meaning the complexity of the search will be $O(m\times n)$. The brute force approach is explained further in section \ref{sec:brute}. Although brute force is a simple solution, there exists several alternative techniques for computing KNN. One commonly applied method is using a generalisation of the binary tree, known as the k-d tree. 
 \\[2mm]
-The k-d tree consists of a root, nodes and leaves; the root represents all patches, the nodes represent a partitioned segment of the patches, and the leaves collectively contain all patches spread out on $2^{h+1}$ leaves where h is the height of the tree excluding leaves.
+The k-d tree consists of a root, internal nodes and leaves. 
+The reference points are fully partitioned, such that all the internal nodes on each level represent all reference points. Two nodes on the same level do not intersect in terms of the reference points they represent.
+% This is a spatial partitioning of the tree in which all the nodes on the same level in the tree represent non-overlapping partitions of the reference points. Two nodes on the same level do not trivially intersect in terms of the reference points they represent. It's a full partitioning, all the nodes on each level represent all reference points. 
+The leaves do not necessarily contain one reference point each, they may contain several reference points, and in our approach we apply brute force on the leaves.  
+% The k-d tree consists of a root, internal nodes and leaves; the root represents all patches, the nodes represent a partitioned segment of the patches, and the leaves collectively contain all patches spread out on $2^{h+1}$ leaves where h is the height of the tree excluding leaves.
 \\[2mm]
-Using a k-d tree has advances w.r.t search performance, thanks to the binary tree structure it yields a complexity of $O(m\ \lg\ m)$ \cite{logmatches}.
+Using a k-d tree improves search performance, in principal the average work complexity is $O(m\ \log\ n)$ \cite{logmatches}. % (at least when we are working on reasonably small dimensionality, reference to section) 
+%thanks to the binary tree structure it yields a complexity of $O(m\ \lg\ m)$ \cite{logmatches}.
 \\[2mm]
 Algorithms \hyperref[alg:main]{1}, \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} below represent a recursive implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. 
-\todo[color=green!40, inline, size=\small]{Cosmin: should I mention that the pseudo-code is based on the Python code and the authors?}
 Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which dimensionality of images A and B are reduced using PCA\footnote{Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).}, a k-d tree is created of image B, and all patches of image A are iterated through, of which a call to \texttt{\textsc{Traverse}} yields the best neighbours for each patch in A. 
 % \\[2mm]
 

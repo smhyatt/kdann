@@ -133,25 +133,29 @@ The following demonstrates the results for the optimisation described in section
 % \caption{The HDF5 hierarchical and cyclic grouping options \protect\cite{hdf5}.}
 \end{figure}
 
-Figure \ref{fig:trav1} looks to show that increasing the size of D as well as the dataset sizes will give a better performance for the optimised solution that checks at all dimensions. The test uses a static size K=5 and tests on D=6 and D=12 for both small and large datasets, where the light blue is the traversal checking one dimension and the dark blue is the traversal checking all dimensions. In comparison, the speed-ups for D=12 is 2.45 and 4.3 times faster than D=6, respectively. 
+Figure \ref{fig:trav1} shows that increasing the size of D as well as the dataset sizes will give a better performance for the optimised solution that checks at all dimensions. The test uses a static size K=5 and tests on D=6 and D=12 for both small and large datasets, where the light blue is the traversal checking one dimension and the dark blue is the traversal checking all dimensions. In comparison, the speed-ups for D=12 is 2.45 and 4.3 times faster than D=6, respectively. 
 
 % \todo[color=green!40, inline, size=\small]{Beskriv tarverse ift. K}
 % [1.3024425089979943, 3.752470195979607, 1.322579210837369, 5.616522829044345]
 
-
+% [2.47, 4.47, 4.3, 3.14, 3.37, 2.65]
 \begin{table}[H]
 \centering
 \begin{tabular}{@{} *5l @{}}    \toprule
 \emph{Datasize} & \emph{K=1} & \emph{K=5} & \emph{K=17} &  \\\midrule
-Small     & $2.20$  & $2.20$  & $2.34$  &   \\ 
-Large     & $2.88$ & $3.05$ & $3.05$ & \\ \bottomrule
+Small     & $2.47$  & $4.47$  & $4.3$  &   \\ 
+Large     & $3.14$ & $3.37$ & $2.65$ & \\ \bottomrule
  \hline
 \end{tabular}
 \caption{Speed-ups gained by increasing the size of K for both small and large datasets.}
 \label{tab:travk}
 \end{table}
 
-The next illustration, figure \ref{fig:trav2}, looks to show that increasing K also gives a slight speed-up w.r.t performance, and more so for larger datasets--which mores visible in table \ref{tab:travk}, which shows the actual speed-ups from the graph in figure \ref{fig:trav2}.
+\todo[color=green!40, inline, size=\small]{Ret med friske øjne}
+
+The next illustration, figure \ref{fig:trav2}, we analyse whether increasing or decreasing K amounts to a speed-up. Testing against a D=12 for both small and large datasets the speed-ups visible in table \ref{tab:travk} show that the performance in both cases are best with a K=5, however, it shows no correlation between a small or large K amounting 
+
+and more so for larger datasets--which mores visible in table \ref{tab:travk}, which shows the actual speed-ups from the graph in figure \ref{fig:trav2}.
 
 % 8563/3882 = 2,2058217414
 % 13082/5946 = 2,2001345442
@@ -164,7 +168,7 @@ The next illustration, figure \ref{fig:trav2}, looks to show that increasing K a
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{pics/plot-figs/trav-d16.png}
+\includegraphics[width=1\textwidth]{pics/plot-figs/new-trav-d12-k1k5k17.png}
 \caption{Traversal comparing results w.r.t varying sizes for K on a smaller and larger dataset.}
 \label{fig:trav2}
 \end{figure}
