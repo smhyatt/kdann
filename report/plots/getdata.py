@@ -334,8 +334,8 @@ b = [
 kd = [truncate(i*0.001) for i in kd]
 b = [truncate(i*0.001) for i in b]
 
-print(kd)
-print(b)
+# print(kd)
+# print(b)
 
 
 
@@ -437,8 +437,46 @@ print(b)
 
 
 
+s = [
+588907.00,
+654088.00,
+4209215.00,
+7229986.00
+]
+
+p = [
+334850.00,
+435987.00,
+20708117.00,
+32698247.00
+]
 
 
+
+
+s = [truncate(i*0.001) for i in s]
+p = [truncate(i*0.001) for i in p]
+
+print(s)
+print(p)
+
+# [588.9, 654.08, 4209.21, 7229.98]
+# [334.85, 435.98, 20708.11, 32698.24]
+
+
+
+# Results for main.fut:
+# dataset data/sorting/8test-k3-d9.in:    588907.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/8test-k11-d9.in:   654088.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/12test-k3-d9.in:  4209215.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/12test-k11-d9.in: 7229986.00μs (avg. of 1 runs; RSD: 0.00)
+# futhark bench --backend=opencl -e main -r 1 partition.fut
+# Compiling partition.fut...
+# Results for partition.fut:
+# dataset data/sorting/8test-k3-d9.in:     334850.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/8test-k11-d9.in:    435987.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/12test-k3-d9.in:  20708117.00μs (avg. of 1 runs; RSD: 0.00)
+# dataset data/sorting/12test-k11-d9.in: 32698247.00μs (avg. of 1 runs; RSD: 0.00)
 
 
 

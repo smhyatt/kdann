@@ -64,6 +64,7 @@ benchmain:
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 
 benchpar:
+	./makedata.sh
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC3)
 	futhark bench --backend=opencl -e $(ENTRY) -r 1 $(SRC4)
 
