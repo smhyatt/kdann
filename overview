@@ -110,6 +110,7 @@
 Can't use all dimensionalities:  
 say you have 4.000.000 points and dimensionality 32 - on a given path from the root to the leaf - the height of that path is 14, which means that more than half of the dimensions are not split, which means you loose accuracy. 
 
+possibly good speedup when height of the tree is several times higher than the # dimensions
 
 
 

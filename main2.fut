@@ -12,6 +12,15 @@ import "traverse-tree2"
 -- compiled input @ data/traverse/13test-k5-d12.in
 
 
+-- compiled input @ data/traverse/11test-k1-d1.in
+-- compiled input @ data/traverse/11test-k1-d6.in
+-- compiled input @ data/traverse/11test-k1-d12.in
+-- compiled input @ data/traverse/11test-k5-d1.in
+-- compiled input @ data/traverse/11test-k5-d6.in
+-- compiled input @ data/traverse/11test-k5-d12.in
+-- compiled input @ data/traverse/11test-k17-d1.in
+-- compiled input @ data/traverse/11test-k17-d6.in
+-- compiled input @ data/traverse/11test-k17-d12.in
 -- compiled input @ data/traverse/13test-k1-d1.in
 -- compiled input @ data/traverse/13test-k1-d6.in
 -- compiled input @ data/traverse/13test-k1-d12.in
@@ -21,7 +30,6 @@ import "traverse-tree2"
 -- compiled input @ data/traverse/13test-k17-d1.in
 -- compiled input @ data/traverse/13test-k17-d6.in
 -- compiled input @ data/traverse/13test-k17-d12.in
-
 
 
 -- compiled input @ data/sorting/8test-k3-d8.in
