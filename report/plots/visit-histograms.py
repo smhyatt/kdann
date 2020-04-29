@@ -7,11 +7,11 @@ from pandas import DataFrame , read_csv
 
 
 
-df = pd.read_csv('visits2.csv')
+# df = pd.read_csv('visits2.csv')
 onev = pd.read_csv('visit-one-k5-d16.csv')
 allv = pd.read_csv('visit-all-k5-d16.csv')
 
-df.columns = ['All', 'One']
+# df.columns = ['All', 'One']
 onev.columns = ['One']
 allv.columns = ['All']
 
@@ -50,19 +50,19 @@ print(bin_edges)
 #   524287,  629145,  734002,  838860,  943718,
 #   1048576]
 
-labels = [104856,  209714,  314572,  419429,
-  524287,  629145,  734002,  838860,  943718,
-  1048576]
+# labels = [104856,  209714,  314572,  419429,
+#   524287,  629145,  734002,  838860,  943718,
+#   1048576]
 
-x = np.arange(len(labels))  # the label locations
-width = 0.4  # the width of the bars
+# x = np.arange(len(labels))  # the label locations
+# width = 0.4  # the width of the bars
 
 
 fig, ax = plt.subplots()
 
 
 # plt.figure(figsize=[10,8])
-n, bins, patches = ax.hist(x=np_hist, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='Visits Traversing All Dimensions.')
+n, bins, patches = ax.hist(x=np_hist, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=16') #, label='Visits Traversing All Dimensions.')
 # n, bins, patches = plt.hist(x=np_hist, bins=12, color='#12446d',alpha=0.7, rwidth=0.85)
 # n, bins, patches = plt.hist(x=np_hist, bins=8, color='#0504aa',alpha=0.7, rwidth=0.85)
 # plt.grid(axis='y', alpha=0.75)
@@ -82,7 +82,7 @@ n, bins, patches = ax.hist(x=np_hist, bins=10, color='#12446d',alpha=0.7, rwidth
 print(bins)
 
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits with a Step of 64, on Traversing All Dimensions')
+ax.set_title('The Number of Visits, with a Step of 64 \n while Checking All Dimensions, on a Dataset of size 1048576')
 # ax.set_yticks(k5.All)
 ax.set_ylabel('Number of Occurrences.')
 ax.set_xticks(bins)
@@ -124,11 +124,11 @@ print(bin_edges)
 
 fig, ax = plt.subplots()
 
-n, bins, patches = ax.hist(x=np_hist2, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='Visits Traversing All Dimensions.')
+n, bins, patches = ax.hist(x=np_hist2, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=16') #, label='Visits Traversing All Dimensions.')
 print(bins)
 
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits with a Step of 64, on Traversing All Dimensions')
+ax.set_title('The Number of Visits, with a Step of 64 \n while Checking One Dimension, on a Dataset of size 1048576')
 ax.set_ylabel('Number of Occurrences.')
 ax.set_xticks(bins)
 ax.legend()
@@ -156,7 +156,84 @@ plt.show()
 
 
 
+onev2 = pd.read_csv('visit-one-k3-d8.csv')
+allv2 = pd.read_csv('visit-all-k3-d8.csv')
 
+onev2.columns = ['One']
+allv2.columns = ['All']
+
+np_hist3 = onev2.One
+hist,bin_edges = np.histogram(np_hist3)
+print(hist)
+print(bin_edges)
+
+
+fig, ax = plt.subplots()
+
+n, bins, patches = ax.hist(x=np_hist3, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=8') #, label='Visits while Traversing and Checking one Dimensions.')
+print(bins)
+
+ax.set_xlabel('Number of Visits.')
+ax.set_title('The Number of Visits while Checking One Dimension,\non a Dataset of size 1048576')
+ax.set_ylabel('Number of Occurrences.')
+ax.set_xticks(bins)
+ax.legend()
+
+def autolabel(rects):
+    i = 0
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+        i += 1
+
+
+autolabel(patches)
+
+fig.tight_layout()
+
+plt.show()
+
+
+np_hist4 = allv2.All
+hist,bin_edges = np.histogram(np_hist4)
+print(hist)
+print(bin_edges)
+
+
+fig, ax = plt.subplots()
+
+n, bins, patches = ax.hist(x=np_hist4, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=8')
+print(bins)
+
+ax.set_xlabel('Number of Visits.')
+ax.set_title('The Number of Visits while Checking All Dimensions,\non a Dataset of size 1048576')
+ax.set_ylabel('Number of Occurrences.')
+ax.set_xticks(bins)
+ax.legend()
+
+def autolabel(rects):
+    i = 0
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+        i += 1
+
+
+autolabel(patches)
+
+fig.tight_layout()
+
+plt.show()
 
 
 

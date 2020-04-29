@@ -3,7 +3,7 @@
 with open('../../data/visit-one-k3-d8') as f1:
 	d1 = f1.read()
 
-fd1 = d1.replace("i32", "").replace("f32", "").replace("[", "").replace("]", "").replace(",", ", \n")
+fd1 = d1.replace("i32", "").replace("f32", "").replace("[", "").replace("]", "").replace(",", " \n")
 
 with open('../../report/plots/visit-all-k3-d8.csv', 'w+') as f11:
 	f11.write(fd1)
@@ -20,14 +20,14 @@ with open('../../report/plots/visit-all-k3-d8.csv', 'w+') as f11:
 # 	f21.write(fd2)
 
 
-with open('../../data/visit-one-k3-d8') as f3:
-	d3 = f3.read()
+# with open('../../data/visit-one-k3-d8') as f3:
+# 	d3 = f3.read()
 
-fd3 = d3.replace("i32", "").replace("f32", "").replace("[", "").replace("]", "").replace(",", " \n")
-# print(type(fd3))
+# fd3 = d3.replace("i32", "").replace("f32", "").replace("[", "").replace("]", "").replace(",", " \n")
+# # print(type(fd3))
 
-with open('../../report/plots/visit-one-k3-d8.csv', 'w+') as f31:
-	f31.write(fd3)
+# with open('../../report/plots/visit-one-k3-d8.csv', 'w+') as f31:
+# 	f31.write(fd3)
 
 
 # fd12 = d1.replace("i32", "").replace("f32", "").replace("[", "").replace("]", "").replace(",", ", \n")

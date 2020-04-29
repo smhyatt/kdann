@@ -13,8 +13,8 @@
 \contentsline {subsubsection}{\numberline {3.3.2}Validating Whether to Look at the \texttt {second}}{15}{subsubsection.3.3.2}
 \contentsline {subsection}{\numberline {3.4}The Full Implementation}{17}{subsection.3.4}
 \contentsline {section}{\numberline {4}Experimental Evaluation}{17}{section.4}
-\contentsline {subsection}{\numberline {4.1}Optimisation using Sorting over Partition}{18}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Optimising Tree Traversal with Full Dimensionality Checking}{20}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Brute Force versus k-d Trees for Computing KNN}{21}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.1}Optimisation using Sorting over Partition}{17}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Optimising Tree Traversal with Full Dimensionality Checking}{18}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Brute Force versus k-d Trees for Computing KNN}{19}{subsection.4.3}
 \contentsline {section}{\numberline {5}Conclusion}{21}{section.5}
-\contentsline {section}{References}{22}{section*.17}
+\contentsline {section}{References}{22}{section*.19}

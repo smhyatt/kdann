@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  28 APR 2020 21:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  29 APR 2020 09:54
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1163,27 +1163,27 @@ runsystem(rm master.aex)...executed.
 (./master.aux)
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 173.
-LaTeX Font Info:    ... okay on input line 173.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 173.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 174.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 174.
 
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    ... okay on input line 174.
 
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1216,7 +1216,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box60
-Package hyperref Info: Link coloring OFF on input line 173.
+Package hyperref Info: Link coloring OFF on input line 174.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1226,9 +1226,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count277
 )
-LaTeX Info: Redefining \ref on input line 173.
-LaTeX Info: Redefining \pageref on input line 173.
-LaTeX Info: Redefining \nameref on input line 173.
+LaTeX Info: Redefining \ref on input line 174.
+LaTeX Info: Redefining \pageref on input line 174.
+LaTeX Info: Redefining \nameref on input line 174.
 
 (./master.out) (./master.out)
 \@outlinefile=\write7
@@ -1294,16 +1294,16 @@ Package caption Info: End \AtBeginDocument code.
 <pics/nat-farve.pdf, id=83, 597.23125pt x 845.1575pt>
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
-Package pdftex.def Info: pics/nat-farve.pdf  used on input line 209.
+Package pdftex.def Info: pics/nat-farve.pdf  used on input line 210.
 (pdftex.def)             Requested size: 702.625pt x 602.25pt.
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
-Package pdftex.def Info: pics/nat-farve.pdf  used on input line 209.
+Package pdftex.def Info: pics/nat-farve.pdf  used on input line 210.
 (pdftex.def)             Requested size: 702.625pt x 1003.75pt.
 <pics/nat-en.pdf, id=86, 597.23125pt x 845.1575pt>
 File: pics/nat-en.pdf Graphic file (type pdf)
 <use pics/nat-en.pdf>
-Package pdftex.def Info: pics/nat-en.pdf  used on input line 209.
+Package pdftex.def Info: pics/nat-en.pdf  used on input line 210.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 [1
 
@@ -1429,81 +1429,95 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 
 (./_minted-master/6EF238F87358005769C51FDCE71F94EF6D5E9B5CA395CA8C27C43E4C01BD6
 354.pygtex)) (./sections/fullprog.tex [15 <./pics/kd-tree-visual/11.png>]
-Overfull \vbox (284.96112pt too high) has occurred while \output is active []
+Overfull \vbox (279.96112pt too high) has occurred while \output is active []
 
 
 [16]) (./sections/eval.tex
 <pics/plot-figs/sort-d16.png, id=265, 616.4631pt x 418.4433pt>
 File: pics/plot-figs/sort-d16.png Graphic file (type png)
 <use pics/plot-figs/sort-d16.png>
-Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 41.
-(pdftex.def)             Requested size: 472.03123pt x 320.41455pt.
- [17]
-File: pics/plot-figs/sort-d16.png Graphic file (type png)
-<use pics/plot-figs/sort-d16.png>
-Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 47.
+Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 32.
 (pdftex.def)             Requested size: 231.2979pt x 156.99886pt.
-<pics/plot-figs/sort-d4.png, id=271, 630.1944pt x 415.5525pt>
+<pics/plot-figs/sort-d4.png, id=267, 630.1944pt x 415.5525pt>
 File: pics/plot-figs/sort-d4.png Graphic file (type png)
 <use pics/plot-figs/sort-d4.png>
-Package pdftex.def Info: pics/plot-figs/sort-d4.png  used on input line 50.
+Package pdftex.def Info: pics/plot-figs/sort-d4.png  used on input line 35.
 (pdftex.def)             Requested size: 236.01561pt x 155.62889pt.
-File: pics/plot-figs/sort-d16.png Graphic file (type png)
-<use pics/plot-figs/sort-d16.png>
-Package pdftex.def Info: pics/plot-figs/sort-d16.png  used on input line 57.
-(pdftex.def)             Requested size: 472.03123pt x 320.41455pt.
- [18 <./pics/plot-figs/sort-d16.png> <./pics/plot-figs/sort-d4.png>]
-<pics/plot-figs/sort-small-d16.png, id=283, 615.0177pt x 416.9979pt>
+<pics/plot-figs/sort-small-d16.png, id=268, 615.0177pt x 416.9979pt>
 File: pics/plot-figs/sort-small-d16.png Graphic file (type png)
 <use pics/plot-figs/sort-small-d16.png>
 Package pdftex.def Info: pics/plot-figs/sort-small-d16.png  used on input line 
-63.
+48.
 (pdftex.def)             Requested size: 231.2979pt x 156.82558pt.
-<pics/plot-figs/sort-small-d4.png, id=284, 633.0852pt x 418.4433pt>
+<pics/plot-figs/sort-small-d4.png, id=269, 633.0852pt x 418.4433pt>
 File: pics/plot-figs/sort-small-d4.png Graphic file (type png)
 <use pics/plot-figs/sort-small-d4.png>
-Package pdftex.def Info: pics/plot-figs/sort-small-d4.png  used on input line 6
-6.
+Package pdftex.def Info: pics/plot-figs/sort-small-d4.png  used on input line 5
+1.
 (pdftex.def)             Requested size: 236.01561pt x 155.99641pt.
-<pics/plot-figs/trav-k5-no-1.png, id=285, 900.4842pt x 509.5035pt>
+ [17 <./pics/plot-figs/sort-d16.png> <./pics/plot-figs/sort-d4.png>]
+<pics/plot-figs/trav-k5-no-1.png, id=279, 900.4842pt x 509.5035pt>
 File: pics/plot-figs/trav-k5-no-1.png Graphic file (type png)
 <use pics/plot-figs/trav-k5-no-1.png>
-Package pdftex.def Info: pics/plot-figs/trav-k5-no-1.png  used on input line 79
+Package pdftex.def Info: pics/plot-figs/trav-k5-no-1.png  used on input line 64
 .
-(pdftex.def)             Requested size: 472.03123pt x 267.0813pt.
- [19 <./pics/plot-figs/sort-small-d16.png> <./pics/plot-figs/sort-small-d4.png>
-]
-<pics/plot-figs/trav-d16.png, id=296, 840.5001pt x 478.4274pt>
+(pdftex.def)             Requested size: 424.82523pt x 240.3685pt.
+<pics/plot-figs/trav-d16.png, id=280, 840.5001pt x 478.4274pt>
 File: pics/plot-figs/trav-d16.png Graphic file (type png)
 <use pics/plot-figs/trav-d16.png>
-Package pdftex.def Info: pics/plot-figs/trav-d16.png  used on input line 87.
-(pdftex.def)             Requested size: 472.03123pt x 268.69133pt.
- [20 <./pics/plot-figs/trav-k5-no-1.png>])
-(./sections/conclusion.tex) [21 <./pics/plot-figs/trav-d16.png>] (./master.bbl)
-[22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
+Package pdftex.def Info: pics/plot-figs/trav-d16.png  used on input line 72.
+(pdftex.def)             Requested size: 424.82523pt x 241.81927pt.
+ [18 <./pics/plot-figs/sort-small-d16.png> <./pics/plot-figs/sort-small-d4.png>
+ <./pics/plot-figs/trav-k5-no-1.png>]
+<pics/plot-figs/brute-mult-k2.png, id=293, 1054.4193pt x 492.8814pt>
+File: pics/plot-figs/brute-mult-k2.png Graphic file (type png)
+<use pics/plot-figs/brute-mult-k2.png>
+Package pdftex.def Info: pics/plot-figs/brute-mult-k2.png  used on input line 8
+9.
+(pdftex.def)             Requested size: 472.03123pt x 220.64389pt.
+<pics/plot-figs/brute-mult-k6.png, id=294, 1055.142pt x 493.6041pt>
+File: pics/plot-figs/brute-mult-k6.png Graphic file (type png)
+<use pics/plot-figs/brute-mult-k6.png>
+Package pdftex.def Info: pics/plot-figs/brute-mult-k6.png  used on input line 9
+6.
+(pdftex.def)             Requested size: 472.03123pt x 220.81679pt.
+ [19 <./pics/plot-figs/trav-d16.png> <./pics/plot-figs/brute-mult-k2.png>]
+<pics/plot-figs/brute-mult-k12-side.png, id=303, 1051.5285pt x 490.7133pt>
+File: pics/plot-figs/brute-mult-k12-side.png Graphic file (type png)
+<use pics/plot-figs/brute-mult-k12-side.png>
+Package pdftex.def Info: pics/plot-figs/brute-mult-k12-side.png  used on input 
+line 103.
+(pdftex.def)             Requested size: 472.03123pt x 220.27983pt.
+<pics/plot-figs/brute-vs-kdtree.png, id=304, 739.3221pt x 364.9635pt>
+File: pics/plot-figs/brute-vs-kdtree.png Graphic file (type png)
+<use pics/plot-figs/brute-vs-kdtree.png>
+Package pdftex.def Info: pics/plot-figs/brute-vs-kdtree.png  used on input line
+ 110.
+(pdftex.def)             Requested size: 377.62642pt x 186.41293pt.
+ [20 <./pics/plot-figs/brute-mult-k6.png> <./pics/plot-figs/brute-mult-k12-side
+.png>])
+(./sections/conclusion.tex) [21 <./pics/plot-figs/brute-vs-kdtree.png>]
+(./master.bbl) [22]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 241.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 241.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 241.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 241.
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: C8BF7C2DD0A1D52990A83ECC6BF5DB59;1345.
+(rerunfilecheck)             Checksum: 2613E934CAFCB360D66074034C83F585;1345.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 240.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 241.
 runsystem(rm master.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27563 strings out of 492649
- 499142 string characters out of 6129621
- 649072 words of memory out of 5000000
- 30748 multiletter control sequences out of 15000+600000
+ 27585 strings out of 492649
+ 499870 string characters out of 6129621
+ 649027 words of memory out of 5000000
+ 30764 multiletter control sequences out of 15000+600000
  28479 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,12n,102p,1140b,622s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1534,10 +1548,10 @@ nts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-dist/font
 s/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/
 type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/cm-super/sftt1200.pfb>
-Output written on master.pdf (23 pages, 734840 bytes).
+Output written on master.pdf (23 pages, 928395 bytes).
 PDF statistics:
- 405 PDF objects out of 1000 (max. 8388607)
- 321 compressed objects within 4 object streams
- 72 named destinations out of 1000 (max. 500000)
- 253 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 325 compressed objects within 4 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 273 words of extra memory for PDF output out of 10000 (max. 10000000)
 
