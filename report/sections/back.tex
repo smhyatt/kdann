@@ -29,8 +29,13 @@
 % - why Futhark: supports regular parallelism - which is why it doesnt have recursion, 
 % - note on PCA and going on with an approximate solution
 
+% Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it can handle binary as well as multiclass data, and while often applied for comparing two images, it faces the challenge of slow performance because both images are of image size. 
 
-Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it can handle binary as well as multiclass data, and while often applied for comparing two images, it faces the challenge of slow performance because both images are of image size. 
+Computing KNN is widely applied due to its simplicity and excellent empirical performance, it has no training phase, it works well handling multi-dimensional datasets. 
+
+KNN, the problem is to find the nearest neighbours in some dimensionality D and k-d trees are good 
+
+We have D dimensional space, we have a set of reference points of size n, and a set of queries of size m and we aim to compute the nearest neighbours according to a measured distance for each query. 
 \\[2mm]
 When comparing two images; image A and image B, the goal of KNN is to find the patches of image B that are most similar to each query patch of image A, according to a measured distance. The naive approach is using brute force, in which each patch of image B is compared with each patch of image A, if each image has m patches the complexity of the search will be $O(m^2)$. See \hyperref[sec:brute]{Brute Force}. Although brute force is a simple solution, there exists several alternative techniques for computing KNN. One commonly applied method is using a generalisation of the binary tree; the k-d tree. 
 \\[2mm]

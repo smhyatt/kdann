@@ -127,15 +127,16 @@ The following demonstrates the results for the optimisation described in section
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{pics/plot-figs/trav-k5-no-1.png}
+\includegraphics[width=1\textwidth]{pics/plot-figs/new-trav-k5-d6d12.png}
 \caption{Traversal comparing results w.r.t varying sizes for D on a smaller and larger dataset.}
 \label{fig:trav1}
 % \caption{The HDF5 hierarchical and cyclic grouping options \protect\cite{hdf5}.}
 \end{figure}
 
-Figure \ref{fig:trav1} looks to show that increasing the size of D as well as the dataset sizes will show a better performance for the optimised solution that checks at all dimensions. The test uses a static size K=5 and tests on D=6 and D=12 for both small and large datasets, where the light blue is the traversal checking one dimension and the dark blue is the traversal checking all dimensions. 
+Figure \ref{fig:trav1} looks to show that increasing the size of D as well as the dataset sizes will give a better performance for the optimised solution that checks at all dimensions. The test uses a static size K=5 and tests on D=6 and D=12 for both small and large datasets, where the light blue is the traversal checking one dimension and the dark blue is the traversal checking all dimensions. In comparison, the speed-ups for D=12 is 2.45 and 4.3 times faster than D=6, respectively. 
 
 % \todo[color=green!40, inline, size=\small]{Beskriv tarverse ift. K}
+% [1.3024425089979943, 3.752470195979607, 1.322579210837369, 5.616522829044345]
 
 
 \begin{table}[H]
