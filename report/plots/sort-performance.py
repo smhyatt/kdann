@@ -48,61 +48,62 @@ print(k3sor.Sorting)
 #			Dataset testing sorting vs partition 
 #################################################################################
 
+# OBS - ORIGIANLLY 16 BUT HAD TO BE 9
 
-# d16sor = sort[sort['D']==16]
-# d16par = sort[sort['D']==16]
-# #print(d16sor)
+d16sor = sort[sort['D']==9]
+d16par = sort[sort['D']==9]
+#print(d16sor)
 
-# d16sork11 = d16sor[d16sor['K']==11]
-# d16park11 = d16par[d16par['K']==11]
+d16sork11 = d16sor[d16sor['K']==11]
+d16park11 = d16par[d16par['K']==11]
+
+labels = [
+'K=3', 'K=11', 
+'K=3', 'K=11'
+]
 
 # labels = [
-# 'K=3', 'K=11', 
-# 'K=3', 'K=11'
+# 'D=4', 'D=16', 
+# 'D=4', 'D=16', 
+# 'D=4', 'D=16',
+# 'D=4', 'D=16'
 # ]
 
-# # labels = [
-# # 'D=4', 'D=16', 
-# # 'D=4', 'D=16', 
-# # 'D=4', 'D=16',
-# # 'D=4', 'D=16'
-# # ]
-
-# x = np.arange(len(labels))  # the label locations
-# width = 0.4  # the width of the bars
+x = np.arange(len(labels))  # the label locations
+width = 0.4  # the width of the bars
 
 
 
-# fig, ax = plt.subplots()
-# rects1 = ax.bar(x - width/2, d16sor.Sorting, width,   label='Sorting',   color='#1e6dae')
-# rects2 = ax.bar(x + width/2, d16par.Partition, width, label='Partition', color='#6baee6')
+fig, ax = plt.subplots()
+rects1 = ax.bar(x - width/2, d16sor.Sorting, width,   label='Sorting',   color='#1e6dae')
+rects2 = ax.bar(x + width/2, d16par.Partition, width, label='Partition', color='#6baee6')
 
-# # Add some text for labels, title and custom x-axis tick labels, etc.
-# ax.set_ylabel('Performance in milliseconds.')
-# ax.set_title('Sorting Queries w.r.t Leaves Versus using Partition,\n On a Larger Dataset for D=16 and K is 3 and 11')
-# ax.set_xticks(x)
-# ax.set_xticklabels(labels)
-# ax.legend()
-
-
-# def autolabel(rects):
-#     """Attach a text label above each bar in *rects*, displaying its height."""
-#     for rect in rects:
-#         height = rect.get_height()
-#         ax.annotate('{}'.format(height),
-#                     xy=(rect.get_x() + rect.get_width() / 2, height),
-#                     xytext=(0, 3),  # 3 points vertical offset
-#                     textcoords="offset points",
-#                     ha='center', va='bottom')
+# Add some text for labels, title and custom x-axis tick labels, etc.
+ax.set_ylabel('Performance in milliseconds.')
+ax.set_title('Sorting Queries w.r.t Leaves Versus using Partition,\n On a Larger Dataset for D=16 and K is 3 and 11')
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
 
 
-# autolabel(rects1)
-# autolabel(rects2)
+def autolabel(rects):
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
 
 
-# fig.tight_layout()
+autolabel(rects1)
+autolabel(rects2)
 
-# plt.show()
+
+fig.tight_layout()
+
+plt.show()
 
 
 #################################################################################

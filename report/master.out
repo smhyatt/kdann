@@ -14,6 +14,9 @@
 \BOOKMARK [1][-]{section.4}{Experimental Evaluation}{}% 14
 \BOOKMARK [2][-]{subsection.4.1}{Optimisation using Sorting over Partition}{section.4}% 15
 \BOOKMARK [2][-]{subsection.4.2}{Optimising Tree Traversal with Full Dimensionality Checking}{section.4}% 16
-\BOOKMARK [2][-]{subsection.4.3}{Brute Force versus k-d Trees for Computing KNN}{section.4}% 17
-\BOOKMARK [1][-]{section.5}{Conclusion}{}% 18
-\BOOKMARK [1][-]{section*.19}{References}{}% 19
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Demonstrating a Comparison of the Number of Leaf Visits}{subsection.4.2}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Brute Force versus k-d Trees for Computing KNN}{section.4}% 18
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 19
+\BOOKMARK [1][-]{section.6}{Appendix}{}% 20
+\BOOKMARK [2][-]{subsection.6.1}{Additional Graphs for Performance of Brute Force versus k-d Trees}{section.6}% 21
+\BOOKMARK [1][-]{section*.26}{References}{}% 22

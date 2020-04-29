@@ -21,7 +21,7 @@
 
 2 Background
 	- the algorithms as pseudo-code
-	- why Futhark: supports regular parallelism - which is why it doesnt have recursion, 
+	- why Futhark: supports regular parallelism - which is why it doesn't have recursion, 
 	- note on PCA and going on with an approximate solution
 
 	2.1 RelatedWork
@@ -31,24 +31,35 @@
 
 3 Implementation
 	- for each have a difficulties / shortcomings section
-	- include nice code of 
+	- include nice code of each - high level showing the map reduce constructions and such - just pseudocode (simplified version)
+		- it should show the parallel constructs - okay to add sort there from tree construction bc. the text should state that we are using batched mergesort
+		- it's just nice to see the loops and mapping constructions - it doesn't have to be your code, it can be the nice solution before we fixed the tree construct with sort where we split it up etc. 
+			- which will help you, because then you can discuss based on the code like you did in the background. 
+		- it doesn't have to work and it can be incomplete
 
 	3.1 The Brute Force Version
 		- describing which parts are parallel and which are not - and why
 
 	3.2 k-d Tree Construction
-		- essential thing: padding technique that allows regular parallelism that is much faster than - the proposed solution uses at least one more - it accounts to less than 1% overhead - so it is totally reafible - it allows to build on top of regular parallelism.
+		"the idea is that we are reducing an irregular problem to a regular problem in terms of parallelism, by means of padding" - such that all parallel operations have the same size such that we can do loop interchange, distribution and so on - to efficiently optimise parallelism. 
+		- essential thing: padding technique that allows regular parallelism which is much more efficient since you write the code with regular parallelism and flattening - argue that the proposed solution uses at most 1 more 1 padded element per leaf and the number of points per leaf is typically in the hundreds so it accounts to less than 1% overhead, so its totally feasible, and this overhead allows for a solution that is built on top of regular parallelism - the parallel dimension has the same size over all the elements of the map and so on. 
+		 at least one more - it accounts to less than 1% overhead - so it is totally feasible - it allows to build on top of regular parallelism.
 		-
-		- batch sorting is a detail - shortcomings in compiler - it was not possible to have the sorting inside the map
+		- what is needed to compute so we get a more accurate result: lower bound and upper bound. 
+		
+		Difficulties: 
+			- batch sorting is a detail - shortcomings in compiler - it was not possible to have the sorting inside the map
+				- because of some shortcomings in the Futhark compiler, it wasn't able to efficiently exploit the regular parallelism if we put the map on top a mergesort - it didn't manage to interchange and so forth, and the same for radix sort.   
+			- not fusing the reduce because then Futhark will fuse them inside. 
+				- not fusing the reduces, because if we refused them, then Futhark is not going to also utilise the parallelism inside
+		
 		- explaining the sorting solution
 		- reasoning about choices w.r.t sorting over partition
 			- and why are there three inner maps in the for-loop (due to sorting)
-		- not fusing the reduce because then Futhark will fuse them inside. 
-		- what is needed to compute so we get a more accurate result
 
 	3.3 Tree Traversal
 		- explaining the solution to use a stack 
-		- showing a figure of the first traversal: first go to the leaf in which the query naturally belongs 
+		- showing a figure of the first traversal: first go to the leaf in which the query naturally belongs, there is a unique leaf to which it naturally belongs to 
 		- showing (2-3) figures of the continuous traversal with a stack
 
 		3.3.1 Representing the Stack as an Integer
@@ -62,7 +73,7 @@
 
 	3.4 The Full Implementation
 		- explain how things are put together - main function
-		- reason about sorting the queries by the leaves - why is it faster?
+		- reason about sorting the queries by the leaves - why is it faster? optimises locality of reference, temporal locality because by sorting the queries by the leaves the same leaves are accessed in order. 
 
 
 4 Experimental Evaluation
@@ -72,6 +83,7 @@
 
 	4.1 Sorting over Partition 
 		- plot and reasoning of partition vs. sorting - including sorting the queries after the leaves
+		- the impact of sorting doesn't necessarily depend on D and K  
 
 	4.2 Including all Dimensions in the Traversal
 		- plot and reasoning of traverse with one median check vs. traverse checking all medians
@@ -87,6 +99,29 @@
 
 
 5 Conclusion
+
+
+
+
+
+
+
+
+Can't use all dimensionalities:  
+say you have 4.000.000 points and dimensionality 32 - on a given path from the root to the leaf - the height of that path is 14, which means that more than half of the dimensions are not split, which means you loose accuracy. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
