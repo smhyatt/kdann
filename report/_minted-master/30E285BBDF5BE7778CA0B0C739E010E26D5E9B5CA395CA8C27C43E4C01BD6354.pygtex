@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{entry} \PYG{n}{nnk} \PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{n}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]} \PYG{p}{(}\PYG{n}{qs}\PYG{k+kt}{:}\PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]}\PYG{n}{real}\PYG{p}{)} \PYG{p}{(}\PYG{n}{refs}\PYG{k+kt}{:}\PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]}\PYG{n}{real}\PYG{p}{)} \PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{k}\PYG{p}{](}\PYG{n}{int}\PYG{p}{,}\PYG{n}{real}\PYG{p}{)} \PYG{o+ow}{=}
+    \PYG{n}{map} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{q} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+        \PYG{k+kr}{let}  \PYG{n}{nn} \PYG{o+ow}{=} \PYG{n}{replicate} \PYG{n}{k} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{n}{i32}\PYG{p}{,} \PYG{n}{real\PYGZus{}inf}\PYG{p}{)}
+        \PYG{k+kr}{in} \PYG{n}{loop} \PYG{n}{nn} \PYG{n}{for} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{n} \PYG{k+kr}{do}
+            \PYG{k+kr}{let} \PYG{n}{ref} \PYG{o+ow}{=} \PYG{n}{refs}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}
+            \PYG{k+kr}{let} \PYG{n}{dist} \PYG{o+ow}{=} \PYG{n}{seq\PYGZus{}euclidean} \PYG{n}{q} \PYG{n}{ref}
+            \PYG{k+kr}{let} \PYG{n}{r\PYGZus{}idx} \PYG{o+ow}{=} \PYG{n}{j} \PYG{k+kr}{in}
+            \PYG{k+kr}{let} \PYG{p}{(}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{n}{nn\PYGZsq{}}\PYG{p}{)} \PYG{o+ow}{=}
+                \PYG{n}{loop} \PYG{p}{(}\PYG{n}{dist}\PYG{p}{,} \PYG{n}{r\PYGZus{}idx}\PYG{p}{,} \PYG{n}{nn}\PYG{p}{)} \PYG{n}{for} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{k} \PYG{k+kr}{do}
+                    \PYG{k+kr}{let} \PYG{n}{cur\PYGZus{}nn} \PYG{o+ow}{=} \PYG{n}{nn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{l+m+mi}{1}  \PYG{k+kr}{in}
+                    \PYG{k+kr}{if} \PYG{n}{dist} \PYG{o}{\PYGZlt{}=} \PYG{n}{cur\PYGZus{}nn} \PYG{k+kr}{then}
+                        \PYG{k+kr}{let} \PYG{n}{tmp\PYGZus{}ind} \PYG{o+ow}{=} \PYG{n}{nn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{l+m+mi}{0}
+                        \PYG{k+kr}{let} \PYG{n}{nn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{r\PYGZus{}idx}\PYG{p}{,} \PYG{n}{dist}\PYG{p}{)}
+                        \PYG{k+kr}{let} \PYG{n}{r\PYGZus{}idx} \PYG{o+ow}{=} \PYG{n}{tmp\PYGZus{}ind}
+                        \PYG{k+kr}{let} \PYG{n}{dist}  \PYG{o+ow}{=} \PYG{n}{cur\PYGZus{}nn}
+                        \PYG{k+kr}{in}  \PYG{p}{(}\PYG{n}{dist}\PYG{p}{,} \PYG{n}{r\PYGZus{}idx}\PYG{p}{,} \PYG{n}{nn}\PYG{p}{)}
+                    \PYG{k+kr}{else}    \PYG{p}{(}\PYG{n}{dist}\PYG{p}{,} \PYG{n}{r\PYGZus{}idx}\PYG{p}{,} \PYG{n}{nn}\PYG{p}{)}
+            \PYG{k+kr}{in}  \PYG{n}{nn\PYGZsq{}}
+    \PYG{p}{)} \PYG{n}{qs}
+\end{Verbatim}

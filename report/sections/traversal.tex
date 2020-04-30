@@ -36,7 +36,7 @@
 
 As mention in the Background, Futhark does not support recursion, which is why the pseudo-code from Algorithm 3 is rewritten into an imperative version. One such solution is using a stack to traverse the tree incrementally while deciding which nodes to visit next. The figure below demonstrates the traverse down to the first leaf; this example does not need a stack because, at this point, we do not know if we need to visit additional leaves. Figures X-X show the traversal continuing from the first leaf, in which a stack is necessary. 
 
-
+Divide and conquer recursion is difficult to map, especially efficiently for parallel execution. Due to divergence and various irregular things.  
 
 
 
@@ -253,3 +253,16 @@ entry traverse [d][n][l] (height:             i32)  (median_dims:     [n]i32)
 \caption{Futhark implementation of the tree traversal.}
 \label{lst:traverse}
 \end{listing}
+
+
+
+
+
+\subsubsection{Difficulties and Shortcomings}
+
+
+
+
+
+
+

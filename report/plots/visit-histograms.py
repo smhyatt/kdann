@@ -25,8 +25,8 @@ def truncate(n):
 # onev = pd.read_csv('visit-one-k5-d6.csv')
 # allv = pd.read_csv('visit-all-k5-d6.csv')
 
-onev = pd.read_csv('visit-one-k5-d16.csv')
-allv = pd.read_csv('visit-all-k5-d16.csv')
+onev = pd.read_csv('visit-one-k5-d14.csv')
+allv = pd.read_csv('visit-all-k5-d14.csv')
 
 onev.columns = ['One']
 allv.columns = ['All']
@@ -41,9 +41,9 @@ np_hist = alltrunc
 hist,bin_edges = np.histogram(np_hist)
 
 fig, ax = plt.subplots()
-n, bins, patches = ax.hist(x=np_hist, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=16') #6')
+n, bins, patches = ax.hist(x=np_hist, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=14') #6')
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits while Checking All Dimensions,\n on a Datasets of sizes 1048576') # 4194304')
+ax.set_title('The Number of Visits while Checking All Dimensions,\n on a Datasets of sizes 4194304') # 4194304')
 ax.set_ylabel('Number of Occurrences in logarithmic scale.')
 ax.set_xticks(bins)
 ax.set_yscale('log')
@@ -80,11 +80,11 @@ hist,bin_edges = np.histogram(np_hist2)
 
 fig, ax = plt.subplots()
 
-n, bins, patches = ax.hist(x=np_hist2, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=16') # 6')
+n, bins, patches = ax.hist(x=np_hist2, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=5 \nD=14') # 6')
 print(bins)
 
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits while Checking One Dimension,\n on a Datasets of sizes 1048576') # 4194304')
+ax.set_title('The Number of Visits while Checking One Dimension,\n on a Datasets of sizes 4194304') # 4194304')
 ax.set_ylabel('Number of Occurrences in logarithmic scale.')
 ax.set_xticks(bins)
 ax.set_yscale('log')
@@ -122,8 +122,8 @@ plt.show()
 # onev2 = pd.read_csv('visit-one-k3-d8.csv')
 # allv2 = pd.read_csv('visit-all-k3-d8.csv')
 
-onev2 = pd.read_csv('visit-one-k3-d16.csv')
-allv2 = pd.read_csv('visit-all-k3-d16.csv')
+onev2 = pd.read_csv('visit-one-k3-d14.csv')
+allv2 = pd.read_csv('visit-all-k3-d14.csv')
 
 
 onev2.columns = ['One']
@@ -139,11 +139,11 @@ np_hist3 = onetrunc
 hist,bin_edges = np.histogram(np_hist3)
 fig, ax = plt.subplots()
 
-n, bins, patches = ax.hist(x=np_hist3, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=16') #8')
+n, bins, patches = ax.hist(x=np_hist3, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=14') #8')
 print(bins)
 
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits while Checking One Dimension,\n on a Datasets of sizes 2097152') # 1048576')
+ax.set_title('The Number of Visits while Checking One Dimension,\n on a Datasets of sizes 4194304') # 1048576')
 ax.set_ylabel('Number of Occurrences in logarithmic scale.')
 ax.set_xticks(bins)
 ax.set_yscale('log')
@@ -174,11 +174,11 @@ np_hist4 = alltrunc
 hist,bin_edges = np.histogram(np_hist4)
 fig, ax = plt.subplots()
 
-n, bins, patches = ax.hist(x=np_hist4, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=16') #8')
+n, bins, patches = ax.hist(x=np_hist4, bins=10, color='#12446d',alpha=0.7, rwidth=0.85, label='K=3 \nD=14') #8')
 print(bins)
 
 ax.set_xlabel('Number of Visits.')
-ax.set_title('The Number of Visits while Checking All Dimensions,\n on a Datasets of sizes 2097152') # 1048576')
+ax.set_title('The Number of Visits while Checking All Dimensions,\n on a Datasets of sizes 4194304') # 1048576')
 ax.set_ylabel('Number of Occurrences in logarithmic scale.')
 ax.set_xticks(bins)
 ax.set_yscale('log')

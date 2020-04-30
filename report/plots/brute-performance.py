@@ -277,6 +277,61 @@ plt.show()
 
 
 
+########################################################################################################################
+#               Computing K for diff. Brute Force and KD Tree separately. 
+########################################################################################################################
+
+
+
+
+# X2 = np.arange(len(bk12.Optimised))
+X2 = np.arange(2, 14, 2) # 2, 4, 6, 8, 10, 12, 14
+
+plt.title('Comparing Brute Force Performances for K=12, K=6 and K=2,\n each on Dimensions 2, 4, 6, 8, 10 and 12')
+# plt.xscale('log')
+# plt.yscale('log')
+plt.ylabel('Performance in milliseconds.')
+plt.xlabel('Dimensions.') 
+
+# plt.plot(X2, naivc, linestyle='-', label = "primes-naive w/ C")
+plt.plot(X2, bk12.Brute, linestyle='-.', label = "Brute Force, K=12", color='#1e6dae')
+
+# plt.plot(X2, flatc, linestyle='-', label = "primes-flat w/ C")
+plt.plot(X2, bk6.Brute, linestyle='-.', label = "Brute Force, K=6", color='#6baee6')
+
+plt.plot(X2, bk2.Brute, linestyle='-.', label = "Brute Force, K=2", color='#12446d')
+
+# plt.plot(X2, seqc, linestyle='-', label = "primes-seq w/ C")
+
+plt.legend()
+plt.show()
+
+
+
+# X2 = np.arange(len(bk12.Optimised))
+X2 = np.arange(2, 14, 2) # 2, 4, 6, 8, 10, 12, 14
+
+plt.title('Comparing k-d Tree Performances for K=12, K=6 and K=2,\n each on Dimensions 2, 4, 6, 8, 10 and 12')
+# plt.xscale('log')
+# plt.yscale('log')
+plt.ylabel('Performance in milliseconds.')
+plt.xlabel('Dimensions.') 
+
+# plt.plot(X2, naivc, linestyle='-', label = "primes-naive w/ C")
+plt.plot(X2, bk12.Optimised, linestyle='-.', label = "k-d Trees, K=12", color='#1e6dae')
+
+# plt.plot(X2, flatc, linestyle='-', label = "primes-flat w/ C")
+plt.plot(X2, bk6.Optimised, linestyle='-.', label = "k-d Trees, K=6", color='#6baee6')
+
+plt.plot(X2, bk2.Optimised, linestyle='-.', label = "k-d Trees, K=2", color='#12446d')
+
+# plt.plot(X2, seqc, linestyle='-', label = "primes-seq w/ C")
+
+plt.legend()
+plt.show()
+
+
+
 
 
 

@@ -7,25 +7,220 @@
 % Whenever possible, support your reasoning with (as in point to) experimental
 % evaluation results (next).
 
+% - for each have a difficulties / shortcomings section
+% - include nice code of each - high level showing the map reduce constructions and such - just pseudocode (simplified version)
+%     - it should show the parallel constructs - okay to add sort there from tree construction bc. the text should state that we are using batched mergesort
+%     - it's just nice to see the loops and mapping constructions - it doesn't have to be your code, it can be the nice solution before we fixed the tree construct with sort where we split it up etc. 
+%         - which will help you, because then you can discuss based on the code like you did in the background. 
+%     - it doesn't have to work and it can be incomplete
 
-\begin{itemize}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{itemize}	
+
+
+% of listing \ref{lst:tree} 
+
+	% 3.2 k-d Tree Construction
+	% 	"the idea is that we are reducing an irregular problem to a regular problem in terms of parallelism, by means of padding" - such that all parallel operations have the same size such that we can do loop interchange, distribution and so on - to efficiently optimise parallelism. 
+	% 	- essential thing: padding technique that allows regular parallelism which is much more efficient since you write the code with regular parallelism and flattening - argue that the proposed solution uses at most 1 more 1 padded element per leaf and the number of points per leaf is typically in the hundreds so it accounts to less than 1% overhead, so its totally feasible, and this overhead allows for a solution that is built on top of regular parallelism - the parallel dimension has the same size over all the elements of the map and so on. 
+	% 	 at least one more - it accounts to less than 1% overhead - so it is totally feasible - it allows to build on top of regular parallelism.
+	% 	-
+	% 	- what is needed to compute so we get a more accurate result: lower bound and upper bound. 
+		
+	% 	Difficulties: 
+	% 		- batch sorting is a detail - shortcomings in compiler - it was not possible to have the sorting inside the map
+	% 			- because of some shortcomings in the Futhark compiler, it wasn't able to efficiently exploit the regular parallelism if we put the map on top a mergesort - it didn't manage to interchange and so forth, and the same for radix sort.   
+	% 		- not fusing the reduce because then Futhark will fuse them inside. 
+	% 			- not fusing the reduces, because if we refused them, then Futhark is not going to also utilise the parallelism inside
+		
+	% 	- explaining the sorting solution
+	% 	- reasoning about choices w.r.t sorting over partition
+	% 		- and why are there three inner maps in the for-loop (due to sorting)
+
+
+Listing \ref{lst:tree} represents Futhark-like pseudo-code to demonstrate the overall steps and parallel constructs that are applied in constructing the k-d tree. Note that the structure is not equivalent to the final code, due to some shortcoming of Futhark that are discussed in subsection \ref{sec:treediff}. 
 
 
 \begin{listing}[H]
 \begin{minted}{haskell}
+entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
+    let num_pads =     (...)   -- computing the padding needed
+    let padding  = map (...)   -- creating the padding array
+    let reference = points ++ padding
 
+    let (ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+    	(...) -- initalising the loop variables
+        for level < (h+1) do
+            let num_nodes_per_lvl = 1 << level
+            let num_points_per_node_per_lvl = m // num_nodes_per_lvl
+
+            let (indices', reference', node_info', lower, upper) = unzip5 <|
+                map3 (\i node_arr inds ->
+                        let dim_arrs = transpose node_arr   |> intrinsics.opaque
+                        let smallest = map o reduce         |> intrinsics.opaque
+                        let largest  = map o reduce    -- largest numbers for each dimension
+                        let differences = map    (...) -- computing differences
+                        let (dim,_)     = reduce (...) -- dimension w/ widest spread
+                        let extract_dim = map    (...) -- extract dimension values
+                        let d_sort_idxs = extract_dim |> sort |> map (.0)
+                        let indices     = gather d_sort_idxs inds
+                        let node_arrp   = gather2D d_sort_idxs node_arr
+                        let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
+                        let node_info   = (median, dim)
+                        in (indices, node_arrp, node_info, smallest, largest)
+
+                    ) (iota num_nodes_per_lvl) reference ref_inds
+
+            let test = ref_idxs'
+            let (medians, dims) = unzip node_info'
+
+            let inds = map (...)   -- computing indices for scatter
+            in (ref_idxs', 
+                reference', 
+                scatter median_vals inds medians,
+                scatter median_dims inds dims, 
+                scatter2D lower_bounds inds lower,
+                scatter2D upper_bounds inds upper)
+
+    in (ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
 \end{minted}
 \caption{Futhark implementation of the tree creation.}
 \label{lst:tree}
 \end{listing}
+
+
+
+\subsubsection{Difficulties and Shortcomings}
+\label{sec:treediff}
+In the construct above in listing \ref{lst:tree}, the original solution was to use a merge sort on line 19. However, although it was safe for Futhark to perform a loop distribution and loop interchange between the outer map inside both for loops, it did not realise, in which case the interchange was not performed. Thus, causing poor performance for the tree construction.  The solution was to (1) use batched merge sort, which operates on 2D arrays rather than 1D arrays, (2) distribute the map from line 12, across the body of the map function, such that the sorting is outside the map. 
+\\[2mm]
+
+
+
+% In the construct above in listing \ref{lst:tree}, if we look only at the construct between the \texttt{map3} on line 12 and the merge sort performed on line 19, we would get the following structure.
+% if we look only at the construct between the \texttt{map3} on line 12 and the merge sort performed on line 19, we would get the following structure.
+% \begin{verbatim}
+% 	map 
+% 	    for i < d
+% 	        for j < i+1
+% 	            map f (size n)
+% \end{verbatim}
+
+% While it should be safe to make 
+
+% How would you actually transform this loop so you use both levels of parallelism if that is actually what you are after? 
+	
+% When is it safe to interchange a loop inside? 
+
+% 	We need to make sure that we are not reversing any of the direction vectors. It cannot start with < (greater than). 
+
+
+% How can parallel loops be interchanged always? 
+
+% 	If the outer loop is parallel - then we can interchange always. 
+
+% 	A parallel loop can always be interchanged inside (meaning inwards) - expect in the cases in which the loop index or loop bounds depend on that parallel loop index or on the map. 
+
+% What you would like to do with this code is to interchange the outer map inside both for loops, and then we will have: 
+% 	for
+% 		for
+% 			map
+% 				map
+
+% and then we can flatten the two maps and that's done at this point because you have two perfectly nested maps. 
+
+
+% Fixed by using batched merge sort -> instead of operating on a 1D array we operate on a 2D array, the idea is to distribute the map and you distribute the map across the body of the map function such that you separate the sorting part of it from the rest. 
+
+% So the sorting is outside the original outer map. 
+
+% 	map
+% 		map
+% 		sort
+% 		map
+
+% -> parallel loop distribution and loop interchange. This is what gives you easy flattening for regular cases which is what Futhark s doing. But in this case Futhark is stupid, because it doesn't realise that the inner loop for j ... , since that the bound is i+1 -> it thinks that it cannot interchange the outer map. So it's a Futhark limitation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \begin{listing}[H]
+% \begin{minted}{haskell}
+% entry buildTree [m][d] (imB : [m][d]f32) (h: i32) =
+%     let num_nodes  = (1 << (h+1)) - 1
+%     let num_leaves =  1 << (h+1)
+%     let ppl  = (m + num_nodes) / num_leaves  -- ceil(m / (2^(h+1)))
+%     let m'   = ppl * num_leaves
+%     let num_pads = m' - m
+%     let pad = map (\_ -> map (\_ -> f32.inf) (iota d)) (iota num_pads)
+%     let imB = imB ++ pad
+%     let num_patches_in_leaf = m' // num_leaves
+%     let tot_nodes = num_nodes+num_leaves
+
+%     let (ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+%         loop(ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
+%           (iota m, points, replicate..., replicate..., replicate..., replicate...)
+
+%         for level < (h+1) do
+%             let num_nodes_per_lvl = 1 << level
+%             let num_points_per_node_per_lvl = m // num_nodes_per_lvl
+
+%             let (imB_idxs', reference, node_info', lower, upper) = unzip5 <|
+%                 map3 (\i node_arr inds ->
+%                         let dim_arrs = transpose node_arr   |> intrinsics.opaque
+%                         let smallest = map o reduce         |> intrinsics.opaque
+%                         let largest  = map o reduce
+%                         let differences = map (...) 	-- computing differences
+%                         let (dim,_)     = reduce (...)  -- dimension w/ widest spread
+%                         let extract_dim = map (...) 	-- extract dimension values
+%                         let d_sort_idxs = extract_dim |> sort |> map (.0)
+%                         let indices     = gather d_sort_idxs inds
+%                         let node_arrp   = gather2D d_sort_idxs node_arr
+%                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
+%                         let node_info   = (median, dim)
+%                         in (indices, node_arrp, node_info, smallest, largest)
+
+%                     ) (iota num_nodes_per_lvl) referencep ref_inds
+
+%             let test = ref_idxs'
+%             let (medians, dims) = unzip node_info'
+
+%             let inds = map (...)
+%             in (flatten ref_idxs', flatten reference, scatter median_vals inds medians,
+%                 scatter median_dims inds dims, scatter2D lower_bounds inds lower,
+%                 scatter2D upper_bounds inds upper)
+
+%     in (ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
+% \end{minted}
+% \caption{Futhark implementation of the tree creation.}
+% \label{lst:tree}
+% \end{listing}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

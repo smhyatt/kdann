@@ -1,6 +1,6 @@
 \section{Implementation}
 \label{sec:brute}
-\subsection{The Brute Force Version}
+\subsection{Brute Force}
 
 % 3. section(s) in which you describe your work: each step
 %     -- brute force version
@@ -15,48 +15,116 @@
 % Whenever possible, support your reasoning with (as in point to) experimental
 % evaluation results (next).
 
-\begin{itemize}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{itemize}	
+% - for each have a difficulties / shortcomings section
+% - include nice code of each - high level showing the map reduce constructions and such - just pseudocode (simplified version)
+%     - it should show the parallel constructs - okay to add sort there from tree construction bc. the text should state that we are using batched mergesort
+%     - it's just nice to see the loops and mapping constructions - it doesn't have to be your code, it can be the nice solution before we fixed the tree construct with sort where we split it up etc. 
+%         - which will help you, because then you can discuss based on the code like you did in the background. 
+%     - it doesn't have to work and it can be incomplete
+
+% 3.1 The Brute Force Version
+%     - describing which parts are parallel and which are not - and why
 
 
 
+
+
+
+% qs is big enough to saturate the hardware on the GPUs, GPU 4 has approx. 4000 core and each core has a bunch of threads - prob. a bit less than 70.000 active threads. Then all the threads spawned  each running the inner sequential code of the parallel outer map. 
+
+
+% Parallel constructs: 
+% map (loop) q 0 -> m
+%     loop j 0 -> m
+%         euclidean -> loop i 0 -> d orig: (map o reduce)
+%         loop i 0 -> k
+
+% for q < m
+%     for j < m
+%         for i < d
+%         for i < k
+
+
+% While this is a better solution than sorting and the extracting K smallest elements, it is also a solution that strains the performance for higher numbers for K, which is visible in Figure \ref{fig:b6} in section \ref{sec:eval}. 
+% It works like insertion sort would, by looping the whole K array and swapping and further exchanging if something better comes. 
+
+% \begin{listing}[H]
+% \begin{minted}{haskell}
+%     map (\q -> ...
+%         for j < n do ...
+%             for i < k do ...
+% \end{minted}
+% \caption{Loop Construct for Brute Force.}
+% \label{lst:bloop}
+% \end{listing}
+
+
+The pseudo-code for the brute force implementation is found in listing \ref{lst:brute}. It is constructed with an outer parallel map on line 2, in which the body of the map is sequential, consisting of a loop nest on lines 4 and 9.
+\\[2mm]
+The first for-loop iterates through the reference points, while computing the distance between the query and each reference point, in line 6. Lines 8-18 choose the KNN for each reference point by iterating through a list of size K, which contains the current nearest neighbours. If a better candidate is found, it will be interchanged to its correct position in the list, and the rest of the list will be forwarded.
+\\[2mm]
+The advantages of implementing the body of the map sequentially, is that the number of queries is large enough to saturate all hardware threads on the GPU, see more in section \ref{sec:eval} for a specialisation of the hardware used. Meaning that the Futhark compiler will spawn all active threads, such that each thread will compute the KNN for a query given to that thread. Figure \ref{fig:b6} in section \ref{sec:eval} shows the performance of brute force with various size of dimensions D and Ks. 
 
 \begin{listing}[H]
 \begin{minted}{haskell}
-entry nnk [m] [n] (imA : [m][n]real) 
-                  (imB : [m][n]real) : [m][k](int,real) =
-    map (\a_patch ->
-        if a_patch[0] == real_inf
-        then replicate k (-2i32, real_inf)
-        else
+entry nnk [m][n][d] (qs:[m][d]real) (refs:[n][d]real) : [m][k](int,real) =
+    map (\q ->
         let  nn = replicate k (-1i32, real_inf)
-        in loop nn for q < m do
-            let b_patch = imB[q]
-            let dist = euclidean a_patch b_patch
-            let b_idx = q in
+        in loop nn for j < n do
+            let ref = refs[j]
+            let dist = seq_euclidean q ref
+            let r_idx = j in
             let (_, _, nn') =
-                loop (dist, b_idx, nn) for i < k do
+                loop (dist, r_idx, nn) for i < k do
                     let cur_nn = nn[i].1  in
                     if dist <= cur_nn then 
                         let tmp_ind = nn[i].0
-                        let nn[i] = (b_idx, dist)
-                        let b_idx = tmp_ind
+                        let nn[i] = (r_idx, dist)
+                        let r_idx = tmp_ind
                         let dist  = cur_nn
-                        in  (dist, b_idx, nn)
-                    else    (dist, b_idx, nn)
+                        in  (dist, r_idx, nn)
+                    else    (dist, r_idx, nn)
             in  nn'
-    ) imA 
+    ) qs
 \end{minted}
 \caption{Futhark implementation of the Brute Force.}
 \label{lst:brute}
 \end{listing}
+
+
+While this pseudo-code shows the full brute force of all queries and reference points, it is conceptually similar to the brute force performed on each leaf-level in the k-d tree implementation. 
+
+
+\subsubsection{Difficulties and Shortcomings}
+
+The distance computed on line 6 in listing \ref{lst:brute} was initially implemented as a map-reduce composition while still called inside the first loop on line 4. The result of this was poor performance because the Futhark compiler would see that there was some inner parallelism, which it would exploit, even though it is inefficient. It was, therefore, more efficient to compute the distance sequentially, as described previously. 
+
+
+% So what it's doing right now, is interchanging the outer map inside the loop of index p and then distribute the map across the euclidean and across the remaining loop. 
+% So basically it is going to compute for each p from 0 -> m-1, the distances based on euclidean for all queries, so instead of having 1 kernel invocation, it is going to have m kernel invocations. 
+% the loop of index p will go on sequentially and each iteration will call two kernels (1) for distance (2) for the remaining -> giving 2\*m kernel calls and it will break all kind of things, if we add locality to it
+
+% Flattening in the case of Futhark just comes down to applying these two rules - so what happens is that you have a map on top of brute force and then Futhark sees some inner parallelism inside the euclidean - so what it will do is exploit that parallelism - which might not always be beneficial - but without knowing the sizes statically it cannot say, so it has to choose - what to do. Futhark chooses to exploit the inner parallelism, although it is not efficient. Assuming that you have enough queries - then what you would like to do is to keep all this code sequential - because the outer level of parallelism is more than enough to saturate the hardware because it has only 100000 threads - so it's not necessarily to exploit the parallelism inside euclidean - and that is why we want to make euclidean sequential.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

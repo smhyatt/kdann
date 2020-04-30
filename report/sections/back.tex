@@ -47,9 +47,13 @@ The leaves do not necessarily contain one reference point each, they may contain
 \\[2mm]
 Using a k-d tree improves search performance, in principal the average work complexity is $O(m\ \log\ n)$ \cite{logmatches}. % (at least when we are working on reasonably small dimensionality, reference to section) 
 %thanks to the binary tree structure it yields a complexity of $O(m\ \lg\ m)$ \cite{logmatches}.
-\\[2mm]
-Algorithms \hyperref[alg:main]{1}, \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} below represent a recursive implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. 
-Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which dimensionality of images A and B are reduced using PCA\footnote{Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).}, a k-d tree is created of image B, and all patches of image A are iterated through, of which a call to \texttt{\textsc{Traverse}} yields the best neighbours for each patch in A. 
+
+\subsection{Pseudo-code for the Computing KNN using k-d Trees}
+
+Algorithms \hyperref[alg:main]{1}, \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} below represent an implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. Both Algorithms \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} use divide and conquer recursion. 
+Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which a k-d tree is created of the reference points, and iterations through the queries call \texttt{\textsc{Traverse}} to find the best neighbours for query. 
+% dimensionality of images A and B are reduced using PCA\footnote{Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).}, 
+% a k-d tree is created of image B, and all patches of image A are iterated through, of which a call to \texttt{\textsc{Traverse}} yields the best neighbours for each patch in A. 
 % \\[2mm]
 
 
@@ -62,12 +66,12 @@ Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which dimensio
 \begin{algorithm}[H]
 \caption{Main}\label{main}
 \begin{algorithmic}[1]
-\Procedure{Main}{k}
-\State $imA \gets \textsc{PCA(\textit{imageA})}$
-\State $imB \gets \textsc{PCA(\textit{imageB})}$
-\State $tree \gets \textsc{BuildTree(imB, imB.1, 0, 0, \textsc{None}\text{)}}$
+\Procedure{Main}{k, queries, refs}
+% \State $imA \gets \textsc{PCA(\textit{refs})}$
+% \State $imB \gets \textsc{PCA(\textit{queries})}$
+\State $tree \gets \textsc{BuildTree(}\textit{refs}, \textit{refs}.idxs, 0, 0, \textsc{None}\text{)}$
 \State $neighbours \gets \textsc{None}$
-\BState \emph{\text{\textbf{foreach} \textit{query} \textbf{in} \textit{imA} \textbf{do}}}:
+\BState \emph{\text{\textbf{foreach} \textit{query} \textbf{in} \textit{queries} \textbf{do}}}:
 	\State $neighbours \gets \textsc{Traverse(\textit{tree}, \textit{query}, \textit{0}, \textit{neighbours}, \textit{k})}$
 \BState
 \Return neighbours
@@ -76,55 +80,92 @@ Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which dimensio
 \end{algorithm}
 
 
-Algorithm \hyperref[alg:tree]{2} represents the construction of the k-d tree. The tree construction is divided into two statements; working with the nodes (lines 4-9) or working with the leaves (lines 20-21). This condition is measured by computing the height of the tree and checking the current level against the height. 
+
+\subsection{Construction the Tree}
+
+Algorithm \hyperref[alg:tree]{2} represents the construction of the k-d tree. The tree construction is divided into two stages; one the processes the internal nodes (lines 3-18) and one the handles the leaves (lines 19-20). 
+The condition is implemented by comparing the current level with the tree height, and if the two are equal, it means that we have reached the leaves. 
+% This condition is measured by computing the height of the tree and checking the current level against the height. 
 \\[2mm]
-The patches are partitioned by finding the dimension with the widest spread and choosing the median value of that dimension. The nodes, therefore, contain a dimension and a median value. Line 5 uses the function GetSplitDimension to attain the dimension, lines 6-7 sort the indices and patches w.r.t the chosen dimension and lines 9-10 pick out the median index and value. Once done, the median and the dimension are ready to be stored, which essentially creates that particular node of the tree. Lines 13-19 compute the left and right indices for the next iteration and recursively call the BuildTree function again, in order to complete the creation of nodes in the tree. 
+For a given node, at any given node level the reference points are partitioned by finding the dimension with the widest spread across the points represented by that node, and choosing the median value of that dimension. The left child of that node will represent the first half of the reference points in sorted order, and the right child of that node will represent the rest. 
+% The reference points are partitioned by finding the dimension with the widest spread and choosing the median value of that dimension. 
+The nodes, therefore, contain a dimension and a median value. Line 4 uses the function GetSplitDimension to find the dimension of widest spread, lines 5-6 sort the indices and patches w.r.t the chosen dimension and lines 8-9 pick out the median index and value. Once done, the median and the dimension are ready to be stored, which essentially creates that particular node of the tree. Lines 12-18 compute the indices of the left and right children of the current node for the next iteration, and recursively call the BuildTree function again, in order to complete the creation of nodes in the tree. 
 \\[2mm]
-Last, line 21 sorts the leaves w.r.t the indices that were sorted and partitioned throughout the recursive node creation.
+Last, lines 20-21 sorts the leaves w.r.t the indices that were sorted and partitioned throughout the recursive node creation.
 
 
 \begin{algorithm}[H]
 \caption{Building the Tree}\label{tree}
 \begin{algorithmic}[1]
-\Procedure{BuildTree}{patches, indices, depth, index, tree}
-\State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
+\Procedure{BuildTree}{refs, indices, depth, index, tree}
+% \State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
 \BState \emph{}
-\If {depth < maxDepth-1}
-\State $dim \gets \textsc{GetSplitDimension(\textit{patches})} $
+\If {\textsc{IsLeaf}(depth)}
+\State $dim \gets \textsc{GetSplitDimension(\textit{refs})} $
 \State $indices \gets \textsc{SortByDim(}indices, dim\text{)} $
-\State $points \gets patches[indices] $
+\State $points \gets refs[indices] $
 \BState \emph{}
-\State $medianIdx \gets \textsc{GetMedianIdx(\textit{indices})} $
-\State $median \gets \textsc{GetMedian(\textit{points})} $
+\State $medianIdx \gets \textsc{Length(\textit{indices})}/2 $
+\State $median \gets \textit{points}[medianIdx] $
 \BState \emph{}
-\State $tree \gets (median, dim) $
+\State $tree[index] \gets (median, dim) $
 \State $depth \gets depth \text{ + 1} $
 \BState \emph{}
-\State $leftIdx  \gets \textsc{AddToLeft(index)} $
-\State $rightIdx \gets \textsc{AddToRight(index)} $
+\State $leftIdx  \gets \textsc{GetLeftChild}(index) $
+\State $rightIdx \gets \textsc{GetRightChild}(index) $
 \BState \emph{}
-\State $ \textsc{BuildTree(}patches[: medianIdx], indices, depth, leftIdx , tree\text{)} $
-\State $ \textsc{BuildTree(}patches[medianIdx :], indices, depth, rightIdx, tree\text{)} $
+\State $ \textsc{BuildTree(}points[: medianIdx], indices[: medianIdx], depth, leftIdx , tree\text{)} $
+\State $ \textsc{BuildTree(}points[medianIdx :], indices[medianIdx :], depth, rightIdx, tree\text{)} $
 \Else
-\State $ leaves[index] \gets \textsc{SortLeavesByIndices(}patches, indices\text{)} $
+\State $ leaves[index].refs \gets refs $
+\State $ leaves[index].idxs \gets indices $
+% \State $ leaves[index] \gets \textsc{SortLeavesByIndices(}patches, indices\text{)} $
 \EndIf
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
 
-The traversal is presented in Algorithm 3 below. It deals with three different stages; reaching a leaf, which is the first and second node to visit and a check to visit the second leaf. The first stage on lines 2-4, reaching a leaf, is straightforward. We reach a leaf; therefore, we perform brute force with the query patch and the patches of image B in that current leaf. 
+% \begin{algorithm}[H]
+% \caption{Building the Tree}\label{tree}
+% \begin{algorithmic}[1]
+% \Procedure{BuildTree}{patches, indices, depth, index, tree}
+% \State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
+% \BState \emph{}
+% \If {depth < maxDepth-1}
+% \State $dim \gets \textsc{GetSplitDimension(\textit{patches})} $
+% \State $indices \gets \textsc{SortByDim(}indices, dim\text{)} $
+% \State $points \gets patches[indices] $
+% \BState \emph{}
+% \State $medianIdx \gets \textsc{GetMedianIdx(\textit{indices})} $
+% \State $median \gets \textsc{GetMedian(\textit{points})} $
+% \BState \emph{}
+% \State $tree \gets (median, dim) $
+% \State $depth \gets depth \text{ + 1} $
+% \BState \emph{}
+% \State $leftIdx  \gets \textsc{AddToLeft(index)} $
+% \State $rightIdx \gets \textsc{AddToRight(index)} $
+% \BState \emph{}
+% \State $ \textsc{BuildTree(}points[: medianIdx], indices, depth, leftIdx , tree\text{)} $
+% \State $ \textsc{BuildTree(}points[medianIdx :], indices, depth, rightIdx, tree\text{)} $
+% \Else
+% \State $ leaves[index] \gets \textsc{SortLeavesByIndices(}patches, indices\text{)} $
+% \EndIf
+% \EndProcedure
+% \end{algorithmic}
+% \end{algorithm}
+
+
+\subsection{Tree Traversal}
+
+The traversal is presented in Algorithm 3 below. Each query is going to traverse the k-d tree, and at each internal node in the tree, it is going to decide whether it has to visit a certain child by making a conservative test to whether the KNN can possibly be improved in the regions that that node represents. If a leaf is reached, a brute force is performed w.r.t the query and all the reference points represented in that leaf, this is shown in line 2-4. The rest of the code corresponds to the recursive traversal, lines 6-21. 
+% The traversal is presented in Algorithm 3 below. It deals with three different stages; reaching a leaf, which is the first and second node to visit and a check to visit the second leaf. The first stage on lines 2-4, reaching a leaf, is straightforward. We reach a leaf; therefore, we perform brute force with the query patch and the patches of image B in that current leaf. 
+
 % \\[2mm]
-
-
-
 % leaf
 % left first
 % right first
 % check second leaf (backtrack)
-
-
-
 
 \begin{algorithm}[H]
 \caption{The Tree Traversal}\label{traverse}
@@ -135,8 +176,8 @@ The traversal is presented in Algorithm 3 below. It deals with three different s
 \State \Return neighbours
 \EndIf
 \BState \emph{}
-\State $dimens \gets tree[nodeIndex].1 $
-\State $median \gets tree[nodeIndex].0 $
+\State $dimens \gets tree[nodeIndex].dims $
+\State $median \gets tree[nodeIndex].meds $
 \State $queryV \gets  query[dimens]$
 \BState \emph{}
 \If {queryV <= median}
@@ -159,12 +200,24 @@ The traversal is presented in Algorithm 3 below. It deals with three different s
 \end{algorithmic}
 \end{algorithm}
 
-The third stage, lines 18-21, determine whether we should visit the second node by checking if the difference between the median and the query is less than the worst nearest neighbour. If this is the case; the second node will be visited in a recursive call of Traverse on line 21. The check is an estimate to assure that it makes sense to continue the traversal, because if the worst nearest neighbours is a better result in XXXX. \todo[inline, size=\small]{Argument the logic behind this.}
-~~
-\\[2mm]
-The second stage on lines 6-17 determines which following nodes are the first and second, respectively. The first is always the node that is on the same side of the current node's median as the query. We might think of this as going left first on lines 10-12 and right first on lines 13-15. The dimension and median of the current node is extracted from the tree, lines 6-7, and the query value based on the current dimension of that node, line 8. Line 17 executes a recursive call of Traverse in which the first node is the next node to be visited.
-\\[2mm]
-The goal is to implement the solution using Futhark since Futhark is a pure functional data-parallel array language, meaning it is syntactically and conceptually similar to other functional languages; however, Futhark can compile code to run on the CPU, or it can optimise and parallelise the code to run on the GPU. It is a great advantage to write fully parallel code in a high-level functional language. The downside is that Futhark has its limits; such as only supporting regular arrays and not supporting recursion. With this in mind, the pseudo-code, demonstrated above, will need to be rewritten without recursion. See more in the sections \hyperref[sec:kdtree]{k-d Tree Construction} and \hyperref[sec:traversal]{Tree Traversal}.
+% The code denotes by first and second, the child node that is on the same side at the median of the current node . 
+The code denotes by first, the child of the current node that is on the same side as median w.r.t the query, similarly second denotes the child of the current node that is on the opposite side of the median. This can be observed between the computations on lines 10-15. 
+\todo[color=green!40, inline, size=\small]{Ret så det lyder bedre}
+If the query value of the current dimension is less than the median of the current node, then first is the left child, and right otherwise. 
+
+If we reach this node, then since the query is on the same side as the current median as the node denoted first, then one recursive call is always going to be made, because it means that we can always reach a leaf that potentially has a neighbour better than the worst one found so far.
+
+The recursive call that follows the second node is not necessarily made, since it is guarded by a conservative condition that tests whether the distance from the query to the current median is better than the worst found neighbour so far. If this condition does not hold, it is safe not to visit the left child, because it is ensured that you cannot find any better neighbours than the ones we currently have, which is visible in lines 20-21. 
+
+\todo[color=green!40, inline, size=\small]{hertil}
+
+% The third stage, lines 18-21, determine whether we should visit the second node by checking if the difference between the median and the query is less than the worst nearest neighbour. If this is the case; the second node will be visited in a recursive call of Traverse on line 21. The check is an estimate to assure that it makes sense to continue the traversal, because if the worst nearest neighbours is a better result in XXXX. \todo[inline, size=\small]{Argument the logic behind this.}
+% ~~
+% \\[2mm]
+% The second stage on lines 6-17 determines which following nodes are the first and second, respectively. The first is always the node that is on the same side of the current node's median as the query. We might think of this as going left first on lines 10-12 and right first on lines 13-15. The dimension and median of the current node is extracted from the tree, lines 6-7, and the query value based on the current dimension of that node, line 8. Line 17 executes a recursive call of Traverse in which the first node is the next node to be visited.
+% \\[2mm]
+The goal is to implement the solution using Futhark since Futhark is a pure functional data-parallel array language, that works efficiently on the GPU. 
+It is a great advantage to write fully parallel code in a high-level functional language. However, since Futhark utilises regular parallelism it does not support recursion. With this in mind, the pseudo-code, demonstrated above, will need to be rewritten without divide-and-conquer recursion, which is demonstrated in the sections \hyperref[sec:kdtree]{k-d Tree Construction} and \hyperref[sec:traversal]{Tree Traversal}.
 
 % Futhark because it is a data-parallel language and simpler to write code in compared to CUDA, and to prototype various implementations. 
 % Futhark because it is a data-parallel language that supports regular parallelism that's basically why we cannot use recursion. 

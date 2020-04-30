@@ -288,6 +288,8 @@ let buildTree [m] [d] (imB : [m][d]f32) (h: i32) (num_nodes: i32) =
 
     in (imB_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds)
 
+
+
 -- Cosmin added this function to avoid using (iota (length leaves))
 --        which screws the type checker up. Now the type
 --        checker knows that `n` is the length of `leaves`

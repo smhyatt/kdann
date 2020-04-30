@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  29 APR 2020 21:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.11.22)  30 APR 2020 17:28
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1311,7 +1311,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<pics/nat-farve.pdf, id=95, 597.23125pt x 845.1575pt>
+<pics/nat-farve.pdf, id=119, 597.23125pt x 845.1575pt>
 File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
 Package pdftex.def Info: pics/nat-farve.pdf  used on input line 221.
@@ -1320,7 +1320,7 @@ File: pics/nat-farve.pdf Graphic file (type pdf)
 <use pics/nat-farve.pdf>
 Package pdftex.def Info: pics/nat-farve.pdf  used on input line 221.
 (pdftex.def)             Requested size: 702.625pt x 1003.75pt.
-<pics/nat-en.pdf, id=98, 597.23125pt x 845.1575pt>
+<pics/nat-en.pdf, id=122, 597.23125pt x 845.1575pt>
 File: pics/nat-en.pdf Graphic file (type pdf)
 <use pics/nat-en.pdf>
 Package pdftex.def Info: pics/nat-en.pdf  used on input line 221.
@@ -1339,7 +1339,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 13.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 18.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -1352,245 +1352,284 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 r (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.16 
-      [1] [2] [3]) (./sections/ack.tex) (./sections/back.tex
+l.1 \section
+            {Introduction} [1] [2] [3]) (./sections/ack.tex)
+(./sections/back.tex
 
-LaTeX Warning: Hyper reference `alg:main' on page 4 undefined on input line 51.
+LaTeX Warning: Hyper reference `alg:main' on page 4 undefined on input line 53.
 
 
 
-LaTeX Warning: Hyper reference `alg:tree' on page 4 undefined on input line 51.
+LaTeX Warning: Hyper reference `alg:tree' on page 4 undefined on input line 53.
 
 
 
 LaTeX Warning: Hyper reference `alg:traverse' on page 4 undefined on input line
- 51.
+ 53.
 
 
-LaTeX Warning: Hyper reference `alg:main' on page 4 undefined on input line 52.
+LaTeX Warning: Hyper reference `alg:tree' on page 4 undefined on input line 53.
 
 
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 63.
+
+LaTeX Warning: Hyper reference `alg:traverse' on page 4 undefined on input line
+ 53.
+
+
+LaTeX Warning: Hyper reference `alg:main' on page 4 undefined on input line 54.
+
+
 [4]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 67.
 
-LaTeX Warning: Hyper reference `alg:tree' on page 5 undefined on input line 79.
+
+LaTeX Warning: Hyper reference `alg:tree' on page 5 undefined on input line 86.
 
 
 [5] [6]
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 162.
+ine 205.
  [7] [8]) (./sections/brute.tex [9]
 \openout4 = `master.pyg'.
 
 
 (./_minted-master/default-pyg-prefix.pygstyle)
 (./_minted-master/default.pygstyle)
-(./_minted-master/BCB3401B97417316CD32DB1E0E8DBA8E6D5E9B5CA395CA8C27C43E4C01BD6
+(./_minted-master/30E285BBDF5BE7778CA0B0C739E010E26D5E9B5CA395CA8C27C43E4C01BD6
 354.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 13.
-
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 9.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ))
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 58.
-)
-(./sections/kdtree.tex [10]
+t line 90.
+
+[10]) (./sections/kdtree.tex
 \openout4 = `master.pyg'.
 
+runsystem(pygmentize -l haskell -f latex -P commandprefix=PYG -F tokenmerge -o 
+_minted-master/00E25259FB37AD4B949ADCDDC20149E96D5E9B5CA395CA8C27C43E4C01BD6354
+.pygtex master.pyg)...executed.
 
-(./_minted-master/68B329DA9893E34099C7D8AD5CB9C9406D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex)) (./sections/traversal.tex [11]
-<pics/kd-tree-visual/22.png, id=235, 835.17018pt x 388.45125pt>
+
+(./_minted-master/00E25259FB37AD4B949ADCDDC20149E96D5E9B5CA395CA8C27C43E4C01BD6
+354.pygtex) [11] [12]) (./sections/traversal.tex [13]
+<pics/kd-tree-visual/22.png, id=282, 835.17018pt x 388.45125pt>
 File: pics/kd-tree-visual/22.png Graphic file (type png)
 <use pics/kd-tree-visual/22.png>
 Package pdftex.def Info: pics/kd-tree-visual/22.png  used on input line 71.
 (pdftex.def)             Requested size: 424.82523pt x 197.59183pt.
-<pics/kd-tree-visual/3.png, id=236, 758.835pt x 352.31625pt>
+<pics/kd-tree-visual/3.png, id=283, 758.835pt x 352.31625pt>
 File: pics/kd-tree-visual/3.png Graphic file (type png)
 <use pics/kd-tree-visual/3.png>
 Package pdftex.def Info: pics/kd-tree-visual/3.png  used on input line 77.
 (pdftex.def)             Requested size: 424.82523pt x 197.24199pt.
- [12 <./pics/kd-tree-visual/22.png>]
-<pics/kd-tree-visual/5.png, id=244, 758.835pt x 352.31625pt>
+<pics/kd-tree-visual/5.png, id=284, 758.835pt x 352.31625pt>
 File: pics/kd-tree-visual/5.png Graphic file (type png)
 <use pics/kd-tree-visual/5.png>
 Package pdftex.def Info: pics/kd-tree-visual/5.png  used on input line 89.
 (pdftex.def)             Requested size: 424.82523pt x 197.24199pt.
-<pics/kd-tree-visual/7.png, id=245, 758.835pt x 352.31625pt>
+ [14 <./pics/kd-tree-visual/22.png> <./pics/kd-tree-visual/3.png>]
+<pics/kd-tree-visual/7.png, id=293, 758.835pt x 352.31625pt>
 File: pics/kd-tree-visual/7.png Graphic file (type png)
 <use pics/kd-tree-visual/7.png>
 Package pdftex.def Info: pics/kd-tree-visual/7.png  used on input line 101.
 (pdftex.def)             Requested size: 424.82523pt x 197.24199pt.
-[13 <./pics/kd-tree-visual/3.png> <./pics/kd-tree-visual/5.png>]
-<pics/kd-tree-visual/10.png, id=254, 758.835pt x 352.31625pt>
+<pics/kd-tree-visual/10.png, id=294, 758.835pt x 352.31625pt>
 File: pics/kd-tree-visual/10.png Graphic file (type png)
 <use pics/kd-tree-visual/10.png>
 Package pdftex.def Info: pics/kd-tree-visual/10.png  used on input line 119.
 (pdftex.def)             Requested size: 424.82523pt x 197.24199pt.
-<pics/kd-tree-visual/11.png, id=255, 758.835pt x 352.31625pt>
+ [15 <./pics/kd-tree-visual/5.png> <./pics/kd-tree-visual/7.png>]
+<pics/kd-tree-visual/11.png, id=303, 758.835pt x 352.31625pt>
 File: pics/kd-tree-visual/11.png Graphic file (type png)
 <use pics/kd-tree-visual/11.png>
 Package pdftex.def Info: pics/kd-tree-visual/11.png  used on input line 125.
 (pdftex.def)             Requested size: 424.82523pt x 197.24199pt.
- [14 <./pics/kd-tree-visual/7.png> <./pics/kd-tree-visual/10.png>]
 \openout4 = `master.pyg'.
 
 
 (./_minted-master/A846073DE81566EC7D25782B7F20B5AA6D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex)
+354.pygtex) [16 <./pics/kd-tree-visual/10.png> <./pics/kd-tree-visual/11.png>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 176.
 \openout4 = `master.pyg'.
 
 
 (./_minted-master/6EF238F87358005769C51FDCE71F94EF6D5E9B5CA395CA8C27C43E4C01BD6
-354.pygtex)) (./sections/fullprog.tex [15 <./pics/kd-tree-visual/11.png>]
-Overfull \vbox (415.41118pt too high) has occurred while \output is active []
+354.pygtex) [17]
+Overfull \vbox (282.46114pt too high) has occurred while \output is active []
 
 
-[16]) (./sections/eval.tex
-<pics/plot-figs/new-sort-all-d9.png, id=281, 983.5947pt x 443.7378pt>
+[18]) (./sections/fullprog.tex) (./sections/eval.tex
+<pics/plot-figs/new-sort-all-d9.png, id=329, 983.5947pt x 443.7378pt>
 File: pics/plot-figs/new-sort-all-d9.png Graphic file (type png)
 <use pics/plot-figs/new-sort-all-d9.png>
 Package pdftex.def Info: pics/plot-figs/new-sort-all-d9.png  used on input line
  33.
 (pdftex.def)             Requested size: 472.03123pt x 212.95786pt.
- [17 <./pics/plot-figs/new-sort-all-d9.png>]
-<pics/plot-figs/new-sort-alld4.png, id=291, 982.1493pt x 442.2924pt>
+ [19]
+<pics/plot-figs/new-sort-alld4.png, id=337, 982.1493pt x 442.2924pt>
 File: pics/plot-figs/new-sort-alld4.png Graphic file (type png)
 <use pics/plot-figs/new-sort-alld4.png>
 Package pdftex.def Info: pics/plot-figs/new-sort-alld4.png  used on input line 
 42.
 (pdftex.def)             Requested size: 472.03123pt x 212.57465pt.
-<pics/plot-figs/new-trav-k5-d6d12.png, id=294, 759.5577pt x 536.2434pt>
+ [20 <./pics/plot-figs/new-sort-all-d9.png> <./pics/plot-figs/new-sort-alld4.pn
+g>]
+<pics/plot-figs/new-trav-k5-d6d12.png, id=349, 759.5577pt x 536.2434pt>
 File: pics/plot-figs/new-trav-k5-d6d12.png Graphic file (type png)
 <use pics/plot-figs/new-trav-k5-d6d12.png>
 Package pdftex.def Info: pics/plot-figs/new-trav-k5-d6d12.png  used on input li
 ne 130.
 (pdftex.def)             Requested size: 472.03123pt x 333.26115pt.
- [18 <./pics/plot-figs/new-sort-alld4.png>] [19 <./pics/plot-figs/new-trav-k5-d
-6d12.png>]
-<pics/plot-figs/new-trav-d12-k1k5k17.png, id=318, 896.148pt x 543.4704pt>
+ [21 <./pics/plot-figs/new-trav-k5-d6d12.png>]
+<pics/plot-figs/new-trav-d12-k1k5k17.png, id=361, 896.148pt x 543.4704pt>
 File: pics/plot-figs/new-trav-d12-k1k5k17.png Graphic file (type png)
 <use pics/plot-figs/new-trav-d12-k1k5k17.png>
 Package pdftex.def Info: pics/plot-figs/new-trav-d12-k1k5k17.png  used on input
- line 167.
+ line 171.
 (pdftex.def)             Requested size: 472.03123pt x 286.26329pt.
-<pics/plot-figs/visits/visit-k3-d8-all-new.png, id=319, 654.7662pt x 427.1157pt
+ [22]
+<pics/plot-figs/visits/visit-k3-d8-all-new.png, id=369, 654.7662pt x 427.1157pt
 >
 File: pics/plot-figs/visits/visit-k3-d8-all-new.png Graphic file (type png)
 <use pics/plot-figs/visits/visit-k3-d8-all-new.png>
 Package pdftex.def Info: pics/plot-figs/visits/visit-k3-d8-all-new.png  used on
- input line 185.
+ input line 189.
 (pdftex.def)             Requested size: 231.2979pt x 150.8809pt.
-<pics/plot-figs/visits/visit-k3-d8-one-new.png, id=320, 654.7662pt x 427.8384pt
+<pics/plot-figs/visits/visit-k3-d8-one-new.png, id=370, 654.7662pt x 427.8384pt
 >
 File: pics/plot-figs/visits/visit-k3-d8-one-new.png Graphic file (type png)
 <use pics/plot-figs/visits/visit-k3-d8-one-new.png>
 Package pdftex.def Info: pics/plot-figs/visits/visit-k3-d8-one-new.png  used on
- input line 186.
+ input line 190.
 (pdftex.def)             Requested size: 236.01561pt x 154.21754pt.
- [20 <./pics/plot-figs/new-trav-d12-k1k5k17.png>]
-<pics/plot-figs/visits/visit-k3-d16-all-new.png, id=333, 654.0435pt x 426.393pt
->
-File: pics/plot-figs/visits/visit-k3-d16-all-new.png Graphic file (type png)
-<use pics/plot-figs/visits/visit-k3-d16-all-new.png>
-Package pdftex.def Info: pics/plot-figs/visits/visit-k3-d16-all-new.png  used o
-n input line 196.
-(pdftex.def)             Requested size: 231.2979pt x 150.78825pt.
-<pics/plot-figs/visits/visit-k3-d16-one-new.png, id=334, 656.9343pt x 430.0065p
+ [23 <./pics/plot-figs/new-trav-d12-k1k5k17.png>]
+<pics/plot-figs/visits/new-visit-all-k3-d14.png, id=380, 677.8926pt x 453.8556p
 t>
-File: pics/plot-figs/visits/visit-k3-d16-one-new.png Graphic file (type png)
-<use pics/plot-figs/visits/visit-k3-d16-one-new.png>
-Package pdftex.def Info: pics/plot-figs/visits/visit-k3-d16-one-new.png  used o
-n input line 197.
-(pdftex.def)             Requested size: 236.01561pt x 154.48727pt.
- [21 <./pics/plot-figs/visits/visit-k3-d8-all-new.png> <./pics/plot-figs/visits
-/visit-k3-d8-one-new.png> <./pics/plot-figs/visits/visit-k3-d16-all-new.png> <.
-/pics/plot-figs/visits/visit-k3-d16-one-new.png>]
-<pics/plot-figs/visits/visit-k5-d6-all-new.png, id=356, 651.1527pt x 427.1157pt
+File: pics/plot-figs/visits/new-visit-all-k3-d14.png Graphic file (type png)
+<use pics/plot-figs/visits/new-visit-all-k3-d14.png>
+Package pdftex.def Info: pics/plot-figs/visits/new-visit-all-k3-d14.png  used o
+n input line 200.
+(pdftex.def)             Requested size: 236.01561pt x 158.01387pt.
+<pics/plot-figs/visits/new-visit-one-k3-d14.png, id=381, 660.5478pt x 482.0409p
+t>
+File: pics/plot-figs/visits/new-visit-one-k3-d14.png Graphic file (type png)
+<use pics/plot-figs/visits/new-visit-one-k3-d14.png>
+Package pdftex.def Info: pics/plot-figs/visits/new-visit-one-k3-d14.png  used o
+n input line 201.
+(pdftex.def)             Requested size: 236.01561pt x 172.23268pt.
+ [24 <./pics/plot-figs/visits/visit-k3-d8-all-new.png> <./pics/plot-figs/visits
+/visit-k3-d8-one-new.png> <./pics/plot-figs/visits/new-visit-all-k3-d14.png> <.
+/pics/plot-figs/visits/new-visit-one-k3-d14.png>]
+<pics/plot-figs/visits/visit-k5-d6-all-new.png, id=403, 651.1527pt x 427.1157pt
 >
 File: pics/plot-figs/visits/visit-k5-d6-all-new.png Graphic file (type png)
 <use pics/plot-figs/visits/visit-k5-d6-all-new.png>
 Package pdftex.def Info: pics/plot-figs/visits/visit-k5-d6-all-new.png  used on
- input line 207.
-(pdftex.def)             Requested size: 231.2979pt x 151.71512pt.
-<pics/plot-figs/visits/visit-k5-d6-one-new.png, id=357, 657.657pt x 430.0065pt>
+ input line 211.
+(pdftex.def)             Requested size: 236.01561pt x 154.8108pt.
+<pics/plot-figs/visits/visit-k5-d6-one-new.png, id=404, 657.657pt x 430.0065pt>
 
 File: pics/plot-figs/visits/visit-k5-d6-one-new.png Graphic file (type png)
 <use pics/plot-figs/visits/visit-k5-d6-one-new.png>
 Package pdftex.def Info: pics/plot-figs/visits/visit-k5-d6-one-new.png  used on
- input line 208.
+ input line 212.
 (pdftex.def)             Requested size: 236.01561pt x 154.31668pt.
-<pics/plot-figs/visits/visit-k5-d16-all-new.png, id=358, 656.2116pt x 422.7795p
+<pics/plot-figs/visits/new-visit-k5-d14.png, id=405, 662.7159pt x 480.5955pt>
+File: pics/plot-figs/visits/new-visit-k5-d14.png Graphic file (type png)
+<use pics/plot-figs/visits/new-visit-k5-d14.png>
+Package pdftex.def Info: pics/plot-figs/visits/new-visit-k5-d14.png  used on in
+put line 220.
+(pdftex.def)             Requested size: 236.01561pt x 171.15892pt.
+<pics/plot-figs/visits/new-visit-one-k5-d14.png, id=406, 661.2705pt x 482.7636p
 t>
-File: pics/plot-figs/visits/visit-k5-d16-all-new.png Graphic file (type png)
-<use pics/plot-figs/visits/visit-k5-d16-all-new.png>
-Package pdftex.def Info: pics/plot-figs/visits/visit-k5-d16-all-new.png  used o
-n input line 216.
-(pdftex.def)             Requested size: 231.2979pt x 149.02011pt.
-<pics/plot-figs/visits/visit-k5-d16-one-new.png, id=359, 655.4889pt x 431.4519p
-t>
-File: pics/plot-figs/visits/visit-k5-d16-one-new.png Graphic file (type png)
-<use pics/plot-figs/visits/visit-k5-d16-one-new.png>
-Package pdftex.def Info: pics/plot-figs/visits/visit-k5-d16-one-new.png  used o
-n input line 217.
-(pdftex.def)             Requested size: 236.01561pt x 155.34889pt.
- [22 <./pics/plot-figs/visits/visit-k5-d6-all-new.png> <./pics/plot-figs/visits
-/visit-k5-d6-one-new.png> <./pics/plot-figs/visits/visit-k5-d16-all-new.png> <.
-/pics/plot-figs/visits/visit-k5-d16-one-new.png>]
-<pics/plot-figs/new-brute-k12.png, id=378, 869.4081pt x 534.798pt>
+File: pics/plot-figs/visits/new-visit-one-k5-d14.png Graphic file (type png)
+<use pics/plot-figs/visits/new-visit-one-k5-d14.png>
+Package pdftex.def Info: pics/plot-figs/visits/new-visit-one-k5-d14.png  used o
+n input line 221.
+(pdftex.def)             Requested size: 236.01561pt x 172.29938pt.
+ [25 <./pics/plot-figs/visits/visit-k5-d6-all-new.png> <./pics/plot-figs/visits
+/visit-k5-d6-one-new.png> <./pics/plot-figs/visits/new-visit-k5-d14.png> <./pic
+s/plot-figs/visits/new-visit-one-k5-d14.png>]
+<pics/plot-figs/new-brute-k12.png, id=425, 869.4081pt x 534.798pt>
 File: pics/plot-figs/new-brute-k12.png Graphic file (type png)
 <use pics/plot-figs/new-brute-k12.png>
 Package pdftex.def Info: pics/plot-figs/new-brute-k12.png  used on input line 2
-80.
+84.
 (pdftex.def)             Requested size: 519.23723pt x 319.40425pt.
 
-Overfull \hbox (47.206pt too wide) in paragraph at lines 280--281
+Overfull \hbox (47.206pt too wide) in paragraph at lines 284--285
+ [][] 
+ []
+
+[26]
+<pics/plot-figs/brute-k2k6k12.png, id=435, 955.4094pt x 526.1256pt>
+File: pics/plot-figs/brute-k2k6k12.png Graphic file (type png)
+<use pics/plot-figs/brute-k2k6k12.png>
+Package pdftex.def Info: pics/plot-figs/brute-k2k6k12.png  used on input line 2
+93.
+(pdftex.def)             Requested size: 519.23723pt x 285.942pt.
+
+Overfull \hbox (47.206pt too wide) in paragraph at lines 293--294
+ [][] 
+ []
+
+[27 <./pics/plot-figs/new-brute-k12.png>]
+<pics/plot-figs/kdtree-k2k6k12.png, id=441, 875.1897pt x 474.0912pt>
+File: pics/plot-figs/kdtree-k2k6k12.png Graphic file (type png)
+<use pics/plot-figs/kdtree-k2k6k12.png>
+Package pdftex.def Info: pics/plot-figs/kdtree-k2k6k12.png  used on input line 
+301.
+(pdftex.def)             Requested size: 519.23723pt x 281.2667pt.
+
+Overfull \hbox (47.206pt too wide) in paragraph at lines 301--302
  [][] 
  []
 
 ) (./sections/conclusion.tex) (./appendiks/appendix.tex
-<pics/plot-figs/new-brute-k2.png, id=379, 792.8019pt x 500.1084pt>
+<pics/plot-figs/new-brute-k2.png, id=442, 792.8019pt x 500.1084pt>
 File: pics/plot-figs/new-brute-k2.png Graphic file (type png)
 <use pics/plot-figs/new-brute-k2.png>
 Package pdftex.def Info: pics/plot-figs/new-brute-k2.png  used on input line 9.
 
 (pdftex.def)             Requested size: 472.03123pt x 297.76279pt.
- [23 <./pics/plot-figs/new-brute-k12.png>]
-<pics/plot-figs/new-brute-k6.png, id=391, 870.1308pt x 536.9661pt>
+ [28 <./pics/plot-figs/brute-k2k6k12.png> <./pics/plot-figs/kdtree-k2k6k12.png>
+]
+<pics/plot-figs/new-brute-k6.png, id=450, 870.1308pt x 536.9661pt>
 File: pics/plot-figs/new-brute-k6.png Graphic file (type png)
 <use pics/plot-figs/new-brute-k6.png>
 Package pdftex.def Info: pics/plot-figs/new-brute-k6.png  used on input line 17
 .
 (pdftex.def)             Requested size: 472.03123pt x 291.2929pt.
- [24 <./pics/plot-figs/new-brute-k2.png>]
-<pics/plot-figs/new-brute-k12-lines.png, id=398, 708.246pt x 359.1819pt>
+ [29 <./pics/plot-figs/new-brute-k2.png>]
+<pics/plot-figs/new-brute-k12-lines.png, id=457, 708.246pt x 359.1819pt>
 File: pics/plot-figs/new-brute-k12-lines.png Graphic file (type png)
 <use pics/plot-figs/new-brute-k12-lines.png>
 Package pdftex.def Info: pics/plot-figs/new-brute-k12-lines.png  used on input 
 line 25.
 (pdftex.def)             Requested size: 377.62642pt x 191.51643pt.
-) [25 <./pics/plot-figs/new-brute-k6.png> <./pics/plot-figs/new-brute-k12-lines
-.png>] (./master.bbl) [26]
+) [30 <./pics/plot-figs/new-brute-k6.png> <./pics/plot-figs/new-brute-k12-lines
+.png>] (./master.bbl)
+runsystem(rm _minted-master/516766DEE91ECB3DE74FB2DA78C548F86D5E9B5CA395CA8C27C
+43E4C01BD6354.pygtex)...executed.
+
+runsystem(rm _minted-master/5143E0638DE84A5C2CF2DEF0C296AB106D5E9B5CA395CA8C27C
+43E4C01BD6354.pygtex)...executed.
+
+ [31]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 252.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 252.
  (./master.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 252.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 252.
+Package rerunfilecheck Info: File `master.out' has not changed.
+(rerunfilecheck)             Checksum: 3A384713585498119F04679CADBC70DF;2108.
 
-
-Package rerunfilecheck Warning: File `master.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `master.out':
-(rerunfilecheck)             Before: 19EC0C4B281E4CEBD02EA163FB5FDDB9;1619
-(rerunfilecheck)             After:  9E9F12CB915E97CCE6C56A64AA1A9361;1619.
 
 LaTeX Warning: There were undefined references.
 
@@ -1602,66 +1641,39 @@ runsystem(rm master.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27730 strings out of 492649
- 502998 string characters out of 6129621
- 655256 words of memory out of 5000000
- 30871 multiletter control sequences out of 15000+600000
- 28479 words of font info for 68 fonts, out of 8000000 for 9000
+ 27752 strings out of 492649
+ 503630 string characters out of 6129621
+ 655773 words of memory out of 5000000
+ 30883 multiletter control sequences out of 15000+600000
+ 26327 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,12n,102p,1140b,618s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{figure.caption.25} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.21} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.20} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.15} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.14} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.13} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.12} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section*.26} has been referenced but does not exist
-, replaced by a fixed one
-
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{
-/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</u
-sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local
-/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/tex
-live/2018/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texli
-ve/2018/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
+/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/loc
+al/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local
+/texlive/2018/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr/local/texlive
 /2018/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/201
-8/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2018/te
-xmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist/f
-onts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/fon
-ts/type1/public/cm-super/sftt1200.pfb>
-Output written on master.pdf (27 pages, 1121893 bytes).
+018/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/201
+8/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2018/
+texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/local/texlive/2018/texmf-
+dist/fonts/type1/public/cm-super/sftc1200.pfb></usr/local/texlive/2018/texmf-di
+st/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2018/texmf-dist/f
+onts/type1/public/cm-super/sftt1200.pfb>
+Output written on master.pdf (32 pages, 1264711 bytes).
 PDF statistics:
- 501 PDF objects out of 1000 (max. 8388607)
- 395 compressed objects within 4 object streams
- 99 named destinations out of 1000 (max. 500000)
- 327 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 561 PDF objects out of 1000 (max. 8388607)
+ 445 compressed objects within 5 object streams
+ 105 named destinations out of 1000 (max. 500000)
+ 385 words of extra memory for PDF output out of 10000 (max. 10000000)
 
