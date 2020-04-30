@@ -92,6 +92,22 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
 \label{sec:treediff}
 In the construct above in listing \ref{lst:tree}, the original solution was to use a merge sort on line 19. However, although it was safe for Futhark to perform a loop distribution and loop interchange between the outer map inside both for loops, it did not realise, in which case the interchange was not performed. Thus, causing poor performance for the tree construction.  The solution was to (1) use batched merge sort, which operates on 2D arrays rather than 1D arrays, (2) distribute the map from line 12, across the body of the map function, such that the sorting is outside the map. 
 \\[2mm]
+Another shortcoming shows by the use of \texttt{intrinsics.opaque} at lines 14-15 in listing \ref{lst:tree}, where the purpose is to prevent the Futhark compiler from fusing the two map-reduce compositions on lines 15-16. The reasoning behind this, is that both map-reduce compositions call on the same size array, namely m. 
+
+Since the Futhark compiler uses moderate flattening, a map-reduce composition 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
