@@ -50,8 +50,8 @@ Using a k-d tree improves search performance, in principal the average work comp
 
 \subsection{Pseudo-code for the Computing KNN using k-d Trees}
 
-Algorithms \hyperref[alg:main]{1}, \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} below represent an implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. Both Algorithms \hyperref[alg:tree]{2} and \hyperref[alg:traverse]{3} use divide and conquer recursion. 
-Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which a k-d tree is created of the reference points, and iterations through the queries call \texttt{\textsc{Traverse}} to find the best neighbours for query. 
+Algorithms \ref{alg:main}, \ref{alg:tree} and \ref{alg:traverse} below represent an implementation of the k-d tree construction and the tree traversal as high-level pseudo-code. Both Algorithms \ref{alg:tree} and \ref{alg:traverse} use divide and conquer recursion. 
+Algorithm \ref{alg:main} is the \texttt{main} function in which a k-d tree is created of the reference points, and iterations through the queries call \texttt{\textsc{Traverse}} to find the best neighbours for query. 
 % dimensionality of images A and B are reduced using PCA\footnote{Given a collection of points in two or higher dimensional space a principal component analysis (PCA) can be created by first choosing the line that minimises the average squared distance from a point to the line, resulting in an Eigenvector, second choosing the line perpendicular to the first, resulting in a new Eigenvector, and repeating the process will result in orthogonal basis vectors. These vectors are called principal components, and several related procedures principal component analysis (PCA).}, 
 % a k-d tree is created of image B, and all patches of image A are iterated through, of which a call to \texttt{\textsc{Traverse}} yields the best neighbours for each patch in A. 
 % \\[2mm]
@@ -64,7 +64,8 @@ Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which a k-d tr
 % \todo[color=green!40, inline, size=\small]{}
 
 \begin{algorithm}[H]
-\caption{Main}\label{main}
+\caption{Main}
+\label{alg:main}
 \begin{algorithmic}[1]
 \Procedure{Main}{k, queries, refs}
 % \State $imA \gets \textsc{PCA(\textit{refs})}$
@@ -83,7 +84,7 @@ Algorithm \hyperref[alg:main]{1} is the \texttt{main} function in which a k-d tr
 
 \subsection{Construction the Tree}
 
-Algorithm \hyperref[alg:tree]{2} represents the construction of the k-d tree. The tree construction is divided into two stages; one the processes the internal nodes (lines 3-18) and one the handles the leaves (lines 19-20). 
+Algorithm \ref{alg:tree} represents the construction of the k-d tree. The tree construction is divided into two stages; one the processes the internal nodes (lines 3-18) and one the handles the leaves (lines 19-20). 
 The condition is implemented by comparing the current level with the tree height, and if the two are equal, it means that we have reached the leaves. 
 % This condition is measured by computing the height of the tree and checking the current level against the height. 
 \\[2mm]
@@ -95,7 +96,8 @@ Last, lines 20-21 sorts the leaves w.r.t the indices that were sorted and partit
 
 
 \begin{algorithm}[H]
-\caption{Building the Tree}\label{tree}
+\caption{Building the Tree}
+\label{alg:tree}
 \begin{algorithmic}[1]
 \Procedure{BuildTree}{refs, indices, depth, index, tree}
 % \State $maxDepth \gets \textsc{ComputeMaxDepth(\textit{patches})} $
@@ -158,7 +160,7 @@ Last, lines 20-21 sorts the leaves w.r.t the indices that were sorted and partit
 
 \subsection{Tree Traversal}
 
-The traversal is presented in Algorithm 3 below. Each query is going to traverse the k-d tree, and at each internal node in the tree, it is going to decide whether it has to visit a certain child by making a conservative test to whether the KNN can possibly be improved in the regions that that node represents. If a leaf is reached, a brute force is performed w.r.t the query and all the reference points represented in that leaf, this is shown in line 2-4. The rest of the code corresponds to the recursive traversal, lines 6-21. 
+The traversal is presented in Algorithm \ref{alg:traverse} below. Each query is going to traverse the k-d tree, and at each internal node in the tree, it is going to decide whether it has to visit a certain child by making a conservative test to whether the KNN can possibly be improved in the regions that that node represents. If a leaf is reached, a brute force is performed w.r.t the query and all the reference points represented in that leaf, this is shown in line 2-4. The rest of the code corresponds to the recursive traversal, lines 6-21. 
 % The traversal is presented in Algorithm 3 below. It deals with three different stages; reaching a leaf, which is the first and second node to visit and a check to visit the second leaf. The first stage on lines 2-4, reaching a leaf, is straightforward. We reach a leaf; therefore, we perform brute force with the query patch and the patches of image B in that current leaf. 
 
 % \\[2mm]
@@ -168,7 +170,8 @@ The traversal is presented in Algorithm 3 below. Each query is going to traverse
 % check second leaf (backtrack)
 
 \begin{algorithm}[H]
-\caption{The Tree Traversal}\label{traverse}
+\caption{The Tree Traversal}
+\label{alg:traverse}
 \begin{algorithmic}[1]
 \Procedure{Traverse}{tree, query, nodeIndex, neighbours, k}
 \If {$\text{\textbf{IsLeaf}}(nodeIndex)$}
