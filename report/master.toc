@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {3.2}k-d Tree Construction}{11}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Difficulties and Shortcomings}{13}{subsubsection.3.2.1}
 \contentsline {subsection}{\numberline {3.3}Tree Traversal}{13}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Representing the Stack as an Integer}{16}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1}Representing the Stack as an Integer}{17}{subsubsection.3.3.1}
 \contentsline {subsubsection}{\numberline {3.3.2}Validating Whether to Look at the \texttt {second}}{17}{subsubsection.3.3.2}
 \contentsline {subsubsection}{\numberline {3.3.3}Difficulties and Shortcomings}{19}{subsubsection.3.3.3}
 \contentsline {subsection}{\numberline {3.4}The Full Implementation}{19}{subsection.3.4}

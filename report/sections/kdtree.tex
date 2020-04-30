@@ -56,10 +56,10 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
                 map3 (\i node_arr inds ->
                         let dim_arrs = transpose node_arr   |> intrinsics.opaque
                         let smallest = map o reduce         |> intrinsics.opaque
-                        let largest  = map o reduce    -- largest numbers for each dimension
-                        let differences = map    (...) -- computing differences
-                        let (dim,_)     = reduce (...) -- dimension w/ widest spread
-                        let extract_dim = map    (...) -- extract dimension values
+                        let largest  = map o reduce         -- max numbers for each dim
+                        let differences = map         (...) -- computing differences
+                        let (dim,_)     = reduce_comm (...) -- dimension w/ widest spread
+                        let extract_dim = map         (...) -- extract dimension values
                         let d_sort_idxs = extract_dim |> sort |> map (.0)
                         let indices     = gather d_sort_idxs inds
                         let node_arrp   = gather2D d_sort_idxs node_arr
@@ -90,14 +90,23 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
 
 \subsubsection{Difficulties and Shortcomings}
 \label{sec:treediff}
-In the construct above in listing \ref{lst:tree}, the original solution was to use a merge sort on line 19. However, although it was safe for Futhark to perform a loop distribution and loop interchange between the outer map inside both for loops, it did not realise, in which case the interchange was not performed. Thus, causing poor performance for the tree construction.  The solution was to (1) use batched merge sort, which operates on 2D arrays rather than 1D arrays, (2) distribute the map from line 12, across the body of the map function, such that the sorting is outside the map. 
+In the construct above in Listing \ref{lst:tree}, the original solution was to use a merge sort on line 19. However, although it was safe for Futhark to perform a loop distribution and loop interchange between the outer map inside both for loops, it did not realise, in which case the interchange was not performed. Thus, causing poor performance for the tree construction.  The solution was to (1) use batched merge sort, which operates on 2D arrays rather than 1D arrays, (2) distribute the map from line 12, across the body of the map function, such that the sorting is outside the map. 
 \\[2mm]
-Another shortcoming shows by the use of \texttt{intrinsics.opaque} at lines 14-15 in listing \ref{lst:tree}, where the purpose is to prevent the Futhark compiler from fusing the two map-reduce compositions on lines 15-16. The reasoning behind this, is that both map-reduce compositions call on the same size array, namely m. 
+Another shortcoming shows by the use of \texttt{intrinsics.opaque} at lines 14-15 in Listing \ref{lst:tree}, where the purpose is to prevent the Futhark compiler from fusing the two map-reduce compositions on lines 15-16. The reasoning behind this is that both map-reduce compositions call on the same size array, namely m. 
+\\[2mm]
+Since the Futhark compiler uses moderate flattening, a map-reduce composition will execute in parallel. However, in a map-reduce composition inside a map, as we have in lines 13 and 15-16, the inner map-reduce composition will be sequentialised, and thus resulting in inefficient code. By adding \texttt{intrinsics.opaque} and preventing the fusion, the compiler will create two reduce inside a map, which in return will exploit all parallelism. 
 
-Since the Futhark compiler uses moderate flattening, a map-reduce composition 
 
 
 
+
+% with: 
+% dataset data/traverse/13test-k3-d14.in: 97395033.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/traverse/13test-k5-d14.in: 108650237.00μs (avg. of 1 runs; RSD: 0.00)
+
+% without:
+% dataset data/traverse/13test-k3-d14.in: 97781445.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/traverse/13test-k5-d14.in: 108743904.00μs (avg. of 1 runs; RSD: 0.00)
 
 
 
@@ -120,16 +129,7 @@ Since the Futhark compiler uses moderate flattening, a map-reduce composition
 % 	            map f (size n)
 % \end{verbatim}
 
-% While it should be safe to make 
-
-% How would you actually transform this loop so you use both levels of parallelism if that is actually what you are after? 
-	
-% When is it safe to interchange a loop inside? 
-
 % 	We need to make sure that we are not reversing any of the direction vectors. It cannot start with < (greater than). 
-
-
-% How can parallel loops be interchanged always? 
 
 % 	If the outer loop is parallel - then we can interchange always. 
 

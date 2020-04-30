@@ -1,6 +1,6 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{n+nf}{entry} \PYG{n}{buildTree} \PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{s}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]} \PYG{p}{(}\PYG{n}{points} \PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{s}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]}\PYG{n}{f32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{h}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{o+ow}{=}
-    \PYG{k+kr}{let} \PYG{n}{num\PYGZus{}pads} \PYG{o+ow}{=} \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}       \PYG{c+c1}{\PYGZhy{}\PYGZhy{} computing the padding needed}
+    \PYG{k+kr}{let} \PYG{n}{num\PYGZus{}pads} \PYG{o+ow}{=}     \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}   \PYG{c+c1}{\PYGZhy{}\PYGZhy{} computing the padding needed}
     \PYG{k+kr}{let} \PYG{n}{padding}  \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}   \PYG{c+c1}{\PYGZhy{}\PYGZhy{} creating the padding array}
     \PYG{k+kr}{let} \PYG{n}{reference} \PYG{o+ow}{=} \PYG{n}{points} \PYG{o}{++} \PYG{n}{padding}
 
@@ -14,10 +14,10 @@
                 \PYG{n}{map3} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{i} \PYG{n}{node\PYGZus{}arr} \PYG{n}{inds} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
                         \PYG{k+kr}{let} \PYG{n}{dim\PYGZus{}arrs} \PYG{o+ow}{=} \PYG{n}{transpose} \PYG{n}{node\PYGZus{}arr}   \PYG{o}{|\PYGZgt{}} \PYG{n}{intrinsics}\PYG{o}{.}\PYG{n}{opaque}
                         \PYG{k+kr}{let} \PYG{n}{smallest} \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{o} \PYG{n}{reduce}         \PYG{o}{|\PYGZgt{}} \PYG{n}{intrinsics}\PYG{o}{.}\PYG{n}{opaque}
-                        \PYG{k+kr}{let} \PYG{n}{largest}  \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{o} \PYG{n}{reduce}     \PYG{c+c1}{\PYGZhy{}\PYGZhy{} largest numbers for each dimension}
-                        \PYG{k+kr}{let} \PYG{n}{differences} \PYG{o+ow}{=} \PYG{n}{map}    \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} computing differences}
-                        \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{dim}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{)}     \PYG{o+ow}{=} \PYG{n}{reduce} \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} dimension w/ widest spread}
-                        \PYG{k+kr}{let} \PYG{n}{extract\PYGZus{}dim} \PYG{o+ow}{=} \PYG{n}{map}    \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} extract dimension values}
+                        \PYG{k+kr}{let} \PYG{n}{largest}  \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{o} \PYG{n}{reduce}         \PYG{c+c1}{\PYGZhy{}\PYGZhy{} max numbers for each dim}
+                        \PYG{k+kr}{let} \PYG{n}{differences} \PYG{o+ow}{=} \PYG{n}{map}         \PYG{p}{(}\PYG{o}{...}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} computing differences}
+                        \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{dim}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{)}     \PYG{o+ow}{=} \PYG{n}{reduce\PYGZus{}comm} \PYG{p}{(}\PYG{o}{...}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} dimension w/ widest spread}
+                        \PYG{k+kr}{let} \PYG{n}{extract\PYGZus{}dim} \PYG{o+ow}{=} \PYG{n}{map}         \PYG{p}{(}\PYG{o}{...}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} extract dimension values}
                         \PYG{k+kr}{let} \PYG{n}{d\PYGZus{}sort\PYGZus{}idxs} \PYG{o+ow}{=} \PYG{n}{extract\PYGZus{}dim} \PYG{o}{|\PYGZgt{}} \PYG{n}{sort} \PYG{o}{|\PYGZgt{}} \PYG{n}{map} \PYG{p}{(}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{p}{)}
                         \PYG{k+kr}{let} \PYG{n}{indices}     \PYG{o+ow}{=} \PYG{n}{gather} \PYG{n}{d\PYGZus{}sort\PYGZus{}idxs} \PYG{n}{inds}
                         \PYG{k+kr}{let} \PYG{n}{node\PYGZus{}arrp}   \PYG{o+ow}{=} \PYG{n}{gather2D} \PYG{n}{d\PYGZus{}sort\PYGZus{}idxs} \PYG{n}{node\PYGZus{}arr}
