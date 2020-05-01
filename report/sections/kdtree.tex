@@ -35,18 +35,39 @@
 	% 	- reasoning about choices w.r.t sorting over partition
 	% 		- and why are there three inner maps in the for-loop (due to sorting)
 
+% \begin{equation} \label{eq1}
+% \begin{split}
+% A & = \frac{\pi r^2}{2} \\
+%  & = \frac{1}{2} \pi r^2
+% \end{split}
+% \end{equation}
+
 
 Listing \ref{lst:tree} represents Futhark-like pseudo-code to demonstrate the overall steps and parallel constructs that are applied in constructing the k-d tree. Note that the structure is not equivalent to the final code, due to some shortcoming of Futhark that are discussed in subsection \ref{sec:treediff}. 
+\\[2mm]
+% - explain the lower and upper bound inclusion 
+% - the structure of the code - what do each stages do and why - reference back to the algorithm from background. 
+% Recall the tree construction Algorithm \ref{alg:tree} from section \ref{sec:back}. it uses divide-and-conquer recursion, which is not supported by Futhark since utilises regular parallelism. Thus, the algorithm is rewritten with an outer sequential for-loop, on line 8, and an inner parallel map on lines 14-28. While Algorithm \ref{alg:tree} 
+%  that iterates through each level of the tree, starting from the root. 
+% The solution that makes up for the divide-and-conquer structure from Algorithm \ref{alg:tree} is that each new level, we compute the current number of nodes per level and number of points per node per level, lines 9-10, such that we can unflatten the arrays containing the reference points and indices to match the number of nodes of the current level, thus being able to map the correct size. 
+% Lines 
+Recall the tree construction Algorithm \ref{alg:tree} from section \ref{sec:back} using divide-and-conquer recursion, which is not supported by Futhark. The way we account for the divide-and-conquer recursion in Listing \ref{lst:tree}, is by iterating through a sequential loop from level 0 to $h+1$, in line 8, and computing for each level the number of nodes per level and number of points per node per level, lines 9-10, in order to unflatten the arrays containing the reference point data into sections that fit the current number of nodes for each level. This is illustrated in figure \ref{fig:divtree}. Once the reference points are sorted within the bounds of each node, the arrays with reference data will be re-flattened, ready for the next iteration of the for-loop. 
 
-- padding 
-- argue (with math from skype meeting) that it accounts for less than 1\% overhead
-- explain the lower and upper bound inclusion 
-- the structure of the code - what do each stages do and why - reference back to the algorithm from background. Algorithm \ref{alg:tree} in section \ref{sec:back}. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{pics/plot-figs/divtree4.png}
+\caption{A demonstration of dividing the reference points at each node level.}
+\label{fig:divtree}
+\end{figure}
+
+The completed tree will consist of the reorganised array of reference points, the original indices of the reference points and two arrays containing the dimension with the widest spread and the median value, that together represent the splitting values of each node. In our optimised solution, the tree also consists of two 2D arrays containing the upper and lower bounds for each dimension at each current node. This idea is elaborated further in section \ref{sec:traversal}. 
+\\[2mm]
+The dimension with the widest spread is computed on lines 16-20, and subsequently, the values in that dimension are sorted, and the reference points and indices are gathered accordingly, on lines 21-24. The median value is picked out on line 25, and both the median and dimension are scattered into the tree arrays containing all medians and dimensions in lines 34-35. Since the upper and lower bounds are computed when finding the dimension with the widest spread, they too are scattered into the tree arrays containing all upper and lower bounds, in lines 36-37. 
 
 
 \begin{listing}[H]
 \begin{minted}{haskell}
-entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
+entry buildTree [m][d] (points : [m][d]f32) (h: i32) =
     let num_pads =     (...)   -- computing the padding needed
     let padding  = map (...)   -- creating the padding array
     let reference = points ++ padding
@@ -54,8 +75,10 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
     let (ref_idxs, reference, median_vals, median_dims, lower_bounds, upper_bounds) =
     	(...) -- initalising the loop variables
         for level < (h+1) do
-            let num_nodes_per_lvl = 1 << level
-            let num_points_per_node_per_lvl = m // num_nodes_per_lvl
+            let num_nodes_pr_lvl = 1 << level
+            let num_points_pr_node_pr_lvl = m // num_nodes_pr_lvl
+            let reference = unflatten num_nodes_pr_lvl num_points_pr_node_pr_lvl reference
+            let ref_inds  = unflatten num_nodes_pr_lvl num_points_pr_node_pr_lvl ref_idxs
 
             let (indices', reference', node_info', lower, upper) = unzip5 <|
                 map3 (\i node_arr inds ->
@@ -71,15 +94,12 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
                         let median      = node_arrp[num_points_per_node_per_lvl // 2, dim]
                         let node_info   = (median, dim)
                         in (indices, node_arrp, node_info, smallest, largest)
-
                     ) (iota num_nodes_per_lvl) reference ref_inds
 
-            let test = ref_idxs'
             let (medians, dims) = unzip node_info'
-
             let inds = map (...)   -- computing indices for scatter
-            in (ref_idxs', 
-                reference', 
+            in (flatten ref_idxs', 
+                flatten reference', 
                 scatter median_vals inds medians,
                 scatter median_dims inds dims, 
                 scatter2D lower_bounds inds lower,
@@ -91,6 +111,22 @@ entry buildTree [m][s][d] (points : [m][s][d]f32) (h: i32) =
 \label{lst:tree}
 \end{listing}
 
+% \\[2mm]
+% One essential optimisation of the k-d tree construction is the use of padding. Since the datasets might be of sizes that are not dividable with $2^{h+1}$, being the number of leaves, then padding the dataset to match the number of leaves, would allow regular parallelism which is much more efficient, since the parallel dimension will have the same size overall the elements of the map.
+One essential optimisation of the k-d tree construction is the use of padding. Since the datasets might be of sizes that are not dividable with the number of leaves, then padding the dataset to match the number of leaves would mean the parallel dimension will have the same size overall the elements of the map, allowing regular parallelism and flattening which is much more efficient.
+\\[2mm]
+% Assuming we choose a height that fits that dataset size, such that the number of points per leaf is in the hundreds, it is arguable that the proposed solution uses at most one padded element per leaf,  accounting to less than 1\% overhead. 
+Arguably, the proposed solution uses at most one padded element per leaf, accounting to less than 1\% overhead. Assuming that we choose a height that fits that dataset size, such that the number of points per leaf is in the hundreds. 
+% It is arguable that the proposed solution uses at most one padded element per leaf, and assuming that we choose a height that fits that dataset size, such that the number of points per leaf is in the hundreds, it accounts to less than 1\% overhead. 
+\\[2mm]
+The upper bound of the number of pads should not exceed the number of leaves, thus, we want to see how many pads that amount per leaf. 
+In Equation \ref{eq:eq1} and \ref{eq:eq2} we denote $n$ to be the total number of reference points, $2^{h+1}$ computes the total number of leaves, where $h$ is the height of the tree excluding the leaves. Thus, $\ceil*{\dfrac{n}{2^{h+1}}}$ denotes the number of points per leaf. In Equation \ref{eq:eq1} we multiply the number of leaves with the number of points per leaf, we get the number of elements that are dividable with the total number of leaves, and by subtracting $n$, we will have the number of pads needed. In Equation \ref{eq:eq2} we divide with the number of leaves on each side, resulting in less than or equal to 1 pad per leaf. 
+
+\begin{align} \label{eq:eq1}
+% \textit{number of pads} \leq \textit{number}& \textit{ of leaves} \\[2mm]
+\ceil*{\dfrac{n}{2^{h+1}}} \times 2^{h+1} - n   &\leq 2^{h+1} \\[2mm]
+\ceil*{\dfrac{n}{2^{h+1}}} - \dfrac{n}{2^{h+1}} &\leq 1 \label{eq:eq2}
+\end{align}
 
 
 \subsubsection{Difficulties and Shortcomings}
@@ -102,16 +138,24 @@ Another shortcoming shows by the use of \texttt{intrinsics.opaque} at lines 14-1
 Since the Futhark compiler uses moderate flattening, a map-reduce composition will execute in parallel. However, in a map-reduce composition inside a map, as we have in lines 13 and 15-16, the inner map-reduce composition will be sequentialised, and thus resulting in inefficient code. By adding \texttt{intrinsics.opaque} and preventing the fusion, the compiler will create two reduce inside a map, which in return will exploit all parallelism. 
 
 
+% 272512/256620 = 1,0619281428
 
+% data/brute/10test-k3-d4.in
+% [580000][4]f32
 
 
 % with: 
 % dataset data/traverse/13test-k3-d14.in: 97395033.00μs (avg. of 1 runs; RSD: 0.00)
 % dataset data/traverse/13test-k5-d14.in: 108650237.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/brute/2brute2.in:       314551.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/brute/10test-k3-d4.in:  256620.00μs (avg. of 1 runs; RSD: 0.00)
 
 % without:
 % dataset data/traverse/13test-k3-d14.in: 97781445.00μs (avg. of 1 runs; RSD: 0.00)
 % dataset data/traverse/13test-k5-d14.in: 108743904.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/brute/2brute2.in:       319978.00μs (avg. of 1 runs; RSD: 0.00)
+% dataset data/brute/10test-k3-d4.in:  272512.00μs (avg. of 1 runs; RSD: 0.00)
+
 
 
 

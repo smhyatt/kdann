@@ -13,9 +13,9 @@
 \BOOKMARK [2][-]{subsection.3.2}{k-d Tree Construction}{section.3}% 13
 \BOOKMARK [3][-]{subsubsection.3.2.1}{Difficulties and Shortcomings}{subsection.3.2}% 14
 \BOOKMARK [2][-]{subsection.3.3}{Tree Traversal}{section.3}% 15
-\BOOKMARK [3][-]{subsubsection.3.3.1}{Representing the Stack as an Integer}{subsection.3.3}% 16
-\BOOKMARK [3][-]{subsubsection.3.3.2}{Validating Whether to Look at the second}{subsection.3.3}% 17
-\BOOKMARK [3][-]{subsubsection.3.3.3}{Difficulties and Shortcomings}{subsection.3.3}% 18
+\BOOKMARK [3][-]{subsubsection.3.3.1}{The First Traversal}{subsection.3.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.2}{The Traversal for Additional Leaves}{subsection.3.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Validating Whether to Look at the second}{subsection.3.3}% 18
 \BOOKMARK [2][-]{subsection.3.4}{The Full Implementation}{section.3}% 19
 \BOOKMARK [1][-]{section.4}{Experimental Evaluation}{}% 20
 \BOOKMARK [2][-]{subsection.4.1}{Optimisation using Sorting over Partition}{section.4}% 21
@@ -25,4 +25,4 @@
 \BOOKMARK [1][-]{section.5}{Conclusion}{}% 25
 \BOOKMARK [1][-]{section.6}{Appendix}{}% 26
 \BOOKMARK [2][-]{subsection.6.1}{Additional Graphs for Performance of Brute Force versus k-d Trees}{section.6}% 27
-\BOOKMARK [1][-]{section*.29}{References}{}% 28
+\BOOKMARK [1][-]{section*.27}{References}{}% 28

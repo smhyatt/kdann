@@ -121,6 +121,7 @@ In conclusion, we see that sorting works incrementally better for increasing siz
 
 
 \subsection{Optimising Tree Traversal with Full Dimensionality Checking}
+\label{sec:evaltrav}
 
 The following demonstrates the results for the optimisation described in section \ref{sec:traversal}. 
 
@@ -175,6 +176,7 @@ and more so for larger datasets--which mores visible in table \ref{tab:travk}, w
 
 
 \subsubsection{Demonstrating a Comparison of the Number of Leaf Visits}
+\label{sec:evaltravhist}
 
 The following histograms demonstrate the number of visits to leaves performed when searching for the exact KNN. The size of the visits-array is initialised to the total number of leaves,  after which each search iteration will store the number of new visits in the array. The small example below shows that the program would finish finding the exact KNN after six iterations of searches through leaves. The three -1’s indicating that no further leaves are visited. 
 % The first visit is typically close to the total of queries because each query will initially have a leaf to search in, of which it naturally belongs. The consecutive number of visits are on the number of additional leaves being visited in order to achieve the exact KNN. 
