@@ -1,9 +1,0 @@
-Computing KNN is widely used due to its simplicity and excellent empirical performance. It has no training phase and it can handle binary as well as multiclass data. When comparing two images the challenge of KNN is finding the patches of say image B that are most similar to the query patch of say image A according to some measured distance. While there are many ways to compute KNN, one commonly applied method is using the \textit{k-d} tree. The \textit{k-d} tree is a binary tree and in this case we define each node to represent a sub-image of the patches in the image representation and a partitioning of that sub-image, meaning the root will represent the whole image.
-\\[2mm]
-Once the tree is created, all leaves will together contain the full partitioned image and each node will represent $\dfrac{m}{2^{level}}$ of the image patches, where $level$ is the current level of the node in the tree in which $level \leq height+1$, $height$ is the height of the tree excluding leaves and $m$ is the total number of patches in the image. 
-\\[2mm]
-The benefit of using a \textit{k-d} tree is the advances w.r.t. search performance. Thanks to the binary tree structure a KNN search for patches will have a complexity of $O(n\ \lg\ n)$. The naive approach of computing KNN is the brute force method, comparing each patch of image B with each patch of image A, resulting in a complexity of $O(n^2)$ \cite{logmatches}.
-\\[2mm]
-
-
-
