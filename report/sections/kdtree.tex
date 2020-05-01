@@ -60,7 +60,7 @@ Recall the tree construction Algorithm \ref{alg:tree} from section \ref{sec:back
 \label{fig:divtree}
 \end{figure}
 
-The completed tree will consist of the reorganised array of reference points, the original indices of the reference points and two arrays containing the dimension with the widest spread and the median value, that together represent the splitting values of each node. In our optimised solution, the tree also consists of two 2D arrays containing the upper and lower bounds for each dimension at each current node. This idea is elaborated further in section \ref{sec:traversal}. 
+The completed tree will consist of the reorganised array of reference points, the original indices of the reference points and two arrays containing the dimensions with the widest spread and the median values, that together represent the splitting values of each node. In our optimised solution, the tree also consists of two 2D arrays containing the upper and lower bounds for each dimension at each current node. This idea is elaborated further in section \ref{sec:traversal}. 
 \\[2mm]
 The dimension with the widest spread is computed on lines 16-20, and subsequently, the values in that dimension are sorted, and the reference points and indices are gathered accordingly, on lines 21-24. The median value is picked out on line 25, and both the median and dimension are scattered into the tree arrays containing all medians and dimensions in lines 34-35. Since the upper and lower bounds are computed when finding the dimension with the widest spread, they too are scattered into the tree arrays containing all upper and lower bounds, in lines 36-37. 
 
@@ -113,7 +113,7 @@ entry buildTree [m][d] (points : [m][d]f32) (h: i32) =
 
 % \\[2mm]
 % One essential optimisation of the k-d tree construction is the use of padding. Since the datasets might be of sizes that are not dividable with $2^{h+1}$, being the number of leaves, then padding the dataset to match the number of leaves, would allow regular parallelism which is much more efficient, since the parallel dimension will have the same size overall the elements of the map.
-One essential optimisation of the k-d tree construction is the use of padding. Since the datasets might be of sizes that are not dividable with the number of leaves, then padding the dataset to match the number of leaves would mean the parallel dimension will have the same size overall the elements of the map, allowing regular parallelism and flattening which is much more efficient.
+One essential optimisation of the k-d tree construction is the use of padding. Since the datasets might be of sizes that are not dividable with the number of leaves, then padding the dataset to match the number of leaves would mean the parallel dimension will have the same size overall the elements of the map, allowing regular parallelism and flattening, which is much more efficient.
 \\[2mm]
 % Assuming we choose a height that fits that dataset size, such that the number of points per leaf is in the hundreds, it is arguable that the proposed solution uses at most one padded element per leaf,  accounting to less than 1\% overhead. 
 Arguably, the proposed solution uses at most one padded element per leaf, accounting to less than 1\% overhead. Assuming that we choose a height that fits that dataset size, such that the number of points per leaf is in the hundreds. 

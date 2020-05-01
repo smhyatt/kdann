@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+
+  \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{sorted\PYGZus{}idxs\PYGZus{}fst}\PYG{p}{,} \PYG{n}{init\PYGZus{}leaves}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{init\PYGZus{}leaves} \PYG{o}{|\PYGZgt{}} \PYG{n}{sort}
+  \PYG{k+kr}{let} \PYG{n}{not\PYGZus{}completed\PYGZus{}queries} \PYG{o+ow}{=} \PYG{n}{gather2D} \PYG{n}{sorted\PYGZus{}idxs\PYGZus{}fst} \PYG{n}{qs}
+
+  \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+          \PYG{n}{while} \PYG{p}{(}\PYG{n}{length} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{k+kr}{do}
+            \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+
+            \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{ongoing\PYGZus{}leaf\PYGZus{}idxs}\PYG{p}{,} \PYG{n}{sorted\PYGZus{}idxs}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{sortQueriesByLeaves} \PYG{n}{new\PYGZus{}leaves}
+            \PYG{k+kr}{let} \PYG{n}{finished} \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{ll} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{if} \PYG{n}{ll} \PYG{o}{==} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{k+kr}{then} \PYG{l+m+mi}{1} \PYG{k+kr}{else} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{n}{ongoing\PYGZus{}leaf\PYGZus{}idxs}
+                        \PYG{o}{|\PYGZgt{}} \PYG{n}{reduce} \PYG{p}{(}\PYG{o}{+}\PYG{p}{)} \PYG{l+m+mi}{0}
+            \PYG{k+kr}{let} \PYG{n}{trues\PYGZsq{}} \PYG{o+ow}{=} \PYG{n}{trues} \PYG{o}{\PYGZhy{}} \PYG{n}{finished}
+
+            \PYG{k+kr}{let} \PYG{n}{not\PYGZus{}completed\PYGZus{}queries\PYGZsq{}} \PYG{o+ow}{=} \PYG{n}{gather2D} \PYG{n}{sorted\PYGZus{}idxs} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs}
+            \PYG{k+kr}{let} \PYG{n}{on\PYGZus{}knn\PYGZus{}idxs\PYGZsq{}}  \PYG{o+ow}{=} \PYG{n}{gather} \PYG{n}{sorted\PYGZus{}idxs} \PYG{n}{on\PYGZus{}knn\PYGZus{}idxs}
+            \PYG{k+kr}{let} \PYG{n}{ongoing\PYGZus{}knns\PYGZsq{}} \PYG{o+ow}{=} \PYG{n}{gather2Dtuples} \PYG{n}{sorted\PYGZus{}idxs} \PYG{n}{new\PYGZus{}ongoing\PYGZus{}knns}
+            \PYG{k+kr}{let} \PYG{n}{stacks\PYGZsq{}} \PYG{o+ow}{=} \PYG{n}{gather} \PYG{n}{sorted\PYGZus{}idxs} \PYG{n}{new\PYGZus{}stacks}
+
+            \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+\end{Verbatim}

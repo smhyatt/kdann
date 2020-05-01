@@ -1,6 +1,7 @@
 \section{Implementation}
-\label{sec:brute}
+\label{sec:imp}
 \subsection{Brute Force}
+\label{sec:brute}
 
 % 3. section(s) in which you describe your work: each step
 %     -- brute force version
@@ -92,12 +93,12 @@ entry nnk [m][n][d] (qs:[m][d]real) (refs:[n][d]real) : [m][k](int,real) =
 \end{listing}
 
 
-While this pseudo-code shows the full brute force of all queries and reference points, it is conceptually similar to the brute force performed on each leaf-level in the k-d tree implementation. 
+While this pseudo-code shows the full brute force of all queries and reference points, it is conceptually similar to the brute force performed on each leaf-level in the k-d tree implementation. Thus, it will not be discussed further.
 
 
 \subsubsection{Difficulties and Shortcomings}
 
-The distance computed on line 6 in Listing \ref{lst:brute} was initially implemented as a map-reduce composition while still called inside the first loop on line 4. The result of this was poor performance because the Futhark compiler would see that there was some inner parallelism, which it would exploit, even though it is inefficient. It was, therefore, more efficient to compute the distance sequentially, as described previously. 
+The distance computed on line 6 in Listing \ref{lst:brute} was initially implemented as a map-reduce composition, while still called inside the first loop on line 4. The result of this was poor performance because the Futhark compiler would see that there was some inner parallelism, which it would exploit, even though it is inefficient. It was, therefore, more efficient to compute the distance sequentially, as described previously. 
 
 
 % So what it's doing right now, is interchanging the outer map inside the loop of index p and then distribute the map across the euclidean and across the remaining loop. 

@@ -40,7 +40,7 @@
 
 In section \ref{sec:back} the tree traversal Algorithm \ref{alg:tree}, is created using recursion, and as in section \ref{sec:kdtree} we must re-write the traversal without recursion. The proposed solution uses a stack, and the stack is represented as an integer, since the height of the tree never exceeds 32. 
 \\[2mm]
-The traversal has two stages overall stages: (1) the first traversal finding the unique leaf in which the query naturally belongs, (2) backtracking the tree to find additional or better KNNs. 
+The traversal has two overall stages: (1) the first traversal finding the unique leaf in which the query naturally belongs, (2) traverse backwards in the tree to find additional or better KNNs. 
 
 \subsubsection{The First Traversal}
 
@@ -75,9 +75,15 @@ Figure \ref{fig:t1} demonstrates how the tree is traversed to the leaf in which 
 \subsubsection{The Traversal for Additional Leaves}
 
 
-In this demonstration, we look at a fictive traversal in which we always check the second node. The validation technique as to whether to check the second node or not, is elaborated in section \ref{sec:valid}. 
+In this demonstration, we look at a fictive traversal in which we always check the second node. The validation technique as to whether to check the second node or not, is elaborated in section \ref{sec:valid}. The traversal looks at three overall elements (1) the current node index, which is initialised as the last visited leaf, (2) a stack and a stack pointer, (3) the second child of the parent node, if it is to be visited. 
+% The parent is saved
+%                 -- in `parent_rec`, the `second` satisfying child in `rec_node`
+%                 -- If root has been reached and its `second` has been visited
+%                 -- then `parent_rec` is the root and `rec_node` is -1 by convention.
+% (node_index, stack, count, rec_node)
+% (last_leaf, stack, height, -1)
 \\[2mm]
-Figure \ref{fig:t2} is a continuation of figure \ref{fig:t1}, in which the initial leaf is reached and the stack is popped to see if the second node has been visited or not. Since it had not been visited, the traversal also visits the second node. 
+Figure \ref{fig:t2} is a continuation of figure \ref{fig:t1}, in which the initial leaf is reached. Thus, the node index is set to the parent of the initial leaf, namely 4, and the stack is popped to see if the second node has been visited or not. Since it had not been visited and we pretend the condition to visit always holds, the traversal also visits the second node. 
 
 % \begin{figure}[H]
 % \centering
@@ -120,7 +126,7 @@ Figure \ref{fig:t2} is a continuation of figure \ref{fig:t1}, in which the initi
 \label{fig:t3}
 \end{figure}
 
-\noindent Pretending that we still have not found the KNN, the traversal will continue into the second leaf of the parents second child, as in figure \ref{fig:t5}. If the KNN is still not found, the traversal will continue to the second child of the root until the whole tree has been traversed, or the KNN is found. 
+\noindent Pretending that we still have not found the KNN, the traversal will continue into the second leaf of the parents second child, as in figure \ref{fig:t5}. If the KNN is still not found, the traversal will continue to the second child of the root until the whole tree has been traversed, or the KNN is found. When the query is done, it returns $-1$
 
 % \begin{figure}[H]
 % \centering
@@ -204,7 +210,7 @@ We propose an optimised solution for checking whether to visit the second node o
 \forall i.[lb_i, ub_i].\ \forall q\in Q_m.\ \forall p\in R_n.\ \forall m\in M_{nn}.
 \]
 
-\noindent The original solution determines whether to visit the second node by checking if the distance from the query to the current median is smaller than the worst found neighbour, as in Equation \ref{eq:e1}. However, the solution looks only at one dimension when checking whether to visit or not, meaning that it is likely that another dimensionality could contain information that would otherwise have prevented the second visit. Especially if the number of dimensions is, because then a lot of values will be overlooked. 
+\noindent The original solution determines whether to visit the second node by checking if the distance from the query to the current median is smaller than the worst found neighbour, as in Equation \ref{eq:e1}. However, the solution looks only at one dimension when checking whether to visit or not, meaning it is likely that another dimensionality could contain information that would otherwise have prevented the second visit. Especially, if the number of dimensions is high, because then a lot of values will be overlooked. 
 % The original solution looks at one dimension when checking whether to visit the second node or not.
 
 \begin{equation}  \label{eq:e1}
@@ -228,7 +234,7 @@ We propose an optimised solution for checking whether to visit the second node o
 \ \geq\ wknn
 \end{equation}
 
-\noindent Section \ref{sec:evaltrav} demonstrates the increased performance by using this solution. On a dataset of size roughly 4 mio., with dimensionality D=12 and K=5, we obtain a speed-up of $5.6$. The reason for this is elaborated further in Section \ref{sec:evaltravhist}, which demonstrates how the checking all the upper and lower bound on all dimensions reduces the number of visits to additional node, due to its increased accuracy. Thus, reducing the steps made in the traversal and improving the performance. 
+\noindent Section \ref{sec:evaltrav} demonstrates the increased performance by using this solution. On a dataset of size roughly 4 mio., with dimensionality D=12 and K=5, we obtain a speed-up of $5.6$. The reason for this is elaborated further in Section \ref{sec:evaltravhist}, which demonstrates how checking all the upper and lower bound on all dimensions reduces the number of visits to additional node, due to its increased accuracy. Thus, reducing the steps made in the traversal and improving the performance. 
 
 
 \begin{listing}[H]

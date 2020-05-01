@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{entry} \PYG{n}{main} \PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{m}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]} \PYG{p}{(}\PYG{n}{k}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{h}\PYG{k+kt}{:} \PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{qs} \PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{m}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]}\PYG{n}{f32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{refs} \PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{d}\PYG{p}{]}\PYG{n}{f32}\PYG{p}{)} \PYG{o+ow}{=}
+
+  \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{ref\PYGZus{}idxs}\PYG{p}{,} \PYG{n}{leaves}\PYG{p}{,} \PYG{n}{meds}\PYG{p}{,} \PYG{n}{dims}\PYG{p}{,} \PYG{n}{lower}\PYG{p}{,} \PYG{n}{upper}\PYG{p}{,} \PYG{n}{ppl}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{buildTree} \PYG{n}{refs} \PYG{n}{h}
+  \PYG{k+kr}{let} \PYG{n}{init\PYGZus{}leaves} \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{qi} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{firstTraverse} \PYG{n}{h} \PYG{n}{dims} \PYG{n}{qs}\PYG{p}{[}\PYG{n}{qi}\PYG{p}{]} \PYG{n}{meds}\PYG{p}{)} \PYG{p}{(}\PYG{n}{iota} \PYG{n}{m}\PYG{p}{)}
+
+  \PYG{c+c1}{\PYGZhy{}\PYGZhy{} For sorting, the queries af sorted by the initial leaves.}
+
+  \PYG{k+kr}{let} \PYG{n}{ongoing\PYGZus{}knn}   \PYG{o+ow}{=} \PYG{n}{replicate} \PYG{n}{a} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{k} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{n}{i32}\PYG{p}{,} \PYG{n}{f32}\PYG{o}{.}\PYG{n}{inf}\PYG{p}{))}
+  \PYG{k+kr}{let} \PYG{n}{completed\PYGZus{}knn} \PYG{o+ow}{=} \PYG{n}{copy} \PYG{n}{ongoing\PYGZus{}knn}
+  \PYG{k+kr}{let} \PYG{n}{stacks}  \PYG{o+ow}{=} \PYG{n}{replicate} \PYG{n}{a} \PYG{l+m+mi}{0}\PYG{n}{i32}
+
+  \PYG{k+kr}{let} \PYG{p}{(}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{n}{completed\PYGZus{}knn}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{,} \PYG{k+kr}{\PYGZus{}}\PYG{p}{)} \PYG{o+ow}{=}
+      \PYG{n}{loop} \PYG{p}{(}\PYG{n}{not\PYGZus{}comp\PYGZus{}qs}\PYG{p}{,} \PYG{n}{init\PYGZus{}leaves}\PYG{p}{,} \PYG{n}{stacks}\PYG{p}{,} \PYG{n}{completed\PYGZus{}knn}\PYG{p}{,} \PYG{n}{ongoing\PYGZus{}knn}\PYG{p}{,} \PYG{n}{on\PYGZus{}knn\PYGZus{}idxs}\PYG{p}{,} \PYG{n}{trues}\PYG{p}{)} \PYG{o+ow}{=}
+        \PYG{p}{(}\PYG{o}{...}\PYG{p}{)} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} loop initialisation}
+
+          \PYG{n}{while} \PYG{p}{(}\PYG{n}{length} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{k+kr}{do}
+            \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{ongoing\PYGZus{}knns}\PYG{p}{,} \PYG{n}{new\PYGZus{}leaves}\PYG{p}{,} \PYG{n}{new\PYGZus{}stacks}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{unzip3} \PYG{o}{\PYGZlt{}|}
+                \PYG{n}{map4} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{q} \PYG{n}{lidx} \PYG{n}{st} \PYG{n}{klst} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}}
+                        \PYG{k+kr}{let} \PYG{n}{neighbours} \PYG{o+ow}{=} \PYG{n}{bruteForce} \PYG{n}{q} \PYG{n}{leaves}\PYG{p}{[}\PYG{n}{lidx}\PYG{p}{]} \PYG{n}{ref\PYGZus{}idxs}\PYG{p}{[}\PYG{n}{lidx}\PYG{p}{]} \PYG{n}{klst}
+                        \PYG{k+kr}{let} \PYG{n}{wknn} \PYG{o+ow}{=} \PYG{n}{neighbours}\PYG{p}{[}\PYG{n}{k}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{l+m+mi}{1}
+                        \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{new\PYGZus{}l}\PYG{p}{,} \PYG{n}{new\PYGZus{}s}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{traverse} \PYG{n}{h} \PYG{n}{dims} \PYG{n}{meds} \PYG{n}{wknn} \PYG{n}{q} \PYG{n}{st} \PYG{n}{lli} \PYG{n}{lower} \PYG{n}{upper}
+                        \PYG{k+kr}{in} \PYG{p}{(}\PYG{n}{neighbours}\PYG{p}{,} \PYG{n}{new\PYGZus{}l}\PYG{p}{,} \PYG{n}{new\PYGZus{}s}\PYG{p}{)}
+                     \PYG{p}{)} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs} \PYG{n}{init\PYGZus{}leaves} \PYG{n}{stacks} \PYG{n}{ongoing\PYGZus{}knn}
+
+            \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Sorting the queries by the leaves and getting the number of finished elements,}
+            \PYG{c+c1}{\PYGZhy{}\PYGZhy{} or Partitioning the finished elements from the rest, returning the number of}
+            \PYG{c+c1}{\PYGZhy{}\PYGZhy{} not finised queries.}
+
+            \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Gathering after sorting.}
+
+            \PYG{k+kr}{in} \PYG{p}{(}\PYG{n}{not\PYGZus{}comp\PYGZus{}qs\PYGZsq{}}\PYG{p}{[}\PYG{n}{finished}\PYG{k+kt}{:}\PYG{p}{],}
+                \PYG{n}{ongoing\PYGZus{}leaf\PYGZus{}idxs}\PYG{p}{[}\PYG{n}{finished}\PYG{k+kt}{:}\PYG{p}{],}
+                \PYG{n}{stacks\PYGZsq{}}\PYG{p}{[}\PYG{n}{finished}\PYG{k+kt}{:}\PYG{p}{],}
+                \PYG{n}{scatter2D} \PYG{n}{completed\PYGZus{}knn} \PYG{p}{(}\PYG{o}{...}\PYG{p}{),} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} scatter completed into collective array}
+                \PYG{n}{ongoing\PYGZus{}knns\PYGZsq{}}\PYG{p}{[}\PYG{n}{finished}\PYG{k+kt}{:}\PYG{p}{],}
+                \PYG{n}{on\PYGZus{}knn\PYGZus{}idxs\PYGZsq{}}\PYG{p}{[}\PYG{n}{finished}\PYG{k+kt}{:}\PYG{p}{],}
+                \PYG{n}{trues\PYGZsq{}}\PYG{p}{)}
+  \PYG{k+kr}{in} \PYG{n}{completed\PYGZus{}knn}
+\end{Verbatim}

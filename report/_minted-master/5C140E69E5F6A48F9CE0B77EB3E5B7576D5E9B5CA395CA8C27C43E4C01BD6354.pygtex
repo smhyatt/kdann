@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      \PYG{n}{while} \PYG{p}{(}\PYG{n}{length} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{k+kr}{do}
+        \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+
+        \PYG{k+kr}{let} \PYG{p}{(}\PYG{n}{trues}\PYG{p}{,} \PYG{n}{ongoing\PYGZus{}leaf\PYGZus{}is}\PYG{p}{,} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs\PYGZsq{}}\PYG{p}{,} \PYG{n}{on\PYGZus{}knn\PYGZus{}idxs\PYGZsq{}}\PYG{p}{,} \PYG{n}{ongoing\PYGZus{}knns\PYGZsq{}}\PYG{p}{,} \PYG{n}{stacks\PYGZsq{}}\PYG{p}{)} \PYG{o+ow}{=}
+            \PYG{n}{partition2} \PYG{n}{sortFinishedQueries} \PYG{n}{new\PYGZus{}leaves} \PYG{n}{not\PYGZus{}comp\PYGZus{}qs}
+            \PYG{n}{ongoing\PYGZus{}knn\PYGZus{}idxs} \PYG{n}{new\PYGZus{}stacks} \PYG{n}{ongoing\PYGZus{}knns}
+
+        \PYG{p}{(}\PYG{o}{...}\PYG{p}{)}
+\end{Verbatim}

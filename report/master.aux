@@ -20,150 +20,170 @@
 \providecommand \oddpage@label [2]{}
 \babel@aux{english}{}
 \citation{kdann}
+\citation{patchmatch}
+\citation{hash}
 \citation{kdann}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}}
-\newlabel{sec:intro}{{1}{2}{Introduction}{section.1}{}}
+\citation{kdann}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}}
+\newlabel{sec:intro}{{1}{3}{Introduction}{section.1}{}}
 \citation{logmatches}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Acknowledgement}{4}{subsection.1.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{4}{section.2}}
-\newlabel{sec:back}{{2}{4}{Background}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Pseudo-code for the Computing KNN using k-d Trees}{5}{subsection.2.1}}
-\@writefile{lop}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Main\relax }}{5}{algorithm.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Acknowledgements}{5}{subsection.1.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{5}{section.2}}
+\newlabel{sec:back}{{2}{5}{Background}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Pseudo-code for the Computing KNN using k-d Trees}{6}{subsection.2.1}}
+\@writefile{lop}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Main\relax }}{6}{algorithm.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{alg:main}{{1}{5}{Main\relax }{algorithm.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Construction the Tree}{5}{subsection.2.2}}
-\@writefile{lop}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Building the Tree\relax }}{6}{algorithm.2}}
-\newlabel{alg:tree}{{2}{6}{Building the Tree\relax }{algorithm.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Tree Traversal}{6}{subsection.2.3}}
-\@writefile{lop}{\contentsline {algorithm}{\numberline {3}{\ignorespaces The Tree Traversal\relax }}{7}{algorithm.3}}
-\newlabel{alg:traverse}{{3}{7}{The Tree Traversal\relax }{algorithm.3}{}}
-\@writefile{tdo}{\contentsline {todo}{Ret s\IeC {\r a} det lyder bedre}{7}{section*.2}}
-\pgfsyspdfmark {pgfid1}{20112834}{10847216}
-\@writefile{tdo}{\contentsline {todo}{hertil}{8}{section*.3}}
-\pgfsyspdfmark {pgfid2}{20112834}{37872717}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Related Work}{8}{subsection.2.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.1}PatchMatch}{8}{subsubsection.2.4.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.2}Coherency Sensitive Hashing}{9}{subsubsection.2.4.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{9}{section.3}}
-\newlabel{sec:brute}{{3}{9}{Implementation}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Brute Force}{9}{subsection.3.1}}
-\@writefile{lol}{\contentsline {listing}{\numberline {1}{\ignorespaces Futhark implementation of the Brute Force.\relax }}{10}{listing.1}}
-\newlabel{lst:brute}{{1}{10}{Futhark implementation of the Brute Force.\relax }{listing.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Difficulties and Shortcomings}{11}{subsubsection.3.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}k-d Tree Construction}{11}{subsection.3.2}}
-\newlabel{sec:kdtree}{{3.2}{11}{k-d Tree Construction}{subsection.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A demonstration of dividing the reference points at each node level.\relax }}{11}{figure.caption.4}}
-\newlabel{fig:divtree}{{1}{11}{A demonstration of dividing the reference points at each node level.\relax }{figure.caption.4}{}}
-\@writefile{lol}{\contentsline {listing}{\numberline {2}{\ignorespaces Futhark implementation of the tree creation.\relax }}{13}{listing.2}}
-\newlabel{lst:tree}{{2}{13}{Futhark implementation of the tree creation.\relax }{listing.2}{}}
-\newlabel{eq:eq1}{{1}{14}{k-d Tree Construction}{equation.3.1}{}}
-\newlabel{eq:eq2}{{2}{14}{k-d Tree Construction}{equation.3.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Difficulties and Shortcomings}{14}{subsubsection.3.2.1}}
-\newlabel{sec:treediff}{{3.2.1}{14}{Difficulties and Shortcomings}{subsubsection.3.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Tree Traversal}{15}{subsection.3.3}}
-\newlabel{sec:traversal}{{3.3}{15}{Tree Traversal}{subsection.3.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}The First Traversal}{15}{subsubsection.3.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first traversal finding the leaf in which the query naturally belongs.\relax }}{16}{figure.caption.5}}
-\newlabel{fig:t1}{{2}{16}{The first traversal finding the leaf in which the query naturally belongs.\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}The Traversal for Additional Leaves}{16}{subsubsection.3.3.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Visiting the second node of the initial leaf.\relax }}{16}{figure.caption.6}}
-\newlabel{fig:t2}{{3}{16}{Visiting the second node of the initial leaf.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visiting first node of the parents second child.\relax }}{17}{figure.caption.7}}
-\newlabel{fig:t3}{{4}{17}{Visiting first node of the parents second child.\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \relax }}{17}{figure.caption.8}}
-\newlabel{fig:t5}{{5}{17}{\relax }{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Validating Whether to Look at the \texttt  {second}}{18}{subsubsection.3.3.3}}
-\newlabel{sec:valid}{{3.3.3}{18}{Validating Whether to Look at the \texttt {second}}{subsubsection.3.3.3}{}}
-\newlabel{eq:e1}{{3}{18}{Validating Whether to Look at the \texttt {second}}{equation.3.3}{}}
-\newlabel{eq:e2}{{4}{18}{Validating Whether to Look at the \texttt {second}}{equation.3.4}{}}
-\newlabel{eq:e3}{{5}{18}{Validating Whether to Look at the \texttt {second}}{equation.3.5}{}}
-\@writefile{lol}{\contentsline {listing}{\numberline {3}{\ignorespaces A part of the tree traversal demonstrating checking upper and lower bound to determine visits.\relax }}{19}{listing.3}}
-\newlabel{lst:traverse1}{{3}{19}{A part of the tree traversal demonstrating checking upper and lower bound to determine visits.\relax }{listing.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}The Full Implementation}{20}{subsection.3.4}}
-\newlabel{sec:full}{{3.4}{20}{The Full Implementation}{subsection.3.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Evaluation}{20}{section.4}}
-\newlabel{sec:eval}{{4}{20}{Experimental Evaluation}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Optimisation using Sorting over Partition}{20}{subsection.4.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Testing for D=9 with datasets of sizes\IeC {\quotesinglbase } 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }}{20}{figure.caption.9}}
-\newlabel{fig:sort1}{{6}{20}{Testing for D=9 with datasets of sizes‚ 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Testing for D=4 with datasets of sizes\IeC {\quotesinglbase } 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }}{21}{figure.caption.10}}
-\newlabel{fig:sort2}{{7}{21}{Testing for D=4 with datasets of sizes‚ 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }{figure.caption.10}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Speed-ups gained by increasing the dataset sizes, for sorting against partition.\relax }}{21}{table.caption.11}}
-\newlabel{tab:sort}{{1}{21}{Speed-ups gained by increasing the dataset sizes, for sorting against partition.\relax }{table.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Optimising Tree Traversal with Full Dimensionality Checking}{22}{subsection.4.2}}
-\newlabel{sec:evaltrav}{{4.2}{22}{Optimising Tree Traversal with Full Dimensionality Checking}{subsection.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Traversal comparing results w.r.t varying sizes for D on a smaller and larger dataset.\relax }}{22}{figure.caption.12}}
-\newlabel{fig:trav1}{{8}{22}{Traversal comparing results w.r.t varying sizes for D on a smaller and larger dataset.\relax }{figure.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Speed-ups gained by increasing the size of K for both small and large datasets.\relax }}{22}{table.caption.13}}
-\newlabel{tab:travk}{{2}{22}{Speed-ups gained by increasing the size of K for both small and large datasets.\relax }{table.caption.13}{}}
-\@writefile{tdo}{\contentsline {todo}{Ret med friske \IeC {\o }jne}{23}{section*.14}}
-\pgfsyspdfmark {pgfid3}{20112834}{46833383}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Traversal comparing results w.r.t varying sizes for K on a smaller and larger dataset.\relax }}{23}{figure.caption.15}}
-\newlabel{fig:trav2}{{9}{23}{Traversal comparing results w.r.t varying sizes for K on a smaller and larger dataset.\relax }{figure.caption.15}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Demonstrating a Comparison of the Number of Leaf Visits}{23}{subsubsection.4.2.1}}
-\newlabel{sec:evaltravhist}{{4.2.1}{23}{Demonstrating a Comparison of the Number of Leaf Visits}{subsubsection.4.2.1}{}}
-\newlabel{fig:f5}{{10a}{24}{Subfigure 10a}{subfigure.10.1}{}}
+\newlabel{alg:main}{{1}{6}{Main\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Construction the Tree}{7}{subsection.2.2}}
+\@writefile{lop}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Building the Tree\relax }}{8}{algorithm.2}}
+\newlabel{alg:tree}{{2}{8}{Building the Tree\relax }{algorithm.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Tree Traversal}{8}{subsection.2.3}}
+\@writefile{lop}{\contentsline {algorithm}{\numberline {3}{\ignorespaces The Tree Traversal\relax }}{9}{algorithm.3}}
+\newlabel{alg:traverse}{{3}{9}{The Tree Traversal\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Related Work}{10}{subsection.2.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.1}PatchMatch}{10}{subsubsection.2.4.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.2}Coherency Sensitive Hashing}{10}{subsubsection.2.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{11}{section.3}}
+\newlabel{sec:imp}{{3}{11}{Implementation}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Brute Force}{11}{subsection.3.1}}
+\newlabel{sec:brute}{{3.1}{11}{Brute Force}{subsection.3.1}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {1}{\ignorespaces Futhark implementation of the Brute Force.\relax }}{12}{listing.1}}
+\newlabel{lst:brute}{{1}{12}{Futhark implementation of the Brute Force.\relax }{listing.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Difficulties and Shortcomings}{12}{subsubsection.3.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}k-d Tree Construction}{13}{subsection.3.2}}
+\newlabel{sec:kdtree}{{3.2}{13}{k-d Tree Construction}{subsection.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A demonstration of dividing the reference points at each node level.\relax }}{13}{figure.caption.2}}
+\newlabel{fig:divtree}{{1}{13}{A demonstration of dividing the reference points at each node level.\relax }{figure.caption.2}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {2}{\ignorespaces Futhark implementation of the tree creation.\relax }}{14}{listing.2}}
+\newlabel{lst:tree}{{2}{14}{Futhark implementation of the tree creation.\relax }{listing.2}{}}
+\newlabel{eq:eq1}{{1}{15}{k-d Tree Construction}{equation.3.1}{}}
+\newlabel{eq:eq2}{{2}{15}{k-d Tree Construction}{equation.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Difficulties and Shortcomings}{15}{subsubsection.3.2.1}}
+\newlabel{sec:treediff}{{3.2.1}{15}{Difficulties and Shortcomings}{subsubsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Tree Traversal}{16}{subsection.3.3}}
+\newlabel{sec:traversal}{{3.3}{16}{Tree Traversal}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}The First Traversal}{16}{subsubsection.3.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first traversal finding the leaf in which the query naturally belongs.\relax }}{17}{figure.caption.3}}
+\newlabel{fig:t1}{{2}{17}{The first traversal finding the leaf in which the query naturally belongs.\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}The Traversal for Additional Leaves}{17}{subsubsection.3.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Visiting the second node of the initial leaf.\relax }}{18}{figure.caption.4}}
+\newlabel{fig:t2}{{3}{18}{Visiting the second node of the initial leaf.\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Visiting first node of the parents second child.\relax }}{18}{figure.caption.5}}
+\newlabel{fig:t3}{{4}{18}{Visiting first node of the parents second child.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \relax }}{19}{figure.caption.6}}
+\newlabel{fig:t5}{{5}{19}{\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Validating Whether to Look at the \texttt  {second}}{19}{subsubsection.3.3.3}}
+\newlabel{sec:valid}{{3.3.3}{19}{Validating Whether to Look at the \texttt {second}}{subsubsection.3.3.3}{}}
+\newlabel{eq:e1}{{3}{19}{Validating Whether to Look at the \texttt {second}}{equation.3.3}{}}
+\newlabel{eq:e2}{{4}{20}{Validating Whether to Look at the \texttt {second}}{equation.3.4}{}}
+\newlabel{eq:e3}{{5}{20}{Validating Whether to Look at the \texttt {second}}{equation.3.5}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {3}{\ignorespaces A part of the tree traversal demonstrating checking upper and lower bound to determine visits.\relax }}{21}{listing.3}}
+\newlabel{lst:traverse1}{{3}{21}{A part of the tree traversal demonstrating checking upper and lower bound to determine visits.\relax }{listing.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}The Full Implementation}{21}{subsection.3.4}}
+\newlabel{sec:full}{{3.4}{21}{The Full Implementation}{subsection.3.4}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {4}{\ignorespaces The overall structure of the main function putting everything together.\relax }}{23}{listing.4}}
+\newlabel{lst:full}{{4}{23}{The overall structure of the main function putting everything together.\relax }{listing.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Using Partition to Extract the Finished Queries}{24}{subsubsection.3.4.1}}
+\newlabel{sec:pard}{{3.4.1}{24}{Using Partition to Extract the Finished Queries}{subsubsection.3.4.1}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {5}{\ignorespaces The missing piece of Listing {\ref  {lst:full}} in the partition solution.\relax }}{24}{listing.5}}
+\newlabel{lst:par1}{{5}{24}{The missing piece of Listing \protect {\ref {lst:full}} in the partition solution.\relax }{listing.5}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {6}{\ignorespaces Implementation of the two-way partition.\relax }}{25}{listing.6}}
+\newlabel{lst:par2}{{6}{25}{Implementation of the two-way partition.\relax }{listing.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Using Sorting to Extract the Finished Queries}{25}{subsubsection.3.4.2}}
+\newlabel{sec:sord}{{3.4.2}{25}{Using Sorting to Extract the Finished Queries}{subsubsection.3.4.2}{}}
+\@writefile{lol}{\contentsline {listing}{\numberline {7}{\ignorespaces The missing pieces of Listing {\ref  {lst:full}} in the sorting solution.\relax }}{26}{listing.7}}
+\newlabel{lst:sor1}{{7}{26}{The missing pieces of Listing \protect {\ref {lst:full}} in the sorting solution.\relax }{listing.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Why Sorting over Partition}{26}{subsubsection.3.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Evaluation}{27}{section.4}}
+\newlabel{sec:eval}{{4}{27}{Experimental Evaluation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Optimisation using Sorting over Partition}{27}{subsection.4.1}}
+\newlabel{sec:sorpar}{{4.1}{27}{Optimisation using Sorting over Partition}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Testing for D=9 with datasets of sizes\IeC {\quotesinglbase } 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }}{27}{figure.caption.7}}
+\newlabel{fig:sort1}{{6}{27}{Testing for D=9 with datasets of sizes‚ 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Testing for D=4 with datasets of sizes\IeC {\quotesinglbase } 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }}{28}{figure.caption.8}}
+\newlabel{fig:sort2}{{7}{28}{Testing for D=4 with datasets of sizes‚ 2097152 and 1900000, 524288 and 524288, and 131072 and 120000.\relax }{figure.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Speed-ups gained by increasing the dataset sizes, for sorting against partition.\relax }}{28}{table.caption.9}}
+\newlabel{tab:sort}{{1}{28}{Speed-ups gained by increasing the dataset sizes, for sorting against partition.\relax }{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Optimising Tree Traversal with Full Dimensionality Checking}{28}{subsection.4.2}}
+\newlabel{sec:evaltrav}{{4.2}{28}{Optimising Tree Traversal with Full Dimensionality Checking}{subsection.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Traversal comparing results w.r.t varying sizes for D on a smaller and larger dataset.\relax }}{29}{figure.caption.10}}
+\newlabel{fig:trav1}{{8}{29}{Traversal comparing results w.r.t varying sizes for D on a smaller and larger dataset.\relax }{figure.caption.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Speed-ups gained by increasing the size of K for both small and large datasets.\relax }}{29}{table.caption.11}}
+\newlabel{tab:travk}{{2}{29}{Speed-ups gained by increasing the size of K for both small and large datasets.\relax }{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Traversal comparing results w.r.t varying sizes for K on a smaller and larger dataset.\relax }}{30}{figure.caption.12}}
+\newlabel{fig:trav2}{{9}{30}{Traversal comparing results w.r.t varying sizes for K on a smaller and larger dataset.\relax }{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Demonstrating a Comparison of the Number of Leaf Visits}{30}{subsubsection.4.2.1}}
+\newlabel{sec:evaltravhist}{{4.2.1}{30}{Demonstrating a Comparison of the Number of Leaf Visits}{subsubsection.4.2.1}{}}
+\newlabel{fig:f5}{{10a}{31}{Subfigure 10a}{subfigure.10.1}{}}
 \newlabel{sub@fig:f5}{{(a)}{a}{Subfigure 10a\relax }{subfigure.10.1}{}}
-\newlabel{fig:f6}{{10b}{24}{Subfigure 10b}{subfigure.10.2}{}}
+\newlabel{fig:f6}{{10b}{31}{Subfigure 10b}{subfigure.10.2}{}}
 \newlabel{sub@fig:f6}{{(b)}{b}{Subfigure 10b\relax }{subfigure.10.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Figure a and b show the same result for K=3 and D=8 on both traversal solutions, on datasets of sizes 1048576.\relax }}{24}{figure.caption.16}}
-\newlabel{fig:k3d8}{{10}{24}{Figure a and b show the same result for K=3 and D=8 on both traversal solutions, on datasets of sizes 1048576.\relax }{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{24}{subfigure.10.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{24}{subfigure.10.2}}
-\newlabel{fig:f7}{{11a}{24}{Subfigure 11a}{subfigure.11.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Figure a and b show the same result for K=3 and D=8 on both traversal solutions, on datasets of sizes 1048576.\relax }}{31}{figure.caption.13}}
+\newlabel{fig:k3d8}{{10}{31}{Figure a and b show the same result for K=3 and D=8 on both traversal solutions, on datasets of sizes 1048576.\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{31}{subfigure.10.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{31}{subfigure.10.2}}
+\newlabel{fig:f7}{{11a}{31}{Subfigure 11a}{subfigure.11.1}{}}
 \newlabel{sub@fig:f7}{{(a)}{a}{Subfigure 11a\relax }{subfigure.11.1}{}}
-\newlabel{fig:f8}{{11b}{24}{Subfigure 11b}{subfigure.11.2}{}}
+\newlabel{fig:f8}{{11b}{31}{Subfigure 11b}{subfigure.11.2}{}}
 \newlabel{sub@fig:f8}{{(b)}{b}{Subfigure 11b\relax }{subfigure.11.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Figure a and b show the same result for K=3 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }}{24}{figure.caption.17}}
-\newlabel{fig:k3d16}{{11}{24}{Figure a and b show the same result for K=3 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{24}{subfigure.11.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{24}{subfigure.11.2}}
-\newlabel{fig:f9}{{12a}{25}{Subfigure 12a}{subfigure.12.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Figure a and b show the same result for K=3 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }}{31}{figure.caption.14}}
+\newlabel{fig:k3d16}{{11}{31}{Figure a and b show the same result for K=3 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{31}{subfigure.11.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{31}{subfigure.11.2}}
+\newlabel{fig:f9}{{12a}{32}{Subfigure 12a}{subfigure.12.1}{}}
 \newlabel{sub@fig:f9}{{(a)}{a}{Subfigure 12a\relax }{subfigure.12.1}{}}
-\newlabel{fig:f10}{{12b}{25}{Subfigure 12b}{subfigure.12.2}{}}
+\newlabel{fig:f10}{{12b}{32}{Subfigure 12b}{subfigure.12.2}{}}
 \newlabel{sub@fig:f10}{{(b)}{b}{Subfigure 12b\relax }{subfigure.12.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Figure a and b show the same result for K=5 and D=6 on both traversal solutions, on datasets of sizes 4194304.\relax }}{25}{figure.caption.18}}
-\newlabel{fig:k5d6}{{12}{25}{Figure a and b show the same result for K=5 and D=6 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.18}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{25}{subfigure.12.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{25}{subfigure.12.2}}
-\newlabel{fig:f11}{{13a}{25}{Subfigure 13a}{subfigure.13.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Figure a and b show the same result for K=5 and D=6 on both traversal solutions, on datasets of sizes 4194304.\relax }}{32}{figure.caption.15}}
+\newlabel{fig:k5d6}{{12}{32}{Figure a and b show the same result for K=5 and D=6 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{32}{subfigure.12.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{32}{subfigure.12.2}}
+\newlabel{fig:f11}{{13a}{32}{Subfigure 13a}{subfigure.13.1}{}}
 \newlabel{sub@fig:f11}{{(a)}{a}{Subfigure 13a\relax }{subfigure.13.1}{}}
-\newlabel{fig:f12}{{13b}{25}{Subfigure 13b}{subfigure.13.2}{}}
+\newlabel{fig:f12}{{13b}{32}{Subfigure 13b}{subfigure.13.2}{}}
 \newlabel{sub@fig:f12}{{(b)}{b}{Subfigure 13b\relax }{subfigure.13.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Figure a and b show the same result for K=5 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }}{25}{figure.caption.19}}
-\newlabel{fig:k5d16}{{13}{25}{Figure a and b show the same result for K=5 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.19}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{25}{subfigure.13.1}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{25}{subfigure.13.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Brute Force versus k-d Trees for Computing KNN}{26}{subsection.4.3}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Speed-ups achieved by the k-d tree solution compared to the brute force solution, based on datasets of sizes 1048576.\relax }}{26}{table.caption.20}}
-\newlabel{tab:total}{{3}{26}{Speed-ups achieved by the k-d tree solution compared to the brute force solution, based on datasets of sizes 1048576.\relax }{table.caption.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }}{27}{figure.caption.21}}
-\newlabel{fig:b3}{{14}{27}{Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }{figure.caption.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Performance comparison of brute force, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }}{28}{figure.caption.22}}
-\newlabel{fig:b6}{{15}{28}{Performance comparison of brute force, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }{figure.caption.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Performance comparison of k-d tree, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }}{28}{figure.caption.23}}
-\newlabel{fig:b7}{{16}{28}{Performance comparison of k-d tree, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{29}{section.5}}
-\newlabel{sec:con}{{5}{29}{Conclusion}{section.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{29}{section.6}}
-\newlabel{sec:appendix}{{6}{29}{Appendix}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Additional Graphs for Performance of Brute Force versus k-d Trees}{29}{subsection.6.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=2 on datasets of sizes 1048576.\relax }}{29}{figure.caption.24}}
-\newlabel{fig:b1}{{17}{29}{Performance comparison of k-d tree versus brute force, with a static K=2 on datasets of sizes 1048576.\relax }{figure.caption.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=6 on datasets of sizes 1048576.\relax }}{30}{figure.caption.25}}
-\newlabel{fig:b2}{{18}{30}{Performance comparison of k-d tree versus brute force, with a static K=6 on datasets of sizes 1048576.\relax }{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }}{30}{figure.caption.26}}
-\newlabel{fig:b4}{{19}{30}{Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Figure a and b show the same result for K=5 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }}{32}{figure.caption.16}}
+\newlabel{fig:k5d16}{{13}{32}{Figure a and b show the same result for K=5 and D=14 on both traversal solutions, on datasets of sizes 4194304.\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Checking all dimensions.}}}{32}{subfigure.13.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Checking one dimension.}}}{32}{subfigure.13.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Brute Force versus k-d Trees for Computing KNN}{33}{subsection.4.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Speed-ups achieved by the k-d tree solution compared to the brute force solution, based on datasets of sizes 1048576.\relax }}{33}{table.caption.17}}
+\newlabel{tab:total}{{3}{33}{Speed-ups achieved by the k-d tree solution compared to the brute force solution, based on datasets of sizes 1048576.\relax }{table.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }}{33}{figure.caption.18}}
+\newlabel{fig:b3}{{14}{33}{Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{34}{section.5}}
+\newlabel{sec:con}{{5}{34}{Conclusion}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{34}{section.6}}
+\newlabel{sec:appendix}{{6}{34}{Appendix}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Additional Graphs for Performance of Brute Force versus k-d Trees}{34}{subsection.6.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=2 on datasets of sizes 1048576.\relax }}{34}{figure.caption.19}}
+\newlabel{fig:b1}{{15}{34}{Performance comparison of k-d tree versus brute force, with a static K=2 on datasets of sizes 1048576.\relax }{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=6 on datasets of sizes 1048576.\relax }}{35}{figure.caption.20}}
+\newlabel{fig:b2}{{16}{35}{Performance comparison of k-d tree versus brute force, with a static K=6 on datasets of sizes 1048576.\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }}{35}{figure.caption.21}}
+\newlabel{fig:b4}{{17}{35}{Performance comparison of k-d tree versus brute force, with a static K=12 on datasets of sizes 1048576.\relax }{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Performance comparison of brute force, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }}{36}{figure.caption.22}}
+\newlabel{fig:b6}{{18}{36}{Performance comparison of brute force, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Performance comparison of k-d tree, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }}{36}{figure.caption.23}}
+\newlabel{fig:b7}{{19}{36}{Performance comparison of k-d tree, with K=12, K=6 and K=2, on datasets of sizes 1048576.\relax }{figure.caption.23}{}}
 \bibstyle{apacite}
 \bibdata{literature}
+\bibcite{patchmatch}{\citeauthoryear {Barnes, Shechtman, Finkelstein,{}\ \BBA{} Goldman}{Barnes\ \BOthers {.}}{{\APACyear {2009}}}}
+\APACbibcite{patchmatch}{\citeauthoryear {Barnes, Shechtman, Finkelstein,{}\ \BBA{} Goldman}{Barnes\ \BOthers {.}}{{\APACyear {2009}}}}
 \bibcite{logmatches}{\citeauthoryear {Friedman, Bentley,{}\ \BBA{} Finkel}{Friedman\ \BOthers {.}}{{\APACyear {1977}}}}
 \APACbibcite{logmatches}{\citeauthoryear {Friedman, Bentley,{}\ \BBA{} Finkel}{Friedman\ \BOthers {.}}{{\APACyear {1977}}}}
 \bibcite{kdann}{\citeauthoryear {He\ \BBA{} Sun}{He\ \BBA{} Sun}{{\APACyear {2012}}}}
 \APACbibcite{kdann}{\citeauthoryear {He\ \BBA{} Sun}{He\ \BBA{} Sun}{{\APACyear {2012}}}}
+\bibcite{hash}{\citeauthoryear {Korman\ \BBA{} Avidan}{Korman\ \BBA{} Avidan}{{\APACyear {2016}}}}
+\APACbibcite{hash}{\citeauthoryear {Korman\ \BBA{} Avidan}{Korman\ \BBA{} Avidan}{{\APACyear {2016}}}}
 \gdef\minted@oldcachelist{,
   default-pyg-prefix.pygstyle,
   default.pygstyle,
   30E285BBDF5BE7778CA0B0C739E010E26D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
   8E7DE961C358885643861D843B8F2EDE6D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
-  9328904294DD0FD36D630ED7887FD8226D5E9B5CA395CA8C27C43E4C01BD6354.pygtex}
-\@writefile{toc}{\contentsline {section}{References}{31}{section*.27}}
+  9328904294DD0FD36D630ED7887FD8226D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
+  0FA0ADDF7C7FB25E0A6A09F96FA5F5F56D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
+  5C140E69E5F6A48F9CE0B77EB3E5B7576D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
+  E254D0553B492817CF640D0269C2B3506D5E9B5CA395CA8C27C43E4C01BD6354.pygtex,
+  BBBA5E072686312E08337533571E6CB16D5E9B5CA395CA8C27C43E4C01BD6354.pygtex}
+\@writefile{toc}{\contentsline {section}{References}{37}{section*.24}}

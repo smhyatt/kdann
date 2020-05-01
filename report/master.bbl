@@ -1,6 +1,37 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Barnes%
+, Shechtman%
+, Finkelstein%
+\BCBL {}\ \BBA {} Goldman%
+}{%
+Barnes%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+patchmatch}
+\APACinsertmetastar {%
+patchmatch}%
+\begin{APACrefauthors}%
+Barnes, C.%
+, Shechtman, E.%
+, Finkelstein, A.%
+\BCBL {}\ \BBA {} Goldman, D\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {PatchMatch: A Randomized Correspondence Algorithm for
+  Structural Image Editing} {Patchmatch: A randomized correspondence algorithm
+  for structural image editing}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Princeton University and Adobe Systems and University
+  of Washington}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Friedman%
 , Bentley%
 \BCBL {}\ \BBA {} Finkel%
@@ -53,6 +84,33 @@ He, K.%
   propagation-assisted kd-trees}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Microsoft Research Asia}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Korman%
+\ \BBA {} Avidan%
+}{%
+Korman%
+\ \BBA {} Avidan%
+}{%
+{\protect \APACyear {2016}}%
+}]{%
+hash}
+\APACinsertmetastar {%
+hash}%
+\begin{APACrefauthors}%
+Korman, S.%
+\BCBT {}\ \BBA {} Avidan, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Coherency Sensitive Hashing} {Coherency sensitive
+  hashing}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Dept. Electrical Engineering, Tel Aviv
+  University}{}{}{}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

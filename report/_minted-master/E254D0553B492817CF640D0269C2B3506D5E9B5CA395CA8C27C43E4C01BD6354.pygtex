@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{let} \PYG{n}{partition2} \PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{k}\PYG{p}{]} \PYG{p}{(}\PYG{n}{expr}\PYG{k+kt}{:} \PYG{p}{(}\PYG{n}{i32} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{bool}\PYG{p}{))} \PYG{p}{(}\PYG{n}{leaf\PYGZus{}idxs}\PYG{k+kt}{:}         \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{)}
+                      \PYG{p}{(}\PYG{n}{completed}\PYG{k+kt}{:}   \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{knn\PYGZus{}inds}\PYG{k+kt}{:}          \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{)}
+                      \PYG{p}{(}\PYG{n}{stack}\PYG{k+kt}{:}       \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{)} \PYG{p}{(}\PYG{n}{knn\PYGZus{}dsts}\PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{k}\PYG{p}{](}\PYG{n}{i32}\PYG{p}{,}\PYG{n}{f32}\PYG{p}{))}
+                      \PYG{k+kt}{:} \PYG{p}{(}\PYG{n}{i32}\PYG{p}{,} \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{,} \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{,} \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{,} \PYG{p}{[}\PYG{n}{n}\PYG{p}{][}\PYG{n}{k}\PYG{p}{](}\PYG{n}{i32}\PYG{p}{,}\PYG{n}{f32}\PYG{p}{),} \PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{n}{i32}\PYG{p}{)} \PYG{o+ow}{=}
+
+    \PYG{k+kr}{let} \PYG{n}{tflgs} \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{e} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{if} \PYG{n}{expr} \PYG{n}{e} \PYG{k+kr}{then} \PYG{l+m+mi}{1} \PYG{k+kr}{else} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{n}{leaf\PYGZus{}idxs}
+    \PYG{k+kr}{let} \PYG{n}{fflgs} \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{b} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{b}\PYG{p}{)} \PYG{n}{tflgs}
+
+    \PYG{k+kr}{let} \PYG{n}{indsT} \PYG{o+ow}{=} \PYG{n}{scan} \PYG{p}{(}\PYG{o}{+}\PYG{p}{)} \PYG{l+m+mi}{0} \PYG{n}{tflgs}
+    \PYG{k+kr}{let} \PYG{n}{tmp}   \PYG{o+ow}{=} \PYG{n}{scan} \PYG{p}{(}\PYG{o}{+}\PYG{p}{)} \PYG{l+m+mi}{0} \PYG{n}{fflgs}
+    \PYG{k+kr}{let} \PYG{n}{trues} \PYG{o+ow}{=} \PYG{k+kr}{if} \PYG{n}{n} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{k+kr}{then} \PYG{n}{indsT}\PYG{p}{[}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k+kr}{else} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+    \PYG{k+kr}{let} \PYG{n}{indsF} \PYG{o+ow}{=} \PYG{n}{map} \PYG{p}{(}\PYG{o}{+}\PYG{n}{trues}\PYG{p}{)} \PYG{n}{tmp}
+
+    \PYG{k+kr}{let} \PYG{n}{inds}  \PYG{o+ow}{=} \PYG{n}{map3} \PYG{p}{(}\PYG{n+nf}{\PYGZbs{}}\PYG{n}{leaf} \PYG{n}{indT} \PYG{n}{indF} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kr}{if} \PYG{n}{expr} \PYG{n}{leaf}
+                                         \PYG{k+kr}{then} \PYG{n}{indT}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+                                         \PYG{k+kr}{else} \PYG{n}{indF}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+                     \PYG{p}{)} \PYG{n}{leaf\PYGZus{}idxs} \PYG{n}{indsT} \PYG{n}{indsF}
+
+    \PYG{k+kr}{let} \PYG{n}{leaf\PYGZus{}idxsp} \PYG{o+ow}{=} \PYG{n}{scatter} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{n} \PYG{l+m+mi}{0}\PYG{n}{i32}\PYG{p}{)} \PYG{n}{inds} \PYG{n}{leaf\PYGZus{}idxs}
+    \PYG{k+kr}{let} \PYG{n}{completedp} \PYG{o+ow}{=} \PYG{n}{scatter} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{n} \PYG{l+m+mi}{0}\PYG{n}{i32}\PYG{p}{)} \PYG{n}{inds} \PYG{n}{completed}
+    \PYG{k+kr}{let} \PYG{n}{knn\PYGZus{}inds\PYGZsq{}}  \PYG{o+ow}{=} \PYG{n}{scatter} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{n} \PYG{l+m+mi}{0}\PYG{n}{i32}\PYG{p}{)} \PYG{n}{inds} \PYG{n}{knn\PYGZus{}inds}
+    \PYG{k+kr}{let} \PYG{n}{knn\PYGZus{}dsts\PYGZsq{}}  \PYG{o+ow}{=} \PYG{n}{scatter2D} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{n} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{k} \PYG{p}{(}\PYG{l+m+mi}{0}\PYG{n}{i32}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{n}{f32}\PYG{p}{)))} \PYG{n}{inds} \PYG{n}{knn\PYGZus{}dsts}
+    \PYG{k+kr}{let} \PYG{n}{stackp}     \PYG{o+ow}{=} \PYG{n}{scatter} \PYG{p}{(}\PYG{n}{replicate} \PYG{n}{n} \PYG{l+m+mi}{0}\PYG{n}{i32}\PYG{p}{)} \PYG{n}{inds} \PYG{n}{stack}
+    \PYG{k+kr}{in}  \PYG{p}{(}\PYG{n}{trues}\PYG{p}{,} \PYG{n}{leaf\PYGZus{}idxsp}\PYG{p}{,} \PYG{n}{completedp}\PYG{p}{,} \PYG{n}{knn\PYGZus{}inds\PYGZsq{}}\PYG{p}{,} \PYG{n}{knn\PYGZus{}dsts\PYGZsq{}}\PYG{p}{,} \PYG{n}{stackp}\PYG{p}{)}
+\end{Verbatim}
